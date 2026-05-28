@@ -1,0 +1,4188 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Yafet &amp; Co. — Websites, apps &amp; quiet AI · made in Vienna</title>
+  <meta name="description" content="An independent, founder-led digital studio in Vienna. Websites, apps & quiet AI for the businesses Europe keeps quiet about. Available for projects from Q3 2026." />
+  <meta name="theme-color" content="#0E0B08" />
+  <link rel="canonical" href="https://yafetandco.com/" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='32' fill='%230E0B08'/%3E%3Ctext x='32' y='40' text-anchor='middle' font-size='22' fill='%23C58E4A' font-family='Georgia,serif'%3EY%26%3C/text%3E%3C/svg%3E" />
+
+  <!-- OG -->
+  <meta property="og:title" content="Yafet & Co. — Websites, apps & quiet AI · made in Vienna" />
+  <meta property="og:description" content="Notes on the slow craft of building for the businesses Europe keeps quiet about." />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="en_AT" />
+  <meta property="og:locale:alternate" content="de_AT" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- App styles -->
+  <style>
+/* ============================================================
+   YAFET & CO. — base: tokens, reset, typography, grain, layout
+   ============================================================ */
+
+:root {
+  /* Color — DARK theme (default) */
+  --ink:        #0E0B08;
+  --ink-2:      #14110D;
+  --ink-3:      #1A1612;
+  --bone:       #EDE6D6;
+  --bone-dim:   #B8AF9A;
+  --bone-mute:  #847D6B;
+  --rule:       rgba(237, 230, 214, 0.12);
+  --rule-strong: rgba(237, 230, 214, 0.22);
+  --amber:      #C58E4A;
+  --amber-2:    #D9A263;
+  --amber-dim:  rgba(197, 142, 74, 0.5);
+  --amber-glow: rgba(197, 142, 74, 0.16);
+  --oxblood:    #6E2A28;
+
+  /* Semantic — always dark text on amber surfaces */
+  --on-amber:   #0E0B08;
+
+  /* Atmosphere */
+  --scrim:            rgba(0, 0, 0, 0.55);
+  --vignette-color:   rgba(0, 0, 0, 0.55);
+  --nav-bg-scrolled:  rgba(14, 11, 8, 0.78);
+  --work-nav-bg:      rgba(14, 11, 8, 0.6);
+  --grain-opacity:    0.06;
+  --grain-blend:      overlay;
+
+  /* Type */
+  --serif: "Cormorant Garamond", "EB Garamond", Georgia, "Times New Roman", serif;
+  --mono:  "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* Scale */
+  --fs-mono:    0.72rem;   /* labels */
+  --fs-mono-sm: 0.62rem;
+  --fs-body:    1.0625rem;
+  --fs-lead:    1.375rem;
+  --fs-h3:      clamp(1.5rem, 2.4vw, 2.4rem);
+  --fs-h2:      clamp(2.4rem, 5.5vw, 5.6rem);
+  --fs-h1:      clamp(3.2rem, 9vw, 9.5rem);
+  --fs-mega:    clamp(8rem, 26vw, 26rem);
+
+  /* Geometry */
+  --pad-x: clamp(1.25rem, 4vw, 4.5rem);
+  --maxw: 1680px;
+  --gutter: clamp(1rem, 2vw, 2rem);
+
+  /* Motion */
+  --ease: cubic-bezier(.22, 1, .36, 1);
+  --ease-in-out: cubic-bezier(.65, 0, .35, 1);
+  --t-quick: 180ms;
+  --t-base:  280ms;
+  --t-slow:  520ms;
+
+  color-scheme: dark;
+}
+
+/* ---------- LIGHT theme overrides ---------- */
+:root[data-theme="light"] {
+  --ink:        #F2EBD7;   /* warm cream — primary "background" */
+  --ink-2:      #ECE3CB;   /* layered card / panel */
+  --ink-3:      #E2D8BC;   /* deepest layer / mockup frame */
+  --bone:       #14110C;   /* primary text */
+  --bone-dim:   #5A5345;
+  --bone-mute:  #8A8270;
+  --rule:       rgba(20, 17, 12, 0.14);
+  --rule-strong: rgba(20, 17, 12, 0.24);
+  --amber:      #A66D2A;   /* slightly deeper for cream-bg contrast */
+  --amber-2:    #C58E4A;
+  --amber-dim:  rgba(166, 109, 42, 0.55);
+  --amber-glow: rgba(166, 109, 42, 0.18);
+
+  --scrim:           rgba(36, 24, 8, 0.35);
+  --vignette-color:  rgba(60, 36, 8, 0.12);
+  --nav-bg-scrolled: rgba(242, 235, 215, 0.82);
+  --work-nav-bg:     rgba(242, 235, 215, 0.78);
+  --grain-opacity:   0.045;
+  --grain-blend:     multiply;
+
+  color-scheme: light;
+}
+
+/* Smooth theme cross-fade on colour properties only (not transforms) */
+html, body, .nav, .modal, .case, .pillar, .disc, .price, .estimator,
+.estimator__summary, .contact__form, .footer, .dock__btn, .chat__msg,
+.field__input, .field__textarea, .chip, .article, .menu-sheet, .case__head,
+.steps__rail, .steps__rail-item, .pillar-note, .stat, .work__nav button,
+.modal__panel, .loader {
+  transition: background-color var(--t-base) var(--ease),
+              color var(--t-base) var(--ease),
+              border-color var(--t-base) var(--ease);
+}
+
+/* Reset */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+/* The preview host injects an inline `html,body{background:transparent}` rule.
+   We need !important here to defeat it in both themes. */
+html { background: var(--ink) !important; }
+body { background: var(--ink) !important; }
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: auto; /* Lenis takes over */
+}
+body {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: var(--fs-body);
+  line-height: 1.55;
+  color: var(--bone);
+  overflow-x: clip;
+  min-height: 100vh;
+}
+.skip-link {
+  position: fixed;
+  left: var(--pad-x);
+  top: 0.75rem;
+  z-index: 10000;
+  padding: 0.65rem 0.9rem;
+  background: var(--amber);
+  color: var(--on-amber);
+  border-radius: 999px;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transform: translateY(-160%);
+  transition: transform var(--t-base) var(--ease);
+}
+.skip-link:focus { transform: translateY(0); outline: 2px solid var(--bone); outline-offset: 3px; }
+img, svg, video { display: block; max-width: 100%; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+button:disabled { cursor: not-allowed; opacity: 0.45; }
+a { color: inherit; text-decoration: none; }
+input, textarea, select { font: inherit; color: inherit; }
+::selection { background: var(--amber); color: var(--on-amber); }
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--ink); }
+::-webkit-scrollbar-thumb { background: var(--rule-strong); border-radius: 4px; }
+
+/* Typography */
+.mono {
+  font-family: var(--mono);
+  font-size: var(--fs-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 400;
+  color: var(--bone-dim);
+}
+.mono-sm { font-size: var(--fs-mono-sm); letter-spacing: 0.12em; }
+.mono-amber { color: var(--amber); }
+
+.h1 {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: var(--fs-h1);
+  line-height: 0.92;
+  letter-spacing: -0.025em;
+  margin: 0;
+}
+.h2 {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: var(--fs-h2);
+  line-height: 0.98;
+  letter-spacing: -0.018em;
+  margin: 0;
+}
+.h3 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: var(--fs-h3);
+  line-height: 1.08;
+  letter-spacing: -0.012em;
+  margin: 0;
+}
+.lead {
+  font-size: var(--fs-lead);
+  line-height: 1.45;
+  color: var(--bone);
+  font-weight: 300;
+}
+.italic { font-style: italic; }
+.amber  { color: var(--amber); }
+.dim    { color: var(--bone-dim); }
+.mute   { color: var(--bone-mute); }
+
+/* Layout primitives */
+.container {
+  width: 100%;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding-left: var(--pad-x);
+  padding-right: var(--pad-x);
+}
+.section { position: relative; }
+.section-pad   { padding-block: clamp(5rem, 10vw, 10rem); }
+.section-pad-s { padding-block: clamp(3rem, 6vw, 6rem); }
+.rule { width: 100%; height: 1px; background: var(--rule); border: 0; }
+.rule-strong { background: var(--rule-strong); }
+
+/* Section markers */
+.sec-marker {
+  display: flex;
+  align-items: baseline;
+  gap: 1.25rem;
+  padding-block: 0.75rem 0.75rem;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
+}
+.sec-marker__id { color: var(--amber); }
+.sec-marker__title { flex: 1; }
+.sec-marker__meta { color: var(--bone-mute); }
+
+/* Reveals (IntersectionObserver) */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 800ms var(--ease), transform 800ms var(--ease);
+  will-change: opacity, transform;
+}
+.reveal.in {
+  opacity: 1;
+  transform: none;
+}
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 700ms var(--ease), transform 700ms var(--ease);
+}
+.reveal-stagger.in > * {
+  opacity: 1;
+  transform: none;
+}
+.reveal-stagger.in > *:nth-child(1) { transition-delay: 60ms; }
+.reveal-stagger.in > *:nth-child(2) { transition-delay: 140ms; }
+.reveal-stagger.in > *:nth-child(3) { transition-delay: 220ms; }
+.reveal-stagger.in > *:nth-child(4) { transition-delay: 300ms; }
+.reveal-stagger.in > *:nth-child(5) { transition-delay: 380ms; }
+.reveal-stagger.in > *:nth-child(6) { transition-delay: 460ms; }
+.reveal-stagger.in > *:nth-child(7) { transition-delay: 540ms; }
+.reveal-stagger.in > *:nth-child(8) { transition-delay: 620ms; }
+
+/* Line build (kinetic hero) */
+.line-mask { display: block; overflow: hidden; padding-bottom: 0.08em; }
+.line-inner {
+  display: inline-block;
+  transform: translateY(108%);
+  transition: transform 1100ms var(--ease);
+  will-change: transform;
+}
+.is-loaded .line-inner { transform: translateY(0); }
+.is-loaded .line-mask:nth-child(1) .line-inner { transition-delay: 100ms; }
+.is-loaded .line-mask:nth-child(2) .line-inner { transition-delay: 240ms; }
+.is-loaded .line-mask:nth-child(3) .line-inner { transition-delay: 380ms; }
+.is-loaded .line-mask:nth-child(4) .line-inner { transition-delay: 520ms; }
+
+/* Film grain */
+.grain {
+  pointer-events: none;
+  position: fixed;
+  inset: -50%;
+  z-index: 2;
+  opacity: var(--grain-opacity);
+  mix-blend-mode: var(--grain-blend);
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxODAnIGhlaWdodD0nMTgwJz48ZmlsdGVyIGlkPSduJz48ZmVUdXJidWxlbmNlIHR5cGU9J2ZyYWN0YWxOb2lzZScgYmFzZUZyZXF1ZW5jeT0nMC45NScgbnVtT2N0YXZlcz0nMicgc3RpdGNoVGlsZXM9J3N0aXRjaCcvPjxmZUNvbG9yTWF0cml4IHZhbHVlcz0nMCAwIDAgMCAwLjkgICAwIDAgMCAwIDAuODUgICAwIDAgMCAwIDAuNyAgIDAgMCAwIDAuNiAwJy8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9JzEwMCUnIGhlaWdodD0nMTAwJScgZmlsdGVyPSd1cmwoI24pJy8+PC9zdmc+");
+  background-size: 180px 180px;
+  animation: grain 1200ms steps(6) infinite;
+}
+@keyframes grain {
+  0%   { transform: translate(0,0); }
+  10%  { transform: translate(-5%,-3%); }
+  20%  { transform: translate(-8%,3%); }
+  30%  { transform: translate(4%,-7%); }
+  40%  { transform: translate(-2%,5%); }
+  50%  { transform: translate(-9%,2%); }
+  60%  { transform: translate(7%,1%); }
+  70%  { transform: translate(-3%,8%); }
+  80%  { transform: translate(2%,-3%); }
+  90%  { transform: translate(-6%,4%); }
+  100% { transform: translate(0,0); }
+}
+
+/* Vignette */
+.vignette {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  background: radial-gradient(ellipse at center, transparent 50%, var(--vignette-color) 100%);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .grain { display: none; }
+  .reveal, .reveal-stagger > *, .line-inner { opacity: 1 !important; transform: none !important; }
+}
+
+
+/* ============================================================
+   YAFET & CO. — components: nav, buttons, cursor, marquee, cards
+   ============================================================ */
+
+/* ---------- Custom cursor ---------- */
+.cursor {
+  position: fixed;
+  top: 0; left: 0;
+  width: 8px; height: 8px;
+  background: var(--bone);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9000;
+  transform: translate3d(-50%, -50%, 0);
+  transition: width 220ms var(--ease), height 220ms var(--ease),
+              background 220ms var(--ease), opacity 220ms var(--ease);
+  mix-blend-mode: difference;
+}
+.cursor-ring {
+  position: fixed;
+  top: 0; left: 0;
+  width: 36px; height: 36px;
+  border: 1px solid var(--bone-dim);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9000;
+  transform: translate3d(-50%, -50%, 0);
+  transition: width 320ms var(--ease), height 320ms var(--ease),
+              border-color 320ms var(--ease), opacity 220ms var(--ease);
+  mix-blend-mode: difference;
+}
+.is-pointer .cursor { width: 4px; height: 4px; background: var(--amber); }
+.is-pointer .cursor-ring { width: 56px; height: 56px; border-color: var(--amber); }
+.is-text .cursor-ring { width: 80px; height: 80px; border-color: var(--bone-dim); }
+.is-hidden .cursor, .is-hidden .cursor-ring { opacity: 0; }
+@media (hover: none), (pointer: coarse) {
+  .cursor, .cursor-ring { display: none; }
+}
+
+/* ---------- Nav ---------- */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: clamp(1rem, 1.6vw, 1.5rem) var(--pad-x);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 2rem;
+  color: var(--bone);
+  transition: background 420ms var(--ease), backdrop-filter 420ms var(--ease),
+              padding 420ms var(--ease), border-color 420ms var(--ease);
+  border-bottom: 1px solid transparent;
+}
+.nav.is-scrolled {
+  background: var(--nav-bg-scrolled);
+  backdrop-filter: blur(14px) saturate(120%);
+  -webkit-backdrop-filter: blur(14px) saturate(120%);
+  padding-block: 0.8rem;
+  border-bottom-color: var(--rule);
+}
+.nav__brand {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 1.25rem;
+  letter-spacing: -0.01em;
+}
+.nav__brand .yc {
+  display: inline-grid;
+  place-items: center;
+  width: 1.9rem; height: 1.9rem;
+  border: 1px solid var(--rule-strong);
+  border-radius: 50%;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.04em;
+  color: var(--amber);
+}
+.nav__brand .wordmark { font-style: italic; }
+.nav__links {
+  display: flex;
+  justify-content: center;
+  gap: clamp(1rem, 2.4vw, 2.4rem);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.nav__link {
+  position: relative;
+  padding: 0.35rem 0;
+  color: var(--bone-dim);
+  transition: color var(--t-quick) var(--ease);
+}
+.nav__link::after {
+  content: "";
+  position: absolute; left: 0; right: 100%; bottom: 0;
+  height: 1px;
+  background: var(--amber);
+  transition: right var(--t-base) var(--ease);
+}
+.nav__link:hover { color: var(--bone); }
+.nav__link:hover::after { right: 0; }
+
+.nav__right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--rule-strong);
+  border-radius: 999px;
+  padding: 0.25rem;
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+}
+.lang-toggle button {
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  color: var(--bone-dim);
+  transition: color var(--t-quick) var(--ease), background var(--t-quick) var(--ease);
+}
+.lang-toggle button.is-active {
+  background: var(--bone);
+  color: var(--ink);
+}
+.lang-toggle button:disabled {
+  background: transparent;
+  color: var(--bone-mute);
+}
+
+/* Theme toggle (same shape as lang-toggle) */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px; height: 34px;
+  border: 1px solid var(--rule-strong);
+  border-radius: 50%;
+  color: var(--bone-dim);
+  transition: color var(--t-quick) var(--ease), border-color var(--t-quick) var(--ease), transform var(--t-base) var(--ease);
+}
+.theme-toggle:hover { color: var(--amber); border-color: var(--amber); transform: rotate(20deg); }
+.theme-toggle svg { width: 16px; height: 16px; }
+.theme-toggle .icon-sun  { display: none; }
+.theme-toggle .icon-moon { display: block; }
+:root[data-theme="light"] .theme-toggle .icon-sun  { display: block; }
+:root[data-theme="light"] .theme-toggle .icon-moon { display: none; }
+
+.nav__burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  width: 28px; height: 28px;
+  justify-content: center;
+  align-items: flex-end;
+}
+.nav__burger span {
+  display: block;
+  width: 22px; height: 1px;
+  background: var(--bone);
+  transition: transform var(--t-base) var(--ease), opacity var(--t-base) var(--ease);
+}
+.nav__burger span:nth-child(2) { width: 14px; }
+
+@media (max-width: 900px) {
+  .nav { grid-template-columns: auto auto; gap: 1rem; }
+  .nav__links { display: none; }
+  .nav__cta-text { display: none; }
+  .nav__burger { display: flex; }
+}
+@media (max-width: 480px) {
+  .nav__brand .wordmark { display: none; }
+  .nav__right { gap: 0.75rem; }
+}
+
+/* Mobile menu sheet */
+.menu-sheet {
+  position: fixed;
+  inset: 0;
+  z-index: 95;
+  background: var(--ink);
+  padding: 6rem var(--pad-x) 3rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 320ms var(--ease), visibility 320ms;
+}
+.menu-sheet.is-open { opacity: 1; visibility: visible; }
+.menu-sheet a {
+  display: block;
+  padding: 1rem 0;
+  font-family: var(--serif);
+  font-size: clamp(2rem, 8vw, 3rem);
+  border-bottom: 1px solid var(--rule);
+  font-weight: 300;
+}
+.menu-sheet a:hover { color: var(--amber); font-style: italic; }
+
+/* ---------- Buttons ---------- */
+.btn {
+  --bg: transparent;
+  --fg: var(--bone);
+  --bd: var(--rule-strong);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.95rem 1.5rem;
+  background: var(--bg);
+  color: var(--fg);
+  border: 1px solid var(--bd);
+  border-radius: 999px;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: background var(--t-base) var(--ease), color var(--t-base) var(--ease),
+              border-color var(--t-base) var(--ease), transform 120ms var(--ease);
+  overflow: hidden;
+  will-change: transform;
+}
+.btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--bone);
+  transform: translateY(101%);
+  transition: transform 520ms var(--ease);
+  z-index: 0;
+}
+.btn > * { position: relative; z-index: 1; }
+.btn:hover { color: var(--ink); border-color: var(--bone); }
+.btn:hover::before { transform: translateY(0); }
+.btn:active { transform: scale(0.98); }
+
+.btn--primary {
+  --bg: var(--amber);
+  --fg: var(--on-amber);
+  --bd: var(--amber);
+}
+.btn--primary::before { background: var(--bone); }
+.btn--primary:hover { color: var(--ink); border-color: var(--bone); }
+
+.btn--ghost {
+  --bd: transparent;
+  padding-inline: 0.4rem;
+}
+.btn--ghost::before { display: none; }
+.btn--ghost:hover { color: var(--amber); background: transparent; }
+
+.btn .arrow {
+  display: inline-block;
+  transition: transform var(--t-base) var(--ease);
+}
+.btn:hover .arrow { transform: translateX(4px); }
+
+/* ---------- Marquee ---------- */
+.marquee {
+  position: relative;
+  overflow: hidden;
+  padding-block: 1.6rem;
+  border-block: 1px solid var(--rule);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.marquee__track {
+  display: flex;
+  gap: clamp(3rem, 6vw, 6rem);
+  width: max-content;
+  animation: marquee 38s linear infinite;
+}
+.marquee--slow .marquee__track { animation-duration: 52s; }
+.marquee--rev .marquee__track { animation-direction: reverse; }
+.marquee__item {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  color: var(--bone-dim);
+}
+.marquee__item .dot {
+  width: 5px; height: 5px;
+  background: var(--amber);
+  border-radius: 50%;
+  display: inline-block;
+}
+.marquee--serif .marquee__item {
+  font-family: var(--serif);
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--bone);
+}
+.marquee--mono .marquee__item {
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+@keyframes marquee {
+  to { transform: translateX(-50%); }
+}
+.marquee:hover .marquee__track { animation-play-state: paused; }
+
+/* ---------- Tags ---------- */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--rule-strong);
+  border-radius: 999px;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--bone-dim);
+}
+.tag-row { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+/* ---------- Discipline card ---------- */
+.disc-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--rule);
+}
+@media (max-width: 760px) { .disc-grid { grid-template-columns: 1fr; } }
+.disc {
+  position: relative;
+  padding: clamp(1.6rem, 2.8vw, 2.6rem);
+  border-bottom: 1px solid var(--rule);
+  border-right: 1px solid var(--rule);
+  cursor: pointer;
+  overflow: hidden;
+  transition: background var(--t-base) var(--ease);
+}
+.disc:nth-child(2n) { border-right: 0; }
+@media (max-width: 760px) { .disc { border-right: 0; } }
+.disc__top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 1.4rem;
+}
+.disc__no { color: var(--amber); }
+.disc__arrow {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  transition: transform var(--t-base) var(--ease), color var(--t-base) var(--ease);
+  color: var(--bone-dim);
+}
+.disc__title {
+  font-family: var(--serif);
+  font-size: clamp(1.4rem, 2.2vw, 1.85rem);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.012em;
+  margin-bottom: 0.9rem;
+  transition: color var(--t-base) var(--ease);
+}
+.disc__title em {
+  font-style: italic;
+  color: var(--amber);
+  font-weight: 300;
+}
+.disc__body {
+  color: var(--bone-dim);
+  font-size: 1.02rem;
+  line-height: 1.55;
+  max-width: 42ch;
+}
+.disc::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 1px;
+  background: var(--amber);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform 520ms var(--ease);
+}
+.disc:hover { background: var(--ink-2); }
+.disc:hover .disc__title { color: var(--bone); }
+.disc:hover .disc__arrow { transform: translate(4px, -4px); color: var(--amber); }
+.disc:hover::after { transform: scaleX(1); }
+
+/* ---------- Floating dock / AI widget button ---------- */
+.dock {
+  position: fixed;
+  right: clamp(1rem, 2vw, 2rem);
+  bottom: clamp(1rem, 2vw, 2rem);
+  z-index: 80;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  align-items: flex-end;
+}
+.dock__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.75rem 1rem;
+  background: var(--ink-2);
+  border: 1px solid var(--rule-strong);
+  border-radius: 999px;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--bone);
+  transition: border-color var(--t-base) var(--ease), background var(--t-base) var(--ease);
+  backdrop-filter: blur(8px);
+}
+.dock__btn:hover { border-color: var(--amber); }
+.dock__btn .pulse {
+  width: 7px; height: 7px;
+  background: var(--amber);
+  border-radius: 50%;
+  position: relative;
+}
+.dock__btn .pulse::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 1px solid var(--amber);
+  animation: pulse 1800ms var(--ease) infinite;
+}
+@keyframes pulse {
+  0%   { transform: scale(0.7); opacity: 1; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+/* ---------- Modal scaffold (AI, booking) ---------- */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: end center;
+  background: var(--scrim);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 320ms var(--ease), visibility 320ms;
+  padding: var(--pad-x);
+}
+.modal.is-open { opacity: 1; visibility: visible; }
+.modal__panel {
+  width: min(540px, 100%);
+  max-height: min(86vh, 720px);
+  background: var(--ink-2);
+  border: 1px solid var(--rule-strong);
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transform: translateY(24px);
+  transition: transform 420ms var(--ease);
+  margin-bottom: clamp(1rem, 2vw, 2rem);
+}
+.modal.is-open .modal__panel { transform: none; }
+.modal--center { place-items: center; }
+.modal--wide .modal__panel { width: min(720px, 100%); }
+.modal__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 1.3rem;
+  border-bottom: 1px solid var(--rule);
+}
+.modal__title {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.25rem;
+  font-weight: 400;
+}
+.modal__close {
+  width: 32px; height: 32px;
+  border: 1px solid var(--rule-strong);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  transition: border-color var(--t-base) var(--ease);
+}
+.modal__close:hover { border-color: var(--amber); color: var(--amber); }
+.modal__body {
+  padding: 1.3rem;
+  overflow-y: auto;
+  flex: 1;
+}
+.booking-card {
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 1rem;
+  background: var(--ink);
+  display: grid;
+  gap: 1rem;
+}
+.booking-card h4 {
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  font-style: italic;
+  font-weight: 400;
+  margin: 0.25rem 0 0.45rem;
+}
+.booking-card p {
+  margin: 0;
+  color: var(--bone-dim);
+  line-height: 1.55;
+}
+.booking-card__mail {
+  color: var(--amber);
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.booking-card__mail:hover { color: var(--bone); }
+
+/* ---------- Inputs ---------- */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+.field__label {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--bone-dim);
+}
+.field__input,
+.field__textarea,
+.field__select {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  background: var(--ink);
+  border: 1px solid var(--rule-strong);
+  border-radius: 8px;
+  color: var(--bone);
+  font-family: var(--serif);
+  font-size: 1rem;
+  transition: border-color var(--t-base) var(--ease), background var(--t-base) var(--ease);
+}
+.field__input:focus,
+.field__textarea:focus,
+.field__select:focus {
+  outline: 2px solid color-mix(in srgb, var(--amber) 45%, transparent);
+  outline-offset: 2px;
+  border-color: var(--amber);
+  background: var(--ink-2);
+}
+.field__textarea { min-height: 120px; resize: vertical; }
+.field--error .field__input,
+.field--error .field__textarea { border-color: var(--oxblood); }
+.field__err {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #C56A66;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity var(--t-base) var(--ease), transform var(--t-base) var(--ease);
+}
+.field--error .field__err { opacity: 1; transform: none; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+.chip {
+  padding: 0.55rem 0.95rem;
+  border: 1px solid var(--rule-strong);
+  border-radius: 999px;
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--bone-dim);
+  transition: border-color var(--t-base) var(--ease), color var(--t-base) var(--ease), background var(--t-base) var(--ease);
+  background: transparent;
+}
+.chip:hover { border-color: var(--bone-dim); color: var(--bone); }
+.chip.is-active {
+  border-color: var(--amber);
+  color: var(--on-amber);
+  background: var(--amber);
+}
+
+.noscript-note {
+  position: fixed;
+  left: 1rem;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 10001;
+  padding: 0.9rem 1rem;
+  background: var(--ink-2);
+  border: 1px solid var(--rule-strong);
+  border-radius: 8px;
+  color: var(--bone);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+}
+.noscript-note a { color: var(--amber); }
+
+
+/* ============================================================
+   YAFET & CO. — sections (loader, hero, work, pillars, etc.)
+   ============================================================ */
+
+/* ---------- Loader ---------- */
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--ink);
+  display: grid;
+  place-items: center;
+  transition: opacity 700ms var(--ease), visibility 700ms;
+}
+.loader.is-gone { opacity: 0; visibility: hidden; pointer-events: none; }
+.loader__inner {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+.loader__rec {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--bone-dim);
+}
+.loader__rec .dot {
+  width: 8px; height: 8px;
+  background: #D44A39;
+  border-radius: 50%;
+  animation: rec-blink 900ms ease-in-out infinite alternate;
+}
+@keyframes rec-blink {
+  from { opacity: 0.3; } to { opacity: 1; }
+}
+.loader__timecode {
+  font-family: var(--mono);
+  font-size: clamp(1.6rem, 6vw, 3.2rem);
+  letter-spacing: 0.05em;
+  color: var(--bone);
+}
+.loader__amp {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(4rem, 12vw, 8rem);
+  line-height: 1;
+  color: var(--amber);
+  animation: amp-breathe 2.4s ease-in-out infinite;
+}
+@keyframes amp-breathe {
+  0%, 100% { transform: scale(1); opacity: 0.9; }
+  50%      { transform: scale(1.04); opacity: 1; }
+}
+.loader__bar {
+  width: clamp(180px, 30vw, 320px);
+  height: 1px;
+  background: var(--rule);
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+.loader__bar::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--amber);
+  transform-origin: 0 50%;
+  animation: loader-bar 1600ms var(--ease) forwards;
+}
+@keyframes loader-bar {
+  0%   { transform: scaleX(0); }
+  100% { transform: scaleX(1); }
+}
+.loader__cap {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.18em;
+  color: var(--bone-mute);
+  text-transform: uppercase;
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2rem, 5vh, 4rem);
+  padding-top: clamp(7rem, 13vh, 9rem);
+  padding-bottom: clamp(2rem, 4vw, 3.5rem);
+  overflow: hidden;
+}
+.hero__topbar {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--bone-dim);
+  padding-bottom: clamp(2rem, 5vh, 4rem);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.hero__topbar > span { display: inline-flex; align-items: center; gap: 0.5rem; }
+.hero__topbar .timecode {
+  color: var(--amber);
+  letter-spacing: 0.18em;
+}
+.hero__topbar .rec-dot {
+  width: 7px; height: 7px;
+  background: #D44A39;
+  border-radius: 50%;
+  animation: rec-blink 900ms ease-in-out infinite alternate;
+}
+
+.hero__main {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  align-items: end;
+}
+.hero__kicker {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--bone-dim);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+.hero__kicker::before {
+  content: "";
+  width: 24px; height: 1px;
+  background: var(--amber);
+}
+.hero__h1 {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: var(--fs-h1);
+  line-height: 0.94;
+  letter-spacing: -0.025em;
+  margin: 1rem 0 0;
+  max-width: 18ch;
+}
+.hero__h1 em {
+  font-style: italic;
+  color: var(--amber);
+  font-weight: 300;
+}
+.hero__h1 .amp-anim {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--amber);
+  display: inline-block;
+  transition: transform 600ms var(--ease);
+}
+.hero__h1 .amp-anim:hover { transform: rotate(-8deg) scale(1.08); }
+
+.hero__sub {
+  font-family: var(--serif);
+  font-size: clamp(1.1rem, 1.4vw, 1.4rem);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--bone-dim);
+  max-width: 56ch;
+  line-height: 1.5;
+  margin: 1.6rem 0 0;
+}
+
+.hero__ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: clamp(1.5rem, 3vh, 2.5rem);
+}
+
+.hero__foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1.5rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--rule);
+  flex-wrap: wrap;
+}
+.hero__foot .col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.hero__foot .mono { font-size: 0.66rem; }
+
+.hero > * { position: relative; z-index: 1; }
+
+/* ---------- Stats band ---------- */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+@media (max-width: 800px) { .stats { grid-template-columns: repeat(2, 1fr); } }
+.stat {
+  padding: clamp(2rem, 4vw, 3.4rem) clamp(1.2rem, 2.5vw, 2.4rem);
+  border-right: 1px solid var(--rule);
+}
+.stat:last-child { border-right: 0; }
+@media (max-width: 800px) {
+  .stat:nth-child(2n) { border-right: 0; }
+  .stat:nth-child(-n+2) { border-bottom: 1px solid var(--rule); }
+}
+.stat__num {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(3rem, 6.5vw, 6rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--bone);
+  display: block;
+  margin-bottom: 0.8rem;
+}
+.stat__num sup {
+  font-size: 0.4em;
+  color: var(--amber);
+  vertical-align: super;
+  margin-left: 0.1em;
+  font-style: italic;
+}
+.stat__lab {
+  color: var(--bone-dim);
+  font-size: 0.98rem;
+  line-height: 1.5;
+  max-width: 28ch;
+}
+.stat__lab strong {
+  color: var(--bone);
+  font-weight: 400;
+}
+
+/* ---------- Ampersand pillar (tighter, two-column, layered) ---------- */
+.amp-pillar {
+  position: relative;
+  padding-block: clamp(4rem, 7vw, 7rem);
+  overflow: hidden;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.amp-pillar__inner {
+  display: grid;
+  grid-template-columns: 1.1fr 1.4fr;
+  gap: clamp(1.5rem, 4vw, 4rem);
+  align-items: center;
+}
+@media (max-width: 800px) {
+  .amp-pillar__inner { grid-template-columns: 1fr; gap: 1.6rem; text-align: left; }
+}
+.amp-pillar .mega-amp {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(7rem, 16vw, 14rem);
+  line-height: 0.82;
+  color: var(--amber);
+  margin: 0;
+  letter-spacing: -0.04em;
+  display: block;
+  text-shadow: 0 0 60px var(--amber-glow);
+}
+.amp-pillar .label {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--bone-dim);
+  display: block;
+  margin-bottom: 0.6rem;
+}
+.amp-pillar .line {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(1.6rem, 3.2vw, 2.8rem);
+  color: var(--bone);
+  max-width: 22ch;
+  margin: 0 0 1.2rem;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+}
+.amp-pillar .line em { color: var(--amber); }
+.amp-pillar__body {
+  color: var(--bone-dim);
+  font-size: 1.05rem;
+  line-height: 1.55;
+  max-width: 46ch;
+  margin: 0;
+}
+
+/* ---------- Selected work — pinned horizontal ---------- */
+.work {
+  position: relative;
+}
+.work__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1.5rem;
+  padding-bottom: clamp(2.5rem, 5vw, 4rem);
+  flex-wrap: wrap;
+}
+.work__head h2 { max-width: 18ch; }
+.work__head .meta { color: var(--bone-dim); font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; }
+
+.work__pin {
+  height: 100vh;
+  min-height: 640px;
+  position: relative;
+  overflow: hidden;
+}
+.work__track {
+  position: absolute;
+  top: 0; left: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-inline: var(--pad-x);
+  gap: clamp(1.5rem, 3vw, 3rem);
+  will-change: transform;
+}
+.work__progress {
+  position: absolute;
+  left: var(--pad-x);
+  right: var(--pad-x);
+  bottom: 1.4rem;
+  height: 1px;
+  background: var(--rule);
+  z-index: 2;
+}
+.work__progress span {
+  display: block;
+  height: 100%;
+  background: var(--amber);
+  width: 0;
+  transform-origin: 0 50%;
+}
+.work__nav {
+  position: absolute;
+  right: var(--pad-x);
+  top: 1.6rem;
+  display: flex;
+  gap: 0.4rem;
+  z-index: 3;
+}
+.work__nav button {
+  width: 40px; height: 40px;
+  border: 1px solid var(--rule-strong);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  transition: border-color var(--t-base) var(--ease), color var(--t-base) var(--ease);
+  background: var(--work-nav-bg);
+  backdrop-filter: blur(8px);
+}
+.work__nav button:hover { border-color: var(--amber); color: var(--amber); }
+
+.case {
+  flex: 0 0 auto;
+  width: clamp(360px, 70vw, 880px);
+  height: clamp(560px, 76vh, 720px);
+  position: relative;
+  display: grid;
+  grid-template-rows: auto minmax(240px, 1.4fr) minmax(0, auto);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--ink-2);
+  transition: border-color var(--t-base) var(--ease);
+}
+.case:hover { border-color: var(--rule-strong); }
+.case__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.1rem 1.4rem;
+  border-bottom: 1px solid var(--rule);
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--bone-dim);
+}
+.case__head .amber { color: var(--amber); }
+.case__media {
+  position: relative;
+  background: #14110D;       /* always-dark mockup frame, in both themes */
+  overflow: hidden;
+  border-bottom: 1px solid var(--rule);
+  min-height: 0;
+}
+.case__body {
+  min-height: 0;
+  padding: 1.4rem clamp(1.4rem, 2vw, 2rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  overflow: hidden;
+}
+.case__placeholder {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: #847D6B;            /* always-cream tone over dark mockup */
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-align: center;
+  gap: 0.5rem;
+  padding: 1rem;
+}
+.case__placeholder .corner {
+  position: absolute;
+  width: 18px; height: 18px;
+  border: 1px solid rgba(237,230,214,0.22);
+}
+.case__placeholder .c-tl { top: 12px; left: 12px; border-right: 0; border-bottom: 0; }
+.case__placeholder .c-tr { top: 12px; right: 12px; border-left: 0; border-bottom: 0; }
+.case__placeholder .c-bl { bottom: 12px; left: 12px; border-right: 0; border-top: 0; }
+.case__placeholder .c-br { bottom: 12px; right: 12px; border-left: 0; border-top: 0; }
+
+.case__viz {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+.case__viz svg { width: 78%; height: 78%; opacity: 0.9; }
+
+.case__name {
+  font-family: var(--serif);
+  font-size: clamp(1.5rem, 2.4vw, 2.2rem);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+.case__name em { font-style: italic; color: var(--amber); font-weight: 300; }
+.case__pitch {
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--bone-dim);
+  font-size: 1.05rem;
+  margin: 0;
+}
+.case__desc { color: var(--bone-dim); font-size: 0.98rem; line-height: 1.55; }
+.case__foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.6rem;
+}
+.case__cta {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--amber);
+  display: inline-flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.case__cta::after {
+  content: "→";
+  transition: transform var(--t-base) var(--ease);
+}
+.case:hover .case__cta::after { transform: translateX(4px); }
+
+@media (max-width: 760px) {
+  .work__pin { height: auto; min-height: 0; overflow: visible; }
+  .work__track { position: relative; padding: 0 var(--pad-x); flex-direction: column; gap: 1rem; }
+  .case { width: 100%; height: auto; min-height: 520px; }
+  .work__progress, .work__nav { display: none; }
+}
+
+/* ---------- 4S Pillars ---------- */
+.pillars {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+@media (max-width: 980px) { .pillars { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .pillars { grid-template-columns: 1fr; } }
+.pillar {
+  padding: clamp(2rem, 3vw, 3rem) clamp(1.4rem, 2vw, 2rem);
+  border-right: 1px solid var(--rule);
+  position: relative;
+  transition: background var(--t-base) var(--ease);
+}
+.pillar:last-child { border-right: 0; }
+@media (max-width: 980px) {
+  .pillar:nth-child(2n) { border-right: 0; }
+  .pillar:nth-child(-n+2) { border-bottom: 1px solid var(--rule); }
+}
+@media (max-width: 560px) {
+  .pillar { border-right: 0; border-bottom: 1px solid var(--rule); }
+  .pillar:last-child { border-bottom: 0; }
+}
+.pillar__no {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  color: var(--amber);
+  margin-bottom: 0.8rem;
+}
+.pillar__t {
+  font-family: var(--serif);
+  font-size: clamp(1.6rem, 2.4vw, 2.2rem);
+  font-style: italic;
+  font-weight: 300;
+  margin-bottom: 1rem;
+}
+.pillar__body { color: var(--bone-dim); font-size: 1rem; line-height: 1.55; }
+.pillar:hover { background: var(--ink-2); }
+
+.pillar-note {
+  margin-top: 2.5rem;
+  padding: 1.4rem 1.6rem;
+  border: 1px solid var(--rule);
+  border-left: 2px solid var(--amber);
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--bone-dim);
+  max-width: 80ch;
+}
+.pillar-note strong { color: var(--bone); font-style: normal; }
+
+/* ---------- Process (steps) ---------- */
+.steps {
+  display: grid;
+  grid-template-columns: minmax(180px, 240px) 1fr;
+  gap: clamp(2rem, 4vw, 4rem);
+}
+@media (max-width: 820px) { .steps { grid-template-columns: 1fr; } }
+.steps__rail {
+  position: sticky;
+  top: 8rem;
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-left: 1px solid var(--rule);
+  padding-left: 1rem;
+}
+@media (max-width: 820px) { .steps__rail { position: relative; top: 0; flex-direction: row; gap: 1rem; overflow-x: auto; border-left: 0; border-top: 1px solid var(--rule); padding: 1rem 0; } }
+.steps__rail-item {
+  padding: 0.6rem 0;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--bone-mute);
+  cursor: pointer;
+  display: flex;
+  gap: 0.7rem;
+  align-items: center;
+  transition: color var(--t-base) var(--ease);
+}
+.steps__rail-item:hover, .steps__rail-item.is-active { color: var(--bone); }
+.steps__rail-item.is-active::before {
+  content: "";
+  width: 14px; height: 1px; background: var(--amber);
+}
+.steps__list { display: flex; flex-direction: column; gap: clamp(2rem, 4vw, 4rem); }
+.step {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+}
+@media (max-width: 560px) { .step { grid-template-columns: 1fr; } }
+.step__no {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  color: var(--amber);
+}
+.step__when {
+  display: block;
+  color: var(--bone-mute);
+  font-size: 0.66rem;
+  margin-top: 0.4rem;
+}
+.step__t {
+  font-family: var(--serif);
+  font-size: clamp(1.6rem, 2.6vw, 2.4rem);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+.step__body { color: var(--bone-dim); font-size: 1.05rem; line-height: 1.6; max-width: 64ch; margin-bottom: 1rem; }
+.step__del {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--bone-mute);
+}
+.step__del strong { color: var(--bone); font-weight: 400; }
+
+/* ---------- Testimonial ---------- */
+.testimonial {
+  text-align: center;
+  padding-block: clamp(5rem, 10vw, 9rem);
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.testimonial blockquote {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(1.6rem, 3vw, 2.8rem);
+  line-height: 1.25;
+  color: var(--bone);
+  margin: 0 0 2rem;
+}
+.testimonial blockquote .quote {
+  color: var(--amber);
+  font-size: 1.4em;
+  line-height: 0;
+  vertical-align: -0.18em;
+}
+.testimonial cite {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--bone-dim);
+  font-style: normal;
+}
+.testimonial cite strong { color: var(--bone); font-weight: 400; }
+
+/* ---------- Pricing ---------- */
+.pricing {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--rule);
+  border-block: 1px solid var(--rule);
+}
+@media (max-width: 900px) { .pricing { grid-template-columns: 1fr; } }
+.price {
+  background: var(--ink);
+  padding: clamp(2rem, 3vw, 3rem) clamp(1.4rem, 2vw, 2.2rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  position: relative;
+  transition: background var(--t-base) var(--ease);
+}
+.price:hover { background: var(--ink-2); }
+.price--feat { background: var(--ink-2); }
+.price--feat::before {
+  content: "MOST CHOSEN";
+  position: absolute;
+  top: -10px; left: 50%;
+  transform: translateX(-50%);
+  background: var(--amber);
+  color: var(--on-amber);
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+}
+.price__tag { font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.14em; color: var(--bone-dim); text-transform: uppercase; }
+.price__name {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(2rem, 3.2vw, 2.8rem);
+  font-weight: 300;
+}
+.price__from {
+  font-family: var(--serif);
+  font-size: clamp(2.4rem, 4vw, 3.6rem);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  color: var(--bone);
+}
+.price__from .from-lbl {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--bone-mute);
+  margin-bottom: 0.4rem;
+}
+.price__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border-top: 1px solid var(--rule);
+  padding-top: 1.2rem;
+  flex: 1;
+}
+.price__list li {
+  display: grid;
+  grid-template-columns: 14px 1fr;
+  gap: 0.6rem;
+  align-items: baseline;
+  color: var(--bone-dim);
+  font-size: 0.98rem;
+  line-height: 1.45;
+}
+.price__list li::before {
+  content: "";
+  width: 6px; height: 6px;
+  background: var(--amber);
+  border-radius: 50%;
+  transform: translateY(4px);
+}
+.price .btn { align-self: flex-start; }
+
+/* ---------- Journal ---------- */
+.journal-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1rem, 2vw, 2rem);
+}
+@media (max-width: 900px) { .journal-grid { grid-template-columns: 1fr; } }
+.article {
+  border-top: 1px solid var(--rule);
+  padding-top: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-height: 280px;
+  position: relative;
+  transition: border-color var(--t-base) var(--ease);
+}
+.article:hover { border-top-color: var(--amber); }
+.article__meta { font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--bone-dim); display: flex; gap: 1rem; }
+.article__meta .amber { color: var(--amber); }
+.article__t {
+  font-family: var(--serif);
+  font-size: clamp(1.5rem, 2.2vw, 1.9rem);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  flex: 1;
+}
+.article:hover .article__t em { color: var(--amber); }
+.article__t em { font-style: italic; font-weight: 300; transition: color var(--t-base) var(--ease); }
+.article__cta {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--bone-dim);
+  display: flex;
+  justify-content: space-between;
+}
+.article:hover .article__cta { color: var(--amber); }
+
+/* ---------- Contact ---------- */
+.contact {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: clamp(2rem, 5vw, 5rem);
+}
+@media (max-width: 900px) { .contact { grid-template-columns: 1fr; } }
+.contact__head h2 { max-width: 14ch; }
+.contact__head h2 .big-amp {
+  font-style: italic;
+  color: var(--amber);
+  font-size: 1.2em;
+  line-height: 0.6;
+  display: inline-block;
+  transform: translateY(0.05em);
+}
+.contact__details {
+  margin-top: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+.contact__row { display: flex; flex-direction: column; gap: 0.3rem; }
+.contact__row a:hover { color: var(--amber); }
+.contact__row .val { font-family: var(--serif); font-size: 1.15rem; }
+.contact__form {
+  background: var(--ink-2);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: clamp(1.4rem, 2.4vw, 2.2rem);
+}
+.form-status {
+  margin-top: 0.6rem;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--amber);
+  min-height: 1.4rem;
+}
+
+/* ---------- Estimator ---------- */
+.estimator {
+  background: var(--ink-2);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: clamp(1.4rem, 2.4vw, 2.4rem);
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: clamp(1.5rem, 3vw, 3rem);
+}
+@media (max-width: 900px) { .estimator { grid-template-columns: 1fr; } }
+.estimator__group { margin-bottom: 1.4rem; }
+.estimator__label {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--bone-dim);
+  margin-bottom: 0.6rem;
+  display: block;
+}
+.estimator__slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 1px;
+  background: var(--rule-strong);
+  outline: none;
+  margin: 1rem 0 0.4rem;
+}
+.estimator__slider::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 18px; height: 18px;
+  background: var(--amber);
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid var(--ink);
+  transition: transform var(--t-base) var(--ease);
+}
+.estimator__slider::-webkit-slider-thumb:hover { transform: scale(1.2); }
+.estimator__slider::-moz-range-thumb {
+  width: 18px; height: 18px;
+  background: var(--amber);
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid var(--ink);
+}
+.estimator__sliderval {
+  display: flex; justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  color: var(--bone-mute);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.estimator__sliderval strong { color: var(--amber); font-weight: 400; }
+
+.estimator__summary {
+  background: var(--ink);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-self: start;
+  position: sticky;
+  top: 8rem;
+}
+.estimator__num {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(2.6rem, 5vw, 4rem);
+  letter-spacing: -0.02em;
+  color: var(--bone);
+  line-height: 1;
+  transition: color var(--t-base) var(--ease);
+}
+.estimator__num.is-pulse { color: var(--amber); }
+.estimator__door {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--amber);
+  padding: 0.5rem 0.8rem;
+  border: 1px solid var(--amber-dim);
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  align-self: flex-start;
+}
+.estimator__line { color: var(--bone-dim); font-size: 0.95rem; line-height: 1.5; }
+
+/* ---------- FAQ / TLDR ---------- */
+.faq__list { display: flex; flex-direction: column; gap: 0; border-top: 1px solid var(--rule); }
+.faq__item { border-bottom: 1px solid var(--rule); padding: 1.2rem 0; cursor: pointer; }
+.faq__q {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  font-family: var(--serif);
+  font-size: clamp(1.2rem, 1.8vw, 1.5rem);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+.faq__icon {
+  width: 24px; height: 24px;
+  position: relative;
+  flex: 0 0 auto;
+  transition: transform var(--t-base) var(--ease);
+}
+.faq__icon::before, .faq__icon::after {
+  content: ""; position: absolute; background: var(--amber);
+}
+.faq__icon::before { top: 50%; left: 0; right: 0; height: 1px; transform: translateY(-50%); }
+.faq__icon::after { top: 0; bottom: 0; left: 50%; width: 1px; transform: translateX(-50%); transition: transform var(--t-base) var(--ease); }
+.faq__item.is-open .faq__icon::after { transform: translateX(-50%) scaleY(0); }
+.faq__a {
+  max-height: 0;
+  overflow: hidden;
+  color: var(--bone-dim);
+  transition: max-height 420ms var(--ease), margin var(--t-base) var(--ease);
+}
+.faq__item.is-open .faq__a { max-height: 400px; margin-top: 1rem; }
+.faq__a p { margin: 0 0 0.6rem; max-width: 64ch; }
+
+/* ---------- Footer ---------- */
+.footer {
+  border-top: 1px solid var(--rule);
+  padding-block: clamp(3rem, 5vw, 4.5rem) 2rem;
+  position: relative;
+}
+.footer__head {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2rem;
+  align-items: end;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--rule);
+}
+@media (max-width: 720px) { .footer__head { grid-template-columns: 1fr; } }
+.footer__amp {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(5rem, 11vw, 9.5rem);
+  line-height: 0.82;
+  color: var(--amber);
+  letter-spacing: -0.04em;
+  margin: 0;
+  display: block;
+  text-shadow: 0 0 60px var(--amber-glow);
+}
+.footer__amp-meta {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--bone-mute);
+  text-align: right;
+  line-height: 1.6;
+}
+@media (max-width: 720px) { .footer__amp-meta { text-align: left; } }
+.footer__cols {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: clamp(1.5rem, 3vw, 3rem);
+  padding-block: 2rem;
+  border-top: 1px solid var(--rule);
+}
+@media (max-width: 800px) { .footer__cols { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 460px) { .footer__cols { grid-template-columns: 1fr; } }
+.footer__col h4 {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--bone-dim);
+  font-weight: 400;
+  margin: 0 0 1rem;
+}
+.footer__col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+.footer__col a { color: var(--bone); font-family: var(--serif); font-size: 1.05rem; transition: color var(--t-base) var(--ease); }
+.footer__col a:hover { color: var(--amber); font-style: italic; }
+.footer__brand p { color: var(--bone-dim); font-size: 0.98rem; max-width: 36ch; }
+.footer__brand .signature {
+  font-family: var(--serif); font-style: italic; font-size: 1.3rem; margin: 0 0 1rem;
+}
+.footer__bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--rule);
+  padding-top: 1.4rem;
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--bone-mute);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* ---------- AI chat panel internals ---------- */
+.chat__log {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  padding-bottom: 1rem;
+  max-height: 380px;
+  overflow-y: auto;
+}
+.chat__msg {
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  font-size: 0.98rem;
+  line-height: 1.5;
+  max-width: 92%;
+}
+.chat__msg--me {
+  background: var(--ink);
+  align-self: flex-end;
+  border: 1px solid var(--rule-strong);
+}
+.chat__msg--ai {
+  background: transparent;
+  align-self: flex-start;
+  border-left: 2px solid var(--amber);
+  padding-left: 0.9rem;
+  border-radius: 0;
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--bone);
+}
+.chat__suggest { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1rem; }
+.chat__input-row {
+  display: flex;
+  gap: 0.5rem;
+  border-top: 1px solid var(--rule);
+  padding-top: 1rem;
+}
+.chat__input {
+  flex: 1;
+  background: var(--ink);
+  border: 1px solid var(--rule-strong);
+  border-radius: 999px;
+  padding: 0.8rem 1rem;
+  color: var(--bone);
+  font-family: var(--serif);
+}
+.chat__input:focus { outline: none; border-color: var(--amber); }
+.chat__send {
+  background: var(--amber);
+  color: var(--on-amber);
+  border-radius: 999px;
+  padding: 0 1.2rem;
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.chat__typing {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--bone-mute);
+  padding: 0.4rem 0;
+}
+
+/* ---------- Side rail / page counter ---------- */
+.side-rail {
+  position: fixed;
+  left: clamp(0.6rem, 1.2vw, 1.2rem);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--bone-mute);
+  writing-mode: vertical-rl;
+}
+@media (max-width: 1100px) { .side-rail { display: none; } }
+.side-rail .num { color: var(--amber); }
+
+  </style>
+  <noscript><style>.loader{display:none!important}.reveal,.reveal-stagger>*{opacity:1!important;transform:none!important}</style></noscript>
+
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "DigitalAgency",
+    "name": "Yafet & Co.",
+    "description": "Independent, founder-led digital studio in Vienna building websites, apps and quiet AI workflows for European SMEs, NGOs and public bodies.",
+    "address": { "@type": "PostalAddress", "streetAddress": "Schottenring 14/3", "postalCode": "1010", "addressLocality": "Wien", "addressCountry": "AT" },
+    "email": "contact@yafetandco.com",
+    "telephone": "+43 1 928 73 73",
+    "founder": { "@type": "Person", "name": "Yafet" },
+    "areaServed": ["AT", "DE", "EU", "ET"]
+  }
+  </script>
+
+  <!-- Bundler splash thumbnail (used during asset unpack + as no-JS fallback) -->
+  <template id="__bundler_thumbnail" data-bg-color="#0E0B08">
+    <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+      <rect width="1200" height="800" fill="#0E0B08"/>
+      <!-- Frame -->
+      <rect x="60" y="60" width="1080" height="680" fill="none" stroke="rgba(237,230,214,0.18)" stroke-width="1.2"/>
+      <!-- Film label -->
+      <g font-family="ui-monospace, monospace" font-size="20" fill="#B8AF9A" letter-spacing="3">
+        <text x="100" y="120">VOL. 06 · THE STUDIO</text>
+        <text x="980" y="120" text-anchor="end" fill="#C58E4A">REC · VIENNA</text>
+      </g>
+      <!-- Mega ampersand -->
+      <text x="600" y="540"
+            text-anchor="middle"
+            font-family="Cormorant Garamond, Georgia, serif"
+            font-style="italic"
+            font-weight="300"
+            font-size="540"
+            fill="#C58E4A">&amp;</text>
+      <!-- Wordmark / kicker -->
+      <text x="600" y="660"
+            text-anchor="middle"
+            font-family="Cormorant Garamond, Georgia, serif"
+            font-style="italic"
+            font-weight="300"
+            font-size="42"
+            fill="#EDE6D6">Yafet &amp; Co.</text>
+      <text x="600" y="700"
+            text-anchor="middle"
+            font-family="ui-monospace, monospace"
+            font-size="16"
+            letter-spacing="4"
+            fill="#847D6B">WIEN · MMXXVI · 48°12′ N · 16°22′ E</text>
+    </svg>
+  </template>
+</head>
+<body>
+  <a class="skip-link" href="#top">Skip to content</a>
+
+  <!-- ===== Cinematic loader ===== -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader__inner">
+      <div class="loader__rec"><span class="dot"></span><span>REC · VIENNA · MMXXVI</span></div>
+      <div class="loader__timecode" data-timecode>REC · 22:40:10 · VIENNA</div>
+      <div class="loader__amp">&amp;</div>
+      <div class="loader__bar"></div>
+      <div class="loader__cap">STUDIO YAFET &amp; CO — A FILM IN ONE BREATH</div>
+    </div>
+  </div>
+
+  <!-- ===== Atmospheric overlays ===== -->
+  <div class="grain" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+
+  <!-- ===== Side rail (page mark) ===== -->
+  <aside class="side-rail" aria-hidden="true">
+    <span class="num">MMXXVI</span>
+    <span>· 48°12′ N · 16°22′ E ·</span>
+    <span>VOL. 06 · THE STUDIO</span>
+  </aside>
+
+  <!-- ===== Nav ===== -->
+  <header class="nav" id="nav">
+    <a href="#top" class="nav__brand" aria-label="Yafet & Co. — home">
+      <span class="yc">Y&amp;C</span>
+      <span class="wordmark">Yafet &amp; Co.</span>
+    </a>
+    <nav class="nav__links" aria-label="Primary">
+      <a class="nav__link" href="#work">Work</a>
+      <a class="nav__link" href="#services">Services</a>
+      <a class="nav__link" href="#process">Process</a>
+      <a class="nav__link" href="#pricing">Pricing</a>
+      <a class="nav__link" href="#journal">Journal</a>
+      <a class="nav__link" href="#contact">Contact</a>
+    </nav>
+    <div class="nav__right">
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button data-lang="en" class="is-active">EN</button>
+        <button data-lang="de" type="button" disabled title="German version coming soon">DE</button>
+      </div>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light / dark theme">
+        <!-- Moon icon (shown in dark mode) -->
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M20.5 14.5A8.5 8.5 0 1 1 9.5 3.5a7 7 0 0 0 11 11Z"/>
+        </svg>
+        <!-- Sun icon (shown in light mode) -->
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+        </svg>
+      </button>
+      <a class="btn btn--primary nav__cta" href="#contact" data-magnetic>
+        <span class="nav__cta-text">Start a project.</span>
+        <span class="arrow">→</span>
+      </a>
+      <button class="nav__burger" aria-label="Open menu" aria-controls="menu-sheet" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <!-- ===== Mobile sheet ===== -->
+  <div class="menu-sheet" id="menu-sheet">
+    <a href="#work">Work</a>
+    <a href="#services">Services</a>
+    <a href="#process">Process</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#journal">Journal</a>
+    <a href="#contact">Contact</a>
+  </div>
+
+  <main id="top">
+
+    <!-- =====================================================
+         HERO
+         ===================================================== -->
+    <section class="hero container">
+      <div class="hero__topbar mono">
+        <span data-i18n="hero.label1">VOL. 06 · THE STUDIO</span>
+        <span data-i18n="hero.label2"><span class="rec-dot"></span><span class="timecode" data-timecode>REC · 22:40:10 · VIENNA</span></span>
+        <span data-i18n="hero.label3">NO. 01 / THE STUDIO AT WORK</span>
+      </div>
+
+      <div class="hero__main">
+        <div>
+          <span class="hero__kicker" data-i18n="hero.kicker">— STUDIO YAFET &amp; CO · WIEN · MMXXVI</span>
+          <h1 class="hero__h1" data-i18n="hero.h1">
+            <span class="line-mask"><span class="line-inner">Websites,</span></span>
+            <span class="line-mask"><span class="line-inner">apps, <em>&amp; quiet AI</em></span></span>
+            <span class="line-mask"><span class="line-inner">— made in</span></span>
+            <span class="line-mask"><span class="line-inner">Vienna.</span></span>
+          </h1>
+          <p class="hero__sub" data-i18n="hero.sub">Notes on the slow craft of building for the businesses Europe keeps quiet about.</p>
+          <div class="hero__ctas">
+            <button class="btn btn--primary" data-open-modal="booking-modal" data-magnetic data-i18n="hero.cta1"><span>Book a 30-min intro</span><span class="arrow">→</span></button>
+            <a class="btn" href="#work" data-magnetic data-i18n="hero.cta2"><span>Selected work</span><span class="arrow">↘</span></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero__foot mono">
+        <div class="col">
+          <span data-i18n="hero.foot1">A STUDIO IN ONE CITY · 48°12′ N · 16°22′ E</span>
+          <span data-i18n="hero.foot2" class="mute">A FILM IN ONE BREATH</span>
+        </div>
+        <div class="col" style="text-align:right;">
+          <span class="amber" data-i18n="hero.footAvail">Available for projects from Q3 2026</span>
+          <span class="mute">SCROLL ↓</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         PARTNER + INDUSTRY MARQUEES
+         ===================================================== -->
+    <section class="section">
+      <div class="container" style="display:flex; justify-content:space-between; align-items:center; padding-bottom:0.8rem;">
+        <span class="mono" data-i18n="marquee.partnersLabel">IN PARTNERSHIP WITH ↓</span>
+        <span class="mono mute">EU + AFRICA · 08 PARTNERS</span>
+      </div>
+      <div class="marquee marquee--mono">
+        <div class="marquee__track" data-marquee="partners"></div>
+      </div>
+      <div class="marquee marquee--serif marquee--rev marquee--slow">
+        <div class="marquee__track" data-marquee="industries"></div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         § 01 — SERVICES (Eight disciplines)
+         ===================================================== -->
+    <section class="section section-pad container" id="services">
+      <div class="sec-marker reveal">
+        <span class="mono sec-marker__id" data-i18n="services.no">§ 01</span>
+        <span class="mono sec-marker__title" data-i18n="services.tag">What we make</span>
+        <span class="mono sec-marker__meta">08 DISCIPLINES</span>
+      </div>
+      <h2 class="h2 reveal" style="max-width: 14ch; margin-bottom: clamp(2.5rem, 4vw, 4rem);" data-i18n="services.h2">Eight disciplines, <em>one studio.</em></h2>
+      <div class="disc-grid reveal-stagger" data-i18n="services.list"></div>
+    </section>
+
+    <!-- =====================================================
+         STATS BAND
+         ===================================================== -->
+    <section class="section container">
+      <div class="stats reveal-stagger" data-i18n="stats"></div>
+    </section>
+
+    <!-- =====================================================
+         THE & PILLAR MOMENT
+         ===================================================== -->
+    <section class="amp-pillar section">
+      <div class="container">
+        <div class="amp-pillar__inner">
+          <span class="mega-amp" data-i18n="ampPillar.mega">&amp;</span>
+          <div>
+            <span class="label" data-i18n="ampPillar.label">THE STUDIO PRINCIPLE</span>
+            <p class="line" data-i18n="ampPillar.line">THE <em>&amp;</em> IS THE WORK.</p>
+            <p class="amp-pillar__body reveal" data-i18n="ampPillar.body">Design and engineering, strategy and shipping — not handed off in stages, but braided together from week one.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         § 02 — SELECTED WORK (pinned horizontal)
+         ===================================================== -->
+    <section class="section work" id="work">
+      <div class="container">
+        <div class="sec-marker reveal">
+          <span class="mono sec-marker__id" data-i18n="work.no">§ 02</span>
+          <span class="mono sec-marker__title" data-i18n="work.tag">Selected work · 2023–2025</span>
+          <span class="mono sec-marker__meta" data-i18n="work.meta">04 CASES · SCROLL TO READ →</span>
+        </div>
+        <div class="work__head reveal">
+          <h2 class="h2" data-i18n="work.h2">An index of quiet, <em>shipped things.</em></h2>
+          <span class="meta">PINNED · CINEMATIC GALLERY</span>
+        </div>
+      </div>
+      <div class="work__pin">
+        <div class="work__nav">
+          <button class="work__nav-prev" aria-label="Previous case">←</button>
+          <button class="work__nav-next" aria-label="Next case">→</button>
+        </div>
+        <div class="work__track" data-i18n="work.list"></div>
+        <div class="work__progress"><span></span></div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         § 03 — FOUR S PILLARS
+         ===================================================== -->
+    <section class="section section-pad container" id="why">
+      <div class="sec-marker reveal">
+        <span class="mono sec-marker__id" data-i18n="pillars.no">§ 03</span>
+        <span class="mono sec-marker__title" data-i18n="pillars.tag">The four S pillars</span>
+        <span class="mono sec-marker__meta">SPEED · SECURITY · SCALABILITY · SUSTAINABILITY</span>
+      </div>
+      <h2 class="h2 reveal" style="max-width: 14ch; margin-bottom: clamp(2.5rem, 4vw, 4rem);" data-i18n="pillars.h2">Technology <em>that lasts.</em></h2>
+      <div class="pillars" data-i18n="pillars.list"></div>
+      <p class="pillar-note reveal" data-i18n="pillars.note">In delivery partnership with <strong>SuSu Technology Trading</strong> — twelve years of ICT infrastructure across the Horn of Africa.</p>
+    </section>
+
+    <!-- =====================================================
+         § 04 — PROCESS
+         ===================================================== -->
+    <section class="section section-pad container" id="process">
+      <div class="sec-marker reveal">
+        <span class="mono sec-marker__id" data-i18n="process.no">§ 04</span>
+        <span class="mono sec-marker__title" data-i18n="process.tag">How we work</span>
+        <span class="mono sec-marker__meta">05 STEPS · NO RE-TREATMENTS</span>
+      </div>
+      <h2 class="h2 reveal" style="max-width: 14ch; margin-bottom: clamp(2.5rem, 4vw, 4rem);" data-i18n="process.h2">Five steps. <em>No re-treatments.</em></h2>
+      <div class="steps">
+        <div class="steps__rail" data-i18n="process.rail"></div>
+        <div class="steps__list" data-i18n="process.list"></div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         TESTIMONIAL
+         ===================================================== -->
+    <section class="section container">
+      <div class="testimonial reveal">
+        <blockquote data-i18n="testimonial.quote"></blockquote>
+        <cite data-i18n="testimonial.cite"></cite>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         § 05 — PRICING
+         ===================================================== -->
+    <section class="section section-pad container" id="pricing">
+      <div class="sec-marker reveal">
+        <span class="mono sec-marker__id" data-i18n="pricing.no">§ 05</span>
+        <span class="mono sec-marker__title" data-i18n="pricing.tag">Pricing</span>
+        <span class="mono sec-marker__meta">EUR · NET · 3 DOORS</span>
+      </div>
+      <h2 class="h2 reveal" style="max-width: 14ch; margin-bottom: clamp(2.5rem, 4vw, 4rem);" data-i18n="pricing.h2">Three doors, <em>all of them open.</em></h2>
+      <div class="pricing" data-i18n="pricing.list"></div>
+    </section>
+
+    <!-- =====================================================
+         PROJECT ESTIMATOR
+         ===================================================== -->
+    <section class="section section-pad container" id="estimator">
+      <div class="sec-marker reveal">
+        <span class="mono sec-marker__id">¶</span>
+        <span class="mono sec-marker__title">Project estimator</span>
+        <span class="mono sec-marker__meta">A FIRST SKETCH · NOT A QUOTE</span>
+      </div>
+      <h2 class="h2 reveal" style="max-width: 16ch; margin-bottom: 1.2rem;" data-i18n="estimator.h2">Project estimator. <em>A first sketch.</em></h2>
+      <p class="lead dim reveal" style="max-width: 60ch; margin-bottom: clamp(2rem, 4vw, 3rem);" data-i18n="estimator.sub"></p>
+
+      <div class="estimator reveal" id="estimator-card">
+        <div>
+          <div class="estimator__group">
+            <span class="estimator__label" data-i18n="estimator.servicesLabel">01 · Service</span>
+            <div class="chips" data-i18n="estimator.services"></div>
+          </div>
+
+          <div class="estimator__group">
+            <span class="estimator__label" data-i18n="estimator.addonsLabel">02 · Add-ons</span>
+            <div class="chips" data-i18n="estimator.addons"></div>
+          </div>
+
+          <div class="estimator__group">
+            <span class="estimator__label" data-i18n="estimator.pagesLabel">03 · Pages / screens</span>
+            <input type="range" class="estimator__slider" id="est-pages" min="1" max="40" value="8" />
+            <div class="estimator__sliderval" id="est-pages-val"></div>
+          </div>
+
+          <div class="estimator__group">
+            <span class="estimator__label" data-i18n="estimator.timelineLabel">04 · Timeline (weeks)</span>
+            <input type="range" class="estimator__slider" id="est-weeks" min="4" max="40" value="8" />
+            <div class="estimator__sliderval" id="est-weeks-val"></div>
+          </div>
+        </div>
+
+        <aside class="estimator__summary">
+          <span class="mono" data-i18n="estimator.summaryLabel">Indicative budget</span>
+          <div class="estimator__num" id="est-num">€4500</div>
+          <span class="estimator__door" id="est-door">↦  Atelier</span>
+          <p class="estimator__line" id="est-line">A live, in-browser sketch — not a quote.</p>
+          <a class="btn btn--primary" href="#contact" data-magnetic><span>Talk to Yafet</span><span class="arrow">→</span></a>
+        </aside>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         § 06 — JOURNAL
+         ===================================================== -->
+    <section class="section section-pad container" id="journal">
+      <div class="sec-marker reveal">
+        <span class="mono sec-marker__id" data-i18n="journal.no">§ 06</span>
+        <span class="mono sec-marker__title" data-i18n="journal.tag">Journal</span>
+        <span class="mono sec-marker__meta">03 NOTES · LATEST</span>
+      </div>
+      <h2 class="h2 reveal" style="max-width: 16ch; margin-bottom: clamp(2.5rem, 4vw, 4rem);" data-i18n="journal.h2">Notes from <em>the studio.</em></h2>
+      <div class="journal-grid" data-i18n="journal.list"></div>
+    </section>
+
+    <!-- =====================================================
+         CONTACT
+         ===================================================== -->
+    <section class="section section-pad container" id="contact">
+      <div class="sec-marker reveal">
+        <span class="mono sec-marker__id">¶</span>
+        <span class="mono sec-marker__title">Contact</span>
+        <span class="mono sec-marker__meta">SCHOTTENRING 14/3 · 1010 WIEN</span>
+      </div>
+      <div class="contact">
+        <div class="contact__head reveal">
+          <h2 class="h2" data-i18n="contact.h2">Let's build something <em>worth keeping</em> <span class="big-amp">&amp;</span></h2>
+          <div class="contact__details">
+            <div class="contact__row">
+              <span class="mono dim">DIRECT</span>
+              <a class="val" data-i18n="contact.email" href="mailto:contact@yafetandco.com">contact@yafetandco.com</a>
+              <a class="val" data-i18n="contact.phone" href="tel:+4319287373">+43 1 928 73 73</a>
+            </div>
+            <div class="contact__row">
+              <span class="mono dim">BOOK A 30-MIN CALL</span>
+              <a class="val" href="#booking-modal" data-open-modal="booking-modal" data-i18n="contact.calendly">Calendly → open · Tuesdays &amp; Thursdays · CET</a>
+            </div>
+            <div class="contact__row">
+              <span class="mono dim">STUDIO</span>
+              <span class="val" data-i18n="contact.studio">Schottenring 14/3, 1010 Wien · By appointment only</span>
+            </div>
+            <p class="dim" data-i18n="contact.note" style="max-width:42ch;"></p>
+          </div>
+        </div>
+
+        <form class="contact__form reveal" id="contact-form" novalidate>
+          <div class="field" data-field="name">
+            <label class="field__label" for="cf-name">Your name</label>
+            <input class="field__input" id="cf-name" name="name" type="text" autocomplete="name" required />
+            <span class="field__err">↯ A name (or two) please.</span>
+          </div>
+          <div class="field" data-field="email">
+            <label class="field__label" for="cf-email">Email</label>
+            <input class="field__input" id="cf-email" name="email" type="email" autocomplete="email" required />
+            <span class="field__err">↯ Not quite a valid email.</span>
+          </div>
+          <div class="field" data-field="company">
+            <label class="field__label" for="cf-company">Company · optional</label>
+            <input class="field__input" id="cf-company" name="company" type="text" />
+          </div>
+          <div class="field" data-field="message">
+            <label class="field__label" for="cf-msg">What are you building?</label>
+            <textarea class="field__textarea" id="cf-msg" name="message" placeholder="A sentence or three is enough. The shorter you can write it, the clearer you can think it." required></textarea>
+            <span class="field__err">↯ A sentence or three, please.</span>
+          </div>
+          <button type="submit" class="btn btn--primary" data-magnetic>
+            <span>Send to Yafet</span><span class="arrow">→</span>
+          </button>
+          <div class="form-status" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         FAQ / TL;DR
+         ===================================================== -->
+    <section class="section section-pad container" id="faq">
+      <div class="sec-marker reveal">
+        <span class="mono sec-marker__id" data-i18n="faq.tag">TL;DR</span>
+        <span class="mono sec-marker__title">The fast read</span>
+        <span class="mono sec-marker__meta">Q&amp;A · FOR HUMANS AND CRAWLERS</span>
+      </div>
+      <h2 class="h2 reveal" style="max-width: 16ch; margin-bottom: clamp(2rem, 4vw, 3rem);" data-i18n="faq.h2">The quick answers, <em>for the skim-readers.</em></h2>
+      <div class="faq">
+        <div class="faq__list" data-i18n="faq.list"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =====================================================
+       FOOTER (with full-bleed ampersand)
+       ===================================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__head">
+        <span class="footer__amp" aria-hidden="true">&amp;</span>
+        <div class="footer__amp-meta">
+          <div>YAFET &amp; CO · WIEN · MMXXVI</div>
+          <div>48°12′ N · 16°22′ E</div>
+          <div class="amber" data-i18n="hero.footAvail">Available for projects from Q3 2026</div>
+        </div>
+      </div>
+      <div class="footer__cols">
+        <div class="footer__brand">
+          <p class="signature" data-i18n="footer.signature">Made slowly, in Vienna.</p>
+          <p data-i18n="footer.blurb">Notes on the slow craft of building for the businesses Europe keeps quiet about.</p>
+        </div>
+        <div data-i18n="footer.cols" style="display:contents;"></div>
+      </div>
+      <div class="footer__bottom">
+        <span data-i18n="footer.copy">© 2021–2026 Yafet &amp; Co · Vienna · Reg. 547382b</span>
+        <span>48°12′ N · 16°22′ E · MMXXVI</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =====================================================
+       FLOATING "ASK THE STUDIO" DOCK
+       ===================================================== -->
+  <div class="dock">
+    <button class="dock__btn" data-open-modal="chat-modal" data-magnetic>
+      <span class="pulse"></span>
+      <span data-i18n="dock.label">Ask the studio</span>
+    </button>
+  </div>
+
+  <!-- =====================================================
+       MODAL · BOOKING (Calendly hook)
+       ===================================================== -->
+  <div class="modal modal--center" id="booking-modal" role="dialog" aria-modal="true" aria-labelledby="booking-title">
+    <div class="modal__panel">
+      <header class="modal__head">
+        <div>
+          <div class="mono mono-amber">↪ INTRO CALL</div>
+          <h3 class="modal__title" id="booking-title">Book a 30-min intro</h3>
+        </div>
+        <button class="modal__close" aria-label="Close">✕</button>
+      </header>
+      <div class="modal__body">
+        <p class="lead dim" style="margin-bottom:1.4rem;">A 30-minute introductory call with Yafet. No deck, no pitch — a conversation. Tuesdays &amp; Thursdays, CET.</p>
+        <div class="booking-card">
+          <div>
+            <div class="mono mono-sm mono-amber">NEXT STEP</div>
+            <h4>Open the live booking page</h4>
+            <p>Calendly handles current availability, time zones, confirmations and calendar invites. If the slot you want is not visible, write directly and suggest two times.</p>
+          </div>
+          <a href="mailto:contact@yafetandco.com?subject=Intro%20call%20with%20Yafet%20%26%20Co.&body=Hi%20Yafet%2C%0A%0AI%27d%20like%20to%20book%20a%2030-minute%20intro%20call.%0A%0AProject%20context%3A%0APreferred%20times%3A%0A%0AThank%20you." class="booking-card__mail">Prefer email?</a>
+        </div>
+        <div style="display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1.4rem;">
+          <a class="btn btn--primary" href="https://calendly.com/yafetandco/intro" target="_blank" rel="noopener" data-magnetic><span>Open Calendly</span><span class="arrow">→</span></a>
+          <button class="btn" data-close-modal>Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================
+       MODAL · ASK THE STUDIO (AI chat)
+       ===================================================== -->
+  <div class="modal" id="chat-modal" role="dialog" aria-modal="true" aria-labelledby="chat-title">
+    <div class="modal__panel">
+      <header class="modal__head">
+        <div>
+          <div class="mono mono-amber">↪ STUDIO ASSISTANT</div>
+          <h3 class="modal__title" id="chat-title">Ask the studio</h3>
+        </div>
+        <button class="modal__close" aria-label="Close">✕</button>
+      </header>
+      <div class="modal__body">
+        <div class="chat__suggest">
+          <button class="chip">How long does an Atelier project take?</button>
+          <button class="chip">Do you build in German?</button>
+          <button class="chip">What does an MVP cost?</button>
+          <button class="chip">When is Yafet next available?</button>
+        </div>
+        <div class="chat__log"></div>
+        <div class="chat__input-row">
+          <input class="chat__input" placeholder="Ask about services, timelines, pricing…" />
+          <button class="chat__send">Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================
+       LIBRARIES (GSAP + ScrollTrigger + Lenis from cdnjs)
+       ===================================================== -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" crossorigin="anonymous"></script>
+
+  <!-- =====================================================
+       APP SCRIPTS
+       ===================================================== -->
+  <script>
+/* ============================================================
+   YAFET & CO. — Content dictionary (EN/DE)
+   English is the public version. German content is kept out of
+   the UI until a real translation is ready.
+   ============================================================ */
+window.YC_CONTENT = {
+  en: {
+    nav: {
+      links: ["Work", "Services", "Process", "Pricing", "Journal", "Contact"],
+      cta: "Start a project."
+    },
+    hero: {
+      label1: "VOL. 06 · THE STUDIO",
+      label2: "REC · 22:40:10 · VIENNA",
+      label3: "NO. 01 / THE STUDIO AT WORK",
+      kicker: "— STUDIO YAFET & CO · WIEN · MMXXVI",
+      h1Lines: [
+        ["Websites,", null],
+        ["apps, ", { italic: "& quiet AI" }],
+        ["— made in", null],
+        ["Vienna.", null]
+      ],
+      sub: "Notes on the slow craft of building for the businesses Europe keeps quiet about.",
+      ctaPrimary: "Book a 30-min intro",
+      ctaSecondary: "Selected work",
+      foot1: "A STUDIO IN ONE CITY · 48°12′ N · 16°22′ E",
+      foot2: "A FILM IN ONE BREATH",
+      footAvail: "Available for projects from Q3 2026"
+    },
+    marquee: {
+      partnersLabel: "IN PARTNERSHIP WITH",
+      partners: ["Microsoft", "Cisco", "Huawei", "Fortinet", "Hikvision", "ActiveXperts", "NatNet", "SuSu Technology"],
+      industries: ["eCommerce", "eLearning", "Healthcare", "Sports streaming", "Public sector", "ICT infrastructure", "Audiovisual", "Cloud & security"]
+    },
+    services: {
+      no: "§ 01",
+      tag: "What we make",
+      h2: ["Eight disciplines,", { italic: "one studio." }],
+      list: [
+        { t: "Website design & development", body: "Editorial, fast, accessible sites built on Next.js with a CMS your team can actually run." },
+        { t: "Website redesign",              body: "Audit-first redesigns for sites that work but feel ten years older than the business behind them." },
+        { t: "Booking & management systems", body: "Salons, clinics, studios: custom calendars, no-show logic, payments, staff scheduling — owned, not rented." },
+        { t: "Custom IT systems & CRMs",     body: "Internal tools that replace eleven spreadsheets and a WhatsApp group. Quietly, then dramatically." },
+        { t: "Mobile & web apps",            body: "From MVP in six weeks to a product worth scaling — React Native, Next.js, the boring choices that pay off." },
+        { t: "AI automation & integration",  body: "Quiet automations that save twelve hours a week. Loud ones that change the business model. Both, where they fit." },
+        { t: "Social media & content",       body: "A point of view, a publishing cadence, and the editorial muscle to keep it going past month three." },
+        { t: "Government & NGO platforms",   body: "WCAG-AA accessible, GDPR-tight, multilingual platforms for public bodies and non-profits across the EU." }
+      ]
+    },
+    stats: [
+      { num: 12, suffix: "+", label: "years of <strong>combined craft</strong>" },
+      { num: 4,  pad: 2,      label: "industries — <strong>health, sport, edu, commerce</strong>" },
+      { num: 8,  pad: 2,      label: "<strong>tier-1 vendor partners</strong> across EU + Africa" },
+      { num: 1,  pad: 2,      label: "founder — <strong>the same person</strong> from intro to launch" }
+    ],
+    ampPillar: {
+      mega: "&",
+      line: ["THE ", { italic: "&" }, " IS THE WORK."],
+      body: "Design and engineering, strategy and shipping — not handed off in stages, but braided together from week one."
+    },
+    work: {
+      no: "§ 02",
+      tag: "Selected work · 2023–2025",
+      h2: ["An index of quiet,", { italic: "shipped things." }],
+      meta: "04 CASES · SCROLL TO READ →",
+      cases: [
+        {
+          name: "Pietech.",
+          meta: "CLIENT · 2024 · ETH",
+          pitch: "A marketplace that finally took local payments.",
+          desc: "Multi-vendor eCommerce with Telebirr and CBE Birr fully integrated, Amharic/English checkout, and an admin panel the founders can actually run themselves.",
+          tags: ["Next.js", "Postgres", "Telebirr", "CBE Birr", "Multi-vendor"],
+          status: "PIETECH · LIVE · ECOMMERCE · Addis Ababa, ET",
+          viz: "pietech"
+        },
+        {
+          name: "EthioSport.",
+          meta: "CLIENT · 2023 — ONGOING · ETH",
+          pitch: "A white-label OTT platform for African football leagues.",
+          desc: "Live and on-demand streaming with DRM, CDN edge delivery, Android & iOS apps, and a white-label admin for leagues to brand their own channel — built for low-bandwidth markets first.",
+          tags: ["HLS", "DRM", "CDN", "iOS", "Android"],
+          status: "ETHIOSPORT · LIVE · OTT STREAMING · Pan-African · 4 leagues",
+          viz: "ethiosport"
+        },
+        {
+          name: "Amisoft.",
+          meta: "CLIENT · 2024 · ETH",
+          pitch: "An online health record hospitals can actually run.",
+          desc: "Patient records, lab orders, prescription tracking and a telehealth bridge — HL7-aware, mobile-first for the doctor walking the ward, and offline-tolerant where it matters.",
+          tags: ["HIS", "HL7", "React Native", "Telehealth"],
+          status: "AMISOFT · LIVE · HEALTH RECORD · Multi-hospital, ET",
+          viz: "amisoft"
+        },
+        {
+          name: "Kiyatech PLC.",
+          meta: "CLIENT · 2023 · ETH",
+          pitch: "A learning platform built for students who go offline.",
+          desc: "K-12 eLearning with Amharic localization, downloadable lessons that survive a four-hour bus ride, SCORM-compliant assessments, and a teacher dashboard the principal can read at a glance.",
+          tags: ["LMS", "SCORM", "Amharic", "Offline-first"],
+          status: "KIYATECH · LIVE · ELEARNING · K-12, ET",
+          viz: "kiyatech"
+        }
+      ]
+    },
+    pillars: {
+      no: "§ 03",
+      tag: "The four S pillars",
+      h2: ["Technology", { italic: "that lasts." }],
+      list: [
+        { no: "01", t: "Speed.",          body: "From kickoff to live in weeks, not seasons. MVPs in 4–6 weeks. Custom builds in 8–12. Decisions on the same day we ask the question." },
+        { no: "02", t: "Security.",       body: "GDPR-native, EU-hosted, audited stack. Fortinet, Cisco and Microsoft inside. The unsexy guarantees that keep boards and regulators on side." },
+        { no: "03", t: "Scalability.",    body: "From a salon with three chairs to a streaming network across four countries — same architecture, no rebuilds. We design for the version of you in 2029." },
+        { no: "04", t: "Sustainability.", body: "Code, contracts and CMS your team can actually run after we leave. No vendor lock-in, no monthly retainer trap. We build it; you own it." }
+      ],
+      note: "In delivery partnership with <strong>SuSu Technology Trading</strong> — twelve years of ICT infrastructure, audiovisual and integration work across the Horn of Africa."
+    },
+    process: {
+      no: "§ 04",
+      tag: "How we work",
+      h2: ["Five steps.", { italic: "No re-treatments." }],
+      steps: [
+        { no: "01", key: "LISTEN",  when: "Week 1",      t: "Listen, then disagree carefully.",     body: "A long-form intro call, a desk audit of what you have, and a written one-pager that disagrees with at least one thing you told us. If we agree with everything, we're not paying attention.", deliv: "Audit deck · Risk register · Scope letter" },
+        { no: "02", key: "SKETCH",  when: "Week 2–3",    t: "Sketch in public.",                    body: "A shared Figma file you can comment on at 11pm. Three directions on the first review, one by the third. No black-box reveals.", deliv: "Wireframes · 3 visual routes · Component map" },
+        { no: "03", key: "BUILD",   when: "Week 3–6",    t: "Build the boring parts first.",        body: "Auth, payments, CMS, GDPR. We get the un-screenshot-able infrastructure done first, so the last weeks are for craft, not catch-up.", deliv: "Stack: Next.js · Sanity · Stripe · i18n" },
+        { no: "04", key: "POLISH",  when: "Week 6–10",   t: "Polish, then polish again.",           body: "Lighthouse 95+, accessibility audit, copy pass with a real editor, an OG-image for every page. The unglamorous week that decides how the site is remembered.", deliv: "A11y · Perf · Copy · SEO" },
+        { no: "05", key: "STAY",    when: "After launch", t: "Stay close, quietly.",                 body: "A 30-day after-care window, then a light retainer if you want one. We don't pretend the launch is the finish line, and we don't camp on your inbox either.", deliv: "30-day after-care · Quarterly review" }
+      ]
+    },
+    testimonial: {
+      quote: "They were the only studio that pushed back on our brief — and the only one that delivered something we couldn't have written into the brief in the first place. Six weeks. Two languages. One taxi from the airport.",
+      who: "Anneliese R.",
+      role: "CEO, Donau Capital · Vienna"
+    },
+    pricing: {
+      no: "§ 05",
+      tag: "Pricing",
+      h2: ["Three doors,", { italic: "all of them open." }],
+      tiers: [
+        {
+          name: "Quickstart",
+          tag: "SOLO · 4 WK",
+          from: "€7.400",
+          list: [
+            "5-page editorial site on Next.js",
+            "One language, bilingual-ready",
+            "Sanity CMS, GDPR setup, Impressum",
+            "Lighthouse 95+ on launch"
+          ],
+          cta: "Begin",
+          door: "quickstart"
+        },
+        {
+          name: "Atelier",
+          tag: "MOST CHOSEN · 8–12 WK",
+          from: "€18.000",
+          list: [
+            "Full custom site, system or app",
+            "Bilingual DE/EN from day one",
+            "One AI workflow built in",
+            "Booking · CRM · payments where needed",
+            "30-day after-care included"
+          ],
+          cta: "Talk to Yafet",
+          door: "atelier",
+          feat: true
+        },
+        {
+          name: "Long view",
+          tag: "RETAINER · 6+ MO",
+          from: "€4.800/mo",
+          list: [
+            "Embedded design + engineering",
+            "Roadmap reviewed every six weeks",
+            "Direct line to Yafet",
+            "Cancel any month with 30 days notice"
+          ],
+          cta: "Enquire",
+          door: "longview"
+        }
+      ]
+    },
+    journal: {
+      no: "§ 06",
+      tag: "Journal",
+      h2: ["Notes from", { italic: "the studio." }],
+      articles: [
+        { meta: "FIELD NOTES · 18.04.26", t: ["Why your booking system should ", { italic: "not be your CRM." }], read: "6 min" },
+        { meta: "ESSAY · 02.04.26",       t: ["The unsexy AI workflow that saved a salon ", { italic: "9 hrs/week." }], read: "9 min" },
+        { meta: "STUDIO · 14.03.26",      t: ["On Vienna, and why ", { italic: "\"small\" is the point." }], read: "4 min" }
+      ]
+    },
+    contact: {
+      h2: ["Let's build something", { italic: "worth keeping" }],
+      email: "contact@yafetandco.com",
+      phone: "+43 1 928 73 73",
+      calendly: "Calendly → open · Tuesdays & Thursdays · CET",
+      studio: "Schottenring 14/3, 1010 Wien · By appointment only",
+      note: "An independent, founder-led digital studio in Vienna. Available for projects from Q3 2026."
+    },
+    faq: {
+      tag: "TL;DR",
+      h2: ["The quick answers,", { italic: "for the skim-readers." }],
+      items: [
+        { q: "What does Yafet & Co. do, in one line?", a: "We are an independent, founder-led digital studio in Vienna building websites, apps and quiet AI workflows for European SMEs, NGOs and public bodies." },
+        { q: "Where are you based, and who do you work with?", a: "Vienna, Austria. We work primarily with Vienna and EU clients, with delivery partnerships across the Horn of Africa via SuSu Technology Trading." },
+        { q: "Which languages do you build and write in?", a: "German and English are both first-class. Every Atelier project ships bilingual DE/EN from day one. Amharic localisation is available for African deployments." },
+        { q: "How long does a typical project take?", a: "Quickstart sites: 4 weeks. Atelier custom builds: 8–12 weeks. MVPs for apps: 4–6 weeks. Long-view retainers: six months and up." },
+        { q: "What does it cost to start?", a: "Quickstart from €7.400. Atelier from €18.000. Long view from €4.800/month. Estimates are firm before we begin — no scope creep that goes silent on price." },
+        { q: "Who actually does the work?", a: "Yafet leads every project from intro call to launch. Specialists from our trusted bench join for delivery. The person who answered your first email is the person at the launch dinner." }
+      ]
+    },
+    footer: {
+      cols: [
+        { h: "Studio", links: ["About", "Journal", "Careers", "Contact"] },
+        { h: "Work",   links: ["Selected projects", "Services", "Process", "Pricing"] },
+        { h: "Legal",  links: ["Impressum", "Privacy", "Terms", "Cookies"] }
+      ],
+      copy: "© 2021–2026 Yafet & Co · Vienna · Reg. 547382b",
+      signature: "Made slowly, in Vienna.",
+      blurb: "Notes on the slow craft of building for the businesses Europe keeps quiet about."
+    },
+    estimator: {
+      h2: ["Project estimator.", { italic: " A first sketch." }],
+      sub: "A live, in-browser sketch — not a quote. Move the levers; we'll show you which door you fit through.",
+      services: ["Website", "App / Platform", "Booking / CRM", "AI Workflow"],
+      addons: ["Booking", "CRM", "AI workflow", "Payments", "Bilingual DE/EN"],
+      pagesLabel: "Pages / screens",
+      timelineLabel: "Timeline (weeks)",
+      summaryLabel: "Indicative budget",
+      lineDefault: "Pick a service to begin — the line will follow you.",
+      doors: { quickstart: "Quickstart", atelier: "Atelier", longview: "Long view" }
+    },
+    aiWidget: {
+      label: "Ask the studio",
+      title: "Ask the studio →",
+      intro: "I'm a quiet assistant trained on this studio's services, process, pricing and availability. Ask me anything — I'll answer in Yafet's voice.",
+      suggestions: [
+        "How long does an Atelier project take?",
+        "Do you build in German?",
+        "What does an MVP cost?",
+        "When is Yafet next available?"
+      ],
+      placeholder: "Ask about services, timelines, pricing…",
+      send: "Send",
+      thinking: "Thinking…",
+      fallback: "I can answer about services, process, pricing and availability — try one of the prompts above, or ask me directly."
+    },
+    booking: {
+      title: "Book a 30-min intro",
+      intro: "A 30-minute introductory call with Yafet. No deck, no pitch — a conversation. Tuesdays & Thursdays, CET.",
+      cta: "Open Calendly →",
+      note: "Or write directly to contact@yafetandco.com."
+    }
+  },
+
+  /* -----------------------------------------------------------
+     German — [DE: …] placeholders. Fill in with real translation.
+     ----------------------------------------------------------- */
+  de: {
+    nav: {
+      links: ["[DE: Work]", "[DE: Services]", "[DE: Process]", "[DE: Pricing]", "[DE: Journal]", "[DE: Contact]"],
+      cta: "[DE: Start a project.]"
+    },
+    hero: {
+      label1: "VOL. 06 · DAS STUDIO",
+      label2: "REC · 22:40:10 · WIEN",
+      label3: "NR. 01 / DAS STUDIO BEI DER ARBEIT",
+      kicker: "— STUDIO YAFET & CO · WIEN · MMXXVI",
+      h1Lines: [
+        ["[DE: Websites,]", null],
+        ["[DE: apps, ]", { italic: "[DE: & quiet AI]" }],
+        ["[DE: — made in]", null],
+        ["[DE: Vienna.]", null]
+      ],
+      sub: "[DE: Notes on the slow craft of building for the businesses Europe keeps quiet about.]",
+      ctaPrimary: "[DE: Book a 30-min intro]",
+      ctaSecondary: "[DE: Selected work]",
+      foot1: "EIN STUDIO, EINE STADT · 48°12′ N · 16°22′ E",
+      foot2: "[DE: A FILM IN ONE BREATH]",
+      footAvail: "[DE: Available for projects from Q3 2026]"
+    },
+    marquee: {
+      partnersLabel: "[DE: IN PARTNERSHIP WITH]",
+      partners: ["Microsoft", "Cisco", "Huawei", "Fortinet", "Hikvision", "ActiveXperts", "NatNet", "SuSu Technology"],
+      industries: ["[DE: eCommerce]", "[DE: eLearning]", "[DE: Healthcare]", "[DE: Sports streaming]", "[DE: Public sector]", "[DE: ICT infrastructure]", "[DE: Audiovisual]", "[DE: Cloud & security]"]
+    },
+    services: {
+      no: "§ 01",
+      tag: "[DE: What we make]",
+      h2: ["[DE: Eight disciplines,]", { italic: "[DE: one studio.]" }],
+      list: [
+        { t: "[DE: Website design & development]", body: "[DE: Editorial, fast, accessible sites built on Next.js with a CMS your team can actually run.]" },
+        { t: "[DE: Website redesign]",              body: "[DE: Audit-first redesigns for sites that work but feel ten years older than the business behind them.]" },
+        { t: "[DE: Booking & management systems]", body: "[DE: Salons, clinics, studios: custom calendars, no-show logic, payments, staff scheduling — owned, not rented.]" },
+        { t: "[DE: Custom IT systems & CRMs]",     body: "[DE: Internal tools that replace eleven spreadsheets and a WhatsApp group. Quietly, then dramatically.]" },
+        { t: "[DE: Mobile & web apps]",            body: "[DE: From MVP in six weeks to a product worth scaling — React Native, Next.js, the boring choices that pay off.]" },
+        { t: "[DE: AI automation & integration]",  body: "[DE: Quiet automations that save twelve hours a week. Loud ones that change the business model. Both, where they fit.]" },
+        { t: "[DE: Social media & content]",       body: "[DE: A point of view, a publishing cadence, and the editorial muscle to keep it going past month three.]" },
+        { t: "[DE: Government & NGO platforms]",   body: "[DE: WCAG-AA accessible, GDPR-tight, multilingual platforms for public bodies and non-profits across the EU.]" }
+      ]
+    },
+    stats: [
+      { num: 12, suffix: "+", label: "[DE: years of <strong>combined craft</strong>]" },
+      { num: 4,  pad: 2,      label: "[DE: industries — <strong>health, sport, edu, commerce</strong>]" },
+      { num: 8,  pad: 2,      label: "[DE: <strong>tier-1 vendor partners</strong> across EU + Africa]" },
+      { num: 1,  pad: 2,      label: "[DE: founder — <strong>the same person</strong> from intro to launch]" }
+    ],
+    ampPillar: {
+      mega: "&",
+      line: ["[DE: THE ]", { italic: "&" }, "[DE:  IS THE WORK.]"],
+      body: "[DE: Design and engineering, strategy and shipping — not handed off in stages, but braided together from week one.]"
+    },
+    work: {
+      no: "§ 02",
+      tag: "[DE: Selected work · 2023–2025]",
+      h2: ["[DE: An index of quiet,]", { italic: "[DE: shipped things.]" }],
+      meta: "[DE: 04 CASES · SCROLL TO READ →]",
+      cases: [
+        { name: "Pietech.",      meta: "[DE: CLIENT · 2024 · ETH]",          pitch: "[DE: A marketplace that finally took local payments.]",       desc: "[DE: Multi-vendor eCommerce with Telebirr and CBE Birr fully integrated, Amharic/English checkout, and an admin panel the founders can actually run themselves.]", tags: ["Next.js","Postgres","Telebirr","CBE Birr","Multi-vendor"], status: "PIETECH · LIVE · ECOMMERCE · Addis Ababa, ET", viz: "pietech" },
+        { name: "EthioSport.",   meta: "[DE: CLIENT · 2023 — ONGOING · ETH]", pitch: "[DE: A white-label OTT platform for African football leagues.]", desc: "[DE: Live and on-demand streaming with DRM, CDN edge delivery, Android & iOS apps, and a white-label admin for leagues to brand their own channel — built for low-bandwidth markets first.]", tags: ["HLS","DRM","CDN","iOS","Android"], status: "ETHIOSPORT · LIVE · OTT STREAMING · Pan-African · 4 leagues", viz: "ethiosport" },
+        { name: "Amisoft.",      meta: "[DE: CLIENT · 2024 · ETH]",          pitch: "[DE: An online health record hospitals can actually run.]",   desc: "[DE: Patient records, lab orders, prescription tracking and a telehealth bridge — HL7-aware, mobile-first for the doctor walking the ward, and offline-tolerant where it matters.]", tags: ["HIS","HL7","React Native","Telehealth"], status: "AMISOFT · LIVE · HEALTH RECORD · Multi-hospital, ET", viz: "amisoft" },
+        { name: "Kiyatech PLC.", meta: "[DE: CLIENT · 2023 · ETH]",          pitch: "[DE: A learning platform built for students who go offline.]", desc: "[DE: K-12 eLearning with Amharic localization, downloadable lessons that survive a four-hour bus ride, SCORM-compliant assessments, and a teacher dashboard the principal can read at a glance.]", tags: ["LMS","SCORM","Amharic","Offline-first"], status: "KIYATECH · LIVE · ELEARNING · K-12, ET", viz: "kiyatech" }
+      ]
+    },
+    pillars: {
+      no: "§ 03",
+      tag: "[DE: The four S pillars]",
+      h2: ["[DE: Technology]", { italic: "[DE: that lasts.]" }],
+      list: [
+        { no: "01", t: "[DE: Speed.]",          body: "[DE: From kickoff to live in weeks, not seasons. MVPs in 4–6 weeks. Custom builds in 8–12. Decisions on the same day we ask the question.]" },
+        { no: "02", t: "[DE: Security.]",       body: "[DE: GDPR-native, EU-hosted, audited stack. Fortinet, Cisco and Microsoft inside. The unsexy guarantees that keep boards and regulators on side.]" },
+        { no: "03", t: "[DE: Scalability.]",    body: "[DE: From a salon with three chairs to a streaming network across four countries — same architecture, no rebuilds. We design for the version of you in 2029.]" },
+        { no: "04", t: "[DE: Sustainability.]", body: "[DE: Code, contracts and CMS your team can actually run after we leave. No vendor lock-in, no monthly retainer trap. We build it; you own it.]" }
+      ],
+      note: "[DE: In delivery partnership with <strong>SuSu Technology Trading</strong> — twelve years of ICT infrastructure, audiovisual and integration work across the Horn of Africa.]"
+    },
+    process: {
+      no: "§ 04",
+      tag: "[DE: How we work]",
+      h2: ["[DE: Five steps.]", { italic: "[DE: No re-treatments.]" }],
+      steps: [
+        { no: "01", key: "LISTEN",  when: "[DE: Week 1]",      t: "[DE: Listen, then disagree carefully.]",     body: "[DE: A long-form intro call, a desk audit of what you have, and a written one-pager that disagrees with at least one thing you told us. If we agree with everything, we're not paying attention.]", deliv: "[DE: Audit deck · Risk register · Scope letter]" },
+        { no: "02", key: "SKETCH",  when: "[DE: Week 2–3]",    t: "[DE: Sketch in public.]",                    body: "[DE: A shared Figma file you can comment on at 11pm. Three directions on the first review, one by the third. No black-box reveals.]", deliv: "[DE: Wireframes · 3 visual routes · Component map]" },
+        { no: "03", key: "BUILD",   when: "[DE: Week 3–6]",    t: "[DE: Build the boring parts first.]",        body: "[DE: Auth, payments, CMS, GDPR. We get the un-screenshot-able infrastructure done first, so the last weeks are for craft, not catch-up.]", deliv: "[DE: Stack: Next.js · Sanity · Stripe · i18n]" },
+        { no: "04", key: "POLISH",  when: "[DE: Week 6–10]",   t: "[DE: Polish, then polish again.]",           body: "[DE: Lighthouse 95+, accessibility audit, copy pass with a real editor, an OG-image for every page. The unglamorous week that decides how the site is remembered.]", deliv: "[DE: A11y · Perf · Copy · SEO]" },
+        { no: "05", key: "STAY",    when: "[DE: After launch]", t: "[DE: Stay close, quietly.]",                 body: "[DE: A 30-day after-care window, then a light retainer if you want one. We don't pretend the launch is the finish line, and we don't camp on your inbox either.]", deliv: "[DE: 30-day after-care · Quarterly review]" }
+      ]
+    },
+    testimonial: {
+      quote: "[DE: They were the only studio that pushed back on our brief — and the only one that delivered something we couldn't have written into the brief in the first place. Six weeks. Two languages. One taxi from the airport.]",
+      who: "Anneliese R.",
+      role: "[DE: CEO, Donau Capital · Vienna]"
+    },
+    pricing: {
+      no: "§ 05",
+      tag: "[DE: Pricing]",
+      h2: ["[DE: Three doors,]", { italic: "[DE: all of them open.]" }],
+      tiers: [
+        { name: "Quickstart", tag: "[DE: SOLO · 4 WK]",  from: "€7.400",     list: ["[DE: 5-page editorial site on Next.js]","[DE: One language, bilingual-ready]","[DE: Sanity CMS, GDPR setup, Impressum]","[DE: Lighthouse 95+ on launch]"], cta: "[DE: Begin]", door: "quickstart" },
+        { name: "Atelier",    tag: "[DE: MOST CHOSEN · 8–12 WK]", from: "€18.000", list: ["[DE: Full custom site, system or app]","[DE: Bilingual DE/EN from day one]","[DE: One AI workflow built in]","[DE: Booking · CRM · payments where needed]","[DE: 30-day after-care included]"], cta: "[DE: Talk to Yafet]", door: "atelier", feat: true },
+        { name: "Long view",  tag: "[DE: RETAINER · 6+ MO]", from: "€4.800/mo", list: ["[DE: Embedded design + engineering]","[DE: Roadmap reviewed every six weeks]","[DE: Direct line to Yafet]","[DE: Cancel any month with 30 days notice]"], cta: "[DE: Enquire]", door: "longview" }
+      ]
+    },
+    journal: {
+      no: "§ 06",
+      tag: "[DE: Journal]",
+      h2: ["[DE: Notes from]", { italic: "[DE: the studio.]" }],
+      articles: [
+        { meta: "[DE: FIELD NOTES · 18.04.26]", t: ["[DE: Why your booking system should ]", { italic: "[DE: not be your CRM.]" }], read: "[DE: 6 min]" },
+        { meta: "[DE: ESSAY · 02.04.26]",       t: ["[DE: The unsexy AI workflow that saved a salon ]", { italic: "[DE: 9 hrs/week.]" }], read: "[DE: 9 min]" },
+        { meta: "[DE: STUDIO · 14.03.26]",      t: ["[DE: On Vienna, and why ]", { italic: "[DE: \"small\" is the point.]" }], read: "[DE: 4 min]" }
+      ]
+    },
+    contact: {
+      h2: ["[DE: Let's build something]", { italic: "[DE: worth keeping]" }],
+      email: "contact@yafetandco.com",
+      phone: "+43 1 928 73 73",
+      calendly: "[DE: Calendly → open · Tuesdays & Thursdays · CET]",
+      studio: "[DE: Schottenring 14/3, 1010 Wien · By appointment only]",
+      note: "[DE: An independent, founder-led digital studio in Vienna. Available for projects from Q3 2026.]"
+    },
+    faq: {
+      tag: "[DE: TL;DR]",
+      h2: ["[DE: The quick answers,]", { italic: "[DE: for the skim-readers.]" }],
+      items: [
+        { q: "[DE: What does Yafet & Co. do, in one line?]", a: "[DE: We are an independent, founder-led digital studio in Vienna…]" },
+        { q: "[DE: Where are you based, and who do you work with?]", a: "[DE: Vienna, Austria. We work primarily with Vienna and EU clients…]" },
+        { q: "[DE: Which languages do you build and write in?]", a: "[DE: German and English are both first-class…]" },
+        { q: "[DE: How long does a typical project take?]", a: "[DE: Quickstart: 4 weeks. Atelier: 8–12 weeks. MVPs: 4–6 weeks.]" },
+        { q: "[DE: What does it cost to start?]", a: "[DE: Quickstart from €7.400. Atelier from €18.000. Long view from €4.800/month.]" },
+        { q: "[DE: Who actually does the work?]", a: "[DE: Yafet leads every project from intro call to launch.]" }
+      ]
+    },
+    footer: {
+      cols: [
+        { h: "[DE: Studio]", links: ["[DE: About]", "[DE: Journal]", "[DE: Careers]", "[DE: Contact]"] },
+        { h: "[DE: Work]",   links: ["[DE: Selected projects]", "[DE: Services]", "[DE: Process]", "[DE: Pricing]"] },
+        { h: "[DE: Legal]",  links: ["Impressum", "[DE: Privacy]", "[DE: Terms]", "[DE: Cookies]"] }
+      ],
+      copy: "© 2021–2026 Yafet & Co · Wien · Reg. 547382b",
+      signature: "[DE: Made slowly, in Vienna.]",
+      blurb: "[DE: Notes on the slow craft of building for the businesses Europe keeps quiet about.]"
+    },
+    estimator: {
+      h2: ["[DE: Project estimator.]", { italic: "[DE:  A first sketch.]" }],
+      sub: "[DE: A live, in-browser sketch — not a quote. Move the levers; we'll show you which door you fit through.]",
+      services: ["[DE: Website]", "[DE: App / Platform]", "[DE: Booking / CRM]", "[DE: AI Workflow]"],
+      addons: ["[DE: Booking]", "[DE: CRM]", "[DE: AI workflow]", "[DE: Payments]", "[DE: Bilingual DE/EN]"],
+      pagesLabel: "[DE: Pages / screens]",
+      timelineLabel: "[DE: Timeline (weeks)]",
+      summaryLabel: "[DE: Indicative budget]",
+      lineDefault: "[DE: Pick a service to begin — the line will follow you.]",
+      doors: { quickstart: "Quickstart", atelier: "Atelier", longview: "[DE: Long view]" }
+    },
+    aiWidget: {
+      label: "[DE: Ask the studio]",
+      title: "[DE: Ask the studio →]",
+      intro: "[DE: I'm a quiet assistant trained on this studio's services, process, pricing and availability.]",
+      suggestions: [
+        "[DE: How long does an Atelier project take?]",
+        "[DE: Do you build in German?]",
+        "[DE: What does an MVP cost?]",
+        "[DE: When is Yafet next available?]"
+      ],
+      placeholder: "[DE: Ask about services, timelines, pricing…]",
+      send: "[DE: Send]",
+      thinking: "[DE: Thinking…]",
+      fallback: "[DE: I can answer about services, process, pricing and availability — try one of the prompts above.]"
+    },
+    booking: {
+      title: "[DE: Book a 30-min intro]",
+      intro: "[DE: A 30-minute introductory call with Yafet. No deck, no pitch — a conversation. Tuesdays & Thursdays, CET.]",
+      cta: "[DE: Open Calendly →]",
+      note: "[DE: Or write directly to contact@yafetandco.com.]"
+    }
+  }
+};
+
+// Keep the disabled DE toggle safe if it is re-enabled before translation.
+window.YC_CONTENT.de = window.YC_CONTENT.en;
+
+
+/* ============================================================
+   YAFET & CO. — motion.js
+   GSAP + ScrollTrigger + Lenis (loaded from CDN). Adds:
+   - Lenis smooth scroll, synced with ScrollTrigger
+   - IntersectionObserver reveals (.reveal / .reveal-stagger)
+   - Animated counters
+   - Pinned horizontal Selected Work scroll
+   - Sticky process-rail highlighter
+   - Hero amp draw-in on load
+   ============================================================ */
+(function () {
+  'use strict';
+
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ----------------- Lenis smooth scroll -----------------
+  let lenis = null;
+  function initLenis() {
+    if (reduced || typeof Lenis === 'undefined') return;
+    lenis = new Lenis({
+      duration: 1.15,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+      smoothTouch: false
+    });
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    // Sync with GSAP ScrollTrigger
+    if (window.gsap && window.ScrollTrigger) {
+      lenis.on('scroll', ScrollTrigger.update);
+      gsap.ticker.add((time) => { lenis.raf(time * 1000); });
+      gsap.ticker.lagSmoothing(0);
+    }
+
+    // Smooth anchor scroll
+    document.addEventListener('click', (e) => {
+      const a = e.target.closest('a[href^="#"]');
+      if (!a) return;
+      const href = a.getAttribute('href');
+      if (href.length < 2) return;
+      const tgt = document.querySelector(href);
+      if (!tgt) return;
+      e.preventDefault();
+      lenis.scrollTo(tgt, { offset: -40, duration: 1.4 });
+    });
+
+    window.__lenis = lenis;
+  }
+
+  // ----------------- IntersectionObserver reveals -----------------
+  function initReveals() {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+
+    document.querySelectorAll('.reveal, .reveal-stagger').forEach((el) => io.observe(el));
+  }
+
+  // ----------------- Counters -----------------
+  function initCounters() {
+    const els = document.querySelectorAll('[data-counter]');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        const el = e.target;
+        const end = parseInt(el.getAttribute('data-counter'), 10) || 0;
+        const pad = parseInt(el.getAttribute('data-pad'), 10) || 0;
+        if (reduced) {
+          el.textContent = String(end).padStart(pad, '0');
+          io.unobserve(el);
+          return;
+        }
+        const start = performance.now();
+        const dur = 1600;
+        function tick(now) {
+          const p = Math.min(1, (now - start) / dur);
+          const eased = 1 - Math.pow(1 - p, 3);
+          const v = Math.round(end * eased);
+          el.textContent = String(v).padStart(pad, '0');
+          if (p < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+        io.unobserve(el);
+      });
+    }, { threshold: 0.4 });
+    els.forEach((el) => io.observe(el));
+  }
+
+  // ----------------- Pinned horizontal scroll: Selected Work -----------------
+  function initPinnedWork() {
+    if (reduced || !window.gsap || !window.ScrollTrigger) return;
+    const pin = document.querySelector('.work__pin');
+    const track = document.querySelector('.work__track');
+    if (!pin || !track || window.innerWidth <= 760) return;
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Compute scroll distance
+    const getDist = () => Math.max(0, track.scrollWidth - window.innerWidth);
+
+    const tween = gsap.to(track, {
+      x: () => -getDist(),
+      ease: 'none',
+      scrollTrigger: {
+        trigger: pin,
+        start: 'top top',
+        end: () => '+=' + getDist(),
+        pin: true,
+        scrub: 0.5,
+        invalidateOnRefresh: true,
+        anticipatePin: 1,
+        onUpdate: (self) => {
+          const bar = document.querySelector('.work__progress span');
+          if (bar) bar.style.width = (self.progress * 100).toFixed(1) + '%';
+        }
+      }
+    });
+
+    // Nav buttons jump to next/prev case
+    const cases = track.querySelectorAll('.case');
+    function scrollToCase(i) {
+      i = Math.max(0, Math.min(cases.length - 1, i));
+      const c = cases[i];
+      if (!c) return;
+      const dist = getDist();
+      if (dist <= 0) return;
+      const trackLeft = parseInt(getComputedStyle(track).paddingLeft, 10) || 0;
+      const targetX = c.offsetLeft - trackLeft;
+      const progress = Math.min(1, targetX / dist);
+      const st = tween.scrollTrigger;
+      const y = st.start + (st.end - st.start) * progress;
+      if (lenis) lenis.scrollTo(y, { duration: 1.2 });
+      else window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+    let curIdx = 0;
+    document.querySelector('.work__nav-prev')?.addEventListener('click', () => scrollToCase(--curIdx));
+    document.querySelector('.work__nav-next')?.addEventListener('click', () => scrollToCase(++curIdx));
+    // Track which case is mostly visible (use the ScrollTrigger we just made)
+    const st = tween.scrollTrigger;
+    if (st && typeof st.scroll === 'function') {
+      ScrollTrigger.create({
+        trigger: pin,
+        start: 'top top',
+        end: () => '+=' + getDist(),
+        onUpdate: (self) => { curIdx = Math.round(self.progress * (cases.length - 1)); }
+      });
+    }
+  }
+
+  // ----------------- Process rail (active step) -----------------
+  function initStepsRail() {
+    const railItems = document.querySelectorAll('.steps__rail-item');
+    const steps = document.querySelectorAll('.step');
+    if (!railItems.length) return;
+
+    railItems.forEach((it, i) => {
+      it.addEventListener('click', () => {
+        const tgt = steps[i];
+        if (!tgt) return;
+        if (lenis) lenis.scrollTo(tgt, { offset: -120, duration: 1.2 });
+        else tgt.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          const idx = parseInt(e.target.getAttribute('data-step'), 10);
+          railItems.forEach((r) => r.classList.remove('is-active'));
+          railItems[idx]?.classList.add('is-active');
+        }
+      });
+    }, { rootMargin: '-40% 0px -50% 0px' });
+    steps.forEach((s) => io.observe(s));
+  }
+
+  // ----------------- Hero ampersand draw-in -----------------
+  function initHeroAmp() {
+    const svgPaths = document.querySelectorAll('.hero__amp-bg .stroke');
+    if (!svgPaths.length) return;
+    svgPaths.forEach((p) => {
+      try {
+        const len = p.getTotalLength();
+        p.style.strokeDasharray = len;
+        p.style.strokeDashoffset = len;
+        if (reduced) {
+          p.style.strokeDashoffset = 0;
+          return;
+        }
+        requestAnimationFrame(() => {
+          p.style.transition = 'stroke-dashoffset 2400ms cubic-bezier(.22,1,.36,1) 600ms';
+          p.style.strokeDashoffset = 0;
+        });
+      } catch (err) { /* paths not measurable -> ignore */ }
+    });
+  }
+
+  // ----------------- Mega ampersand parallax in pillar -----------------
+  function initAmpPillar() {
+    if (reduced || !window.gsap || !window.ScrollTrigger) return;
+    const mega = document.querySelector('.amp-pillar .mega-amp');
+    if (!mega) return;
+    gsap.to(mega, {
+      yPercent: -12,
+      scale: 1.04,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '.amp-pillar',
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: true
+      }
+    });
+
+    // Footer amp parallax
+    const footAmp = document.querySelector('.footer__amp');
+    if (footAmp) {
+      gsap.to(footAmp, {
+        yPercent: -8,
+        ease: 'none',
+        scrollTrigger: { trigger: '.footer', start: 'top bottom', end: 'bottom bottom', scrub: true }
+      });
+    }
+  }
+
+  // ----------------- Nav scroll state -----------------
+  function initNavScroll() {
+    const nav = document.querySelector('.nav');
+    if (!nav) return;
+    let last = 0;
+    function onScroll() {
+      const y = window.scrollY || window.pageYOffset;
+      nav.classList.toggle('is-scrolled', y > 24);
+      last = y;
+    }
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+
+  // ----------------- Timecode tick -----------------
+  function initTimecode() {
+    const els = document.querySelectorAll('[data-timecode]');
+    if (!els.length) return;
+    function pad(n) { return String(n).padStart(2, '0'); }
+    function tick() {
+      const d = new Date();
+      // Vienna is CET/CEST; simple "local hh:mm:ss" is fine for the cinematic effect.
+      const tc = `REC · ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())} · VIENNA`;
+      els.forEach((el) => el.textContent = tc);
+    }
+    tick();
+    setInterval(tick, 1000);
+  }
+
+  // ----------------- Loader handoff -----------------
+  function dismissLoader() {
+    const ldr = document.getElementById('loader');
+    if (!ldr) return;
+    document.body.classList.add('is-loaded');
+    setTimeout(() => {
+      ldr.classList.add('is-gone');
+      // Refresh ScrollTrigger AFTER hero is visible to re-measure pin distances
+      if (window.ScrollTrigger) setTimeout(() => ScrollTrigger.refresh(), 200);
+    }, reduced ? 0 : 1500);
+  }
+
+  // ----------------- Boot -----------------
+  function boot() {
+    initLenis();
+    initReveals();
+    initCounters();
+    initStepsRail();
+    initHeroAmp();
+    initAmpPillar();
+    initNavScroll();
+    initTimecode();
+    // Pin after a tick so layout is settled
+    requestAnimationFrame(() => requestAnimationFrame(initPinnedWork));
+    dismissLoader();
+
+    window.addEventListener('resize', () => {
+      if (window.ScrollTrigger) ScrollTrigger.refresh();
+    });
+  }
+
+  window.YC_initMotion = boot;
+})();
+
+
+/* ============================================================
+   YAFET & CO. — interactions.js
+   - Custom cursor + magnetic buttons
+   - EN/DE language toggle (re-renders text from window.YC_CONTENT)
+   - FAQ accordion
+   - Booking modal (Calendly hook)
+   - AI assistant ("Ask the Studio") — wires to window.claude.complete
+     when available, falls back to keyword logic.
+   - Project estimator (live calc)
+   - Contact form (validation + animated success)
+   - Mobile menu sheet
+   ============================================================ */
+(function () {
+  'use strict';
+
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const $  = (sel, root = document) => root.querySelector(sel);
+  const $ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+
+  // ============================================================
+  //  Custom cursor + magnetic buttons
+  // ============================================================
+  function initCursor() {
+    if (window.matchMedia('(pointer: coarse)').matches) return;
+    const dot  = document.createElement('div'); dot.className  = 'cursor';
+    const ring = document.createElement('div'); ring.className = 'cursor-ring';
+    document.body.append(dot, ring);
+
+    let mx = window.innerWidth / 2, my = window.innerHeight / 2;
+    let rx = mx, ry = my;
+
+    document.addEventListener('mousemove', (e) => {
+      mx = e.clientX; my = e.clientY;
+      dot.style.transform = `translate3d(${mx}px, ${my}px, 0) translate(-50%, -50%)`;
+    }, { passive: true });
+
+    document.addEventListener('mouseleave', () => document.body.classList.add('is-hidden'));
+    document.addEventListener('mouseenter', () => document.body.classList.remove('is-hidden'));
+
+    function loop() {
+      rx += (mx - rx) * 0.18;
+      ry += (my - ry) * 0.18;
+      ring.style.transform = `translate3d(${rx}px, ${ry}px, 0) translate(-50%, -50%)`;
+      requestAnimationFrame(loop);
+    }
+    requestAnimationFrame(loop);
+
+    // pointer state
+    const pointerSel = 'a, button, .chip, .disc, .article, .case, .faq__item, .nav__link, .stat, .dock__btn, [data-pointer]';
+    document.addEventListener('mouseover', (e) => {
+      if (e.target.closest(pointerSel)) document.body.classList.add('is-pointer');
+      else document.body.classList.remove('is-pointer');
+      if (e.target.closest('h1, h2, blockquote, .step__t')) document.body.classList.add('is-text');
+      else document.body.classList.remove('is-text');
+    });
+  }
+
+  function initMagnetic() {
+    if (reduced || window.matchMedia('(pointer: coarse)').matches) return;
+    $('[data-magnetic]').forEach((el) => {
+      let rect;
+      el.addEventListener('mouseenter', () => { rect = el.getBoundingClientRect(); });
+      el.addEventListener('mousemove', (e) => {
+        if (!rect) rect = el.getBoundingClientRect();
+        const dx = (e.clientX - (rect.left + rect.width / 2)) * 0.25;
+        const dy = (e.clientY - (rect.top + rect.height / 2)) * 0.35;
+        el.style.transform = `translate(${dx}px, ${dy}px)`;
+      });
+      el.addEventListener('mouseleave', () => { el.style.transform = ''; });
+    });
+  }
+
+  // ============================================================
+  //  EN / DE language toggle — re-renders all [data-i18n] nodes
+  // ============================================================
+  let CUR_LANG = 'en';
+
+  function joinH2(arr) {
+    // arr: array of strings | {italic:...}
+    // Insert a single space between adjacent segments when neither side
+    // already provides whitespace, so we don't get "Three doors,*all of them*".
+    const parts = [];
+    arr.forEach((seg, i) => {
+      const isObj = seg && typeof seg === 'object' && seg.italic !== undefined;
+      const cur   = isObj ? seg.italic : seg;
+      const wrap  = isObj ? (s) => `<em>${s}</em>` : (s) => s;
+
+      if (i > 0) {
+        const prev = arr[i - 1];
+        const prevIsObj = prev && typeof prev === 'object' && prev.italic !== undefined;
+        const prevText  = prevIsObj ? prev.italic : prev;
+        const prevEndsSpace = /\s$/.test(prevText);
+        const curStartsSpace = /^\s/.test(cur);
+        if (!prevEndsSpace && !curStartsSpace) parts.push(' ');
+      }
+      parts.push(wrap(cur));
+    });
+    return parts.join('');
+  }
+
+  function setLang(lang) {
+    if (!window.YC_CONTENT[lang]) lang = 'en';
+    CUR_LANG = lang;
+    const C = window.YC_CONTENT[lang];
+    document.documentElement.lang = lang;
+
+    // Nav links
+    $('.nav__link').forEach((a, i) => { a.textContent = C.nav.links[i] || a.textContent; });
+    const navCta = $('.nav__cta-text'); if (navCta) navCta.textContent = C.nav.cta;
+
+    // Lang buttons
+    $('.lang-toggle button').forEach((b) => b.classList.toggle('is-active', b.dataset.lang === lang));
+
+    // Hero
+    $('[data-i18n="hero.label1"]').textContent = C.hero.label1;
+    $('[data-i18n="hero.label2"]').innerHTML = `<span class="rec-dot"></span><span class="timecode" data-timecode>${C.hero.label2}</span>`;
+    $('[data-i18n="hero.label3"]').textContent = C.hero.label3;
+    $('[data-i18n="hero.kicker"]').textContent = C.hero.kicker;
+
+    // Hero headline lines (re-render with the line-mask wrappers)
+    const h1 = $('[data-i18n="hero.h1"]');
+    h1.innerHTML = C.hero.h1Lines.map((seg) => {
+      const main = seg[0];
+      const tail = seg[1];
+      const tailHtml = tail && tail.italic ? `<em>${tail.italic}</em>` : '';
+      return `<span class="line-mask"><span class="line-inner">${main}${tailHtml}</span></span>`;
+    }).join('');
+
+    $('[data-i18n="hero.sub"]').textContent = C.hero.sub;
+    $('[data-i18n="hero.cta1"]').innerHTML = `<span>${C.hero.ctaPrimary}</span><span class="arrow">→</span>`;
+    $('[data-i18n="hero.cta2"]').innerHTML = `<span>${C.hero.ctaSecondary}</span><span class="arrow">↘</span>`;
+    $('[data-i18n="hero.foot1"]').textContent = C.hero.foot1;
+    $('[data-i18n="hero.foot2"]').textContent = C.hero.foot2;
+    $('[data-i18n="hero.footAvail"]').textContent = C.hero.footAvail;
+
+    // Marquees
+    $('[data-i18n="marquee.partnersLabel"]').textContent = C.marquee.partnersLabel + ' ↓';
+    renderMarquee('[data-marquee="partners"]', C.marquee.partners, 'mono');
+    renderMarquee('[data-marquee="industries"]', C.marquee.industries, 'serif');
+
+    // Services
+    $('[data-i18n="services.no"]').textContent = C.services.no;
+    $('[data-i18n="services.tag"]').textContent = C.services.tag;
+    $('[data-i18n="services.h2"]').innerHTML = joinH2(C.services.h2);
+    const discGrid = $('[data-i18n="services.list"]');
+    discGrid.innerHTML = C.services.list.map((it, i) => `
+      <div class="disc">
+        <div class="disc__top">
+          <span class="mono disc__no">${String(i + 1).padStart(2, '0')}</span>
+          <span class="disc__arrow">↗</span>
+        </div>
+        <h3 class="disc__title">${it.t}</h3>
+        <p class="disc__body">${it.body}</p>
+      </div>`).join('');
+
+    // Stats
+    const sw = $('[data-i18n="stats"]');
+    sw.innerHTML = C.stats.map((s) => {
+      const suf = s.suffix ? `<sup>${s.suffix}</sup>` : '';
+      return `<div class="stat">
+        <span class="stat__num" data-counter="${s.num}" data-pad="${s.pad || 0}">${String(s.num).padStart(s.pad || 0, '0')}${suf ? '' : ''}</span>${suf ? `<span class="stat__num-suf">${suf}</span>` : ''}
+        <p class="stat__lab">${s.label}</p>
+      </div>`;
+    }).join('').replace(/<span class="stat__num-suf"><sup>/g, '').replace(/<\/sup><\/span>/g, '');
+    // Simpler re-render to also embed suffix inside the num span:
+    sw.innerHTML = C.stats.map((s) => `
+      <div class="stat">
+        <span class="stat__num"><span data-counter="${s.num}" data-pad="${s.pad || 0}">${String(s.num).padStart(s.pad || 0, '0')}</span>${s.suffix ? `<sup>${s.suffix}</sup>` : ''}</span>
+        <p class="stat__lab">${s.label}</p>
+      </div>`).join('');
+
+    // Amp pillar
+    $('[data-i18n="ampPillar.mega"]').textContent = C.ampPillar.mega;
+    $('[data-i18n="ampPillar.line"]').innerHTML = joinH2(C.ampPillar.line);
+    $('[data-i18n="ampPillar.body"]').textContent = C.ampPillar.body;
+
+    // Work
+    $('[data-i18n="work.no"]').textContent = C.work.no;
+    $('[data-i18n="work.tag"]').textContent = C.work.tag;
+    $('[data-i18n="work.h2"]').innerHTML = joinH2(C.work.h2);
+    $('[data-i18n="work.meta"]').textContent = C.work.meta;
+    renderCases(C.work.cases);
+
+    // Pillars
+    $('[data-i18n="pillars.no"]').textContent = C.pillars.no;
+    $('[data-i18n="pillars.tag"]').textContent = C.pillars.tag;
+    $('[data-i18n="pillars.h2"]').innerHTML = joinH2(C.pillars.h2);
+    const pg = $('[data-i18n="pillars.list"]');
+    pg.innerHTML = C.pillars.list.map((p) => `
+      <div class="pillar reveal">
+        <div class="pillar__no">${p.no}</div>
+        <h3 class="pillar__t">${p.t}</h3>
+        <p class="pillar__body">${p.body}</p>
+      </div>`).join('');
+    $('[data-i18n="pillars.note"]').innerHTML = C.pillars.note;
+
+    // Process
+    $('[data-i18n="process.no"]').textContent = C.process.no;
+    $('[data-i18n="process.tag"]').textContent = C.process.tag;
+    $('[data-i18n="process.h2"]').innerHTML = joinH2(C.process.h2);
+    const rail = $('[data-i18n="process.rail"]');
+    rail.innerHTML = C.process.steps.map((s, i) => `<button class="steps__rail-item${i === 0 ? ' is-active' : ''}" data-step="${i}">${s.no} · ${s.key}</button>`).join('');
+    const stepList = $('[data-i18n="process.list"]');
+    stepList.innerHTML = C.process.steps.map((s, i) => `
+      <article class="step reveal" data-step="${i}">
+        <div>
+          <div class="step__no">${s.no}</div>
+          <span class="step__when">${s.when}</span>
+        </div>
+        <div>
+          <h3 class="step__t">${s.t}</h3>
+          <p class="step__body">${s.body}</p>
+          <div class="step__del"><strong>Deliverables —</strong> ${s.deliv}</div>
+        </div>
+      </article>`).join('');
+
+    // Testimonial
+    $('[data-i18n="testimonial.quote"]').innerHTML = `<span class="quote">“</span>${C.testimonial.quote}<span class="quote">”</span>`;
+    $('[data-i18n="testimonial.cite"]').innerHTML = `<strong>${C.testimonial.who}</strong>, ${C.testimonial.role}`;
+
+    // Pricing
+    $('[data-i18n="pricing.no"]').textContent = C.pricing.no;
+    $('[data-i18n="pricing.tag"]').textContent = C.pricing.tag;
+    $('[data-i18n="pricing.h2"]').innerHTML = joinH2(C.pricing.h2);
+    const pricing = $('[data-i18n="pricing.list"]');
+    pricing.innerHTML = C.pricing.tiers.map((t) => `
+      <article class="price${t.feat ? ' price--feat' : ''} reveal">
+        <span class="price__tag">${t.tag}</span>
+        <h3 class="price__name">${t.name}</h3>
+        <div class="price__from"><span class="from-lbl">from</span>${t.from}</div>
+        <ul class="price__list">${t.list.map((li) => `<li>${li}</li>`).join('')}</ul>
+        <a class="btn ${t.feat ? 'btn--primary' : ''}" data-magnetic href="#contact"><span>${t.cta}</span><span class="arrow">→</span></a>
+      </article>`).join('');
+
+    // Estimator
+    $('[data-i18n="estimator.h2"]').innerHTML = joinH2(C.estimator.h2);
+    $('[data-i18n="estimator.sub"]').textContent = C.estimator.sub;
+    $('[data-i18n="estimator.servicesLabel"]').textContent = '01 · Service';
+    $('[data-i18n="estimator.addonsLabel"]').textContent = '02 · Add-ons';
+    $('[data-i18n="estimator.pagesLabel"]').textContent = '03 · ' + C.estimator.pagesLabel;
+    $('[data-i18n="estimator.timelineLabel"]').textContent = '04 · ' + C.estimator.timelineLabel;
+    $('[data-i18n="estimator.summaryLabel"]').textContent = C.estimator.summaryLabel;
+    const estS = $('[data-i18n="estimator.services"]');
+    estS.innerHTML = C.estimator.services.map((s, i) => `<button class="chip${i === 0 ? ' is-active' : ''}" data-svc="${i}">${s}</button>`).join('');
+    const estA = $('[data-i18n="estimator.addons"]');
+    estA.innerHTML = C.estimator.addons.map((a, i) => `<button class="chip" data-addon="${i}">${a}</button>`).join('');
+
+    // Journal
+    $('[data-i18n="journal.no"]').textContent = C.journal.no;
+    $('[data-i18n="journal.tag"]').textContent = C.journal.tag;
+    $('[data-i18n="journal.h2"]').innerHTML = joinH2(C.journal.h2);
+    const jg = $('[data-i18n="journal.list"]');
+    jg.innerHTML = C.journal.articles.map((a) => `
+      <a href="#contact" class="article reveal">
+        <div class="article__meta"><span class="amber">${a.meta.split(' · ')[0]}</span><span>${a.meta.split(' · ')[1] || ''}</span></div>
+        <h3 class="article__t">${joinH2(a.t)}</h3>
+        <div class="article__cta"><span>Read</span><span>${a.read}</span></div>
+      </a>`).join('');
+
+    // Contact
+    $('[data-i18n="contact.h2"]').innerHTML = joinH2(C.contact.h2) + ' <span class="big-amp">&</span>';
+    $('[data-i18n="contact.email"]').href = 'mailto:' + C.contact.email;
+    $('[data-i18n="contact.email"]').textContent = C.contact.email;
+    $('[data-i18n="contact.phone"]').href = 'tel:' + C.contact.phone.replace(/\s+/g, '');
+    $('[data-i18n="contact.phone"]').textContent = C.contact.phone;
+    $('[data-i18n="contact.calendly"]').textContent = C.contact.calendly;
+    $('[data-i18n="contact.studio"]').textContent = C.contact.studio;
+    $('[data-i18n="contact.note"]').textContent = C.contact.note;
+
+    // FAQ
+    $('[data-i18n="faq.tag"]').textContent = C.faq.tag;
+    $('[data-i18n="faq.h2"]').innerHTML = joinH2(C.faq.h2);
+    const fl = $('[data-i18n="faq.list"]');
+    fl.innerHTML = C.faq.items.map((it) => `
+      <div class="faq__item">
+        <div class="faq__q">${it.q}<span class="faq__icon"></span></div>
+        <div class="faq__a"><p>${it.a}</p></div>
+      </div>`).join('');
+    initFaq();
+
+    // Footer
+    $('[data-i18n="footer.signature"]').textContent = C.footer.signature;
+    $('[data-i18n="footer.blurb"]').textContent = C.footer.blurb;
+    const fcols = $('[data-i18n="footer.cols"]');
+    fcols.innerHTML = C.footer.cols.map((c) => `
+      <div class="footer__col">
+        <h4>${c.h}</h4>
+        <ul>${c.links.map((l) => `<li><a href="${footerHref(l)}">${l}</a></li>`).join('')}</ul>
+      </div>`).join('');
+    $('[data-i18n="footer.copy"]').textContent = C.footer.copy;
+
+    // Dock label
+    $('[data-i18n="dock.label"]').textContent = C.aiWidget.label;
+
+    // After re-render, re-run motion bits that depend on new DOM
+    // Re-init reveals for newly-injected .reveal elements
+    document.querySelectorAll('.reveal, .reveal-stagger').forEach((el) => {
+      if (!el.classList.contains('in')) {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) el.classList.add('in');
+      }
+    });
+
+    // Re-trigger hero line build
+    document.body.classList.remove('is-loaded');
+    requestAnimationFrame(() => requestAnimationFrame(() => document.body.classList.add('is-loaded')));
+
+    // Refresh ScrollTrigger if present
+    if (window.ScrollTrigger) setTimeout(() => ScrollTrigger.refresh(), 80);
+  }
+
+  function renderMarquee(sel, items, kind) {
+    const el = document.querySelector(sel);
+    if (!el) return;
+    const make = (i) => `<span class="marquee__item"><span class="dot"></span>${i}</span>`;
+    const html = items.map(make).join('');
+    el.innerHTML = html + html; // duplicated for seamless loop
+  }
+
+  function renderCases(cases) {
+    const track = $('[data-i18n="work.list"]');
+    if (!track) return;
+    track.innerHTML = cases.map((c, i) => `
+      <article class="case" data-case="${i}">
+        <header class="case__head">
+          <span><span class="amber">${String(i + 1).padStart(2, '0')}</span> / 04</span>
+          <span>${c.meta}</span>
+        </header>
+        <div class="case__media">
+          <div class="case__placeholder">
+            <span class="corner c-tl"></span><span class="corner c-tr"></span>
+            <span class="corner c-bl"></span><span class="corner c-br"></span>
+            <div class="case__viz">${caseViz(c.viz)}</div>
+          </div>
+        </div>
+        <div class="case__body">
+          <h3 class="case__name">${c.name}</h3>
+          <p class="case__pitch">${c.pitch}</p>
+          <p class="case__desc">${c.desc}</p>
+          <div class="tag-row">${c.tags.map((t) => `<span class="tag">${t}</span>`).join('')}</div>
+          <div class="case__foot">
+            <span class="mono mono-sm">${c.status}</span>
+            <a class="case__cta" href="#contact" aria-label="Ask about the ${c.name} case study">Ask about this case</a>
+          </div>
+        </div>
+      </article>`).join('');
+  }
+
+  function footerHref(label) {
+    const key = label.toLowerCase();
+    if (key.includes('journal')) return '#journal';
+    if (key.includes('contact')) return '#contact';
+    if (key.includes('work') || key.includes('project')) return '#work';
+    if (key.includes('service')) return '#services';
+    if (key.includes('process')) return '#process';
+    if (key.includes('pricing')) return '#pricing';
+    if (key.includes('privacy') || key.includes('terms') || key.includes('cookies') || key.includes('impressum')) return '#contact';
+    return '#top';
+  }
+
+  // SVG visualisations per case (placeholders for real screenshots)
+  function caseViz(kind) {
+    const s = (children) => `<svg viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg">${children}</svg>`;
+    const amber = '#C58E4A';
+    const bone  = '#EDE6D6';
+    const dim   = 'rgba(237,230,214,0.32)';
+    switch (kind) {
+      case 'pietech':
+        return s(`
+          <rect x="20" y="20" width="360" height="200" fill="none" stroke="${dim}" stroke-width="0.8"/>
+          <line x1="20" y1="48" x2="380" y2="48" stroke="${dim}" stroke-width="0.6"/>
+          <circle cx="34" cy="34" r="3" fill="${amber}"/>
+          <text x="44" y="38" font-family="monospace" font-size="9" fill="${bone}" opacity="0.7">PIETECH · ETB 1,240</text>
+          <rect x="40" y="64" width="100" height="120" fill="none" stroke="${dim}"/>
+          <rect x="40" y="64" width="100" height="60" fill="${amber}" opacity="0.18"/>
+          <text x="50" y="138" font-family="serif" font-style="italic" font-size="11" fill="${bone}">Habesha kemis</text>
+          <text x="50" y="154" font-family="monospace" font-size="8" fill="${amber}">ETB 3,200</text>
+          <rect x="150" y="64" width="100" height="120" fill="none" stroke="${dim}"/>
+          <rect x="150" y="64" width="100" height="60" fill="${dim}" opacity="0.4"/>
+          <text x="160" y="138" font-family="serif" font-style="italic" font-size="11" fill="${bone}">Buna ceremony set</text>
+          <text x="160" y="154" font-family="monospace" font-size="8" fill="${amber}">ETB 1,840</text>
+          <rect x="260" y="64" width="100" height="120" fill="none" stroke="${dim}"/>
+          <rect x="260" y="64" width="100" height="60" fill="${dim}" opacity="0.25"/>
+          <text x="270" y="138" font-family="serif" font-style="italic" font-size="11" fill="${bone}">Mesob basket</text>
+          <text x="270" y="154" font-family="monospace" font-size="8" fill="${amber}">ETB 920</text>
+          <rect x="40" y="194" width="320" height="14" fill="${amber}" opacity="0.85"/>
+          <text x="200" y="204" font-family="monospace" font-size="8" fill="#0E0B08" text-anchor="middle" font-weight="700">PAY WITH TELEBIRR · CBE BIRR · CARD</text>
+        `);
+      case 'ethiosport':
+        return s(`
+          <rect x="20" y="20" width="360" height="200" fill="#14110D" stroke="${dim}"/>
+          <circle cx="200" cy="120" r="48" fill="none" stroke="${bone}" stroke-width="0.8" opacity="0.4"/>
+          <path d="M150 120 L200 80 L250 120 L200 160 Z" fill="none" stroke="${amber}" stroke-width="1.2"/>
+          <circle cx="200" cy="120" r="4" fill="${amber}"/>
+          <text x="200" y="50" font-family="monospace" font-size="9" fill="${bone}" text-anchor="middle" opacity="0.7">LIVE · ETHIOPIA PREMIER LEAGUE</text>
+          <rect x="36" y="190" width="6" height="12" fill="#D44A39"/>
+          <text x="50" y="200" font-family="monospace" font-size="8" fill="${bone}">REC · 73:42 · HD</text>
+          <rect x="320" y="190" width="44" height="14" fill="${amber}" opacity="0.85"/>
+          <text x="342" y="200" font-family="monospace" font-size="7" fill="#0E0B08" text-anchor="middle" font-weight="700">CC · HLS</text>
+          <line x1="36" y1="180" x2="364" y2="180" stroke="${amber}"/>
+          <circle cx="120" cy="180" r="2.5" fill="${bone}"/>
+          <circle cx="240" cy="180" r="2.5" fill="${bone}"/>
+          <circle cx="304" cy="180" r="2.5" fill="${amber}"/>
+        `);
+      case 'amisoft':
+        return s(`
+          <rect x="20" y="20" width="360" height="200" fill="none" stroke="${dim}"/>
+          <text x="34" y="42" font-family="monospace" font-size="9" fill="${amber}">PT · MK-00342 · F · 34</text>
+          <text x="34" y="56" font-family="serif" font-style="italic" font-size="14" fill="${bone}">Almaz Tesfaye</text>
+          <line x1="20" y1="70" x2="380" y2="70" stroke="${dim}"/>
+          <text x="34" y="92" font-family="monospace" font-size="8" fill="${bone}" opacity="0.5">VITALS</text>
+          <text x="34" y="110" font-family="serif" font-size="11" fill="${bone}">BP 118/76 · HR 72 · SpO₂ 98</text>
+          <text x="34" y="138" font-family="monospace" font-size="8" fill="${bone}" opacity="0.5">LAB · 14.04</text>
+          <text x="34" y="156" font-family="serif" font-size="11" fill="${bone}">Hb 12.4 · WBC 6.1 · Glu 92</text>
+          <text x="34" y="184" font-family="monospace" font-size="8" fill="${bone}" opacity="0.5">RX · CURRENT</text>
+          <text x="34" y="202" font-family="serif" font-style="italic" font-size="11" fill="${amber}">Amoxicillin 500mg · 3×/d · 5d</text>
+          <rect x="240" y="80" width="120" height="120" fill="none" stroke="${amber}" stroke-width="0.8"/>
+          <path d="M260 140 Q280 90 300 140 T340 140" fill="none" stroke="${amber}" stroke-width="1.2"/>
+          <text x="300" y="194" font-family="monospace" font-size="7" fill="${bone}" text-anchor="middle" opacity="0.6">7-DAY TREND · HL7</text>
+        `);
+      case 'kiyatech':
+        return s(`
+          <rect x="20" y="20" width="360" height="200" fill="none" stroke="${dim}"/>
+          <text x="34" y="42" font-family="monospace" font-size="9" fill="${amber}">GRADE 8 · CHEMISTRY · UNIT 04</text>
+          <text x="34" y="68" font-family="serif" font-style="italic" font-size="18" fill="${bone}">Periodic patterns &amp; the alkali metals</text>
+          <line x1="20" y1="84" x2="380" y2="84" stroke="${dim}"/>
+          <g transform="translate(34, 100)">
+            <rect width="34" height="34" fill="${amber}" opacity="0.85"/>
+            <text x="17" y="16" font-family="serif" font-size="8" fill="#0E0B08" text-anchor="middle">Li</text>
+            <text x="17" y="28" font-family="monospace" font-size="6" fill="#0E0B08" text-anchor="middle">3</text>
+          </g>
+          <g transform="translate(74, 100)">
+            <rect width="34" height="34" fill="none" stroke="${bone}" opacity="0.6"/>
+            <text x="17" y="16" font-family="serif" font-size="8" fill="${bone}" text-anchor="middle">Na</text>
+            <text x="17" y="28" font-family="monospace" font-size="6" fill="${bone}" text-anchor="middle">11</text>
+          </g>
+          <g transform="translate(114, 100)">
+            <rect width="34" height="34" fill="none" stroke="${bone}" opacity="0.6"/>
+            <text x="17" y="16" font-family="serif" font-size="8" fill="${bone}" text-anchor="middle">K</text>
+            <text x="17" y="28" font-family="monospace" font-size="6" fill="${bone}" text-anchor="middle">19</text>
+          </g>
+          <text x="34" y="170" font-family="monospace" font-size="8" fill="${bone}" opacity="0.6">DOWNLOAD · 12 MB · OFFLINE-READY</text>
+          <rect x="34" y="180" width="240" height="6" fill="${dim}"/>
+          <rect x="34" y="180" width="180" height="6" fill="${amber}"/>
+          <text x="290" y="186" font-family="monospace" font-size="8" fill="${amber}">75%</text>
+        `);
+      default:
+        return s(`<text x="200" y="120" font-family="monospace" font-size="10" fill="${bone}" text-anchor="middle" opacity="0.5">CASE PLACEHOLDER</text>`);
+    }
+  }
+
+  // ============================================================
+  //  FAQ accordion
+  // ============================================================
+  function initFaq() {
+    $('.faq__item').forEach((it) => {
+      it.addEventListener('click', () => it.classList.toggle('is-open'));
+    });
+  }
+
+  // ============================================================
+  //  Modals (booking, AI chat)
+  // ============================================================
+  function openModal(id) {
+    const m = document.getElementById(id);
+    if (!m) return;
+    m.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+    if (window.__lenis) window.__lenis.stop();
+  }
+  function closeModal(id) {
+    const m = document.getElementById(id);
+    if (!m) return;
+    m.classList.remove('is-open');
+    document.body.style.overflow = '';
+    if (window.__lenis) window.__lenis.start();
+  }
+  function initModals() {
+    $('[data-open-modal]').forEach((b) => {
+      b.addEventListener('click', (e) => { e.preventDefault(); openModal(b.dataset.openModal); });
+    });
+    $('.modal').forEach((m) => {
+      m.addEventListener('click', (e) => { if (e.target === m) closeModal(m.id); });
+      $('.modal__close, [data-close-modal]', m).forEach((b) => b.addEventListener('click', () => closeModal(m.id)));
+    });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') $('.modal.is-open').forEach((m) => closeModal(m.id)); });
+  }
+
+  // ============================================================
+  //  AI assistant — "Ask the Studio"
+  //  Wires to window.claude.complete if present; falls back to
+  //  keyword logic.  *** connect real AI here ***
+  // ============================================================
+  const STUDIO_KB = `You are the "studio voice" for Yafet & Co., an independent founder-led digital studio in Vienna.
+Voice: editorial, literary, cinematic, understated. Restraint is the brand. "Quiet" recurs. Never salesy.
+Founder: Yafet — same person from intro call to launch.
+One-liner: "Websites, apps, & quiet AI — made in Vienna."
+
+SERVICES (8): Website design & development; Website redesign; Booking & management systems; Custom IT systems & CRMs; Mobile & web apps; AI automation & integration; Social media & content; Government & NGO platforms.
+
+PROCESS (5 weeks-based): 01 Listen (Wk1); 02 Sketch (Wk2-3); 03 Build (Wk3-6); 04 Polish (Wk6-10); 05 Stay (post-launch 30 days).
+
+PRICING DOORS:
+- Quickstart — 4 weeks — from €7.400 — 5-page editorial site on Next.js, one language bilingual-ready, Sanity CMS + GDPR + Impressum, Lighthouse 95+.
+- Atelier — 8–12 weeks — from €18.000 — full custom site/system/app, bilingual DE/EN from day one, one AI workflow built in, booking/CRM/payments where needed, 30-day after-care.
+- Long view — 6+ months retainer — from €4.800/month — embedded design + engineering, roadmap reviewed every six weeks, cancel any month with 30 days notice.
+
+AVAILABILITY: Available for projects from Q3 2026.
+LANGUAGES: DE / EN first-class; Amharic localisation for African deployments.
+LOCATION: Schottenring 14/3, 1010 Wien. By appointment only.
+CONTACT: contact@yafetandco.com · +43 1 928 73 73 · Calendly intro Tuesdays & Thursdays CET.
+PARTNERS: Microsoft, Cisco, Huawei, Fortinet, Dahua, Hikvision, ActiveXperts, NatNet, SuSu Technology.
+
+Stay in voice. Keep replies short — 2-4 sentences. Use the word "quiet" sparingly but on-brand. Never invent prices, dates, or testimonials. If asked something outside the studio, redirect kindly to a booking call.`;
+
+  function fallbackAnswer(q) {
+    const x = q.toLowerCase();
+    if (/(price|cost|budget|how much|euro|€|preis)/.test(x)) {
+      return 'Three doors. Quickstart from €7.400 (4 weeks). Atelier from €18.000 (8–12 weeks) — most projects fit here. Long view from €4.800/month. Estimates are firm before we begin.';
+    }
+    if (/(time|long|when|fast|schedule|wann|dauer)/.test(x)) {
+      return 'Quickstart sites in four weeks. Atelier custom builds in eight to twelve. MVPs for apps in four to six. We commit dates on the same day we agree scope.';
+    }
+    if (/(language|german|deutsch|bilingual|de\/en)/.test(x)) {
+      return 'German and English are both first-class — every Atelier project ships bilingual DE/EN from day one. Amharic localisation is available where it fits.';
+    }
+    if (/(avail|free|when can|q3|q4|2026)/.test(x)) {
+      return 'Available for new projects from Q3 2026. Intro calls are Tuesdays and Thursdays, CET — quiet half-hour, no deck.';
+    }
+    if (/(service|do|make|offer|build)/.test(x)) {
+      return 'Eight disciplines, one studio: websites, redesigns, booking systems, custom CRMs, mobile & web apps, quiet AI automations, social/content, and government/NGO platforms. All led by Yafet.';
+    }
+    if (/(ai|automation|claude|gpt|workflow)/.test(x)) {
+      return 'Quiet automations that save twelve hours a week. Loud ones that change the business model. Where they fit — never as decoration.';
+    }
+    if (/(yafet|founder|who|team)/.test(x)) {
+      return 'Yafet leads every project from the intro call to the launch dinner. Specialists from our trusted bench join when delivery needs it.';
+    }
+    if (/(book|call|intro|meeting|calendly)/.test(x)) {
+      return 'A thirty-minute intro call, Tuesdays and Thursdays CET. Open the Calendly card on this page — no deck needed, just a conversation.';
+    }
+    if (/(vienna|wien|where|location|office)/.test(x)) {
+      return 'Schottenring 14/3, 1010 Wien — by appointment only. We work primarily with Vienna and EU clients; delivery partners across the Horn of Africa.';
+    }
+    return window.YC_CONTENT[CUR_LANG].aiWidget.fallback;
+  }
+
+  async function askStudio(q) {
+    // *** connect real AI here ***  — uses Claude artifact bridge if present
+    if (window.claude && typeof window.claude.complete === 'function') {
+      try {
+        const reply = await window.claude.complete({
+          messages: [
+            { role: 'user', content: `${STUDIO_KB}\n\n---\nVISITOR QUESTION: ${q}\n\nRespond in 2–4 sentences, in the studio voice. Do not invent facts.` }
+          ]
+        });
+        return reply || fallbackAnswer(q);
+      } catch (err) {
+        console.warn('[claude] fallback', err);
+      }
+    }
+    return fallbackAnswer(q);
+  }
+
+  function initChat() {
+    const log = $('.chat__log');
+    const input = $('.chat__input');
+    const send = $('.chat__send');
+    const sugg = $('.chat__suggest');
+    if (!log) return;
+
+    function append(role, text) {
+      const div = document.createElement('div');
+      div.className = `chat__msg chat__msg--${role}`;
+      div.textContent = text;
+      log.appendChild(div);
+      log.scrollTop = log.scrollHeight;
+      return div;
+    }
+
+    function typingOn() {
+      const t = document.createElement('div');
+      t.className = 'chat__typing';
+      t.textContent = window.YC_CONTENT[CUR_LANG].aiWidget.thinking;
+      t.id = 'chat-typing';
+      log.appendChild(t);
+      log.scrollTop = log.scrollHeight;
+    }
+    function typingOff() { document.getElementById('chat-typing')?.remove(); }
+
+    async function submit(q) {
+      if (!q.trim()) return;
+      append('me', q);
+      input.value = '';
+      typingOn();
+      const reply = await askStudio(q);
+      typingOff();
+      append('ai', reply);
+    }
+
+    send?.addEventListener('click', () => submit(input.value));
+    input?.addEventListener('keydown', (e) => { if (e.key === 'Enter') submit(input.value); });
+    sugg?.addEventListener('click', (e) => {
+      const b = e.target.closest('button');
+      if (!b) return;
+      submit(b.textContent);
+    });
+
+    // Seed intro message
+    const C = window.YC_CONTENT[CUR_LANG];
+    append('ai', C.aiWidget.intro);
+  }
+
+  // ============================================================
+  //  Project estimator — live calculation
+  // ============================================================
+  function initEstimator() {
+    const root = $('#estimator-card');
+    if (!root) return;
+    const svcBtns   = $('[data-svc]', root);
+    const addonBtns = $('[data-addon]', root);
+    const pages     = $('#est-pages');
+    const weeks     = $('#est-weeks');
+    const pagesVal  = $('#est-pages-val');
+    const weeksVal  = $('#est-weeks-val');
+    const numEl     = $('#est-num');
+    const doorEl    = $('#est-door');
+    const lineEl    = $('#est-line');
+
+    // Base prices by service index (rough, indicative)
+    const BASE = [7400, 18000, 14000, 12000];          // Website / App / Booking-CRM / AI workflow
+    const SVC_LABEL = ['website', 'platform', 'booking system', 'AI workflow'];
+    const ADDON_COST = [2200, 2600, 3400, 1800, 1600];  // Booking, CRM, AI workflow, Payments, Bilingual
+    const ADDON_LABEL = ['booking', 'a CRM layer', 'an AI workflow', 'payments', 'a second language'];
+
+    const state = { svc: 0, addons: new Set(), pages: 8, weeks: 8 };
+
+    function fmtEUR(n) { return '€' + Math.round(n / 100) * 100; }
+
+    function recalc() {
+      const base = BASE[state.svc];
+      const pagesAdd = Math.max(0, state.pages - 5) * 480;
+      let addonAdd = 0;
+      state.addons.forEach((i) => { addonAdd += ADDON_COST[i]; });
+      const rushFactor = state.weeks < 8 ? 1.18 : (state.weeks > 14 ? 0.94 : 1);
+      const total = (base + pagesAdd + addonAdd) * rushFactor;
+
+      // Animate number
+      numEl.classList.add('is-pulse');
+      setTimeout(() => numEl.classList.remove('is-pulse'), 240);
+      numEl.textContent = fmtEUR(total);
+
+      // Door logic
+      const C = window.YC_CONTENT[CUR_LANG].estimator;
+      let door, line;
+      if (total <= 9500 && state.svc === 0 && state.addons.size <= 1) {
+        door = C.doors.quickstart;
+        line = 'Likely a Quickstart: an editorial Next.js site in four weeks, on a CMS your team runs.';
+      } else if (state.weeks >= 24 || state.addons.size >= 4) {
+        door = C.doors.longview;
+        line = 'This shape suits the Long view — embedded design + engineering, reviewed every six weeks.';
+      } else {
+        door = C.doors.atelier;
+        line = `An Atelier project — a custom ${SVC_LABEL[state.svc]}${state.addons.size ? ' with ' + Array.from(state.addons).map((i) => ADDON_LABEL[i]).join(', ') : ''}, shipped in ${state.weeks} weeks.`;
+      }
+      doorEl.textContent = '↦  ' + door;
+      lineEl.textContent = line;
+    }
+
+    svcBtns.forEach((b, i) => {
+      b.addEventListener('click', () => {
+        svcBtns.forEach((x) => x.classList.remove('is-active'));
+        b.classList.add('is-active');
+        state.svc = i;
+        recalc();
+      });
+    });
+    addonBtns.forEach((b, i) => {
+      b.addEventListener('click', () => {
+        b.classList.toggle('is-active');
+        if (state.addons.has(i)) state.addons.delete(i); else state.addons.add(i);
+        recalc();
+      });
+    });
+    pages?.addEventListener('input', () => {
+      state.pages = +pages.value;
+      pagesVal.innerHTML = `<span>min 1</span><strong>${state.pages} pages</strong><span>max 40</span>`;
+      recalc();
+    });
+    weeks?.addEventListener('input', () => {
+      state.weeks = +weeks.value;
+      weeksVal.innerHTML = `<span>4 wk</span><strong>${state.weeks} weeks</strong><span>40 wk</span>`;
+      recalc();
+    });
+
+    // initial labels
+    pagesVal.innerHTML = `<span>min 1</span><strong>${state.pages} pages</strong><span>max 40</span>`;
+    weeksVal.innerHTML = `<span>4 wk</span><strong>${state.weeks} weeks</strong><span>40 wk</span>`;
+    recalc();
+  }
+
+  // ============================================================
+  //  Contact form (validation + mail client handoff)
+  // ============================================================
+  function initContactForm() {
+    const form = $('#contact-form');
+    if (!form) return;
+    const status = $('.form-status', form);
+
+    function setErr(name, on) {
+      const field = $(`[data-field="${name}"]`, form);
+      if (!field) return;
+      field.classList.toggle('field--error', on);
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form).entries());
+      let bad = false;
+      if (!data.name || data.name.trim().length < 2)       { setErr('name', true); bad = true; }  else setErr('name', false);
+      if (!data.email || !/^[^@\s]+@[^@\s.]+\.[^@\s]+$/.test(data.email)) { setErr('email', true); bad = true; } else setErr('email', false);
+      if (!data.message || data.message.trim().length < 12) { setErr('message', true); bad = true; } else setErr('message', false);
+      if (bad) { status.textContent = '↯ One or two fields need a second look.'; return; }
+
+      status.textContent = 'Opening your email app...';
+
+      const subject = `Project inquiry from ${data.name}`;
+      const body = [
+        `Name: ${data.name}`,
+        `Email: ${data.email}`,
+        `Company: ${data.company || '-'}`,
+        '',
+        'What they are building:',
+        data.message,
+        '',
+        'Sent from yafetandco.com'
+      ].join('\n');
+
+      window.location.href = `mailto:contact@yafetandco.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      await new Promise((r) => setTimeout(r, 500));
+
+      // Animated success state
+      form.querySelectorAll('.field').forEach((f) => f.style.display = 'none');
+      const btn = form.querySelector('button[type="submit"]');
+      if (btn) btn.style.display = 'none';
+      const success = document.createElement('div');
+      success.innerHTML = `
+        <div class="mono mono-amber" style="margin-bottom:0.6rem;">↪ EMAIL DRAFT READY · ${new Date().toLocaleTimeString()}</div>
+        <h3 class="h3" style="margin-bottom:1rem;">Thank you, <em class="italic amber">${data.name.split(/\s+/)[0]}</em>.</h3>
+        <p class="lead dim" style="margin-bottom:1rem;">Your email app should now have a message addressed to <strong style="color:var(--bone)">contact@yafetandco.com</strong>. Send it from there, and Yafet will read it personally.</p>
+        <p class="mono dim">WHAT HAPPENS NEXT · 01 SEND THE EMAIL · 02 YAFET REPLIES · 03 A 30-MIN INTRO CALL</p>`;
+      form.appendChild(success);
+      status.textContent = '';
+    });
+  }
+
+  // ============================================================
+  //  Mobile menu
+  // ============================================================
+  function initMobileMenu() {
+    const burger = $('.nav__burger');
+    const sheet  = $('#menu-sheet');
+    if (!burger || !sheet) return;
+    function setOpen(on) {
+      sheet.classList.toggle('is-open', on);
+      burger.setAttribute('aria-expanded', String(on));
+    }
+    burger.addEventListener('click', () => setOpen(!sheet.classList.contains('is-open')));
+    $('a', sheet).forEach((a) => a.addEventListener('click', () => setOpen(false)));
+  }
+
+  // ============================================================
+  //  EN/DE language buttons
+  // ============================================================
+  function initLangButtons() {
+    $('.lang-toggle button').forEach((b) => {
+      b.addEventListener('click', () => {
+        if (b.disabled) return;
+        setLang(b.dataset.lang);
+      });
+    });
+  }
+
+  // ============================================================
+  //  Theme toggle (light / dark) — in-memory only, no storage
+  // ============================================================
+  function initThemeToggle() {
+    const btn = document.getElementById('theme-toggle');
+    if (!btn) return;
+    let saved = null;
+    try { saved = localStorage.getItem('yc-theme'); } catch (err) { saved = null; }
+    if (saved === 'light' || (!saved && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+    btn.addEventListener('click', () => {
+      const cur = document.documentElement.getAttribute('data-theme');
+      if (cur === 'light') {
+        document.documentElement.removeAttribute('data-theme');
+        try { localStorage.setItem('yc-theme', 'dark'); } catch (err) {}
+      } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+        try { localStorage.setItem('yc-theme', 'light'); } catch (err) {}
+      }
+    });
+  }
+
+  // ============================================================
+  //  Boot
+  // ============================================================
+  function boot() {
+    initCursor();
+    initMagnetic();
+    initModals();
+    initLangButtons();
+    initThemeToggle();
+    setLang('en'); // initial render
+    initFaq();
+    initChat();
+    initEstimator();
+    initContactForm();
+    initMobileMenu();
+    // After language render, kick motion engine
+    if (window.YC_initMotion) window.YC_initMotion();
+  }
+
+  window.YC_initInteractions = boot;
+})();
+
+  </script>
+  <noscript>
+    <div class="noscript-note">
+      JavaScript is off, so the interactive sections are paused. You can still contact the studio at
+      <a href="mailto:contact@yafetandco.com">contact@yafetandco.com</a>.
+    </div>
+  </noscript>
+  <script>
+    // Boot when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => window.YC_initInteractions());
+    } else {
+      window.YC_initInteractions();
+    }
+  </script>
+</body>
+</html>

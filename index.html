@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Yafet &amp; Co. — Websites, apps &amp; quiet AI · made in Vienna</title>
+  <meta name="description" content="An independent, founder-led digital studio in Vienna. Websites, apps & quiet AI for the businesses Europe keeps quiet about. Available for projects from Q3 2026." />
+  <meta name="theme-color" content="#0E0B08" />
+  <link rel="canonical" href="https://yafetandco.com/" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='32' fill='%230E0B08'/%3E%3Ctext x='32' y='40' text-anchor='middle' font-size='22' fill='%23C58E4A' font-family='Georgia,serif'%3EY%26%3C/text%3E%3C/svg%3E" />
+
+  <!-- OG -->
+  <meta property="og:title" content="Yafet & Co. — Websites, apps & quiet AI · made in Vienna" />
+  <meta property="og:description" content="Notes on the slow craft of building for the businesses Europe keeps quiet about." />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="en_AT" />
+  <meta property="og:locale:alternate" content="de_AT" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- App styles -->
+  <link rel="stylesheet" href="styles/base.css" />
+  <link rel="stylesheet" href="styles/components.css" />
+  <link rel="stylesheet" href="styles/sections.css" />
+  <noscript><style>.loader{display:none!important}.reveal,.reveal-stagger>*{opacity:1!important;transform:none!important}</style></noscript>
+
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "DigitalAgency",
+    "name": "Yafet & Co.",
+    "description": "Independent, founder-led digital studio in Vienna building websites, apps and quiet AI workflows for European SMEs, NGOs and public bodies.",
+    "address": { "@type": "PostalAddress", "streetAddress": "Schottenring 14/3", "postalCode": "1010", "addressLocality": "Wien", "addressCountry": "AT" },
+    "email": "contact@yafetandco.com",
+    "telephone": "+43 1 928 73 73",
+    "founder": { "@type": "Person", "name": "Yafet" },
+    "areaServed": ["AT", "DE", "EU", "ET"]
+  }
+  </script>
+
+  <!-- Bundler splash thumbnail (used during asset unpack + as no-JS fallback) -->
+  <template id="__bundler_thumbnail" data-bg-color="#0E0B08">
+    <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+      <rect width="1200" height="800" fill="#0E0B08"/>
+      <!-- Frame -->
+      <rect x="60" y="60" width="1080" height="680" fill="none" stroke="rgba(237,230,214,0.18)" stroke-width="1.2"/>
+      <!-- Film label -->
+      <g font-family="ui-monospace, monospace" font-size="20" fill="#B8AF9A" letter-spacing="3">
+        <text x="100" y="120">VOL. 06 · THE STUDIO</text>
+        <text x="980" y="120" text-anchor="end" fill="#C58E4A">REC · VIENNA</text>
+      </g>
+      <!-- Mega ampersand -->
+      <text x="600" y="540"
+            text-anchor="middle"
+            font-family="Cormorant Garamond, Georgia, serif"
+            font-style="italic"
+            font-weight="300"
+            font-size="540"
+            fill="#C58E4A">&amp;</text>
+      <!-- Wordmark / kicker -->
+      <text x="600" y="660"
+            text-anchor="middle"
+            font-family="Cormorant Garamond, Georgia, serif"
+            font-style="italic"
+            font-weight="300"
+            font-size="42"
+            fill="#EDE6D6">Yafet &amp; Co.</text>
+      <text x="600" y="700"
+            text-anchor="middle"
+            font-family="ui-monospace, monospace"
+            font-size="16"
+            letter-spacing="4"
+            fill="#847D6B">WIEN · MMXXVI · 48°12′ N · 16°22′ E</text>
+    </svg>
+  </template>
+</head>
+<body>
+  <a class="skip-link" href="#top">Skip to content</a>
+
+  <!-- ===== Cinematic loader ===== -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader__inner">
+      <div class="loader__rec"><span class="dot"></span><span>REC · VIENNA · MMXXVI</span></div>
+      <div class="loader__timecode" data-timecode>REC · 22:40:10 · VIENNA</div>
+      <div class="loader__amp">&amp;</div>
+      <div class="loader__bar"></div>
+      <div class="loader__cap">STUDIO YAFET &amp; CO — A FILM IN ONE BREATH</div>
+    </div>
+  </div>
+
+  <!-- ===== Atmospheric overlays ===== -->
+  <div class="grain" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+
+  <!-- ===== Side rail (page mark) ===== -->
+  <aside class="side-rail" aria-hidden="true">
+    <span class="num">MMXXVI</span>
+    <span>· 48°12′ N · 16°22′ E ·</span>
+    <span>VOL. 06 · THE STUDIO</span>
+  </aside>
+
+  <!-- ===== Nav ===== -->
+  <header class="nav" id="nav">
+    <a href="#top" class="nav__brand" aria-label="Yafet & Co. — home">
+      <span class="yc">Y&amp;C</span>
+      <span class="wordmark">Yafet &amp; Co.</span>
+    </a>
+    <nav class="nav__links" aria-label="Primary">
+      <a class="nav__link" href="#work">Work</a>
+      <a class="nav__link" href="#services">Services</a>
+      <a class="nav__link" href="#process">Process</a>
+      <a class="nav__link" href="#pricing">Pricing</a>
+      <a class="nav__link" href="#journal">Journal</a>
+      <a class="nav__link" href="#contact">Contact</a>
+    </nav>
+    <div class="nav__right">
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button data-lang="en" class="is-active">EN</button>
+        <button data-lang="de" type="button" disabled title="German version coming soon">DE</button>
+      </div>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light / dark theme">
+        <!-- Moon icon (shown in dark mode) -->
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M20.5 14.5A8.5 8.5 0 1 1 9.5 3.5a7 7 0 0 0 11 11Z"/>
+        </svg>
+        <!-- Sun icon (shown in light mode) -->
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+        </svg>
+      </button>
+      <a class="btn btn--primary nav__cta" href="#contact" data-magnetic>
+        <span class="nav__cta-text">Start a project.</span>
+        <span class="arrow">→</span>
+      </a>
+      <button class="nav__burger" aria-label="Open menu" aria-controls="menu-sheet" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <!-- ===== Mobile sheet ===== -->
+  <div class="menu-sheet" id="menu-sheet">
+    <a href="#work">Work</a>
+    <a href="#services">Services</a>
+    <a href="#process">Process</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#journal">Journal</a>
+    <a href="#contact">Contact</a>
+  </div>
+
+  <main id="top">
+
+    <!-- =====================================================
+         HERO
+         ===================================================== -->
+    <section class="hero container">
+      <div class="hero__topbar mono">
+        <span data-i18n="hero.label1">VOL. 06 · THE STUDIO</span>
+        <span data-i18n="hero.label2"><span class="rec-dot"></span><span class="timecode" data-timecode>REC · 22:40:10 · VIENNA</span></span>
+        <span data-i18n="hero.label3">NO. 01 / THE STUDIO AT WORK</span>
+      </div>
+
+      <div class="hero__main">
+        <div>
+          <span class="hero__kicker" data-i18n="hero.kicker">— STUDIO YAFET &amp; CO · WIEN · MMXXVI</span>
+          <h1 class="hero__h1" data-i18n="hero.h1">
+            <span class="line-mask"><span class="line-inner">Websites,</span></span>
+            <span class="line-mask"><span class="line-inner">apps, <em>&amp; quiet AI</em></span></span>
+            <span class="line-mask"><span class="line-inner">— made in</span></span>
+            <span class="line-mask"><span class="line-inner">Vienna.</span></span>
+          </h1>
+          <p class="hero__sub" data-i18n="hero.sub">Notes on the slow craft of building for the businesses Europe keeps quiet about.</p>
+          <div class="hero__ctas">
+            <button class="btn btn--primary" data-open-modal="booking-modal" data-magnetic data-i18n="hero.cta1"><span>Book a 30-min intro</span><span class="arrow">→</span></button>
+            <a class="btn" href="#work" data-magnetic data-i18n="hero.cta2"><span>Selected work</span><span class="arrow">↘</span></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero__foot mono">
+        <div class="col">
+          <span data-i18n="hero.foot1">A STUDIO IN ONE CITY · 48°12′ N · 16°22′ E</span>
+          <span data-i18n="hero.foot2" class="mute">A FILM IN ONE BREATH</span>
+        </div>
+        <div class="col" style="text-align:right;">
+          <span class="amber" data-i18n="hero.footAvail">Available for projects from Q3 2026</span>
+          <span class="mute">SCROLL ↓</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         PARTNER + INDUSTRY MARQUEES
+         ===================================================== -->
+    <section class="section">
+      <div class="container" style="display:flex; justify-content:space-between; align-items:center; padding-bottom:0.8rem;">
+        <span class="mono" data-i18n="marquee.partnersLabel">IN PARTNERSHIP WITH ↓</span>
+        <span class="mono mute">EU + AFRICA · 08 PARTNERS</span>
+      </div>
+      <div class="marquee marquee--mono">
+        <div class="marquee__track" data-marquee="partners"></div>
+      </div>
+      <div class="marquee marquee--serif marquee--rev marquee--slow">
+        <div class="marquee__track" data-marquee="industries"></div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         § 01 — SERVICES (Eight disciplines)
+         ===================================================== -->
+    <section class="section section-pad container" id="services">
+      <div class="sec-marker reveal">
+        <span class="mono sec-marker__id" data-i18n="services.no">§ 01</span>
+        <span class="mono sec-marker__title" data-i18n="services.tag">What we make</span>
+        <span class="mono sec-marker__meta">08 DISCIPLINES</span>
+      </div>
+      <h2 class="h2 reveal" style="max-width: 14ch; margin-bottom: clamp(2.5rem, 4vw, 4rem);" data-i18n="services.h2">Eight disciplines, <em>one studio.</em></h2>
+      <div class="disc-grid reveal-stagger" data-i18n="services.list"></div>
+    </section>
+
+    <!-- =====================================================
+         STATS BAND
+         ===================================================== -->
+    <section class="section container">
+      <div class="stats reveal-stagger" data-i18n="stats"></div>
+    </section>
+
+    <!-- =====================================================
+         THE & PILLAR MOMENT
+         ===================================================== -->
+    <section class="amp-pillar section">
+      <div class="container">
+        <div class="amp-pillar__inner">
+          <span class="mega-amp" data-i18n="ampPillar.mega">&amp;</span>
+          <div>
+            <span class="label" data-i18n="ampPillar.label">THE STUDIO PRINCIPLE</span>
+            <p class="line" data-i18n="ampPillar.line">THE <em>&amp;</em> IS THE WORK.</p>
+            <p class="amp-pillar__body reveal" data-i18n="ampPillar.body">Design and engineering, strategy and shipping — not handed off in stages, but braided together from week one.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         § 02 — SELECTED WORK (pinned horizontal)
+         ===================================================== -->
+    <section class="section work" id="work">
+      <div class="container">
+        <div class="sec-marker reveal">
+          <span class="mono sec-marker__id" data-i18n="work.no">§ 02</span>
+          <span class="mono sec-marker__title" data-i18n="work.tag">Selected work · 2023–2025</span>
+          <span class="mono sec-marker__meta" data-i18n="work.meta">04 CASES · SCROLL TO READ →</span>
+        </div>
+        <div class="work__head reveal">
+          <h2 class="h2" data-i18n="work.h2">An index of quiet, <em>shipped things.</em></h2>
+          <span class="meta">PINNED · CINEMATIC GALLERY</span>
+        </div>
+      </div>
+      <div class="work__pin">
+        <div class="work__nav">
+          <button class="work__nav-prev" aria-label="Previous case">←</button>
+          <button class="work__nav-next" aria-label="Next case">→</button>
+        </div>
+        <div class="work__track" data-i18n="work.list"></div>
+        <div class="work__progress"><span></span></div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         § 03 — FOUR S PILLARS
+         ===================================================== -->
+    <section class="section section-pad container" id="why">
+      <div class="sec-marker reveal">
+        <span class="mono sec-marker__id" data-i18n="pillars.no">§ 03</span>
+        <span class="mono sec-marker__title" data-i18n="pillars.tag">The four S pillars</span>
+        <span class="mono sec-marker__meta">SPEED · SECURITY · SCALABILITY · SUSTAINABILITY</span>
+      </div>
+      <h2 class="h2 reveal" style="max-width: 14ch; margin-bottom: clamp(2.5rem, 4vw, 4rem);" data-i18n="pillars.h2">Technology <em>that lasts.</em></h2>
+      <div class="pillars" data-i18n="pillars.list"></div>
+      <p class="pillar-note reveal" data-i18n="pillars.note">In delivery partnership with <strong>SuSu Technology Trading</strong> — twelve years of ICT infrastructure across the Horn of Africa.</p>
+    </section>
+
+    <!-- =====================================================
+         § 04 — PROCESS
+         ===================================================== -->
+    <section class="section section-pad container" id="process">
+      <div class="sec-marker reveal">
+        <span class="mono sec-marker__id" data-i18n="process.no">§ 04</span>
+        <span class="mono sec-marker__title" data-i18n="process.tag">How we work</span>
+        <span class="mono sec-marker__meta">05 STEPS · NO RE-TREATMENTS</span>
+      </div>
+      <h2 class="h2 reveal" style="max-width: 14ch; margin-bottom: clamp(2.5rem, 4vw, 4rem);" data-i18n="process.h2">Five steps. <em>No re-treatments.</em></h2>
+      <div class="steps">
+        <div class="steps__rail" data-i18n="process.rail"></div>
+        <div class="steps__list" data-i18n="process.list"></div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         TESTIMONIAL
+         ===================================================== -->
+    <section class="section container">
+      <div class="testimonial reveal">
+        <blockquote data-i18n="testimonial.quote"></blockquote>
+        <cite data-i18n="testimonial.cite"></cite>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         § 05 — PRICING
+         ===================================================== -->
+    <section class="section section-pad container" id="pricing">
+      <div class="sec-marker reveal">
+        <span class="mono sec-marker__id" data-i18n="pricing.no">§ 05</span>
+        <span class="mono sec-marker__title" data-i18n="pricing.tag">Pricing</span>
+        <span class="mono sec-marker__meta">EUR · NET · 3 DOORS</span>
+      </div>
+      <h2 class="h2 reveal" style="max-width: 14ch; margin-bottom: clamp(2.5rem, 4vw, 4rem);" data-i18n="pricing.h2">Three doors, <em>all of them open.</em></h2>
+      <div class="pricing" data-i18n="pricing.list"></div>
+    </section>
+
+    <!-- =====================================================
+         PROJECT ESTIMATOR
+         ===================================================== -->
+    <section class="section section-pad container" id="estimator">
+      <div class="sec-marker reveal">
+        <span class="mono sec-marker__id">¶</span>
+        <span class="mono sec-marker__title">Project estimator</span>
+        <span class="mono sec-marker__meta">A FIRST SKETCH · NOT A QUOTE</span>
+      </div>
+      <h2 class="h2 reveal" style="max-width: 16ch; margin-bottom: 1.2rem;" data-i18n="estimator.h2">Project estimator. <em>A first sketch.</em></h2>
+      <p class="lead dim reveal" style="max-width: 60ch; margin-bottom: clamp(2rem, 4vw, 3rem);" data-i18n="estimator.sub"></p>
+
+      <div class="estimator reveal" id="estimator-card">
+        <div>
+          <div class="estimator__group">
+            <span class="estimator__label" data-i18n="estimator.servicesLabel">01 · Service</span>
+            <div class="chips" data-i18n="estimator.services"></div>
+          </div>
+
+          <div class="estimator__group">
+            <span class="estimator__label" data-i18n="estimator.addonsLabel">02 · Add-ons</span>
+            <div class="chips" data-i18n="estimator.addons"></div>
+          </div>
+
+          <div class="estimator__group">
+            <span class="estimator__label" data-i18n="estimator.pagesLabel">03 · Pages / screens</span>
+            <input type="range" class="estimator__slider" id="est-pages" min="1" max="40" value="8" />
+            <div class="estimator__sliderval" id="est-pages-val"></div>
+          </div>
+
+          <div class="estimator__group">
+            <span class="estimator__label" data-i18n="estimator.timelineLabel">04 · Timeline (weeks)</span>
+            <input type="range" class="estimator__slider" id="est-weeks" min="4" max="40" value="8" />
+            <div class="estimator__sliderval" id="est-weeks-val"></div>
+          </div>
+        </div>
+
+        <aside class="estimator__summary">
+          <span class="mono" data-i18n="estimator.summaryLabel">Indicative budget</span>
+          <div class="estimator__num" id="est-num">€4500</div>
+          <span class="estimator__door" id="est-door">↦  Atelier</span>
+          <p class="estimator__line" id="est-line">A live, in-browser sketch — not a quote.</p>
+          <a class="btn btn--primary" href="#contact" data-magnetic><span>Talk to Yafet</span><span class="arrow">→</span></a>
+        </aside>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         § 06 — JOURNAL
+         ===================================================== -->
+    <section class="section section-pad container" id="journal">
+      <div class="sec-marker reveal">
+        <span class="mono sec-marker__id" data-i18n="journal.no">§ 06</span>
+        <span class="mono sec-marker__title" data-i18n="journal.tag">Journal</span>
+        <span class="mono sec-marker__meta">03 NOTES · LATEST</span>
+      </div>
+      <h2 class="h2 reveal" style="max-width: 16ch; margin-bottom: clamp(2.5rem, 4vw, 4rem);" data-i18n="journal.h2">Notes from <em>the studio.</em></h2>
+      <div class="journal-grid" data-i18n="journal.list"></div>
+    </section>
+
+    <!-- =====================================================
+         CONTACT
+         ===================================================== -->
+    <section class="section section-pad container" id="contact">
+      <div class="sec-marker reveal">
+        <span class="mono sec-marker__id">¶</span>
+        <span class="mono sec-marker__title">Contact</span>
+        <span class="mono sec-marker__meta">SCHOTTENRING 14/3 · 1010 WIEN</span>
+      </div>
+      <div class="contact">
+        <div class="contact__head reveal">
+          <h2 class="h2" data-i18n="contact.h2">Let's build something <em>worth keeping</em> <span class="big-amp">&amp;</span></h2>
+          <div class="contact__details">
+            <div class="contact__row">
+              <span class="mono dim">DIRECT</span>
+              <a class="val" data-i18n="contact.email" href="mailto:contact@yafetandco.com">contact@yafetandco.com</a>
+              <a class="val" data-i18n="contact.phone" href="tel:+4319287373">+43 1 928 73 73</a>
+            </div>
+            <div class="contact__row">
+              <span class="mono dim">BOOK A 30-MIN CALL</span>
+              <a class="val" href="#booking-modal" data-open-modal="booking-modal" data-i18n="contact.calendly">Calendly → open · Tuesdays &amp; Thursdays · CET</a>
+            </div>
+            <div class="contact__row">
+              <span class="mono dim">STUDIO</span>
+              <span class="val" data-i18n="contact.studio">Schottenring 14/3, 1010 Wien · By appointment only</span>
+            </div>
+            <p class="dim" data-i18n="contact.note" style="max-width:42ch;"></p>
+          </div>
+        </div>
+
+        <form class="contact__form reveal" id="contact-form" novalidate>
+          <div class="field" data-field="name">
+            <label class="field__label" for="cf-name">Your name</label>
+            <input class="field__input" id="cf-name" name="name" type="text" autocomplete="name" required />
+            <span class="field__err">↯ A name (or two) please.</span>
+          </div>
+          <div class="field" data-field="email">
+            <label class="field__label" for="cf-email">Email</label>
+            <input class="field__input" id="cf-email" name="email" type="email" autocomplete="email" required />
+            <span class="field__err">↯ Not quite a valid email.</span>
+          </div>
+          <div class="field" data-field="company">
+            <label class="field__label" for="cf-company">Company · optional</label>
+            <input class="field__input" id="cf-company" name="company" type="text" />
+          </div>
+          <div class="field" data-field="message">
+            <label class="field__label" for="cf-msg">What are you building?</label>
+            <textarea class="field__textarea" id="cf-msg" name="message" placeholder="A sentence or three is enough. The shorter you can write it, the clearer you can think it." required></textarea>
+            <span class="field__err">↯ A sentence or three, please.</span>
+          </div>
+          <button type="submit" class="btn btn--primary" data-magnetic>
+            <span>Send to Yafet</span><span class="arrow">→</span>
+          </button>
+          <div class="form-status" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         FAQ / TL;DR
+         ===================================================== -->
+    <section class="section section-pad container" id="faq">
+      <div class="sec-marker reveal">
+        <span class="mono sec-marker__id" data-i18n="faq.tag">TL;DR</span>
+        <span class="mono sec-marker__title">The fast read</span>
+        <span class="mono sec-marker__meta">Q&amp;A · FOR HUMANS AND CRAWLERS</span>
+      </div>
+      <h2 class="h2 reveal" style="max-width: 16ch; margin-bottom: clamp(2rem, 4vw, 3rem);" data-i18n="faq.h2">The quick answers, <em>for the skim-readers.</em></h2>
+      <div class="faq">
+        <div class="faq__list" data-i18n="faq.list"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =====================================================
+       FOOTER (with full-bleed ampersand)
+       ===================================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__head">
+        <span class="footer__amp" aria-hidden="true">&amp;</span>
+        <div class="footer__amp-meta">
+          <div>YAFET &amp; CO · WIEN · MMXXVI</div>
+          <div>48°12′ N · 16°22′ E</div>
+          <div class="amber" data-i18n="hero.footAvail">Available for projects from Q3 2026</div>
+        </div>
+      </div>
+      <div class="footer__cols">
+        <div class="footer__brand">
+          <p class="signature" data-i18n="footer.signature">Made slowly, in Vienna.</p>
+          <p data-i18n="footer.blurb">Notes on the slow craft of building for the businesses Europe keeps quiet about.</p>
+        </div>
+        <div data-i18n="footer.cols" style="display:contents;"></div>
+      </div>
+      <div class="footer__bottom">
+        <span data-i18n="footer.copy">© 2021–2026 Yafet &amp; Co · Vienna · Reg. 547382b</span>
+        <span>48°12′ N · 16°22′ E · MMXXVI</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =====================================================
+       FLOATING "ASK THE STUDIO" DOCK
+       ===================================================== -->
+  <div class="dock">
+    <button class="dock__btn" data-open-modal="chat-modal" data-magnetic>
+      <span class="pulse"></span>
+      <span data-i18n="dock.label">Ask the studio</span>
+    </button>
+  </div>
+
+  <!-- =====================================================
+       MODAL · BOOKING (Calendly hook)
+       ===================================================== -->
+  <div class="modal modal--center" id="booking-modal" role="dialog" aria-modal="true" aria-labelledby="booking-title">
+    <div class="modal__panel">
+      <header class="modal__head">
+        <div>
+          <div class="mono mono-amber">↪ INTRO CALL</div>
+          <h3 class="modal__title" id="booking-title">Book a 30-min intro</h3>
+        </div>
+        <button class="modal__close" aria-label="Close">✕</button>
+      </header>
+      <div class="modal__body">
+        <p class="lead dim" style="margin-bottom:1.4rem;">A 30-minute introductory call with Yafet. No deck, no pitch — a conversation. Tuesdays &amp; Thursdays, CET.</p>
+        <div class="booking-card">
+          <div>
+            <div class="mono mono-sm mono-amber">NEXT STEP</div>
+            <h4>Open the live booking page</h4>
+            <p>Calendly handles current availability, time zones, confirmations and calendar invites. If the slot you want is not visible, write directly and suggest two times.</p>
+          </div>
+          <a href="mailto:contact@yafetandco.com?subject=Intro%20call%20with%20Yafet%20%26%20Co.&body=Hi%20Yafet%2C%0A%0AI%27d%20like%20to%20book%20a%2030-minute%20intro%20call.%0A%0AProject%20context%3A%0APreferred%20times%3A%0A%0AThank%20you." class="booking-card__mail">Prefer email?</a>
+        </div>
+        <div style="display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1.4rem;">
+          <a class="btn btn--primary" href="https://calendly.com/yafetandco/intro" target="_blank" rel="noopener" data-magnetic><span>Open Calendly</span><span class="arrow">→</span></a>
+          <button class="btn" data-close-modal>Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================
+       MODAL · ASK THE STUDIO (AI chat)
+       ===================================================== -->
+  <div class="modal" id="chat-modal" role="dialog" aria-modal="true" aria-labelledby="chat-title">
+    <div class="modal__panel">
+      <header class="modal__head">
+        <div>
+          <div class="mono mono-amber">↪ STUDIO ASSISTANT</div>
+          <h3 class="modal__title" id="chat-title">Ask the studio</h3>
+        </div>
+        <button class="modal__close" aria-label="Close">✕</button>
+      </header>
+      <div class="modal__body">
+        <div class="chat__suggest">
+          <button class="chip">How long does an Atelier project take?</button>
+          <button class="chip">Do you build in German?</button>
+          <button class="chip">What does an MVP cost?</button>
+          <button class="chip">When is Yafet next available?</button>
+        </div>
+        <div class="chat__log"></div>
+        <div class="chat__input-row">
+          <input class="chat__input" placeholder="Ask about services, timelines, pricing…" />
+          <button class="chat__send">Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================
+       LIBRARIES (GSAP + ScrollTrigger + Lenis from cdnjs)
+       ===================================================== -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" crossorigin="anonymous"></script>
+
+  <!-- =====================================================
+       APP SCRIPTS
+       ===================================================== -->
+  <script src="js/content.js"></script>
+  <script src="js/motion.js"></script>
+  <script src="js/interactions.js"></script>
+  <noscript>
+    <div class="noscript-note">
+      JavaScript is off, so the interactive sections are paused. You can still contact the studio at
+      <a href="mailto:contact@yafetandco.com">contact@yafetandco.com</a>.
+    </div>
+  </noscript>
+  <script>
+    // Boot when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => window.YC_initInteractions());
+    } else {
+      window.YC_initInteractions();
+    }
+  </script>
+</body>
+</html>
