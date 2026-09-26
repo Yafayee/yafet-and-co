@@ -1,0 +1,1 @@
+window.TL = {"starts": [0.0, 6.096, 10.734, 15.317, 20.247], "total": 27.33, "vo": [{"start": 0.35, "dur": 5.396, "file": "vo/line0.wav"}, {"start": 6.446, "dur": 3.937, "file": "vo/line1.wav"}, {"start": 11.084, "dur": 3.883, "file": "vo/line2.wav"}, {"start": 15.667, "dur": 4.23, "file": "vo/line3.wav"}, {"start": 20.597, "dur": 5.183, "file": "vo/line4.wav"}]};
