@@ -129,3 +129,9 @@ Small habits don't add up — they **compound**. Keep looking for the next 1% im
 5. **Design your space** — put the cue in sight, hide the cues for bad habits.
 6. **Track it** on a calendar and follow the rule: **never miss twice**.
 7. **Review** every month: what is working, what should change?
+
+---
+
+## 6. The 1% System app
+
+A phone app built on these ideas lives at [`/habits`](../habits/) (**yafetandco.com/habits** once deployed). Open it on your phone and use *Add to Home Screen* to install it. It works offline and keeps your data on the device. To move data between devices, use *Guide → Backup & move your data*.
