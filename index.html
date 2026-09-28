@@ -23,9 +23,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <!-- App styles -->
-  <link rel="stylesheet" href="base.css" />
-  <link rel="stylesheet" href="components.css" />
-  <link rel="stylesheet" href="sections.css" />
+  <link rel="stylesheet" href="styles/base.css" />
+  <link rel="stylesheet" href="styles/components.css" />
+  <link rel="stylesheet" href="styles/sections.css" />
   <noscript><style>.loader{display:none!important}.reveal,.reveal-stagger>*{opacity:1!important;transform:none!important}</style></noscript>
 
   <!-- Schema.org -->
@@ -111,8 +111,8 @@
       <span class="wordmark">Yafet &amp; Co.</span>
     </a>
     <nav class="nav__links" aria-label="Primary">
-      <a class="nav__link" href="#work">Work</a>
       <a class="nav__link" href="#services">Services</a>
+      <a class="nav__link" href="#work">Work</a>
       <a class="nav__link" href="#process">Process</a>
       <a class="nav__link" href="#pricing">Pricing</a>
       <a class="nav__link" href="#journal">Journal</a>
@@ -144,8 +144,8 @@
 
   <!-- ===== Mobile sheet ===== -->
   <div class="menu-sheet" id="menu-sheet">
-    <a href="#work">Work</a>
     <a href="#services">Services</a>
+    <a href="#work">Work</a>
     <a href="#process">Process</a>
     <a href="#pricing">Pricing</a>
     <a href="#journal">Journal</a>
@@ -166,7 +166,7 @@
 
       <div class="hero__main">
         <div>
-          <span class="hero__kicker" data-i18n="hero.kicker">— STUDIO YAFET &amp; CO · WIEN · MMXXVI</span>
+          <span class="hero__kicker" data-i18n="hero.kicker">STUDIO YAFET &amp; CO · WIEN · MMXXVI</span>
           <h1 class="hero__h1" data-i18n="hero.h1">
             <span class="line-mask"><span class="line-inner">Websites,</span></span>
             <span class="line-mask"><span class="line-inner">apps, <em>&amp; quiet AI</em></span></span>
@@ -186,7 +186,7 @@
           <span data-i18n="hero.foot1">A STUDIO IN ONE CITY · 48°12′ N · 16°22′ E</span>
           <span data-i18n="hero.foot2" class="mute">A FILM IN ONE BREATH</span>
         </div>
-        <div class="col" style="text-align:right;">
+        <div class="col col--end">
           <span class="amber" data-i18n="hero.footAvail">Available for projects from Q3 2026</span>
           <span class="mute">SCROLL ↓</span>
         </div>
@@ -197,7 +197,7 @@
          PARTNER + INDUSTRY MARQUEES
          ===================================================== -->
     <section class="section">
-      <div class="container" style="display:flex; justify-content:space-between; align-items:center; padding-bottom:0.8rem;">
+      <div class="container marquee-head">
         <span class="mono" data-i18n="marquee.partnersLabel">IN PARTNERSHIP WITH ↓</span>
         <span class="mono mute">EU + AFRICA · 08 PARTNERS</span>
       </div>
@@ -218,7 +218,7 @@
         <span class="mono sec-marker__title" data-i18n="services.tag">What we make</span>
         <span class="mono sec-marker__meta">08 DISCIPLINES</span>
       </div>
-      <h2 class="h2 reveal" style="max-width: 14ch; margin-bottom: clamp(2.5rem, 4vw, 4rem);" data-i18n="services.h2">Eight disciplines, <em>one studio.</em></h2>
+      <h2 class="h2 sec-title reveal" data-i18n="services.h2">Eight disciplines, <em>one studio.</em></h2>
       <div class="disc-grid reveal-stagger" data-i18n="services.list"></div>
     </section>
 
@@ -279,7 +279,7 @@
         <span class="mono sec-marker__title" data-i18n="pillars.tag">The four S pillars</span>
         <span class="mono sec-marker__meta">SPEED · SECURITY · SCALABILITY · SUSTAINABILITY</span>
       </div>
-      <h2 class="h2 reveal" style="max-width: 14ch; margin-bottom: clamp(2.5rem, 4vw, 4rem);" data-i18n="pillars.h2">Technology <em>that lasts.</em></h2>
+      <h2 class="h2 sec-title reveal" data-i18n="pillars.h2">Technology <em>that lasts.</em></h2>
       <div class="pillars" data-i18n="pillars.list"></div>
       <p class="pillar-note reveal" data-i18n="pillars.note">In delivery partnership with <strong>SuSu Technology Trading</strong> — twelve years of ICT infrastructure across the Horn of Africa.</p>
     </section>
@@ -293,7 +293,7 @@
         <span class="mono sec-marker__title" data-i18n="process.tag">How we work</span>
         <span class="mono sec-marker__meta">05 STEPS · NO RE-TREATMENTS</span>
       </div>
-      <h2 class="h2 reveal" style="max-width: 14ch; margin-bottom: clamp(2.5rem, 4vw, 4rem);" data-i18n="process.h2">Five steps. <em>No re-treatments.</em></h2>
+      <h2 class="h2 sec-title reveal" data-i18n="process.h2">Five steps. <em>No re-treatments.</em></h2>
       <div class="steps">
         <div class="steps__rail" data-i18n="process.rail"></div>
         <div class="steps__list" data-i18n="process.list"></div>
@@ -319,7 +319,7 @@
         <span class="mono sec-marker__title" data-i18n="pricing.tag">Pricing</span>
         <span class="mono sec-marker__meta">EUR · NET · 3 DOORS</span>
       </div>
-      <h2 class="h2 reveal" style="max-width: 14ch; margin-bottom: clamp(2.5rem, 4vw, 4rem);" data-i18n="pricing.h2">Three doors, <em>all of them open.</em></h2>
+      <h2 class="h2 sec-title reveal" data-i18n="pricing.h2">Three doors, <em>all of them open.</em></h2>
       <div class="pricing" data-i18n="pricing.list"></div>
     </section>
 
@@ -332,8 +332,8 @@
         <span class="mono sec-marker__title">Project estimator</span>
         <span class="mono sec-marker__meta">A FIRST SKETCH · NOT A QUOTE</span>
       </div>
-      <h2 class="h2 reveal" style="max-width: 16ch; margin-bottom: 1.2rem;" data-i18n="estimator.h2">Project estimator. <em>A first sketch.</em></h2>
-      <p class="lead dim reveal" style="max-width: 60ch; margin-bottom: clamp(2rem, 4vw, 3rem);" data-i18n="estimator.sub"></p>
+      <h2 class="h2 sec-title sec-title--wide sec-title--tight reveal" data-i18n="estimator.h2">Project estimator. <em>A first sketch.</em></h2>
+      <p class="lead dim sec-lead reveal" data-i18n="estimator.sub"></p>
 
       <div class="estimator reveal" id="estimator-card">
         <div>
@@ -379,10 +379,24 @@
         <span class="mono sec-marker__title" data-i18n="journal.tag">Journal</span>
         <span class="mono sec-marker__meta">03 NOTES · LATEST</span>
       </div>
-      <h2 class="h2 reveal" style="max-width: 16ch; margin-bottom: clamp(2.5rem, 4vw, 4rem);" data-i18n="journal.h2">Notes from <em>the studio.</em></h2>
+      <h2 class="h2 sec-title sec-title--wide reveal" data-i18n="journal.h2">Notes from <em>the studio.</em></h2>
       <div class="journal-grid" data-i18n="journal.list"></div>
     </section>
 
+    <!-- =====================================================
+         FAQ / TL;DR
+         ===================================================== -->
+    <section class="section section-pad container" id="faq">
+      <div class="sec-marker reveal">
+        <span class="mono sec-marker__id" data-i18n="faq.tag">TL;DR</span>
+        <span class="mono sec-marker__title">The fast read</span>
+        <span class="mono sec-marker__meta">Q&amp;A · FOR HUMANS AND CRAWLERS</span>
+      </div>
+      <h2 class="h2 sec-title sec-title--wide reveal" data-i18n="faq.h2">The quick answers, <em>for the skim-readers.</em></h2>
+      <div class="faq">
+        <div class="faq__list" data-i18n="faq.list"></div>
+      </div>
+    </section>
     <!-- =====================================================
          CONTACT
          ===================================================== -->
@@ -409,7 +423,7 @@
               <span class="mono dim">STUDIO</span>
               <span class="val" data-i18n="contact.studio">Schottenring 14/3, 1010 Wien · By appointment only</span>
             </div>
-            <p class="dim" data-i18n="contact.note" style="max-width:42ch;"></p>
+            <p class="dim contact__note" data-i18n="contact.note"></p>
           </div>
         </div>
 
@@ -441,20 +455,6 @@
       </div>
     </section>
 
-    <!-- =====================================================
-         FAQ / TL;DR
-         ===================================================== -->
-    <section class="section section-pad container" id="faq">
-      <div class="sec-marker reveal">
-        <span class="mono sec-marker__id" data-i18n="faq.tag">TL;DR</span>
-        <span class="mono sec-marker__title">The fast read</span>
-        <span class="mono sec-marker__meta">Q&amp;A · FOR HUMANS AND CRAWLERS</span>
-      </div>
-      <h2 class="h2 reveal" style="max-width: 16ch; margin-bottom: clamp(2rem, 4vw, 3rem);" data-i18n="faq.h2">The quick answers, <em>for the skim-readers.</em></h2>
-      <div class="faq">
-        <div class="faq__list" data-i18n="faq.list"></div>
-      </div>
-    </section>
   </main>
 
   <!-- =====================================================
@@ -475,7 +475,7 @@
           <p class="signature" data-i18n="footer.signature">Made slowly, in Vienna.</p>
           <p data-i18n="footer.blurb">Notes on the slow craft of building for the businesses Europe keeps quiet about.</p>
         </div>
-        <div data-i18n="footer.cols" style="display:contents;"></div>
+        <div class="footer__cols-slot" data-i18n="footer.cols"></div>
       </div>
       <div class="footer__bottom">
         <span data-i18n="footer.copy">© 2021–2026 Yafet &amp; Co · Vienna · Reg. 547382b</span>
@@ -507,7 +507,7 @@
         <button class="modal__close" aria-label="Close">✕</button>
       </header>
       <div class="modal__body">
-        <p class="lead dim" style="margin-bottom:1.4rem;">A 30-minute introductory call with Yafet. No deck, no pitch — a conversation. Tuesdays &amp; Thursdays, CET.</p>
+        <p class="lead dim modal__lead">A 30-minute introductory call with Yafet. No deck, no pitch — a conversation. Tuesdays &amp; Thursdays, CET.</p>
         <div class="booking-card">
           <div>
             <div class="mono mono-sm mono-amber">NEXT STEP</div>
@@ -516,7 +516,7 @@
           </div>
           <a href="mailto:contact@yafetandco.com?subject=Intro%20call%20with%20Yafet%20%26%20Co.&body=Hi%20Yafet%2C%0A%0AI%27d%20like%20to%20book%20a%2030-minute%20intro%20call.%0A%0AProject%20context%3A%0APreferred%20times%3A%0A%0AThank%20you." class="booking-card__mail">Prefer email?</a>
         </div>
-        <div style="display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1.4rem;">
+        <div class="modal__actions">
           <a class="btn btn--primary" href="https://calendly.com/yafetandco/intro" target="_blank" rel="noopener" data-magnetic><span>Open Calendly</span><span class="arrow">→</span></a>
           <button class="btn" data-close-modal>Close</button>
         </div>
@@ -562,9 +562,9 @@
   <!-- =====================================================
        APP SCRIPTS
        ===================================================== -->
-  <script src="content.js"></script>
-  <script src="motion.js"></script>
-  <script src="interactions.js"></script>
+  <script src="js/content.js"></script>
+  <script src="js/motion.js"></script>
+  <script src="js/interactions.js"></script>
   <noscript>
     <div class="noscript-note">
       JavaScript is off, so the interactive sections are paused. You can still contact the studio at

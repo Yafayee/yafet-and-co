@@ -97,12 +97,16 @@
 
   // ----------------- Pinned horizontal scroll: Selected Work -----------------
   function initPinnedWork() {
-    if (reduced || !window.gsap || !window.ScrollTrigger) return;
     const pin = document.querySelector('.work__pin');
     const track = document.querySelector('.work__track');
-    if (!pin || !track || window.innerWidth <= 760) return;
+    if (!pin || !track) return;
+    if (reduced || !window.gsap || !window.ScrollTrigger || window.innerWidth <= 760) {
+      initWorkScroller(track);
+      return;
+    }
 
     gsap.registerPlugin(ScrollTrigger);
+    pin.classList.add('is-pinned');
 
     // Compute scroll distance
     const getDist = () => Math.max(0, track.scrollWidth - window.innerWidth);
@@ -154,6 +158,27 @@
         onUpdate: (self) => { curIdx = Math.round(self.progress * (cases.length - 1)); }
       });
     }
+  }
+
+  // Fallback for the work row: native horizontal scroll, with the
+  // prev/next buttons and progress bar driven by the scroll position.
+  function initWorkScroller(track) {
+    const bar = document.querySelector('.work__progress span');
+    const cases = () => track.querySelectorAll('.case');
+    function step(dir) {
+      const c = cases()[0];
+      if (!c) return;
+      const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+      track.scrollBy({ left: dir * (c.offsetWidth + gap), behavior: reduced ? 'auto' : 'smooth' });
+    }
+    function onScroll() {
+      const max = track.scrollWidth - track.clientWidth;
+      if (bar) bar.style.width = (max > 0 ? (track.scrollLeft / max) * 100 : 0).toFixed(1) + '%';
+    }
+    document.querySelector('.work__nav-prev')?.addEventListener('click', () => step(-1));
+    document.querySelector('.work__nav-next')?.addEventListener('click', () => step(1));
+    track.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
   }
 
   // ----------------- Process rail (active step) -----------------

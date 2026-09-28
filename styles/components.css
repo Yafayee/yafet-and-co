@@ -172,12 +172,14 @@
 @media (max-width: 900px) {
   .nav { grid-template-columns: auto auto; gap: 1rem; }
   .nav__links { display: none; }
+  .nav__right { justify-self: end; }
   .nav__cta-text { display: none; }
   .nav__burger { display: flex; }
 }
 @media (max-width: 480px) {
   .nav__brand .wordmark { display: none; }
   .nav__right { gap: 0.75rem; }
+  .nav__right .nav__cta { display: none; } /* hero CTA + menu cover it on phones */
 }
 
 /* Mobile menu sheet */
@@ -220,6 +222,7 @@
   font-size: 0.72rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
+  white-space: nowrap;
   transition: background var(--t-base) var(--ease), color var(--t-base) var(--ease),
               border-color var(--t-base) var(--ease), transform 120ms var(--ease);
   overflow: hidden;
@@ -494,6 +497,8 @@
   overflow-y: auto;
   flex: 1;
 }
+.modal__lead { margin: 0 0 1.4rem; }
+.modal__actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.4rem; }
 .booking-card {
   border: 1px solid var(--rule);
   border-radius: 8px;

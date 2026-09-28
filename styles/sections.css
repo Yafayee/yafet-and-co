@@ -197,7 +197,22 @@
   flex-direction: column;
   gap: 0.2rem;
 }
+.hero__foot .col--end { align-items: flex-end; text-align: right; }
 .hero__foot .mono { font-size: 0.66rem; }
+@media (max-width: 640px) {
+  .hero__foot { flex-direction: column; align-items: flex-start; }
+  .hero__foot .col--end { align-items: flex-start; text-align: left; }
+}
+
+/* Label row above the partner marquee */
+.marquee-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.4rem 1rem;
+  padding-bottom: 0.8rem;
+}
 
 .hero > * { position: relative; z-index: 1; }
 
@@ -319,20 +334,39 @@
 .work__head h2 { max-width: 18ch; }
 .work__head .meta { color: var(--bone-dim); font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; }
 
+/* Default: a swipeable row (used without GSAP or with reduced motion).
+   motion.js adds .is-pinned when it takes over with a pinned scroll. */
 .work__pin {
-  height: 100vh;
-  min-height: 640px;
   position: relative;
-  overflow: hidden;
+  padding-top: 4.5rem;
 }
 .work__track {
+  display: flex;
+  align-items: center;
+  padding: 0 var(--pad-x) 3.4rem;
+  gap: clamp(1.5rem, 3vw, 3rem);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--pad-x);
+  scrollbar-width: none;
+}
+.work__track::-webkit-scrollbar { display: none; }
+.work__track .case { scroll-snap-align: start; }
+
+.work__pin.is-pinned {
+  height: 100vh;
+  min-height: 640px;
+  padding-top: 0;
+  overflow: hidden;
+}
+.work__pin.is-pinned .work__track {
   position: absolute;
   top: 0; left: 0;
   height: 100%;
-  display: flex;
-  align-items: center;
-  padding-inline: var(--pad-x);
-  gap: clamp(1.5rem, 3vw, 3rem);
+  padding-bottom: 0;
+  overflow: visible;
+  scroll-snap-type: none;
   will-change: transform;
 }
 .work__progress {
@@ -460,7 +494,7 @@
   font-size: 1.05rem;
   margin: 0;
 }
-.case__desc { color: var(--bone-dim); font-size: 0.98rem; line-height: 1.55; }
+.case__desc { color: var(--bone-dim); font-size: 0.98rem; line-height: 1.55; margin: 0; }
 .case__foot {
   display: flex;
   justify-content: space-between;
@@ -484,8 +518,8 @@
 .case:hover .case__cta::after { transform: translateX(4px); }
 
 @media (max-width: 760px) {
-  .work__pin { height: auto; min-height: 0; overflow: visible; }
-  .work__track { position: relative; padding: 0 var(--pad-x); flex-direction: column; gap: 1rem; }
+  .work__pin { height: auto; min-height: 0; padding-top: 0; overflow: visible; }
+  .work__track { position: relative; padding: 0 var(--pad-x); flex-direction: column; gap: 1rem; overflow: visible; scroll-snap-type: none; }
   .case { width: 100%; height: auto; min-height: 520px; }
   .work__progress, .work__nav { display: none; }
 }
@@ -598,7 +632,10 @@
 .step__when {
   display: block;
   color: var(--bone-mute);
-  font-size: 0.66rem;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   margin-top: 0.4rem;
 }
 .step__t {
@@ -800,6 +837,7 @@
   gap: 1.6rem;
 }
 .contact__row { display: flex; flex-direction: column; gap: 0.3rem; }
+.contact__note { max-width: 42ch; margin: 0; }
 .contact__row a:hover { color: var(--amber); }
 .contact__row .val { font-family: var(--serif); font-size: 1.15rem; }
 .contact__form {
@@ -959,7 +997,6 @@
   gap: 2rem;
   align-items: end;
   padding-bottom: 2rem;
-  border-bottom: 1px solid var(--rule);
 }
 @media (max-width: 720px) { .footer__head { grid-template-columns: 1fr; } }
 .footer__amp {
@@ -991,6 +1028,7 @@
   padding-block: 2rem;
   border-top: 1px solid var(--rule);
 }
+.footer__cols-slot { display: contents; }
 @media (max-width: 800px) { .footer__cols { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 460px) { .footer__cols { grid-template-columns: 1fr; } }
 .footer__col h4 {

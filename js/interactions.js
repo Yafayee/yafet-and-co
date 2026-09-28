@@ -373,15 +373,15 @@
           <text x="44" y="38" font-family="monospace" font-size="9" fill="${bone}" opacity="0.7">PIETECH · ETB 1,240</text>
           <rect x="40" y="64" width="100" height="120" fill="none" stroke="${dim}"/>
           <rect x="40" y="64" width="100" height="60" fill="${amber}" opacity="0.18"/>
-          <text x="50" y="138" font-family="serif" font-style="italic" font-size="11" fill="${bone}">Habesha kemis</text>
+          <text x="50" y="138" font-family="serif" font-style="italic" font-size="9" fill="${bone}">Habesha kemis</text>
           <text x="50" y="154" font-family="monospace" font-size="8" fill="${amber}">ETB 3,200</text>
           <rect x="150" y="64" width="100" height="120" fill="none" stroke="${dim}"/>
           <rect x="150" y="64" width="100" height="60" fill="${dim}" opacity="0.4"/>
-          <text x="160" y="138" font-family="serif" font-style="italic" font-size="11" fill="${bone}">Buna ceremony set</text>
+          <text x="160" y="138" font-family="serif" font-style="italic" font-size="9" fill="${bone}">Buna ceremony set</text>
           <text x="160" y="154" font-family="monospace" font-size="8" fill="${amber}">ETB 1,840</text>
           <rect x="260" y="64" width="100" height="120" fill="none" stroke="${dim}"/>
           <rect x="260" y="64" width="100" height="60" fill="${dim}" opacity="0.25"/>
-          <text x="270" y="138" font-family="serif" font-style="italic" font-size="11" fill="${bone}">Mesob basket</text>
+          <text x="270" y="138" font-family="serif" font-style="italic" font-size="9" fill="${bone}">Mesob basket</text>
           <text x="270" y="154" font-family="monospace" font-size="8" fill="${amber}">ETB 920</text>
           <rect x="40" y="194" width="320" height="14" fill="${amber}" opacity="0.85"/>
           <text x="200" y="204" font-family="monospace" font-size="8" fill="#0E0B08" text-anchor="middle" font-weight="700">PAY WITH TELEBIRR · CBE BIRR · CARD</text>

@@ -21,7 +21,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Collect site files
-        run: rsync -a --exclude '.git' --exclude '.github' --exclude '_site' ./ _site/
+        run: rsync -a --exclude '.git' --exclude '.github' --exclude '_site' --exclude '/archive/' --exclude '/README.md' ./ _site/
       - uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}

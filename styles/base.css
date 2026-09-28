@@ -137,6 +137,7 @@ img, svg, video { display: block; max-width: 100%; }
 button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
 button:disabled { cursor: not-allowed; opacity: 0.45; }
 a { color: inherit; text-decoration: none; }
+h1, h2, h3, h4 { margin: 0; } /* spacing comes from each component, not UA defaults */
 input, textarea, select { font: inherit; color: inherit; }
 ::selection { background: var(--amber); color: var(--on-amber); }
 
@@ -203,6 +204,8 @@ input, textarea, select { font: inherit; color: inherit; }
 .section { position: relative; }
 .section-pad   { padding-block: clamp(5rem, 10vw, 10rem); }
 .section-pad-s { padding-block: clamp(3rem, 6vw, 6rem); }
+/* Two padded sections in a row share one gap instead of stacking two */
+.section-pad + .section-pad { padding-top: 0; }
 .rule { width: 100%; height: 1px; background: var(--rule); border: 0; }
 .rule-strong { background: var(--rule-strong); }
 
@@ -216,9 +219,19 @@ input, textarea, select { font: inherit; color: inherit; }
   border-bottom: 1px solid var(--rule);
   margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
 }
-.sec-marker__id { color: var(--amber); }
+.sec-marker__id { color: var(--amber); white-space: nowrap; }
 .sec-marker__title { flex: 1; }
 .sec-marker__meta { color: var(--bone-mute); }
+@media (max-width: 640px) {
+  .sec-marker { flex-wrap: wrap; row-gap: 0.35rem; }
+  .sec-marker__meta { flex-basis: 100%; }
+}
+
+/* Section headline + optional lead under the marker */
+.sec-title { max-width: 14ch; margin-bottom: clamp(2.5rem, 4vw, 4rem); }
+.sec-title--wide { max-width: 16ch; }
+.sec-title--tight { margin-bottom: 1.2rem; }
+.sec-lead { max-width: 60ch; margin: 0 0 clamp(2rem, 4vw, 3rem); }
 
 /* Reveals (IntersectionObserver) */
 .reveal {

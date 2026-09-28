@@ -6,14 +6,14 @@
 window.YC_CONTENT = {
   en: {
     nav: {
-      links: ["Work", "Services", "Process", "Pricing", "Journal", "Contact"],
+      links: ["Services", "Work", "Process", "Pricing", "Journal", "Contact"],
       cta: "Start a project."
     },
     hero: {
       label1: "VOL. 06 · THE STUDIO",
       label2: "REC · 22:40:10 · VIENNA",
       label3: "NO. 01 / THE STUDIO AT WORK",
-      kicker: "— STUDIO YAFET & CO · WIEN · MMXXVI",
+      kicker: "STUDIO YAFET & CO · WIEN · MMXXVI",
       h1Lines: [
         ["Websites,", null],
         ["apps, ", { italic: "& quiet AI" }],
@@ -258,14 +258,14 @@ window.YC_CONTENT = {
      ----------------------------------------------------------- */
   de: {
     nav: {
-      links: ["[DE: Work]", "[DE: Services]", "[DE: Process]", "[DE: Pricing]", "[DE: Journal]", "[DE: Contact]"],
+      links: ["[DE: Services]", "[DE: Work]", "[DE: Process]", "[DE: Pricing]", "[DE: Journal]", "[DE: Contact]"],
       cta: "[DE: Start a project.]"
     },
     hero: {
       label1: "VOL. 06 · DAS STUDIO",
       label2: "REC · 22:40:10 · WIEN",
       label3: "NR. 01 / DAS STUDIO BEI DER ARBEIT",
-      kicker: "— STUDIO YAFET & CO · WIEN · MMXXVI",
+      kicker: "STUDIO YAFET & CO · WIEN · MMXXVI",
       h1Lines: [
         ["[DE: Websites,]", null],
         ["[DE: apps, ]", { italic: "[DE: & quiet AI]" }],
