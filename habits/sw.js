@@ -1,5 +1,5 @@
 // Offline support for The 1% System. Bump VERSION whenever the app files change.
-const VERSION = 'onepct-v2';
+const VERSION = 'onepct-v3';
 const SHELL = ['./', './index.html', './manifest.webmanifest', './icon.svg', './icon-192.png', './icon-512.png', './apple-touch-icon.png'];
 
 self.addEventListener('install', e => {
