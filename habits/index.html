@@ -146,6 +146,12 @@ button{cursor:pointer}
 @keyframes pop{0%{transform:scale(.7)}60%{transform:scale(1.18)}100%{transform:scale(1)}}
 @keyframes lift{0%{transform:scale(1)}40%{transform:scale(1.015)}100%{transform:scale(1)}}
 
+.groups{display:flex;flex-direction:column;gap:20px}
+.group{display:flex;flex-direction:column;gap:8px}
+.ghead{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:0 4px;font:700 12px var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.ghead b{color:var(--ink);font-weight:700}
+.gbar{height:4px;border-radius:2px;background:var(--surface-2);overflow:hidden;margin:0 4px 2px}
+.gbar i{display:block;height:100%;background:var(--good);transition:width .5s}
 .add-row{appearance:none;border:2px dashed var(--line);background:none;border-radius:18px;padding:14px;color:var(--muted);font-weight:600;display:flex;align-items:center;justify-content:center;gap:8px;min-height:56px}
 .add-row svg{width:18px;height:18px}
 
@@ -296,7 +302,7 @@ const LS = 'onepct:';
 const IS_SITE = (() => { try { return window.top === window.self; } catch(e){ return false; } })();
 const C = 2*Math.PI*44;
 const COLORS = ['#FF5A36','#F5A524','#17A884','#3B8BEB','#8B5CF6','#E4468B'];
-const EMOJIS = ['💻','💼','📚','🏃','💪','🧘','💧','🥗','✍️','🗣️','🎯','🧠','😴','📵','☕','🧹','💰','🎸','🙏','🚶','🇩🇪','📝','🛠️','🌱'];
+const EMOJIS = ['⏰','🛏️','🪟','🤸','🦷','🙏','🗣️','☕','📖','💻','💼','📚','🏃','💪','🧘','💧','🥗','✍️','🎯','🧠','😴','📵','🧹','💰','🎸','🚶','🇩🇪','📝','🛠️','🌱','🌅','🙂'];
 const I = {
   today:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 10"/></svg>',
   habits:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="7" height="7" rx="2"/><path d="M16.5 13.5v6M13.5 16.5h6"/></svg>',
@@ -331,6 +337,45 @@ const LAWS = {
   break:[['obvious','Make it invisible','Remove the cue from your space','e.g. Charge the phone outside the bedroom'],['attractive','Make it unattractive','Remind yourself what it costs you','e.g. Think of how tired you feel next morning'],['easy','Make it difficult','Add friction between you and the habit','e.g. Log out of the app after every use'],['satisfying','Make it unsatisfying','Make missing it cost something','e.g. Tell a friend and let them check on you']]
 };
 
+const STARTER = {
+  identities:[
+    {id:'i4',text:'I am someone who wins the morning'},
+    {id:'i5',text:'I am grounded in faith and gratitude'},
+    {id:'i1',text:'I am an IT professional who ships work every day'},
+    {id:'i2',text:'I am a healthy person who moves daily'},
+    {id:'i3',text:'I am a lifelong learner'}
+  ],
+  goals:[
+    {id:'g0',goal:'Start every day calm, focused and on time',system:'Follow my morning routine from 6:00, one small step after another'},
+    {id:'g1',goal:'Land an IT role in Vienna / grow Yafet & Co',system:'Apply to or follow up on one opportunity every weekday, and do one focused work block'},
+    {id:'g2',goal:'Get fitter and have more energy',system:'Stretch every morning and move for at least 20 minutes every day'},
+    {id:'g3',goal:'Build new skills (German, IT certifications)',system:'Read every morning and study something small every evening'}
+  ],
+  habits:[
+    {id:'m1',routine:'Morning routine',name:'Wake up at 6:00',kind:'build',identity:'i4',emoji:'⏰',color:'#F5A524',stack:'my alarm rings',time:'06:00',place:'bedroom',twoMin:'Put both feet on the floor as soon as the alarm rings',obvious:'Put the alarm across the room so I have to stand up',attractive:'Remind myself: coffee and my book are waiting',easy:'Be in bed by 22:30, phone charging outside the bedroom',satisfying:'Tick it: the first win of the day'},
+    {id:'m2',routine:'Morning routine',name:'Make the bed',kind:'build',identity:'i4',emoji:'🛏️',color:'#F5A524',stack:'get out of bed',time:'06:01',place:'bedroom',twoMin:'Pull the duvet straight and fix the pillow',obvious:'Do it before leaving the bedroom, every time',attractive:'A tidy room feels calm when I come back tonight',easy:'Keep bedding simple: one duvet, one pillow',satisfying:'Tick it and look at the made bed'},
+    {id:'m3',routine:'Morning routine',name:'Open the window & refresh the bedroom',kind:'build',identity:'i4',emoji:'🪟',color:'#3B8BEB',stack:'make my bed',time:'06:03',place:'bedroom',twoMin:'Open the window wide',obvious:'The window is right next to the bed I just made',attractive:'Breathe the fresh morning air for a moment',easy:'Keep the window area clear',satisfying:'Notice how fresh the room feels'},
+    {id:'m4',routine:'Morning routine',name:'Morning stretching (5 min)',kind:'build',identity:'i2',emoji:'🤸',color:'#17A884',stack:'open the window',time:'06:05',place:'by the open window',twoMin:'Touch my toes and roll my shoulders 5 times',obvious:'Stretch right by the open window while the room airs out',attractive:'Fresh air + a favourite calm song',easy:'Same 5 stretches every day, no planning',satisfying:'Tick it: my body is awake'},
+    {id:'m5',routine:'Morning routine',name:'Brush my teeth',kind:'build',identity:'i4',emoji:'🦷',color:'#3B8BEB',stack:'finish stretching',time:'06:10',place:'bathroom',twoMin:'Brush for 2 minutes',obvious:'Toothbrush in plain sight next to the sink',attractive:'Fresh mouth before coffee',easy:'Toothpaste already on the counter',satisfying:'Tick it on the way to the kitchen'},
+    {id:'m6',routine:'Morning routine',name:'Pray',kind:'build',identity:'i5',emoji:'🙏',color:'#8B5CF6',stack:'walk into the kitchen',time:'06:15',place:'kitchen',twoMin:'Say one short prayer of thanks',obvious:'A quiet spot in the kitchen that is my prayer place',attractive:'Start the day grateful and calm',easy:'No phone until after prayer',satisfying:'Tick it and take one slow breath'},
+    {id:'m7',routine:'Morning routine',name:'Say my affirmations',kind:'build',identity:'i5',emoji:'🗣️',color:'#8B5CF6',stack:'finish praying',time:'06:20',place:'kitchen',twoMin:'Say one affirmation out loud',obvious:'Affirmations written on a card on the fridge',attractive:'Say them with energy, like I mean them',easy:'Keep the list short: 3 sentences',satisfying:'Tick it and smile'},
+    {id:'m8',routine:'Morning routine',name:'Prepare my coffee',kind:'build',identity:'i4',emoji:'☕',color:'#FF5A36',stack:'say my affirmations',time:'06:25',place:'kitchen',twoMin:'Fill the kettle / start the machine',obvious:'Cup and coffee ready on the counter the night before',attractive:'My favourite cup',easy:'Same coffee, same steps every morning',satisfying:'The smell of fresh coffee'},
+    {id:'m9',routine:'Morning routine',name:'Read while drinking my coffee',kind:'build',identity:'i3',emoji:'📖',color:'#FF5A36',stack:'pour my coffee',time:'06:30',place:'kitchen table',twoMin:'Read one page',obvious:'The book lies on the table next to my coffee spot',attractive:'Coffee only tastes this good with my book',easy:'Bookmark in place, phone in another room',satisfying:'Tick it and note one idea I liked'},
+    {id:'h1',routine:'Workday',name:'Deep work block',kind:'build',identity:'i1',emoji:'💻',color:'#3B8BEB',stack:'finish my morning reading',time:'08:00',place:'desk',twoMin:'Open the laptop and write the first task',obvious:"Write tomorrow's first task on a sticky note the night before",attractive:'Favourite focus playlist only during deep work',easy:'Leave the laptop open on the task, phone in another room',satisfying:'Tick it and see the streak grow'},
+    {id:'h2',routine:'Workday',name:'Send one application or follow-up',kind:'build',identity:'i1',emoji:'💼',color:'#FF5A36',stack:'finish my deep work block',time:'11:00',place:'desk',twoMin:'Open the job board and save one listing',obvious:'Keep the job tracker pinned as the first browser tab',attractive:'Pair it with a coffee break',easy:'Keep a ready CV and cover-letter template',satisfying:'Log it in the tracker'},
+    {id:'h3',routine:'Workday',name:'Move for 20 minutes',kind:'build',identity:'i2',emoji:'🏃',color:'#17A884',stack:'close my laptop for lunch',time:'13:00',place:'outside',twoMin:'Put on my shoes and walk to the corner',obvious:'Shoes and jacket by the door',attractive:'Listen to a podcast only while walking',easy:'Same route every day, no planning',satisfying:'Tick it here right after'},
+    {id:'h4',routine:'Evening',name:'Study for 15 minutes',kind:'build',identity:'i3',emoji:'📚',color:'#8B5CF6',stack:'finish dinner',time:'20:00',place:'couch',twoMin:'Do one flashcard or read one page',obvious:'Book or app open on the couch',attractive:'Study with tea',easy:'Pick the lesson in advance',satisfying:'Tick it here'},
+    {id:'h5',routine:'Evening',name:'Phone scrolling in bed',kind:'break',identity:'i2',emoji:'📵',color:'#E4468B',stack:'I get into bed with my phone',time:'',place:'bedroom',twoMin:'Read a book instead',obvious:'Charge the phone outside the bedroom',attractive:'Remember how tired I feel the next morning',easy:'Log out of social apps / use app timers',satisfying:"Tick 'avoided' here each morning"}
+  ],
+  scorecard:[
+    {id:'s1',text:'Wake up and check phone',rating:'minus'},
+    {id:'s2',text:'Make the bed',rating:'plus'},
+    {id:'s3',text:'Pray and say affirmations',rating:'plus'},
+    {id:'s4',text:'Read with my morning coffee',rating:'plus'}
+  ]
+};
+function starterPlan(){ const p = JSON.parse(JSON.stringify(STARTER)); p.startDate = ymd(today()); if(state && state.plan && state.plan.name) p.name = state.plan.name; return p; }
+
 const state = { plan:null, logs:{}, reviews:{}, tab:'today', selDay:null, reviewWeek:null, habitSeg:'list', sheet:null, lastFrac:null, justId:null, mode:'loading', intro:null };
 let dbReadyResolve; const dbReady = new Promise(r => dbReadyResolve = r);
 const pending = new Set();
@@ -355,12 +400,13 @@ function lsKeys(prefix){ const out=[]; try{ for(let i=0;i<localStorage.length;i+
 function buzz(ms){ try{ navigator.vibrate && navigator.vibrate(ms); }catch(e){} }
 
 function plan(){
-  if(!state.plan) state.plan = { startDate: todayS(), identities:[], goals:[], habits:[], scorecard:[] };
+  if(!state.plan) state.plan = starterPlan();
   const p = state.plan; ['identities','goals','habits','scorecard'].forEach(k => { if(!Array.isArray(p[k])) p[k] = []; });
   if(!p.startDate) p.startDate = todayS();
   return p;
 }
 const habits = () => plan().habits;
+const afterWord = st => /^(my|the|a|an|i|it|we|someone)\b/i.test((st||'').trim()) ? 'After ' : 'After I ';
 const hColor = (h,i) => h.color || COLORS[(i ?? habits().indexOf(h)) % COLORS.length];
 const hEmoji = h => h.emoji || (h.kind === 'break' ? '📵' : '🎯');
 const identityText = id => (plan().identities.find(i => i.id === id) || {}).text || '';
@@ -415,7 +461,7 @@ async function connect(){
   if(!IS_SITE) for(let i=0;i<30 && !(window.claude && window.claude.use);i++) await new Promise(r => setTimeout(r, 100));
   let db = null;
   try { db = window.claude && window.claude.use ? await window.claude.use('db') : null; } catch(e){ db = null; }
-  if(!db){ state.mode = 'local'; dbReadyResolve(null); modeStatus(); scheduleRender(); return; }
+  if(!db){ state.mode = 'local'; dbReadyResolve(null); modeStatus(); if(!lsGet('system/plan')) savePlan(0); scheduleRender(); return; }
   state.mode = 'db'; dbReadyResolve(db); modeStatus();
   const onErr = () => setStatus('err','Sync paused');
   db.doc('system/plan').onSnapshot(snap => {
@@ -487,11 +533,11 @@ function viewToday(){
   const canWarn = sel === todayS() && start <= addDays(t,-1);
   const missed = canWarn ? hs.filter(h => !isDone(sel,h.id) && !isDone(yd,h.id)) : [];
   const q = QUOTES[(Math.floor(t/864e5)) % QUOTES.length];
-  const cards = hs.map((h,i) => {
+  const card = (h,i) => {
     const d = isDone(sel, h.id), s = streak(h.id);
     const bits = [];
     if(h.kind === 'break') bits.push('<span class="tag break">Break</span>');
-    if(h.stack) bits.push(`<span>${h.kind === 'break' ? 'When ' : 'After I '}${esc(h.stack)}</span>`);
+    if(h.stack) bits.push(`<span>${h.kind === 'break' ? 'When ' : afterWord(h.stack)}${esc(h.stack)}</span>`);
     if(h.time) bits.push(`<span class="mono">${esc(h.time)}</span>`);
     if(s > 0) bits.push(`<span class="flame">${I.flame}${s}</span>`);
     if(missed.includes(h)) bits.push('<span class="tag warn">Don’t miss twice</span>');
@@ -507,14 +553,19 @@ function viewToday(){
       </button>
       <button class="hmore" data-action="edit" data-id="${h.id}" aria-label="Edit ${esc(h.name)}">${I.more}</button>
     </div>`;
-  }).join('');
+  };
+  const groups = [], gi = {};
+  hs.forEach((h,i) => { const g = (h.routine || '').trim() || 'Other habits'; if(!(g in gi)){ gi[g] = groups.length; groups.push({ name:g, items:[] }); } groups[gi[g]].items.push([h,i]); });
+  const single = groups.length === 1 && groups[0].name === 'Other habits';
+  const cards = `<div class="groups">${groups.map(g => { const dn = g.items.filter(([h]) => isDone(sel, h.id)).length;
+    return `<div class="group">${single ? '' : `<div class="ghead"><span>${esc(g.name)}</span><span><b>${dn}</b>/${g.items.length}</span></div><div class="gbar"><i style="width:${Math.round(dn/g.items.length*100)}%"></i></div>`}<div class="habits">${g.items.map(([h,i]) => card(h,i)).join('')}</div></div>`; }).join('')}</div>`;
   state.justId = null;
   const note = (dayRec(sel,false) || {}).note || '';
   return hero + `
     ${missed.length ? `<div class="alert">${I.warn}<div><b>Never miss twice.</b> ${missed.length === 1 ? esc(missed[0].name)+' was' : missed.length+' habits were'} missed yesterday. Do the two-minute version today and the chain stays alive.</div></div>` : ''}
     <section class="stack" style="gap:10px">
       <div class="spread"><h2>${sel === todayS() ? 'Your habits' : 'Habits on '+esc(dayLabel(sel))}</h2><span class="muted small">Tap to check off</span></div>
-      <div class="habits">${cards}</div>
+      ${cards}
       <button class="add-row" data-action="new-habit">${I.plus} Add a habit</button>
     </section>
     <div class="quote">“${esc(q[0])}”<small>${esc(q[1])}</small></div>
@@ -534,7 +585,7 @@ function viewHabits(){
         <button class="htap" data-action="edit" data-id="${h.id}">
           <span class="hicon" aria-hidden="true">${esc(hEmoji(h))}</span>
           <span class="hmain"><span class="hname">${esc(h.name || 'Untitled habit')}</span>
-          <span class="hsub">${h.kind === 'break' ? '<span class="tag break">Break</span>' : '<span class="tag">Build</span>'}${identityText(h.identity) ? `<span>${esc(identityText(h.identity))}</span>` : ''}</span></span>
+          <span class="hsub">${h.kind === 'break' ? '<span class="tag break">Break</span>' : '<span class="tag">Build</span>'}${h.routine ? `<span class="tag">${esc(h.routine)}</span>` : ''}${h.time ? `<span class="mono">${esc(h.time)}</span>` : ''}</span></span>
         </button>
         <button class="hmore" data-action="edit" data-id="${h.id}" aria-label="Edit">${I.more}</button>
       </div>`).join('')}</div>
@@ -571,7 +622,7 @@ function openEditor(id){
 }
 function sentence(d){
   if(d.kind === 'break') return `When <em>${esc(d.stack || 'the trigger happens')}</em>, I will <em>${esc((d.twoMin || 'do something else').toLowerCase())}</em> instead of <em>${esc((d.name || 'the old habit').toLowerCase())}</em>.`;
-  return `After I <em>${esc(d.stack || '…')}</em>, I will <em>${esc((d.name || 'do my habit').toLowerCase())}</em>${d.time ? ` at <em>${esc(d.time)}</em>` : ''}${d.place ? ` in <em>${esc(d.place)}</em>` : ''}.`;
+  return `${afterWord(d.stack)}<em>${esc(d.stack || '…')}</em>, I will <em>${esc((d.name || 'do my habit').toLowerCase())}</em>${d.time ? ` at <em>${esc(d.time)}</em>` : ''}${d.place ? ` in <em>${esc(d.place)}</em>` : ''}.`;
 }
 function renderSheet(){
   const root = document.getElementById('sheet'); const s = state.sheet;
@@ -600,7 +651,9 @@ function renderSheet(){
         <label class="field" for="e-time" style="flex:1">Time<input type="time" id="e-time" data-draft="time" value="${esc(d.time)}"></label>
         <label class="field" for="e-place" style="flex:1.4">Place<input type="text" id="e-place" data-draft="place" value="${esc(d.place)}" placeholder="kitchen"></label>
       </div>
-      <div class="preview" id="preview">${sentence(d)}</div>`;
+      <div class="preview" id="preview">${sentence(d)}</div>
+      ${f('routine','Part of which routine?','Morning routine','Habits in the same routine are shown together on Today, in this order.')}
+      <div class="chips">${['Morning routine','Workday','Evening'].map(c => `<button class="chip" data-action="fill" data-k="routine" data-v="${esc(c)}">${esc(c)}</button>`).join('')}</div>`;
   } else if(s.step === 2){
     body = `
       <p class="muted small">${brk ? 'Pick a small replacement you can do in the moment the trigger shows up.' : 'Shrink the habit to something that takes less than two minutes. On a bad day you only do this part. Showing up is what builds the habit.'}</p>
@@ -737,7 +790,8 @@ function viewReview(){
 function viewGuide(){
   const g = (icon, title, body, open) => `<details class="g" ${open ? 'open' : ''}><summary><span class="gi">${I[icon]}</span>${title}</summary><div class="gbody">${body}</div></details>`;
   return `<div><h1>User guide</h1><p class="muted">How to use the app, and how to get results from it.</p></div>
-    <button class="btn block" data-action="intro">Replay the intro</button>
+    <div class="row"><button class="btn" style="flex:1" data-action="intro">Replay the intro</button><button class="btn ${state.confirmStarter ? 'danger' : ''}" style="flex:1" data-action="starter">${state.confirmStarter ? 'Tap again to replace my habits' : 'Load the starter plan'}</button></div>
+    <p class="muted small">The starter plan has your 6:00 morning routine (wake up → bed → window → stretch → teeth → pray → affirmations → coffee → reading), plus workday and evening habits. Your check-ins are kept.</p>
     ${g('rocket','Get started in 5 minutes', `<ol class="steps-list">
       <li><span><b>Write who you want to become.</b> Go to <i>Habits → Identity</i> and add 1 to 3 “I am…” statements.</span></li>
       <li><span><b>Add one habit.</b> Tap <i>+ Add a habit</i>. The 4-step setup walks you through the habit, its cue, its two-minute version and the four laws.</span></li>
@@ -758,7 +812,8 @@ function viewGuide(){
       <div class="lawcell"><span class="k">Reward</span><b>Make it satisfying</b><span>Tap the card, see the ring fill and the streak grow.</span></div>
     </div><p class="muted small">To break a bad habit, reverse each law: make it invisible, unattractive, difficult and unsatisfying. Choose <i>Break a bad habit</i> when you create it.</p>`)}
     ${g('bulb','Tips that make it work', `<ul style="margin:0;padding-left:18px;display:flex;flex-direction:column;gap:8px">
-      <li><b>Start with 1 or 2 habits.</b> Add another only when the first feels automatic.</li>
+      <li><b>Chain your routine.</b> Each habit’s cue is the one before it (“After I make my bed, I open the window”). One done habit pulls the next.</li>
+      <li><b>New habit? Slot it into the chain.</b> Put it after something you already do in the same place. Morning stretching fits after opening the window.</li>
       <li><b>Never miss twice.</b> The app warns you when you missed a habit yesterday.</li>
       <li><b>Showing up beats intensity.</b> One page still counts. The 1.01× number counts the days you showed up.</li>
       <li><b>Forgot to tick a day?</b> Tap that day in the week strip on <i>Today</i> and check it off there.</li>
@@ -832,6 +887,7 @@ document.getElementById('view').addEventListener('click', e => {
   const b = e.target.closest('[data-action]'); if(!b) return;
   const a = b.dataset.action, id = b.dataset.id, p = plan();
   if(a !== 'bk-restore') state.confirmImport = false;
+  if(a !== 'starter') state.confirmStarter = false;
   if(a === 'toggle'){
     const sel = state.selDay || todayS(); const r = dayRec(sel, true); const n = habits().length; const before = doneCount(sel);
     if(r.done[id]) delete r.done[id]; else { r.done[id] = true; state.justId = id; }
@@ -856,6 +912,7 @@ document.getElementById('view').addEventListener('click', e => {
   else if(a === 'rate'){ const s = p.scorecard.find(x => x.id === id); if(s){ s.rating = b.dataset.v; savePlan(200); render(); } }
   else if(a === 'week'){ const cur = state.reviewWeek ? parse(state.reviewWeek) : weekStart(today()); let nw = addDays(cur, Number(b.dataset.d)); if(nw > weekStart(today())) nw = weekStart(today()); state.reviewWeek = ymd(nw); render(); }
   else if(a === 'intro'){ state.intro = 0; renderIntro(); }
+  else if(a === 'starter'){ if(!state.confirmStarter){ state.confirmStarter = true; render(); return; } state.confirmStarter = false; state.plan = starterPlan(); state.lastFrac = null; savePlan(50); state.tab = 'today'; lsSet('ui:tab','today'); render(); window.scrollTo(0,0); toast('Starter plan loaded'); }
   else if(a === 'bk-copy'){
     const txt = backupJSON(); state.openBackup = true;
     const fallback = () => { state.backupText = txt; render(); const el = document.getElementById('bk-text'); if(el){ el.focus(); el.select(); } toast('Backup shown below. Select all and copy it.'); };
