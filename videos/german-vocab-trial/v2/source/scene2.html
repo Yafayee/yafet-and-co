@@ -1,0 +1,277 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Fredoka;font-weight:600;src:url(fonts/fredoka-latin-600-normal.woff2)}
+@font-face{font-family:Fredoka;font-weight:700;src:url(fonts/fredoka-latin-700-normal.woff2)}
+@font-face{font-family:Poppins;font-weight:500;src:url(fonts/poppins-latin-500-normal.woff2)}
+@font-face{font-family:Poppins;font-weight:700;src:url(fonts/poppins-latin-700-normal.woff2)}
+@font-face{font-family:Poppins;font-weight:800;src:url(fonts/poppins-latin-800-normal.woff2)}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#ffe9b8}
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden;font-family:Poppins,sans-serif;color:#2b1d12;
+  background:radial-gradient(900px 700px at 50% 22%,#fff8e6 0%,#ffe6ad 55%,#ffc978 100%)}
+#rays{position:absolute;left:50%;top:560px;width:2600px;height:2600px;margin:-1300px 0 0 -1300px;opacity:.28;
+  background:repeating-conic-gradient(from 0deg,#fff 0deg 9deg,transparent 9deg 18deg);border-radius:50%;
+  -webkit-mask-image:radial-gradient(circle,#000 20%,transparent 62%)}
+.float{position:absolute;font:700 64px Fredoka;opacity:.22}
+#dots{position:absolute;inset:0;background-image:radial-gradient(rgba(180,90,20,.18) 3px,transparent 3.5px);background-size:46px 46px;
+  -webkit-mask-image:linear-gradient(to bottom,transparent 50%,#000 100%)}
+#flag{position:absolute;left:0;right:0;top:0;height:14px;display:flex}#flag div{flex:1}
+#header{position:absolute;top:66px;left:0;right:0;display:flex;flex-direction:column;align-items:center;gap:22px}
+.pill{font:700 42px Fredoka;letter-spacing:1px;padding:14px 36px;border-radius:60px;background:#fff;color:#2b1d12;
+  box-shadow:0 8px 0 #e59a3b,0 16px 40px rgba(160,80,0,.25)}
+.pill b{color:#e0452b}
+#prog{width:760px;height:18px;border-radius:10px;background:rgba(255,255,255,.7);position:relative;box-shadow:inset 0 2px 4px rgba(0,0,0,.08)}
+#progfill{height:100%;border-radius:10px;background:linear-gradient(90deg,#ff8a3d,#e0452b)}
+.dot{position:absolute;top:50%;width:40px;height:40px;margin:-20px 0 0 -20px;border-radius:50%;background:#fff;border:4px solid #f3c27a;
+  font:700 18px Fredoka;display:flex;align-items:center;justify-content:center;color:#c98a3a}
+.dot.on{background:#e0452b;border-color:#fff;color:#fff;box-shadow:0 0 0 4px #e0452b33}
+#lenaWrap{position:absolute;left:50%;top:230px;width:640px;height:700px;margin-left:-320px;transform-origin:50% 100%}
+#cardWrap{position:absolute;left:66px;right:66px;top:930px;height:700px}
+.card{position:absolute;inset:0;border-radius:44px;padding:44px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:#fffdf7;box-shadow:0 14px 0 #f0b25e,0 34px 70px rgba(150,70,0,.28);opacity:0}
+.tape{position:absolute;top:-22px;width:150px;height:46px;background:rgba(255,120,80,.55);border-radius:6px}
+.tape.l{left:60px;transform:rotate(-8deg)}.tape.r{right:60px;transform:rotate(7deg);background:rgba(80,180,255,.5)}
+.num{position:absolute;top:34px;left:40px;font:700 34px Fredoka;color:#c98a3a}
+.tag{position:absolute;top:30px;right:36px;font:700 26px Fredoka;letter-spacing:2px;padding:8px 20px;border-radius:30px;background:#fff1dc;color:#d9661f;border:3px solid #ffcf94}
+.emoji{font-size:150px;line-height:1;filter:drop-shadow(0 10px 12px rgba(120,60,0,.25))}
+.de{font:700 176px Fredoka;line-height:1.05;margin-top:8px;white-space:nowrap;color:#2b1d12}
+.de span{display:inline-block}
+.uline{height:16px;border-radius:10px;background:linear-gradient(90deg,#ffcf3f,#ff8a3d,#e0452b);margin-top:-8px;transform-origin:0 50%}
+.pron{margin-top:18px;font:500 38px Poppins;color:#9a6a3a;letter-spacing:1px}
+.eq{margin-top:30px;display:flex;align-items:center;gap:20px;padding:16px 44px;border-radius:40px;background:#2f7de1;color:#fff;
+  box-shadow:0 8px 0 #1d5bb0;font:800 62px Poppins}
+.eq small{font:700 28px Fredoka;opacity:.85;letter-spacing:2px}
+#gram .title{font:700 44px Fredoka;letter-spacing:2px;color:#e0452b}
+#gram .rule{margin-top:14px;font:800 56px Poppins;text-align:center;line-height:1.15}
+#gram .rule em{font-style:normal;color:#e0452b}
+.tiles{margin-top:60px;display:flex;gap:16px}
+.tile{position:relative;padding:22px 24px 26px;border-radius:18px;background:linear-gradient(180deg,#f7d9a8,#e9b877);color:#4a2c10;
+  box-shadow:0 8px 0 #b98545,0 14px 20px rgba(0,0,0,.18);font:700 58px Fredoka;opacity:0}
+.tile i{position:absolute;top:-28px;left:50%;margin-left:-24px;width:48px;height:48px;border-radius:50%;background:#fff;border:4px solid #e9b877;
+  font:700 24px Fredoka;font-style:normal;display:flex;align-items:center;justify-content:center;color:#9a6a3a}
+.tile.verb{background:linear-gradient(180deg,#ff7a5c,#e0452b);color:#fff;box-shadow:0 8px 0 #a3281a,0 14px 30px rgba(224,69,43,.45)}
+.tile.verb i{background:#ffcf3f;border-color:#fff;color:#4a2c10}
+.vlabel{position:absolute;bottom:-66px;left:50%;transform:translateX(-50%);font:800 28px Poppins;color:#e0452b;letter-spacing:3px;white-space:nowrap}
+.trans{margin-top:90px;font:500 42px Poppins;color:#7a5530;opacity:0}.trans b{color:#2b1d12}
+#outro .big{font:700 124px Fredoka;color:#e0452b}
+#outro .sub{margin-top:10px;font:800 60px Poppins}
+#outro .btn{margin-top:46px;font:800 52px Poppins;padding:22px 70px;border-radius:60px;background:#e0452b;color:#fff;box-shadow:0 10px 0 #a3281a}
+#cap{position:absolute;left:60px;right:60px;top:1690px;display:flex;justify-content:center}
+#capbox{max-width:960px;text-align:center;font:700 46px Poppins;line-height:1.3;padding:18px 34px;border-radius:26px;background:#2b1d12;color:#fff;box-shadow:0 8px 0 rgba(0,0,0,.15)}
+#capbox .dew{color:#ffcf3f}
+#brand{position:absolute;bottom:40px;left:0;right:0;text-align:center;font:600 28px Fredoka;letter-spacing:4px;color:rgba(90,50,10,.55)}
+#intro{position:absolute;left:0;right:0;top:980px;text-align:center;opacity:0}
+#intro .h1{font:700 120px Fredoka;line-height:1.02}
+#intro .h1 span{color:#e0452b}
+#intro .h2{margin-top:26px;display:inline-block;font:700 44px Poppins;background:#fff;padding:12px 34px;border-radius:40px;box-shadow:0 6px 0 #e59a3b}
+#bubble{position:absolute;left:640px;top:250px;font:700 46px Fredoka;background:#fff;padding:16px 28px;border-radius:30px;box-shadow:0 6px 0 #e59a3b;opacity:0;transform-origin:0 100%}
+#bubble:after{content:'';position:absolute;left:24px;bottom:-22px;border:14px solid transparent;border-top:18px solid #fff;border-left-color:#fff}
+</style></head>
+<body><div id="stage">
+  <div id="rays"></div><div id="dots"></div><div id="floats"></div>
+  <div id="flag"><div style="background:#111"></div><div style="background:#dd0000"></div><div style="background:#ffce00"></div></div>
+  <div id="header"><div class="pill">🇩🇪 GERMAN IN <b>20 SECONDS</b></div><div id="prog"><div id="progfill" style="width:0"></div></div></div>
+  <div id="lenaWrap">
+  <svg id="lena" viewBox="0 0 640 700" width="640" height="700">
+   <defs>
+    <linearGradient id="skin" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f6c9a4"/><stop offset="1" stop-color="#e9ad84"/></linearGradient>
+    <linearGradient id="hair" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6b3f22"/><stop offset="1" stop-color="#4a2a15"/></linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3f8cf0"/><stop offset="1" stop-color="#2464c4"/></linearGradient>
+    <clipPath id="mouthClip"><ellipse id="mclip" cx="320" cy="372" rx="30" ry="4"/></clipPath>
+   </defs>
+   <ellipse cx="320" cy="690" rx="230" ry="14" fill="rgba(120,60,0,.18)"/>
+   <!-- hair back -->
+   <path d="M168 250 Q160 110 320 92 Q480 110 472 250 L486 470 Q420 505 320 500 Q220 505 154 470Z" fill="url(#hair)"/>
+   <!-- body -->
+   <g id="body">
+    <path d="M110 700 Q112 540 230 505 L410 505 Q528 540 530 700Z" fill="url(#card)"/>
+    <path d="M262 505 L320 585 L378 505Z" fill="#fff"/>
+    <path d="M262 505 L292 548 L320 525Z M378 505 L348 548 L320 525Z" fill="#f2f2f2" stroke="#dcdcdc" stroke-width="3"/>
+    <path d="M232 510 Q270 600 262 700 M408 510 Q370 600 378 700" stroke="#1d5bb0" stroke-width="6" fill="none"/>
+    <circle cx="300" cy="620" r="7" fill="#1d5bb0"/><circle cx="300" cy="664" r="7" fill="#1d5bb0"/>
+    <g transform="translate(410 590) rotate(-6)"><rect x="-44" y="-26" width="88" height="54" rx="10" fill="#fff"/><rect x="-36" y="-18" width="72" height="12" fill="#111"/><rect x="-36" y="-6" width="72" height="12" fill="#d00"/><rect x="-36" y="6" width="72" height="12" fill="#ffce00"/></g>
+   </g>
+   <!-- left arm (viewer's right) : pointer -->
+   <g id="armP">
+    <path d="M470 560 Q540 520 560 450" stroke="#2f7de1" stroke-width="54" stroke-linecap="round" fill="none"/>
+    <circle cx="562" cy="440" r="30" fill="url(#skin)"/>
+    <line id="stick" x1="562" y1="440" x2="640" y2="300" stroke="#8a5a2b" stroke-width="10" stroke-linecap="round"/>
+    <circle cx="640" cy="300" r="10" fill="#e0452b"/>
+   </g>
+   <!-- waving arm (viewer's left) -->
+   <g id="armW">
+    <path d="M170 560 Q100 520 92 440" stroke="#2f7de1" stroke-width="54" stroke-linecap="round" fill="none"/>
+    <g id="handW"><ellipse cx="90" cy="420" rx="30" ry="36" fill="url(#skin)"/><path d="M68 396 L60 360 M82 390 L78 350 M98 390 L100 352 M112 398 L120 366" stroke="#e9ad84" stroke-width="14" stroke-linecap="round"/></g>
+   </g>
+   <!-- neck -->
+   <rect x="284" y="430" width="72" height="90" rx="30" fill="#e3a57c"/>
+   <g id="head">
+    <ellipse cx="178" cy="300" rx="24" ry="34" fill="url(#skin)"/><ellipse cx="462" cy="300" rx="24" ry="34" fill="url(#skin)"/>
+    <circle cx="176" cy="338" r="8" fill="#ffc83d"/><circle cx="464" cy="338" r="8" fill="#ffc83d"/>
+    <ellipse cx="320" cy="290" rx="142" ry="162" fill="url(#skin)"/>
+    <!-- blush -->
+    <ellipse cx="228" cy="340" rx="30" ry="18" fill="#ff8f7a" opacity=".35"/><ellipse cx="412" cy="340" rx="30" ry="18" fill="#ff8f7a" opacity=".35"/>
+    <!-- eyes -->
+    <g id="eyes">
+      <g id="eyeL"><ellipse cx="262" cy="282" rx="24" ry="27" fill="#fff"/><circle id="irL" cx="262" cy="286" r="15" fill="#5a3718"/><circle id="puL" cx="262" cy="286" r="7" fill="#1b0f06"/><circle id="hiL" cx="268" cy="280" r="5" fill="#fff"/>
+        <rect id="lidL" x="234" y="252" width="56" height="0" fill="#f2c19c"/></g>
+      <g id="eyeR"><ellipse cx="378" cy="282" rx="24" ry="27" fill="#fff"/><circle id="irR" cx="378" cy="286" r="15" fill="#5a3718"/><circle id="puR" cx="378" cy="286" r="7" fill="#1b0f06"/><circle id="hiR" cx="384" cy="280" r="5" fill="#fff"/>
+        <rect id="lidR" x="350" y="252" width="56" height="0" fill="#f2c19c"/></g>
+    </g>
+    <!-- glasses -->
+    <g fill="none" stroke="#2b1d12" stroke-width="7"><circle cx="262" cy="284" r="42"/><circle cx="378" cy="284" r="42"/><path d="M304 280 Q320 270 336 280"/><path d="M220 276 L182 268 M420 276 L458 268"/></g>
+    <path d="M232 264 Q246 256 262 256" stroke="#fff" stroke-width="5" fill="none" opacity=".7"/><path d="M348 264 Q362 256 378 256" stroke="#fff" stroke-width="5" fill="none" opacity=".7"/>
+    <!-- brows -->
+    <path id="browL" d="M226 224 Q260 206 294 220" stroke="#4a2a15" stroke-width="10" fill="none" stroke-linecap="round"/>
+    <path id="browR" d="M346 220 Q380 206 414 224" stroke="#4a2a15" stroke-width="10" fill="none" stroke-linecap="round"/>
+    <!-- nose -->
+    <path d="M318 300 Q306 332 322 338" stroke="#d48e66" stroke-width="6" fill="none" stroke-linecap="round"/>
+    <!-- mouth -->
+    <g id="mouth">
+      <path id="smile" d="M286 366 Q320 392 354 366" stroke="#9c3b2b" stroke-width="7" fill="none" stroke-linecap="round"/>
+      <g id="openM" opacity="0">
+        <ellipse id="mo" cx="320" cy="372" rx="30" ry="4" fill="#7a2418"/>
+        <g clip-path="url(#mouthClip)"><rect x="280" y="340" width="80" height="22" id="teeth" fill="#fff"/><ellipse id="tongue" cx="320" cy="396" rx="20" ry="12" fill="#ff7b86"/></g>
+        <ellipse id="lipline" cx="320" cy="372" rx="31" ry="5" fill="none" stroke="#b34a3a" stroke-width="5"/>
+      </g>
+    </g>
+    <!-- hair front: bangs + bun -->
+    <circle cx="320" cy="96" r="58" fill="url(#hair)"/><path d="M280 110 Q320 130 360 110" stroke="#ffcf3f" stroke-width="12" fill="none" stroke-linecap="round"/>
+    <path d="M176 262 Q170 130 320 124 Q470 130 464 262 Q440 190 390 176 Q350 214 300 196 Q250 214 222 188 Q190 214 176 262Z" fill="url(#hair)"/>
+    <path d="M240 150 Q300 132 350 148" stroke="#8a5530" stroke-width="6" fill="none" opacity=".6" stroke-linecap="round"/>
+   </g>
+  </svg>
+  </div>
+  <div id="bubble">Hallo! 👋</div>
+  <div id="intro"><div class="h1">Learn <span>German</span><br>with Frau Lena</div><div class="h2">4 words · 1 grammar tip</div></div>
+  <div id="cardWrap"></div>
+  <div id="cap"><div id="capbox"></div></div>
+  <div id="brand">YAFET &amp; CO · LANGUAGE LAB</div>
+</div>
+<script>
+const $=s=>document.querySelector(s);
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+const ease={out:t=>1-Math.pow(1-t,3),inOut:t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2,
+  back:t=>{const c1=1.9,c3=c1+1;return 1+c3*Math.pow(t-1,3)+c1*Math.pow(t-1,2)},
+  el:t=>t===0?0:t===1?1:Math.pow(2,-10*t)*Math.sin((t*10-.75)*(2*Math.PI/3))+1};
+const prog=(t,a,d)=>clamp((t-a)/d);
+let D,TL={};
+const WORDS=[
+ {id:'w1',de:'Hallo',en:'Hello',emo:'👋',pr:'[ HAH-loh ]',tag:'GREETING'},
+ {id:'w2',de:'Danke',en:'Thank you',emo:'💛',pr:'[ DAHN-keh ]',tag:'POLITE'},
+ {id:'w3',de:'Bitte',en:'Please',emo:'🙏',pr:'[ BIT-teh ]',tag:'POLITE'},
+ {id:'w4',de:'Wasser',en:'Water',emo:'💧',pr:'[ VAH-ser ]',tag:'NOUN'},
+];
+const CAPS={intro:"Hi! I'm Lena. Let's learn four German words in twenty seconds!",w1a:'<span class="dew">Hallo!</span>',w1b:'Hello.',w2a:'<span class="dew">Danke!</span>',w2b:'Thank you.',
+ w3a:'<span class="dew">Bitte!</span>',w3b:'Please.',w4a:'<span class="dew">Wasser!</span>',w4b:'Water.',rule:'Grammar tip: in German, the verb always comes second.',
+ exa:'<span class="dew">Heute trinke ich Wasser.</span>',exb:'Today, I drink water.',outro:'Follow for more!',tsch:'<span class="dew">Tschüss!</span>'};
+function rand(s){return function(){s=(s*16807)%2147483647;return (s-1)/2147483646}}
+const FL=[];
+window.setup=function(data){
+  D=data; data.timeline.forEach(x=>TL[x.id]=x);
+  const r=rand(11), fw=$('#floats'), ch=['Ä','Ö','Ü','ß','A','B','C','!','?','★','♥','Ü','ä','ö'];
+  const cols=['#e0452b','#2f7de1','#ff8a3d','#9b59b6','#27ae60'];
+  for(let i=0;i<22;i++){const e=document.createElement('div');e.className='float';e.textContent=ch[i%ch.length];e.style.color=cols[i%5];e.style.fontSize=(40+r()*50)+'px';fw.appendChild(e);
+    FL.push({e,x:r()*1040,y:r()*1920,sp:18+r()*40,ph:r()*6.28,rot:r()*40-20})}
+  const cw=$('#cardWrap');
+  WORDS.forEach((w,i)=>{const c=document.createElement('div');c.className='card';c.id='c'+w.id;
+    c.innerHTML=`<div class="tape l"></div><div class="tape r"></div><div class="num">${i+1}/4</div><div class="tag">${w.tag}</div><div class="emoji">${w.emo}</div>
+    <div class="de">${[...w.de].map(ch=>`<span>${ch}</span>`).join('')}</div><div class="uline" style="width:${w.de.length*92}px"></div><div class="pron">${w.pr}</div>
+    <div class="eq"><small>EN</small>${w.en}</div>`;cw.appendChild(c)});
+  const g=document.createElement('div');g.className='card';g.id='gram';
+  g.innerHTML=`<div class="tape l"></div><div class="tape r"></div><div class="title">✏️ GRAMMAR TIP</div><div class="rule">The <em>verb</em> always comes<br><em>SECOND</em></div>
+   <div class="tiles"><div class="tile"><i>1</i>Heute</div><div class="tile verb"><i>2</i>trinke<div class="vlabel">▲ VERB</div></div><div class="tile"><i>3</i>ich</div><div class="tile"><i>4</i>Wasser.</div></div>
+   <div class="trans">= <b>Today, I drink water.</b></div>`;cw.appendChild(g);
+  const o=document.createElement('div');o.className='card';o.id='outro';
+  o.innerHTML=`<div class="tape l"></div><div class="tape r"></div><div class="big">Tschüss! 👋</div><div class="sub">= Bye!</div><div class="btn">FOLLOW FOR MORE</div>`;cw.appendChild(o);
+  const pr=$('#prog');['1','2','3','4','✏'].forEach((l,i)=>{const d=document.createElement('div');d.className='dot';d.style.left=(i+1)/5*100+'%';d.textContent=l;d.id='dot'+i;pr.appendChild(d)});
+};
+function cardAnim(el,t,tin,tout){
+  const a=prog(t,tin,.55), b=tout?prog(t,tout,.4):0;
+  if(t<tin||(tout&&t>tout+.4)){el.style.opacity=0;return 0}
+  const y=(1-ease.back(a))*500 + ease.inOut(b)*-120, x=ease.inOut(b)*-900, rot=(1-ease.out(a))*-10 - b*12, s=.85+.15*ease.back(a);
+  el.style.opacity=Math.min(ease.out(a*1.5),1-b);
+  el.style.transform=`translate(${x}px,${y}px) rotate(${rot+Math.sin(t*1.3)*.6}deg) scale(${s})`;
+  return a;
+}
+const speaking=(t,ids)=>ids.some(k=>TL[k]&&t>=TL[k].start&&t<=TL[k].end);
+window.renderAt=function(t){
+  const f=Math.floor(t*30), env=D.env[f]||0, envN=D.env[f+1]||0, T=D.duration;
+  $('#rays').style.transform=`rotate(${t*6}deg)`;
+  FL.forEach(p=>{const y=((p.y-t*p.sp)%1990+1990)%1990-40;p.e.style.transform=`translate(${p.x+Math.sin(t*.8+p.ph)*24}px,${y}px) rotate(${p.rot+Math.sin(t+p.ph)*10}deg)`});
+  const hIn=ease.back(prog(t,.1,.6));$('#header').style.transform=`translateY(${(1-hIn)*-220}px)`;
+  const ms=[TL.w1a.start,TL.w2a.start,TL.w3a.start,TL.w4a.start,TL.rule.start];
+  $('#progfill').style.width=(clamp(t/TL.rule.start)*100)+'%';
+  ms.forEach((m,i)=>$('#dot'+i).classList.toggle('on',t>=m-.3));
+  // Lena entrance: pop up from below
+  const ent=prog(t,0,.8);
+  const bob=Math.sin(t*2.2)*6;
+  $('#lenaWrap').style.transform=`translateY(${(1-ease.back(ent))*700+bob}px)`;
+  // head motion: nods while talking, tilt on German
+  const talk=env>0.08, de=speaking(t,['w1a','w2a','w3a','w4a','exa','tsch']);
+  const nod=Math.sin(t*5.5)*(talk?3.5:1)+ (de?-5:0) + Math.sin(t*.9)*2;
+  $('#head').setAttribute('transform',`rotate(${nod} 320 440) translate(0 ${talk?Math.sin(t*9)*2:0})`);
+  // mouth: open height from envelope; shape varies
+  const o=clamp(Math.max(env,envN*.6));
+  const open=o>0.07;
+  $('#smile').setAttribute('opacity',open?0:1);$('#openM').setAttribute('opacity',open?1:0);
+  const ry=4+o*30, rx=24+o*10+Math.sin(t*23)*3*o;
+  ['#mo','#mclip'].forEach(s=>{$(s).setAttribute('ry',ry);$(s).setAttribute('rx',rx);$(s).setAttribute('cy',368+ry*.35)});
+  $('#lipline').setAttribute('ry',ry+1);$('#lipline').setAttribute('rx',rx+1);$('#lipline').setAttribute('cy',368+ry*.35);
+  $('#teeth').setAttribute('y',368+ry*.35-ry);$('#tongue').setAttribute('cy',368+ry*.35+ry*.7);
+  // eyes: blink + gaze
+  const blinks=[1.9,4.6,7.3,9.9,13.1,16.4,19.2,21.5];let bl=0;blinks.forEach(b=>{const d=Math.abs(t-b);if(d<.1)bl=Math.max(bl,1-d/.1)});
+  const happy=speaking(t,['w1b','w2b','exb'])||t>(TL.tsch||TL.outro).start;
+  ['L','R'].forEach(s=>{$('#lid'+s).setAttribute('height',54*bl);});
+  const gy=t>TL.w1a.start-.6&&t<(TL.outro.start)?7:0, gx=Math.sin(t*.7)*4;
+  ['irL','puL','irR','puR'].forEach(id=>{const e=$('#'+id);e.setAttribute('transform',`translate(${gx},${gy})`)});
+  ['hiL','hiR'].forEach(id=>$('#'+id).setAttribute('transform',`translate(${gx*.6},${gy*.6})`));
+  const br=(de?-10:0)+(happy?-6:0)+Math.max(0,Math.sin(t*3))*(talk?-4:0);
+  $('#browL').setAttribute('transform',`translate(0 ${br})`);$('#browR').setAttribute('transform',`translate(0 ${br})`);
+  // arms
+  const wave=(t>.5&&t<TL.intro.end+.2)||t>(TL.outro.start+.2);
+  const wa=wave?Math.sin(t*11)*16-6:12+Math.sin(t*1.6)*4;
+  $('#armW').setAttribute('transform',`rotate(${wa} 170 560)`);
+  const point=t>TL.w1a.start-.6&&t<TL.outro.start-.3;
+  const pa=point?(-8+Math.sin(t*2.4)*4 + (de?-8:0)):62+Math.sin(t*1.4)*3;
+  $('#armP').setAttribute('transform',`rotate(${pa} 470 560)`);
+  $('#stick').setAttribute('opacity',point?1:0);
+  // speech bubble at intro
+  const bp=prog(t,.7,.4), bo=prog(t,TL.intro.end-.2,.3);
+  $('#bubble').style.opacity=clamp(bp*2)*(1-bo);$('#bubble').style.transform=`scale(${ease.back(bp)*(1-bo*.3)}) rotate(${Math.sin(t*3)*3}deg)`;
+  // intro title
+  const ia=prog(t,.6,.6), io=prog(t,TL.w1a.start-.7,.35);
+  $('#intro').style.opacity=ease.out(ia)*(1-io);
+  $('#intro').style.transform=`translateY(${(1-ease.back(ia))*140 - io*80}px) scale(${.9+.1*ease.back(ia)})`;
+  const tRule=TL.rule.start-.5, tOut=TL.outro.start;
+  WORDS.forEach((w,i)=>{
+    const a0=TL[w.id+'a'], b0=TL[w.id+'b'];
+    const nextStart=i<3?TL[WORDS[i+1].id+'a'].start-.35:tRule;
+    const el=$('#c'+w.id);
+    cardAnim(el,t,a0.start-.45,nextStart-.1);
+    const spans=el.querySelectorAll('.de span'), n=spans.length, dur=Math.max(a0.end-a0.start,.35);
+    spans.forEach((s,k)=>{const lp=prog(t,a0.start-.1+k*(dur*.75/n),.35);s.style.transform=`translateY(${(1-ease.back(lp))*70}px) rotate(${(1-lp)*-20}deg)`;s.style.opacity=clamp(lp*3)});
+    el.querySelector('.uline').style.transform=`scaleX(${ease.out(prog(t,a0.end-.15,.4))})`;
+    const ep=prog(t,a0.start-.35,.6);el.querySelector('.emoji').style.transform=`scale(${ease.el(ep)}) rotate(${Math.sin(t*4)*8}deg)`;
+    el.querySelector('.pron').style.opacity=prog(t,a0.end-.1,.3);
+    const eqp=prog(t,b0.start-.08,.45);const eq=el.querySelector('.eq');
+    eq.style.opacity=clamp(eqp*3);eq.style.transform=`scale(${.4+.6*ease.back(eqp)})`;
+  });
+  const g=$('#gram');cardAnim(g,t,tRule,tOut-.45);
+  const ex=TL.exa;
+  g.querySelectorAll('.tile').forEach((el,k)=>{const tp=prog(t,ex.start-.05+k*.3,.4);el.style.opacity=clamp(tp*2);
+    let s=.3+.7*ease.back(tp); if(k===1&&t>ex.start+.3)s*=1+.08*Math.max(0,Math.sin((t-ex.start)*7));
+    el.style.transform=`translateY(${(1-ease.back(tp))*-140}px) rotate(${(k%2?3:-3)*(1-tp*.6)}deg) scale(${s})`});
+  g.querySelector('.vlabel').style.opacity=prog(t,ex.start+.4,.3);
+  const tr=g.querySelector('.trans'),trp=prog(t,TL.exb.start-.1,.4);tr.style.opacity=trp;tr.style.transform=`translateY(${(1-ease.out(trp))*30}px)`;
+  g.querySelector('.rule').style.opacity=prog(t,tRule+.2,.4);
+  const oc=$('#outro');cardAnim(oc,t,tOut-.4,null);
+  const bpp=prog(t,tOut+.5,.5);const btn=oc.querySelector('.btn');btn.style.transform=`scale(${ease.back(bpp)*(1+.04*Math.sin(t*9))})`;btn.style.opacity=clamp(bpp*3);
+  const ts=TL.tsch||TL.outro, tb=prog(t,ts.start-.1,.5);oc.querySelector('.big').style.transform=`scale(${.8+.2*ease.el(tb)}) rotate(${Math.sin(t*4)*2}deg)`;
+  let cap='',cid=null;for(const k in CAPS){const x=TL[k];if(x&&t>=x.start-.1&&t<=x.end+.25){cap=CAPS[k];cid=k}}
+  const cb=$('#capbox');if(cb.dataset.k!==String(cid)){cb.innerHTML=cap;cb.dataset.k=cid}
+  cb.style.opacity=cap?1:0;const cx=cid?prog(t,TL[cid].start-.1,.2):0;cb.style.transform=`scale(${.9+.1*ease.back(cx)})`;
+  $('#stage').style.filter=`brightness(${Math.min(1,t/.3,(T-t)/.5)})`;
+};
+</script></body></html>
