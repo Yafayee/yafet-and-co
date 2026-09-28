@@ -152,6 +152,12 @@ button{cursor:pointer}
 .ghead b{color:var(--ink);font-weight:700}
 .gbar{height:4px;border-radius:2px;background:var(--surface-2);overflow:hidden;margin:0 4px 2px}
 .gbar i{display:block;height:100%;background:var(--good);transition:width .5s}
+.mic{appearance:none;width:104px;height:104px;border-radius:50%;border:0;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;margin:4px auto 0;box-shadow:0 10px 28px color-mix(in srgb,var(--accent) 40%,transparent)}
+.mic svg{width:44px;height:44px}
+.mic.on{animation:pulse 1.2s ease-out infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 55%,transparent)}100%{box-shadow:0 0 0 28px transparent}}
+.heard{border-radius:16px;padding:12px 14px;background:color-mix(in srgb,var(--accent) 10%,var(--surface));display:flex;flex-direction:column;gap:4px;font-weight:600}
+.heard .small{font-weight:500}
 .add-row{appearance:none;border:2px dashed var(--line);background:none;border-radius:18px;padding:14px;color:var(--muted);font-weight:600;display:flex;align-items:center;justify-content:center;gap:8px;min-height:56px}
 .add-row svg{width:18px;height:18px}
 
@@ -292,6 +298,7 @@ a{color:var(--accent);font-weight:600}
   <div class="inner" id="nav"></div>
 </nav>
 <div id="sheet"></div>
+<div id="voice"></div>
 <div id="intro"></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <canvas id="fx" aria-hidden="true"></canvas>
@@ -321,6 +328,7 @@ const I = {
   bulb:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.4 1 1.1 1 1.8V16h5v-.3c0-.7.4-1.4 1-1.8A6 6 0 0 0 12 3z"/></svg>',
   phone:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="6" y="2.5" width="12" height="19" rx="3"/><path d="M11 18.5h2"/></svg>',
   save:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>',
+  mic:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>',
   help:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6v.6M12 17v.01"/></svg>'
 };
 const QUOTES = [
@@ -566,7 +574,7 @@ function viewToday(){
     <section class="stack" style="gap:10px">
       <div class="spread"><h2>${sel === todayS() ? 'Your habits' : 'Habits on '+esc(dayLabel(sel))}</h2><span class="muted small">Tap to check off</span></div>
       ${cards}
-      <button class="add-row" data-action="new-habit">${I.plus} Add a habit</button>
+      <button class="add-row" data-action="new-habit">${I.mic} Add a habit${CAN_MIC ? ' by voice' : ''}</button>
     </section>
     <div class="quote">“${esc(q[0])}”<small>${esc(q[1])}</small></div>
     <label class="field" for="note-${sel}">One line about ${sel === todayS() ? 'today' : 'this day'}
@@ -613,16 +621,16 @@ function viewHabits(){
 }
 
 /* ---------- habit editor sheet ---------- */
-function openEditor(id){
+function openEditor(id, preset, heard){
   const p = plan(); let h = p.habits.find(x => x.id === id);
   const isNew = !h;
-  if(isNew) h = { id:uid(), name:'', kind:'build', identity:(p.identities[0]||{}).id || '', stack:'', time:'', place:'', twoMin:'', obvious:'', attractive:'', easy:'', satisfying:'', emoji:'🎯', color:COLORS[p.habits.length % COLORS.length] };
-  state.sheet = { isNew, step:0, draft:clone(h), confirmDel:false, newIdentity:'' };
+  if(isNew) h = Object.assign({ id:uid(), name:'', kind:'build', identity:(p.identities[0]||{}).id || '', routine:'', stack:'', time:'', place:'', twoMin:'', obvious:'', attractive:'', easy:'', satisfying:'', emoji:'🎯', color:COLORS[p.habits.length % COLORS.length] }, preset || {});
+  state.sheet = { isNew, step:0, draft:clone(h), confirmDel:false, newIdentity:'', fromVoice:!!preset, heard:heard || '' };
   renderSheet();
 }
 function sentence(d){
   if(d.kind === 'break') return `When <em>${esc(d.stack || 'the trigger happens')}</em>, I will <em>${esc((d.twoMin || 'do something else').toLowerCase())}</em> instead of <em>${esc((d.name || 'the old habit').toLowerCase())}</em>.`;
-  return `${afterWord(d.stack)}<em>${esc(d.stack || '…')}</em>, I will <em>${esc((d.name || 'do my habit').toLowerCase())}</em>${d.time ? ` at <em>${esc(d.time)}</em>` : ''}${d.place ? ` in <em>${esc(d.place)}</em>` : ''}.`;
+  return `${afterWord(d.stack)}<em>${esc(d.stack || '…')}</em>, I will <em>${esc((d.name || 'do my habit').toLowerCase())}</em>${d.time ? ` at <em>${esc(d.time)}</em>` : ''}${d.place ? `${/^(the|my|a|an|by|at|on|in|outside|home|bed)\b/i.test(d.place) ? ' ' : ' in the '}<em>${esc(d.place.replace(/^in\s+/i,''))}</em>` : ''}.`;
 }
 function renderSheet(){
   const root = document.getElementById('sheet'); const s = state.sheet;
@@ -633,7 +641,7 @@ function renderSheet(){
   const f = (key, label, ph, hint) => `<label class="field" for="e-${key}">${label}<input type="text" id="e-${key}" data-draft="${key}" value="${esc(d[key] || '')}" placeholder="${esc(ph)}">${hint ? `<span class="hint">${hint}</span>` : ''}</label>`;
   let body = '';
   if(s.step === 0){
-    body = `
+    body = (s.heard ? `<div class="heard"><span>🎤 “${esc(s.heard)}”</span><span class="muted small">I filled in the details from what you said. Check them, change anything, then tap <b>Save habit</b>.</span></div><div class="preview" id="preview">${sentence(d)}</div>` : '') + `
       <div class="seg" role="radiogroup" aria-label="Type"><button class="${!brk ? 'on' : ''}" data-action="kind" data-v="build" aria-checked="${!brk}" role="radio">Build a good habit</button><button class="${brk ? 'on' : ''}" data-action="kind" data-v="break" aria-checked="${brk}" role="radio">Break a bad habit</button></div>
       ${f('name', brk ? 'Which habit do you want to stop?' : 'What do you want to do?', brk ? 'Scrolling my phone in bed' : 'Read 10 pages')}
       <div class="field">Icon<div class="emojis">${EMOJIS.map(e => `<button data-action="emoji" data-v="${e}" class="${d.emoji === e ? 'on' : ''}" aria-label="Icon ${e}">${e}</button>`).join('')}</div></div>
@@ -674,10 +682,10 @@ function renderSheet(){
         <div class="steps">${titles.map((t,i) => `<button data-action="step" data-v="${i}" class="${i === s.step ? 'on' : i < s.step ? 'done' : ''}" aria-label="Step ${i+1}: ${t}"></button>`).join('')}</div>
       </div>
       <div class="sheet-body">${body}</div>
-      <div class="sheet-foot">
+      <div class="sheet-foot">${s.fromVoice ? `${s.step > 0 ? '<button class="btn" data-action="back">Back</button>' : ''}${last ? '' : '<button class="btn" data-action="next">Details</button>'}<button class="btn primary" data-action="save">Save habit</button>` : `
         ${s.step > 0 ? '<button class="btn" data-action="back">Back</button>' : (s.isNew ? '' : '<button class="btn primary" data-action="save">Save</button>')}
         ${last ? '<button class="btn primary" data-action="save">Save habit</button>' : `<button class="btn ${s.isNew || s.step > 0 ? 'primary' : ''}" data-action="next">Next</button>`}
-        ${!last && !s.isNew && s.step > 0 ? '<button class="btn" data-action="save">Save</button>' : ''}
+        ${!last && !s.isNew && s.step > 0 ? '<button class="btn" data-action="save">Save</button>' : ''}`}
       </div>
     </div></div>`;
 }
@@ -689,10 +697,12 @@ function saveDraft(){
     if(text){ const ni = { id:uid(), text }; p.identities.push(ni); d.identity = ni.id; } else d.identity = '';
   }
   delete d.__newIdentity;
+  const after = d.__after; delete d.__after;
   const idx = p.habits.findIndex(h => h.id === d.id);
-  if(idx >= 0) p.habits[idx] = d; else p.habits.push(d);
+  if(idx >= 0) p.habits[idx] = d;
+  else { const ai = after ? p.habits.findIndex(h => h.id === after) : -1; if(ai >= 0) p.habits.splice(ai + 1, 0, d); else p.habits.push(d); }
   savePlan(100); state.sheet = null; renderSheet(); render();
-  toast(s.isNew ? 'Habit added. Start with the two-minute version.' : 'Habit saved');
+  toast(s.fromVoice ? 'Added to your tracker: '+d.name : s.isNew ? 'Habit added. Start with the two-minute version.' : 'Habit saved');
 }
 document.getElementById('sheet').addEventListener('click', e => {
   const s = state.sheet; if(!s) return;
@@ -720,7 +730,7 @@ document.getElementById('sheet').addEventListener('input', e => {
   const pv = document.getElementById('preview'); if(pv) pv.innerHTML = sentence(s.draft);
   if(k === 'identity') renderSheet();
 });
-document.addEventListener('keydown', e => { if(e.key === 'Escape' && state.sheet){ state.sheet = null; renderSheet(); } });
+document.addEventListener('keydown', e => { if(e.key !== 'Escape') return; if(state.voice) closeVoice(); else if(state.sheet){ state.sheet = null; renderSheet(); } });
 
 /* ---------- PROGRESS ---------- */
 function viewProgress(){
@@ -799,6 +809,12 @@ function viewGuide(){
       <li><span><b>Make it tiny.</b> The two-minute version is what you do on a bad day.</span></li>
       <li><span><b>Tap the card when it’s done.</b> The ring fills up and your streak grows.</span></li>
     </ol>`, true)}
+    ${g('mic','Add a habit by voice', `<ol class="steps-list">
+      <li><span>Tap <b>Add a habit</b> on the Today screen.</span></li>
+      <li><span>${CAN_MIC ? 'The mic starts listening. ' : 'Tap the 🎤 on your keyboard. '}Say the habit in one sentence: <i>what</i>, <i>after which habit</i>, <i>when</i> and <i>where</i>. Example: “After I brush my teeth, drink a glass of water in the kitchen.”</span></li>
+      <li><span>The app fills in the name, cue, time, place, routine, icon, two-minute version and four-law tactics.</span></li>
+      <li><span>Check it, change anything, and tap <b>Save habit</b>. It goes straight into your tracker.</span></li>
+    </ol><p class="muted small">To stop a habit, start with “stop…”, for example “Stop checking my phone when I wake up”. ${IS_SITE ? 'If the mic does not work in the home-screen app on iPhone, use the 🎤 on the keyboard instead.' : ''}</p>`)}
     ${g('sun','Your daily routine', `<ol class="steps-list">
       <li><span><b>Morning (30 seconds).</b> Open <i>Today</i> and read your habits and their cues.</span></li>
       <li><span><b>During the day.</b> Tap a habit right after you do it. Break habits: tap when you avoided it.</span></li>
@@ -843,6 +859,150 @@ function restoreBackup(text){
   Object.entries(d.logs || {}).forEach(([mk,v]) => { state.logs[mk] = v; saveMonth(mk, 50); });
   Object.entries(d.reviews || {}).forEach(([wk,v]) => { state.reviews[wk] = v; saveReview(wk, 50); });
   state.backupText = ''; state.lastFrac = null; render(); toast('Backup restored');
+}
+
+/* ---------- voice → habit ---------- */
+const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+const CAN_MIC = !!SR && IS_SITE;
+const VOICE_EXAMPLES = ['After I brush my teeth, drink a glass of water in the kitchen','Learn 10 German words after dinner at 8 pm','Stop checking my phone when I wake up','Do 10 push-ups every morning after stretching'];
+let rec = null;
+function openVoice(){ state.voice = { text:'', listening:false, busy:false, msg:'' }; renderVoice(); if(CAN_MIC) startListening(); else setTimeout(() => { const t = document.getElementById('v-text'); t && t.focus(); }, 50); }
+function closeVoice(){ try { rec && rec.abort(); } catch(e){} rec = null; state.voice = null; renderVoice(); }
+function startListening(){
+  const v = state.voice; if(!v || !CAN_MIC) return;
+  try { rec && rec.abort(); } catch(e){}
+  const r = new SR(); rec = r;
+  r.lang = 'en-US'; r.interimResults = true; r.continuous = false; r.maxAlternatives = 1;
+  let finalText = v.text ? v.text + ' ' : '';
+  r.onresult = e => { let interim = ''; for(let i = e.resultIndex; i < e.results.length; i++){ const x = e.results[i]; if(x.isFinal) finalText += x[0].transcript + ' '; else interim += x[0].transcript; } v.text = (finalText + interim).replace(/\s+/g,' ').trim(); const ta = document.getElementById('v-text'); if(ta) ta.value = v.text; };
+  r.onerror = e => { v.listening = false; v.msg = (e.error === 'not-allowed' || e.error === 'service-not-allowed') ? 'The microphone is blocked. Allow it for this site in your browser settings, or use the 🎤 on your keyboard.' : e.error === 'no-speech' ? 'I didn’t hear anything. Tap the mic and try again.' : e.error === 'aborted' ? '' : 'Voice input stopped ('+e.error+'). You can type or use the 🎤 on your keyboard.'; if(state.voice === v) renderVoice(); };
+  r.onend = () => { const was = v.listening; v.listening = false; if(state.voice !== v || rec !== r) return; if(was && v.text.trim()) understand(); else renderVoice(); };
+  v.listening = true; v.msg = ''; renderVoice();
+  try { r.start(); buzz(10); } catch(e){ v.listening = false; v.msg = 'Could not start the microphone. Type instead.'; renderVoice(); }
+}
+function renderVoice(){
+  const root = document.getElementById('voice'); const v = state.voice;
+  if(!v){ root.innerHTML = ''; if(!state.sheet) document.body.style.overflow = ''; return; }
+  document.body.style.overflow = 'hidden';
+  const status = v.busy ? 'Understanding your habit…' : v.listening ? 'Listening… say your habit' : 'Tap the mic and speak';
+  root.innerHTML = `<div class="scrim" data-action="v-scrim"><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="vTitle">
+    <div class="sheet-head"><div class="grab"></div><div class="spread" style="flex-wrap:nowrap"><div><div class="eyebrow">New habit</div><h2 id="vTitle">${CAN_MIC ? 'Say your new habit' : 'Describe your new habit'}</h2></div><button class="iconbtn" data-action="v-close" aria-label="Close">${I.close}</button></div></div>
+    <div class="sheet-body">
+      ${CAN_MIC ? `<button class="mic ${v.listening ? 'on' : ''}" data-action="v-mic" aria-pressed="${v.listening}" aria-label="${v.listening ? 'Stop listening' : 'Start listening'}" ${v.busy ? 'disabled' : ''}>${I.mic}</button><p class="muted small" style="text-align:center" aria-live="polite">${status}</p>`
+        : `<p class="muted small">Say it with the 🎤 on your phone’s keyboard, or type it. Mention what, when and where, for example “after I brush my teeth”. ${IS_SITE ? '' : 'Claude turns it into a habit for you.'}</p>`}
+      ${v.msg ? `<div class="alert">${I.warn}<div>${esc(v.msg)}</div></div>` : ''}
+      <label class="field" for="v-text">${CAN_MIC ? 'What I heard (you can edit it)' : 'Your habit, in your own words'}<textarea id="v-text" placeholder="e.g. After I brush my teeth I want to drink a glass of water in the kitchen">${esc(v.text)}</textarea></label>
+      <div class="field">Try saying<div class="chips">${VOICE_EXAMPLES.map(x => `<button class="chip" data-action="v-example" data-v="${esc(x)}">${esc(x)}</button>`).join('')}</div></div>
+    </div>
+    <div class="sheet-foot"><button class="btn" data-action="v-manual">Step by step</button><button class="btn primary" data-action="v-go" ${v.busy ? 'disabled' : ''}>${v.busy ? 'Understanding…' : 'Create habit'}</button></div>
+  </div></div>`;
+}
+document.getElementById('voice').addEventListener('click', e => {
+  const v = state.voice; if(!v) return; const b = e.target.closest('[data-action]'); if(!b) return; const a = b.dataset.action;
+  if(a === 'v-scrim'){ if(e.target === b) closeVoice(); return; }
+  if(a === 'v-close') closeVoice();
+  else if(a === 'v-mic'){ if(v.listening){ try { rec && rec.stop(); } catch(err){} } else startListening(); }
+  else if(a === 'v-example'){ if(v.listening){ try { rec && rec.abort(); } catch(err){} v.listening = false; } v.text = b.dataset.v; renderVoice(); }
+  else if(a === 'v-manual'){ closeVoice(); openEditor(null); }
+  else if(a === 'v-go'){ if(v.listening){ try { rec && rec.stop(); } catch(err){} } else understand(); }
+});
+document.getElementById('voice').addEventListener('input', e => { if(e.target.id === 'v-text' && state.voice) state.voice.text = e.target.value; });
+
+const EMOJI_RULES = [[/\b(read|book|reading|page)/,'📖'],[/\b(pray|prayer|bible|quran|church)/,'🙏'],[/\b(affirm)/,'🗣️'],[/\b(water|hydrat)/,'💧'],[/\b(run|running|jog)/,'🏃'],[/\b(walk|walking|steps)/,'🚶'],[/\b(stretch|yoga|mobility)/,'🤸'],[/\b(gym|workout|push-?ups?|sit-?ups?|squats?|exercise|train|lift)/,'💪'],[/\b(meditat|breath)/,'🧘'],[/\b(german|deutsch|language|vocab|words)/,'🇩🇪'],[/\b(study|learn|course|certif|lesson)/,'📚'],[/\b(write|journal|diary|blog)/,'✍️'],[/\b(code|coding|program|laptop|deep work|project)/,'💻'],[/\b(apply|application|job|cv|interview|linkedin)/,'💼'],[/\b(phone|scroll|instagram|tiktok|social media|youtube)/,'📵'],[/\b(sleep|nap)/,'😴'],[/\b(bed)\b/,'🛏️'],[/\b(coffee|tea)\b/,'☕'],[/\b(clean|tidy|dishes|laundry)/,'🧹'],[/\b(save|money|budget|spend)/,'💰'],[/\b(eat|vegetable|fruit|salad|breakfast|cook)/,'🥗'],[/\b(teeth|floss)/,'🦷'],[/\b(guitar|music|piano|sing)/,'🎸'],[/\b(wake|alarm)/,'⏰'],[/\b(window|fresh air)/,'🪟'],[/\b(plan|todo|to-do|list)/,'📝'],[/\b(smile|gratitude|grateful|thank)/,'🙂']];
+const TWO_MIN = [[/\b(read|book)/,'Read one page'],[/\b(run|jog)/,'Put on my running shoes'],[/\b(walk)/,'Put on my shoes and step outside'],[/\b(water)/,'Fill a glass and take one sip'],[/\b(stretch|yoga)/,'Do one stretch'],[/\b(push-?ups?)/,'Do 2 push-ups'],[/\b(gym|workout|exercise|train)/,'Put on my workout clothes'],[/\b(meditat|breath)/,'Take three slow breaths'],[/\b(german|language|vocab|words)/,'Learn one word'],[/\b(study|learn|course|lesson)/,'Open the lesson and do one exercise'],[/\b(write|journal|diary)/,'Write one sentence'],[/\b(pray)/,'Say one short prayer'],[/\b(clean|tidy)/,'Put away three things'],[/\b(apply|application|job)/,'Open the job board and save one listing'],[/\b(code|coding|project)/,'Open the project and write the first line'],[/\b(plan|todo|list)/,'Write down the first task']];
+const ID_HINTS = [[/\b(run|walk|stretch|yoga|gym|workout|push|exercise|water|sleep|eat|salad|fruit|move|health|fit)/, /health|move|fit|sleep|body|energ/i],[/\b(read|study|learn|german|language|course|book|vocab|words|lesson)/, /learn|reader|stud|grow/i],[/\b(pray|affirm|gratitude|grateful|meditat|church|bible)/, /faith|grat|pray|spirit/i],[/\b(code|coding|apply|job|work|project|client|laptop|cv|linkedin)/, /\bIT\b|work|ship|professional|business/i],[/\b(wake|window|morning)/, /morning/i]];
+function findRoutine(name){ const r = habits().map(h => h.routine).find(x => x && x.toLowerCase().startsWith(name.toLowerCase().split(' ')[0])); return r || name; }
+function parseHabit(raw){
+  const text = raw.replace(/\s+/g,' ').trim(); const low = text.toLowerCase(); let rest = ' ' + text + ' ';
+  const kind = /\b(stop|quit|avoid|no more|less|don'?t|do not|break the habit|get rid of|cut down|give up)\b/i.test(text) ? 'break' : 'build';
+  let time = '';
+  const tm = text.match(/\b(?:at|around|by)\s+(\d{1,2})(?:[:.](\d{2}))?\s*(a\.?\s?m\.?|p\.?\s?m\.?|o'?clock)?/i) || text.match(/\b(\d{1,2})(?:[:.](\d{2}))?\s*(a\.?\s?m\.?|p\.?\s?m\.?)/i);
+  if(tm){ let h = +tm[1], mi = tm[2] ? +tm[2] : 0; const ap = (tm[3]||'').toLowerCase().replace(/[^ap]/g,''); if(ap === 'p' && h < 12) h += 12; if(ap === 'a' && h === 12) h = 0; if(!ap && h < 7 && /evening|night|afternoon|dinner/.test(low)) h += 12; if(h < 24 && mi < 60){ time = pad(h)+':'+pad(mi); rest = rest.replace(tm[0], ' '); } }
+  let stack = '';
+  const sm = rest.match(/\b(right after|after|when|once|whenever)\s+(?:i\s+|i'm\s+|i've\s+)?(.+?)(?=\s*(?:,|\.|;|\bat\s+\d|\bin (?:the|my)\b|\bevery\b|\beach\b|\bthen\b|\bi (?:want|will|should|need)\b|\bdaily\b| $))/i);
+  if(sm && sm[2].trim().length > 1){ stack = sm[2].trim().replace(/[,.]$/,''); if(/^(?:\w+ing|dinner|lunch|breakfast|work|school|class|training|prayer|church|the gym)$/i.test(stack)) stack = 'finish ' + stack; if(kind === 'break' && !/^i\b/i.test(stack)) stack = 'I ' + stack; rest = rest.replace(sm[0], ' '); }
+  let place = '';
+  const pm = rest.match(/\b(?:in|at|on|by)\s+(?:the|my)\s+([a-z][a-z ]{2,24}?)(?=\s*(?:,|\.|\bat\b|\bafter\b|\bevery\b|\bbefore\b|\bwhen\b|\bfor\b|\bdaily\b| $))/i);
+  if(pm && !/morning|evening|afternoon|night|day|week/.test(pm[1])){ place = pm[1].trim(); rest = rest.replace(pm[0], ' '); }
+  let name = rest
+    .replace(/^\s*(?:hey|ok(?:ay)?|so|um+|uh+|well)[, ]+/i,' ')
+    .replace(/\b(?:i\s+(?:want|would like|'d like|need|wanna|plan|am going|'m going|have)\s+to|i\s+will|i'll|i\s+should|i\s+must|let me|please|help me(?: to)?|add (?:a )?(?:new )?habit(?: to| for| that| of)?|(?:a )?new habit(?: to| of)?|a habit (?:to|of)|start(?:ing)? to|begin to|try to)\b/gi,' ')
+    .replace(/\b(?:every\s*day|everyday|daily|each\s+day|every\s+(?:morning|evening|night|afternoon)|in the (?:morning|evening|afternoon)|at night|each (?:morning|evening)|before (?:bed|sleep|going to bed)|every week)\b/gi,' ');
+  if(kind === 'break') name = name.replace(/\b(?:stop|quit|avoid|no more|don'?t|do not|break the habit of|get rid of|cut down on|give up)\b\s*/gi,' ');
+  name = name.replace(/\s+/g,' ').replace(/^[\s,.;:-]+|[\s,.;:-]+$/g,'').replace(/\b(and|to|then|so)$/i,'').replace(/^(?:start|begin)\s+(?=\w+ing\b)/i,'').trim();
+  name = name.replace(/^(\w+?)(e?)ing\b/i, (m, stem, e) => /^(meditat|journal|read|stretch|walk|run|pray|study|writ|learn|cook|clean|practic|exercis)/i.test(m) && !/^(?:checking|scrolling|eating|smoking|drinking|watching|playing)$/i.test(m) ? ({meditating:'meditate',running:'go running',writing:'write',practicing:'practice',exercising:'exercise'}[m.toLowerCase()] || stem) : m);
+  if(!name) name = text;
+  name = name.charAt(0).toUpperCase() + name.slice(1);
+  if(name.length > 70) name = name.slice(0,70).replace(/\s+\S*$/,'');
+  const nm = name.toLowerCase(); const pick = (rules, fb) => { const r = rules.find(([re]) => re.test(nm)) || rules.find(([re]) => re.test(low)); return r ? r[1] : fb; };
+  const emoji = pick(EMOJI_RULES, kind === 'break' ? '📵' : '🎯');
+  const hr = time ? +time.slice(0,2) : -1;
+  let routine = '', after = '';
+  if(stack){ const core = stack.toLowerCase().replace(/^(?:i\s+|finish\s+)/,'').split(/\s+/).filter(w => w.length > 3 || /^(pray|run|eat|read)$/.test(w));
+    const anchor = habits().find(h => core.some(w => h.name.toLowerCase().includes(w.replace(/ing$/,'')))) || habits().find(h => core.some(w => (h.stack||'').toLowerCase().includes(w)));
+    if(anchor){ after = anchor.id; if(anchor.routine) routine = anchor.routine; if(!time && anchor.time){ const [ah, am] = anchor.time.split(':').map(Number); const t2 = ah*60 + am + 5; time = pad(Math.floor(t2/60)%24)+':'+pad(t2%60); } } }
+  if(routine){}
+  else if(/\b(morning|wake|breakfast|sunrise)\b/.test(low) || (hr >= 0 && hr < 11)) routine = findRoutine('Morning routine');
+  else if(/\b(evening|night|bed|dinner|sleep)\b/.test(low) || hr >= 18) routine = findRoutine('Evening');
+  else if(/\b(work|office|lunch|afternoon|laptop|job|desk)\b/.test(low) || hr >= 11) routine = findRoutine('Workday');
+  const twoMin = kind === 'break' ? 'Take three deep breaths and do something else' : pick(TWO_MIN, 'Do just the first two minutes');
+  let identity = '';
+  for(const [act, idre] of ID_HINTS){ if(act.test(nm) || (!ID_HINTS.some(([a2]) => a2.test(nm)) && act.test(low))){ const m = plan().identities.find(i => idre.test(i.text)); if(m){ identity = m.id; break; } } }
+  const where = place ? ' in the ' + place : '';
+  const laws = kind === 'break'
+    ? { obvious:'Remove the trigger from sight'+where, attractive:'Remind myself what this habit costs me', easy:'Add friction: make it harder to start', satisfying:'Tick “avoided” here every day' }
+    : { obvious: stack ? 'Do it right after I '+stack.replace(/^i\s+/i,'') : 'Put a visible cue'+(where || ' where I will see it'), attractive:'Pair it with something I enjoy', easy:'Prepare everything I need the night before', satisfying:'Tick it here and watch the streak grow' };
+  return Object.assign({ name, kind, routine, stack, time, place, twoMin, emoji, identity, __after: after, color: kind === 'break' ? '#E4468B' : COLORS[habits().length % COLORS.length] }, laws);
+}
+function aiPrompt(text){
+  const ids = plan().identities.map(i => i.id + ': ' + i.text).join('\n') || '(none)';
+  const routines = [...new Set(habits().map(h => h.routine).filter(Boolean))].join(', ') || 'Morning routine, Workday, Evening';
+  return `Turn this spoken request into ONE habit for an Atomic Habits tracker.
+Spoken text: "${text.replace(/"/g,"'")}"
+
+Existing identities (id: text):
+${ids}
+Existing routines: ${routines}
+
+Reply with only a JSON object with these string fields:
+name: short, starts with a verb (e.g. "Drink a glass of water"). For a habit to stop, name the bad habit (e.g. "Scrolling my phone in bed").
+kind: "build" or "break".
+routine: one of the existing routines, or "" if unclear.
+stack: the existing habit it follows, phrased to fit "After I ___" (e.g. "brush my teeth"); for a break habit, the trigger (e.g. "I get into bed"). "" if none.
+time: "HH:MM" 24-hour, or "".
+place: short place, or "".
+twoMin: a version that takes under two minutes; for a break habit, what to do instead.
+emoji: one emoji.
+identity: the id of the best matching identity, or "".
+newIdentity: an "I am ..." statement only if no identity fits, else "".
+obvious, attractive, easy, satisfying: one short tactic each for the four laws (for a break habit use the inversions: invisible, unattractive, difficult, unsatisfying).
+Use only what the text says or clearly implies. Keep every value under 80 characters. Fix speech-recognition mistakes.`;
+}
+function mergeAI(base, ai){
+  if(!ai || typeof ai !== 'object') return base;
+  const out = Object.assign({}, base);
+  ['name','routine','stack','place','twoMin','emoji','obvious','attractive','easy','satisfying'].forEach(k => { if(typeof ai[k] === 'string' && ai[k].trim()) out[k] = ai[k].trim().slice(0,100); });
+  if(ai.kind === 'build' || ai.kind === 'break') out.kind = ai.kind;
+  if(typeof ai.time === 'string' && /^\d{2}:\d{2}$/.test(ai.time)) out.time = ai.time;
+  if(typeof ai.identity === 'string' && plan().identities.some(i => i.id === ai.identity)) out.identity = ai.identity;
+  else if(typeof ai.newIdentity === 'string' && ai.newIdentity.trim()){ out.identity = '__new'; out.__newIdentity = ai.newIdentity.trim().slice(0,100); }
+  return out;
+}
+async function understand(){
+  const v = state.voice; if(!v) return;
+  const text = (v.text || '').trim();
+  if(!text){ v.msg = CAN_MIC ? 'Say or type what you want to do.' : 'Type or dictate what you want to do.'; renderVoice(); return; }
+  v.busy = true; v.msg = ''; renderVoice();
+  let draft = parseHabit(text);
+  if(!IS_SITE){
+    try {
+      const sample = window.claude && window.claude.use ? await window.claude.use('sample') : null;
+      if(sample) draft = mergeAI(draft, await sample.json(aiPrompt(text), { modelTier:'quick' }));
+    } catch(e){ /* keep the on-device result */ }
+  }
+  if(state.voice !== v) return;
+  state.voice = null; renderVoice();
+  openEditor(null, draft, text);
 }
 
 /* ---------- INTRO ---------- */
@@ -901,7 +1061,7 @@ document.getElementById('view').addEventListener('click', e => {
   }
   else if(a === 'day'){ state.selDay = b.dataset.d === todayS() ? null : b.dataset.d; state.lastFrac = null; render(); }
   else if(a === 'edit') openEditor(id);
-  else if(a === 'new-habit') openEditor(null);
+  else if(a === 'new-habit') openVoice();
   else if(a === 'seg'){ state.habitSeg = b.dataset.v; render(); }
   else if(a === 'add-identity'){ const i = { id:uid(), text:'' }; p.identities.push(i); savePlan(); render(); const el = document.getElementById('id-'+i.id); el && el.focus(); }
   else if(a === 'del-identity'){ p.identities = p.identities.filter(i => i.id !== id); p.habits.forEach(h => { if(h.identity === id) h.identity = ''; }); savePlan(100); render(); }
