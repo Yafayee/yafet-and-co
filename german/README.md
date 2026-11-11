@@ -16,8 +16,12 @@ The 1,000 most common German words, in frequency order, for the "30 new words a 
 
 ## What a card looks like
 
+![Front and back of a card](card_preview.png)
+
 - **Front:** the German word, colour-coded by gender (der = blue, die = red, das = green), with its word type. Anki reads it aloud with your device's German voice.
 - **Back:** the English meaning, the plural, an example sentence (also read aloud), the frequency rank and the CEFR level.
+
+A few swear and slang words (*verdammt, Scheiße, Mist, Arsch, geil*) are on the list because they're common in spoken German. They're tagged `slang`. To skip them, search `tag:slang` in Browse and suspend them.
 
 ## Set it up (once)
 

@@ -130,7 +130,8 @@ def main():
             model=MODEL,
             fields=fields,
             guid=genanki.guid_for("german-top-1000", w["rank"], w["word"]),
-            tags=[w["pos"], w["cefr"], rank_band(w["rank"])],
+            tags=[w["pos"], w["cefr"], rank_band(w["rank"])]
+            + (["slang"] if re.search(r"vulgar|expletive", w["translation"]) else []),
             due=w["rank"],  # new cards appear in frequency order
         )
         deck.add_note(note)

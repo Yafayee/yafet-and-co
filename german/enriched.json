@@ -1,0 +1,7002 @@
+[
+ {
+  "rank": 1,
+  "word": "ich",
+  "plural": "",
+  "example_de": "**Ich** komme aus Spanien.",
+  "example_en": "I come from Spain."
+ },
+ {
+  "rank": 2,
+  "word": "sein",
+  "plural": "",
+  "example_de": "Ich **bin** heute sehr müde.",
+  "example_en": "I am very tired today."
+ },
+ {
+  "rank": 3,
+  "word": "das",
+  "plural": "",
+  "example_de": "**Das** Brot ist noch warm.",
+  "example_en": "The bread is still warm."
+ },
+ {
+  "rank": 4,
+  "word": "die",
+  "plural": "",
+  "example_de": "**Die** Küche ist sehr klein.",
+  "example_en": "The kitchen is very small."
+ },
+ {
+  "rank": 5,
+  "word": "du",
+  "plural": "",
+  "example_de": "Wohnst **du** in Berlin?",
+  "example_en": "Do you live in Berlin?"
+ },
+ {
+  "rank": 6,
+  "word": "der",
+  "plural": "",
+  "example_de": "**Der** Kaffee ist zu heiß.",
+  "example_en": "The coffee is too hot."
+ },
+ {
+  "rank": 7,
+  "word": "nicht",
+  "plural": "",
+  "example_de": "Das Restaurant ist heute **nicht** offen.",
+  "example_en": "The restaurant isn't open today."
+ },
+ {
+  "rank": 8,
+  "word": "und",
+  "plural": "",
+  "example_de": "Ich esse Brot **und** Käse.",
+  "example_en": "I'm eating bread and cheese."
+ },
+ {
+  "rank": 9,
+  "word": "es",
+  "plural": "",
+  "example_de": "**Es** regnet schon den ganzen Tag.",
+  "example_en": "It has been raining all day."
+ },
+ {
+  "rank": 10,
+  "word": "sie",
+  "plural": "",
+  "example_de": "**Sie** arbeitet in einem Krankenhaus.",
+  "example_en": "She works in a hospital."
+ },
+ {
+  "rank": 11,
+  "word": "haben",
+  "plural": "",
+  "example_de": "Wir **haben** zwei Kinder.",
+  "example_en": "We have two children."
+ },
+ {
+  "rank": 12,
+  "word": "was",
+  "plural": "",
+  "example_de": "**Was** machst du am Wochenende?",
+  "example_en": "What are you doing at the weekend?"
+ },
+ {
+  "rank": 13,
+  "word": "wir",
+  "plural": "",
+  "example_de": "**Wir** gehen heute Abend ins Kino.",
+  "example_en": "We're going to the cinema tonight."
+ },
+ {
+  "rank": 14,
+  "word": "zu",
+  "plural": "",
+  "example_de": "Ich gehe jetzt **zu** meiner Oma.",
+  "example_en": "I'm going to my grandma's now."
+ },
+ {
+  "rank": 15,
+  "word": "ein",
+  "plural": "",
+  "example_de": "Ich habe **ein** Fahrrad.",
+  "example_en": "I have a bike."
+ },
+ {
+  "rank": 16,
+  "word": "er",
+  "plural": "",
+  "example_de": "**Er** spielt gern Fußball.",
+  "example_en": "He likes playing football."
+ },
+ {
+  "rank": 17,
+  "word": "werden",
+  "plural": "",
+  "example_de": "Mein Bruder will Arzt **werden**.",
+  "example_en": "My brother wants to become a doctor."
+ },
+ {
+  "rank": 18,
+  "word": "in",
+  "plural": "",
+  "example_de": "Wir wohnen **in** einer kleinen Wohnung.",
+  "example_en": "We live in a small apartment."
+ },
+ {
+  "rank": 19,
+  "word": "mit",
+  "plural": "",
+  "example_de": "Ich fahre **mit** dem Bus zur Arbeit.",
+  "example_en": "I go to work by bus."
+ },
+ {
+  "rank": 20,
+  "word": "ja",
+  "plural": "",
+  "example_de": "**Ja**, ich komme gern mit.",
+  "example_en": "Yes, I'd love to come along."
+ },
+ {
+  "rank": 21,
+  "word": "wie",
+  "plural": "",
+  "example_de": "**Wie** geht es dir?",
+  "example_en": "How are you?"
+ },
+ {
+  "rank": 22,
+  "word": "den",
+  "plural": "",
+  "example_de": "Ich sehe **den** Hund im Garten.",
+  "example_en": "I see the dog in the garden."
+ },
+ {
+  "rank": 23,
+  "word": "mir",
+  "plural": "",
+  "example_de": "Kannst du **mir** das Salz geben?",
+  "example_en": "Can you pass me the salt?"
+ },
+ {
+  "rank": 24,
+  "word": "können",
+  "plural": "",
+  "example_de": "**Kannst** du schwimmen?",
+  "example_en": "Can you swim?"
+ },
+ {
+  "rank": 25,
+  "word": "auf",
+  "plural": "",
+  "example_de": "Das Buch liegt **auf** dem Tisch.",
+  "example_en": "The book is lying on the table."
+ },
+ {
+  "rank": 26,
+  "word": "mich",
+  "plural": "",
+  "example_de": "Kannst du **mich** morgen abholen?",
+  "example_en": "Can you pick me up tomorrow?"
+ },
+ {
+  "rank": 27,
+  "word": "dass",
+  "plural": "",
+  "example_de": "Ich glaube, **dass** er krank ist.",
+  "example_en": "I think that he is sick."
+ },
+ {
+  "rank": 28,
+  "word": "so",
+  "plural": "",
+  "example_de": "Warum bist du heute **so** müde?",
+  "example_en": "Why are you so tired today?"
+ },
+ {
+  "rank": 29,
+  "word": "eine",
+  "plural": "",
+  "example_de": "Ich möchte **eine** Tasse Tee.",
+  "example_en": "I'd like a cup of tea."
+ },
+ {
+  "rank": 30,
+  "word": "aber",
+  "plural": "",
+  "example_de": "Das Hotel ist schön, **aber** teuer.",
+  "example_en": "The hotel is nice, but expensive."
+ },
+ {
+  "rank": 31,
+  "word": "hier",
+  "plural": "",
+  "example_de": "Ich wohne schon zehn Jahre **hier**.",
+  "example_en": "I have lived here for ten years."
+ },
+ {
+  "rank": 32,
+  "word": "für",
+  "plural": "",
+  "example_de": "Das Geschenk ist **für** dich.",
+  "example_en": "The present is for you."
+ },
+ {
+  "rank": 33,
+  "word": "von",
+  "plural": "",
+  "example_de": "Das ist ein Brief **von** meiner Schwester.",
+  "example_en": "This is a letter from my sister."
+ },
+ {
+  "rank": 34,
+  "word": "wollen",
+  "plural": "",
+  "example_de": "Wir **wollen** im Sommer nach Italien fahren.",
+  "example_en": "We want to go to Italy in the summer."
+ },
+ {
+  "rank": 35,
+  "word": "dich",
+  "plural": "",
+  "example_de": "Ich besuche **dich** am Samstag.",
+  "example_en": "I'll visit you on Saturday."
+ },
+ {
+  "rank": 36,
+  "word": "noch",
+  "plural": "",
+  "example_de": "Bist du **noch** im Büro?",
+  "example_en": "Are you still at the office?"
+ },
+ {
+  "rank": 37,
+  "word": "an",
+  "plural": "",
+  "example_de": "Das Bild hängt **an** der Wand.",
+  "example_en": "The picture is hanging on the wall."
+ },
+ {
+  "rank": 38,
+  "word": "da",
+  "plural": "",
+  "example_de": "Ist Peter **da**?",
+  "example_en": "Is Peter there?"
+ },
+ {
+  "rank": 39,
+  "word": "dir",
+  "plural": "",
+  "example_de": "Ich helfe **dir** gern.",
+  "example_en": "I'm happy to help you."
+ },
+ {
+  "rank": 40,
+  "word": "wenn",
+  "plural": "",
+  "example_de": "**Wenn** es regnet, bleiben wir zu Hause.",
+  "example_en": "If it rains, we'll stay at home."
+ },
+ {
+  "rank": 41,
+  "word": "gut",
+  "plural": "",
+  "example_de": "Die Suppe schmeckt sehr **gut**.",
+  "example_en": "The soup tastes very good."
+ },
+ {
+  "rank": 42,
+  "word": "man",
+  "plural": "",
+  "example_de": "Hier darf **man** nicht rauchen.",
+  "example_en": "You're not allowed to smoke here."
+ },
+ {
+  "rank": 43,
+  "word": "auch",
+  "plural": "",
+  "example_de": "Ich habe **auch** Hunger.",
+  "example_en": "I'm hungry too."
+ },
+ {
+  "rank": 44,
+  "word": "nur",
+  "plural": "",
+  "example_de": "Ich habe **nur** zehn Euro.",
+  "example_en": "I only have ten euros."
+ },
+ {
+  "rank": 45,
+  "word": "machen",
+  "plural": "",
+  "example_de": "Ich **mache** am Abend meine Hausaufgaben.",
+  "example_en": "I do my homework in the evening."
+ },
+ {
+  "rank": 46,
+  "word": "wissen",
+  "plural": "",
+  "example_de": "Ich **weiß** nicht, wo er wohnt.",
+  "example_en": "I don't know where he lives."
+ },
+ {
+  "rank": 47,
+  "word": "gehen",
+  "plural": "",
+  "example_de": "Wir **gehen** am Sonntag in den Park.",
+  "example_en": "We're going to the park on Sunday."
+ },
+ {
+  "rank": 48,
+  "word": "jetzt",
+  "plural": "",
+  "example_de": "Ich muss **jetzt** leider gehen.",
+  "example_en": "Unfortunately, I have to go now."
+ },
+ {
+  "rank": 49,
+  "word": "mein",
+  "plural": "",
+  "example_de": "Das ist **mein** Bruder Tom.",
+  "example_en": "This is my brother Tom."
+ },
+ {
+  "rank": 50,
+  "word": "doch",
+  "plural": "",
+  "example_de": "Ich war müde, **doch** ich konnte nicht schlafen.",
+  "example_en": "I was tired, but I couldn't sleep."
+ },
+ {
+  "rank": 51,
+  "word": "kommen",
+  "plural": "",
+  "example_de": "Woher **kommst** du?",
+  "example_en": "Where are you from?"
+ },
+ {
+  "rank": 52,
+  "word": "müssen",
+  "plural": "",
+  "example_de": "Ich **muss** morgen früh aufstehen.",
+  "example_en": "I have to get up early tomorrow."
+ },
+ {
+  "rank": 53,
+  "word": "sagen",
+  "plural": "",
+  "example_de": "Was hat der Arzt **gesagt**?",
+  "example_en": "What did the doctor say?"
+ },
+ {
+  "rank": 54,
+  "word": "sehen",
+  "plural": "",
+  "example_de": "Ich **sehe** dich morgen in der Schule.",
+  "example_en": "I'll see you at school tomorrow."
+ },
+ {
+  "rank": 55,
+  "word": "nein",
+  "plural": "",
+  "example_de": "**Nein**, danke, ich habe keinen Hunger.",
+  "example_en": "No, thanks, I'm not hungry."
+ },
+ {
+  "rank": 56,
+  "word": "dann",
+  "plural": "",
+  "example_de": "Erst essen wir, **dann** gehen wir spazieren.",
+  "example_en": "First we eat, then we go for a walk."
+ },
+ {
+  "rank": 57,
+  "word": "sehr",
+  "plural": "",
+  "example_de": "Das Wetter ist heute **sehr** schön.",
+  "example_en": "The weather is very nice today."
+ },
+ {
+  "rank": 58,
+  "word": "im",
+  "plural": "",
+  "example_de": "Die Kinder spielen **im** Garten.",
+  "example_en": "The children are playing in the garden."
+ },
+ {
+  "rank": 59,
+  "word": "sollen",
+  "plural": "",
+  "example_de": "Der Arzt sagt, ich **soll** mehr Wasser trinken.",
+  "example_en": "The doctor says I should drink more water."
+ },
+ {
+  "rank": 60,
+  "word": "ihn",
+  "plural": "",
+  "example_de": "Ich habe **ihn** gestern im Supermarkt gesehen.",
+  "example_en": "I saw him at the supermarket yesterday."
+ },
+ {
+  "rank": 61,
+  "word": "uns",
+  "plural": "",
+  "example_de": "Besuch **uns** doch am Wochenende!",
+  "example_en": "Come and visit us at the weekend!"
+ },
+ {
+  "rank": 62,
+  "word": "schon",
+  "plural": "",
+  "example_de": "Bist du **schon** fertig?",
+  "example_en": "Are you already done?"
+ },
+ {
+  "rank": 63,
+  "word": "mal",
+  "plural": "",
+  "example_de": "Warst du schon **mal** in Berlin?",
+  "example_en": "Have you ever been to Berlin?"
+ },
+ {
+  "rank": 64,
+  "word": "kein",
+  "plural": "",
+  "example_de": "Ich habe heute **keine** Zeit.",
+  "example_en": "I don't have time today."
+ },
+ {
+  "rank": 65,
+  "word": "oder",
+  "plural": "",
+  "example_de": "Möchtest du Tee **oder** Kaffee?",
+  "example_en": "Would you like tea or coffee?"
+ },
+ {
+  "rank": 66,
+  "word": "denn",
+  "plural": "",
+  "example_de": "Ich bleibe zu Hause, **denn** ich bin krank.",
+  "example_en": "I'm staying at home because I'm sick."
+ },
+ {
+  "rank": 67,
+  "word": "um",
+  "plural": "",
+  "example_de": "Wir laufen jeden Sonntag **um** den See.",
+  "example_en": "We walk around the lake every Sunday."
+ },
+ {
+  "rank": 68,
+  "word": "mehr",
+  "plural": "",
+  "example_de": "Ich brauche **mehr** Zeit.",
+  "example_en": "I need more time."
+ },
+ {
+  "rank": 69,
+  "word": "also",
+  "plural": "",
+  "example_de": "Es regnet, **also** nehmen wir den Bus.",
+  "example_en": "It's raining, so we'll take the bus."
+ },
+ {
+  "rank": 70,
+  "word": "ihm",
+  "plural": "",
+  "example_de": "Ich gebe **ihm** das Buch morgen.",
+  "example_en": "I'll give him the book tomorrow."
+ },
+ {
+  "rank": 71,
+  "word": "wo",
+  "plural": "",
+  "example_de": "**Wo** ist der Bahnhof?",
+  "example_en": "Where is the train station?"
+ },
+ {
+  "rank": 72,
+  "word": "sich",
+  "plural": "",
+  "example_de": "Mein Sohn zieht **sich** schon allein an.",
+  "example_en": "My son already gets dressed by himself."
+ },
+ {
+  "rank": 73,
+  "word": "alles",
+  "plural": "",
+  "example_de": "Danke für **alles**!",
+  "example_en": "Thanks for everything!"
+ },
+ {
+  "rank": 74,
+  "word": "nach",
+  "plural": "",
+  "example_de": "**Nach** dem Essen trinken wir einen Kaffee.",
+  "example_en": "After the meal we have a coffee."
+ },
+ {
+  "rank": 75,
+  "word": "ihr",
+  "plural": "",
+  "example_de": "Kommt **ihr** heute Abend mit?",
+  "example_en": "Are you guys coming along tonight?"
+ },
+ {
+  "rank": 76,
+  "word": "aus",
+  "plural": "",
+  "example_de": "Ich nehme die Milch **aus** dem Kühlschrank.",
+  "example_en": "I take the milk out of the fridge."
+ },
+ {
+  "rank": 77,
+  "word": "bei",
+  "plural": "",
+  "example_de": "Ich wohne noch **bei** meinen Eltern.",
+  "example_en": "I still live with my parents."
+ },
+ {
+  "rank": 78,
+  "word": "geben",
+  "plural": "",
+  "example_de": "Die Mutter **gibt** dem Kind einen Apfel.",
+  "example_en": "The mother gives the child an apple."
+ },
+ {
+  "rank": 79,
+  "word": "immer",
+  "plural": "",
+  "example_de": "Er kommt **immer** zu spät.",
+  "example_en": "He's always late."
+ },
+ {
+  "rank": 80,
+  "word": "etwas",
+  "plural": "",
+  "example_de": "Möchtest du **etwas** trinken?",
+  "example_en": "Would you like something to drink?"
+ },
+ {
+  "rank": 81,
+  "word": "warum",
+  "plural": "",
+  "example_de": "**Warum** lernst du Deutsch?",
+  "example_en": "Why are you learning German?"
+ },
+ {
+  "rank": 82,
+  "word": "nichts",
+  "plural": "",
+  "example_de": "Ich habe heute noch **nichts** gegessen.",
+  "example_en": "I haven't eaten anything yet today."
+ },
+ {
+  "rank": 83,
+  "word": "wieder",
+  "plural": "",
+  "example_de": "Morgen scheint **wieder** die Sonne.",
+  "example_en": "The sun will shine again tomorrow."
+ },
+ {
+  "rank": 84,
+  "word": "tun",
+  "plural": "",
+  "example_de": "Was kann ich für Sie **tun**?",
+  "example_en": "What can I do for you?"
+ },
+ {
+  "rank": 85,
+  "word": "lassen",
+  "plural": "",
+  "example_de": "Meine Eltern **lassen** mich nicht allein reisen.",
+  "example_en": "My parents don't let me travel alone."
+ },
+ {
+  "rank": 86,
+  "word": "denken",
+  "plural": "",
+  "example_de": "Ich **denke** oft an meine Familie.",
+  "example_en": "I often think about my family."
+ },
+ {
+  "rank": 87,
+  "word": "als",
+  "plural": "",
+  "example_de": "**Als** ich klein war, hatte ich einen Hund.",
+  "example_en": "When I was little, I had a dog."
+ },
+ {
+  "rank": 88,
+  "word": "dem",
+  "plural": "",
+  "example_de": "Ich gebe **dem** Kind ein Glas Milch.",
+  "example_en": "I give the child a glass of milk."
+ },
+ {
+  "rank": 89,
+  "word": "gerade",
+  "plural": "",
+  "example_de": "Ich koche **gerade** das Abendessen.",
+  "example_en": "I'm cooking dinner right now."
+ },
+ {
+  "rank": 90,
+  "word": "wirklich",
+  "plural": "",
+  "example_de": "Das Essen war **wirklich** lecker.",
+  "example_en": "The food was really tasty."
+ },
+ {
+  "rank": 91,
+  "word": "glauben",
+  "plural": "",
+  "example_de": "**Glaubst** du mir nicht?",
+  "example_en": "Don't you believe me?"
+ },
+ {
+  "rank": 92,
+  "word": "viel",
+  "plural": "",
+  "example_de": "Wir haben heute **viel** Arbeit.",
+  "example_en": "We have a lot of work today."
+ },
+ {
+  "rank": 93,
+  "word": "brauchen",
+  "plural": "",
+  "example_de": "Ich **brauche** einen neuen Laptop.",
+  "example_en": "I need a new laptop."
+ },
+ {
+  "rank": 94,
+  "word": "weil",
+  "plural": "",
+  "example_de": "Ich komme nicht, **weil** ich arbeiten muss.",
+  "example_en": "I'm not coming because I have to work."
+ },
+ {
+  "rank": 95,
+  "word": "vielleicht",
+  "plural": "",
+  "example_de": "**Vielleicht** regnet es morgen.",
+  "example_en": "Maybe it will rain tomorrow."
+ },
+ {
+  "rank": 96,
+  "word": "wer",
+  "plural": "",
+  "example_de": "**Wer** ist die Frau dort?",
+  "example_en": "Who is the woman over there?"
+ },
+ {
+  "rank": 97,
+  "word": "gern",
+  "plural": "",
+  "example_de": "Ich koche **gern** für meine Freunde.",
+  "example_en": "I like cooking for my friends."
+ },
+ {
+  "rank": 98,
+  "word": "bitte",
+  "plural": "",
+  "example_de": "Ein Wasser, **bitte**.",
+  "example_en": "A water, please."
+ },
+ {
+  "rank": 99,
+  "word": "ganz",
+  "plural": "",
+  "example_de": "Die Wohnung ist **ganz** neu.",
+  "example_en": "The apartment is completely new."
+ },
+ {
+  "rank": 100,
+  "word": "los",
+  "plural": "",
+  "example_de": "Was ist **los**? Warum weinst du?",
+  "example_en": "What's wrong? Why are you crying?"
+ },
+ {
+  "rank": 101,
+  "word": "Mann",
+  "plural": "Männer",
+  "example_de": "Der **Mann** dort ist mein Nachbar.",
+  "example_en": "The man over there is my neighbor."
+ },
+ {
+  "rank": 102,
+  "word": "heißen",
+  "plural": "",
+  "example_de": "Wie **heißt** du?",
+  "example_en": "What's your name?"
+ },
+ {
+  "rank": 103,
+  "word": "Gott",
+  "plural": "Götter",
+  "example_de": "Glaubst du an **Gott**?",
+  "example_en": "Do you believe in God?"
+ },
+ {
+  "rank": 104,
+  "word": "einen",
+  "plural": "",
+  "example_de": "Ich brauche **einen** Stift.",
+  "example_en": "I need a pen."
+ },
+ {
+  "rank": 105,
+  "word": "finden",
+  "plural": "",
+  "example_de": "Ich kann meinen Schlüssel nicht **finden**.",
+  "example_en": "I can't find my key."
+ },
+ {
+  "rank": 106,
+  "word": "Zeit",
+  "plural": "Zeiten",
+  "example_de": "Hast du morgen **Zeit**?",
+  "example_en": "Do you have time tomorrow?"
+ },
+ {
+  "rank": 107,
+  "word": "danke",
+  "plural": "",
+  "example_de": "**Danke** für deine Hilfe!",
+  "example_en": "Thanks for your help!"
+ },
+ {
+  "rank": 108,
+  "word": "reden",
+  "plural": "",
+  "example_de": "Wir **reden** oft über unsere Arbeit.",
+  "example_en": "We often talk about our work."
+ },
+ {
+  "rank": 109,
+  "word": "nehmen",
+  "plural": "",
+  "example_de": "Wir **nehmen** den Zug nach München.",
+  "example_en": "We're taking the train to Munich."
+ },
+ {
+  "rank": 110,
+  "word": "Tag",
+  "plural": "Tage",
+  "example_de": "Ich arbeite acht Stunden am **Tag**.",
+  "example_en": "I work eight hours a day."
+ },
+ {
+  "rank": 111,
+  "word": "vor",
+  "plural": "",
+  "example_de": "**Vor** dem Essen wasche ich mir die Hände.",
+  "example_en": "Before eating, I wash my hands."
+ },
+ {
+  "rank": 112,
+  "word": "bleiben",
+  "plural": "",
+  "example_de": "Wir **bleiben** eine Woche in Hamburg.",
+  "example_en": "We're staying in Hamburg for a week."
+ },
+ {
+  "rank": 113,
+  "word": "dieser",
+  "plural": "",
+  "example_de": "**Dieser** Pullover ist zu teuer.",
+  "example_en": "This sweater is too expensive."
+ },
+ {
+  "rank": 114,
+  "word": "mögen",
+  "plural": "",
+  "example_de": "Ich **mag** keine Tomaten.",
+  "example_en": "I don't like tomatoes."
+ },
+ {
+  "rank": 115,
+  "word": "Frau",
+  "plural": "Frauen",
+  "example_de": "Die **Frau** am Fenster ist meine Lehrerin.",
+  "example_en": "The woman by the window is my teacher."
+ },
+ {
+  "rank": 116,
+  "word": "sprechen",
+  "plural": "",
+  "example_de": "**Sprechen** Sie Englisch?",
+  "example_en": "Do you speak English?"
+ },
+ {
+  "rank": 117,
+  "word": "hallo",
+  "plural": "",
+  "example_de": "**Hallo**, wie geht's?",
+  "example_en": "Hi, how are you?"
+ },
+ {
+  "rank": 118,
+  "word": "wann",
+  "plural": "",
+  "example_de": "**Wann** fährt der nächste Zug?",
+  "example_en": "When does the next train leave?"
+ },
+ {
+  "rank": 119,
+  "word": "alle",
+  "plural": "",
+  "example_de": "**Alle** Kinder sind schon im Bett.",
+  "example_en": "All the children are already in bed."
+ },
+ {
+  "rank": 120,
+  "word": "fragen",
+  "plural": "",
+  "example_de": "Darf ich Sie etwas **fragen**?",
+  "example_en": "May I ask you something?"
+ },
+ {
+  "rank": 121,
+  "word": "Leute",
+  "plural": "",
+  "example_de": "Die **Leute** hier sind sehr freundlich.",
+  "example_en": "The people here are very friendly."
+ },
+ {
+  "rank": 122,
+  "word": "gleich",
+  "plural": "",
+  "example_de": "Warte kurz, ich bin **gleich** fertig.",
+  "example_en": "Wait a moment, I'll be ready in a minute."
+ },
+ {
+  "rank": 123,
+  "word": "einfach",
+  "plural": "",
+  "example_de": "Heute bleibe ich **einfach** im Bett.",
+  "example_en": "Today I'm just staying in bed."
+ },
+ {
+  "rank": 124,
+  "word": "ob",
+  "plural": "",
+  "example_de": "Weißt du, **ob** der Supermarkt noch offen ist?",
+  "example_en": "Do you know if the supermarket is still open?"
+ },
+ {
+  "rank": 125,
+  "word": "hören",
+  "plural": "",
+  "example_de": "Ich **höre** beim Kochen gern Musik.",
+  "example_en": "I like listening to music while I cook."
+ },
+ {
+  "rank": 126,
+  "word": "verstehen",
+  "plural": "",
+  "example_de": "Ich **verstehe** die Frage nicht.",
+  "example_en": "I don't understand the question."
+ },
+ {
+  "rank": 127,
+  "word": "natürlich",
+  "plural": "",
+  "example_de": "**Natürlich** helfe ich dir!",
+  "example_en": "Of course I'll help you!"
+ },
+ {
+  "rank": 128,
+  "word": "warten",
+  "plural": "",
+  "example_de": "Ich **warte** an der Bushaltestelle auf dich.",
+  "example_en": "I'm waiting for you at the bus stop."
+ },
+ {
+  "rank": 129,
+  "word": "über",
+  "plural": "",
+  "example_de": "**Über** dem Sofa hängt eine Lampe.",
+  "example_en": "A lamp hangs above the sofa."
+ },
+ {
+  "rank": 130,
+  "word": "richtig",
+  "plural": "",
+  "example_de": "Deine Antwort ist **richtig**.",
+  "example_en": "Your answer is correct."
+ },
+ {
+  "rank": 131,
+  "word": "Leben",
+  "plural": "Leben",
+  "example_de": "Das **Leben** in der Stadt ist teuer.",
+  "example_en": "Life in the city is expensive."
+ },
+ {
+  "rank": 132,
+  "word": "andere",
+  "plural": "",
+  "example_de": "Ich möchte eine **andere** Farbe.",
+  "example_en": "I'd like a different color."
+ },
+ {
+  "rank": 133,
+  "word": "meinen",
+  "plural": "",
+  "example_de": "Was **meinst** du damit?",
+  "example_en": "What do you mean by that?"
+ },
+ {
+  "rank": 134,
+  "word": "stehen",
+  "plural": "",
+  "example_de": "Der Lehrer **steht** vor der Klasse.",
+  "example_en": "The teacher is standing in front of the class."
+ },
+ {
+  "rank": 135,
+  "word": "dein",
+  "plural": "",
+  "example_de": "Ist das **dein** Handy?",
+  "example_en": "Is that your phone?"
+ },
+ {
+  "rank": 136,
+  "word": "Vater",
+  "plural": "Väter",
+  "example_de": "Mein **Vater** arbeitet bei der Post.",
+  "example_en": "My father works at the post office."
+ },
+ {
+  "rank": 137,
+  "word": "gar",
+  "plural": "",
+  "example_de": "Das ist **gar** nicht schwer.",
+  "example_en": "That isn't hard at all."
+ },
+ {
+  "rank": 138,
+  "word": "klar",
+  "plural": "",
+  "example_de": "Das Wasser im See ist sehr **klar**.",
+  "example_en": "The water in the lake is very clear."
+ },
+ {
+  "rank": 139,
+  "word": "leben",
+  "plural": "",
+  "example_de": "Meine Großeltern **leben** auf dem Land.",
+  "example_en": "My grandparents live in the countryside."
+ },
+ {
+  "rank": 140,
+  "word": "Mutter",
+  "plural": "Mütter",
+  "example_de": "Meine **Mutter** kocht sehr gut.",
+  "example_en": "My mother is a very good cook."
+ },
+ {
+  "rank": 141,
+  "word": "helfen",
+  "plural": "",
+  "example_de": "Kannst du mir beim Umzug **helfen**?",
+  "example_en": "Can you help me with the move?"
+ },
+ {
+  "rank": 142,
+  "word": "schön",
+  "plural": "",
+  "example_de": "Ihr habt eine sehr **schöne** Wohnung.",
+  "example_en": "You have a very nice apartment."
+ },
+ {
+  "rank": 143,
+  "word": "kennen",
+  "plural": "",
+  "example_de": "**Kennst** du hier ein gutes Restaurant?",
+  "example_en": "Do you know a good restaurant around here?"
+ },
+ {
+  "rank": 144,
+  "word": "weg",
+  "plural": "",
+  "example_de": "Mein Fahrrad ist **weg**!",
+  "example_en": "My bike is gone!"
+ },
+ {
+  "rank": 145,
+  "word": "zwei",
+  "plural": "",
+  "example_de": "Ich hätte gern **zwei** Brötchen.",
+  "example_en": "I'd like two bread rolls, please."
+ },
+ {
+  "rank": 146,
+  "word": "laufen",
+  "plural": "",
+  "example_de": "Ich **laufe** jeden Morgen im Park.",
+  "example_en": "I run in the park every morning."
+ },
+ {
+  "rank": 147,
+  "word": "Jahr",
+  "plural": "Jahre",
+  "example_de": "Meine Tochter ist fünf **Jahre** alt.",
+  "example_en": "My daughter is five years old."
+ },
+ {
+  "rank": 148,
+  "word": "lieben",
+  "plural": "",
+  "example_de": "Ich **liebe** meine Familie.",
+  "example_en": "I love my family."
+ },
+ {
+  "rank": 149,
+  "word": "dürfen",
+  "plural": "",
+  "example_de": "**Darf** ich hier parken?",
+  "example_en": "May I park here?"
+ },
+ {
+  "rank": 150,
+  "word": "heute",
+  "plural": "",
+  "example_de": "**Heute** ist Montag.",
+  "example_en": "Today is Monday."
+ },
+ {
+  "rank": 151,
+  "word": "versuchen",
+  "plural": "",
+  "example_de": "Ich **versuche**, früher ins Bett zu gehen.",
+  "example_en": "I'm trying to go to bed earlier."
+ },
+ {
+  "rank": 152,
+  "word": "Haus",
+  "plural": "Häuser",
+  "example_de": "Wir haben ein **Haus** mit Garten.",
+  "example_en": "We have a house with a garden."
+ },
+ {
+  "rank": 153,
+  "word": "am",
+  "plural": "",
+  "example_de": "Wir treffen uns **am** Bahnhof.",
+  "example_en": "We'll meet at the station."
+ },
+ {
+  "rank": 154,
+  "word": "Herr",
+  "plural": "Herren",
+  "example_de": "Der ältere **Herr** dort ist sehr freundlich.",
+  "example_en": "The older gentleman over there is very friendly."
+ },
+ {
+  "rank": 155,
+  "word": "euch",
+  "plural": "",
+  "example_de": "Ich zeige **euch** die Stadt.",
+  "example_en": "I'll show you the city."
+ },
+ {
+  "rank": 156,
+  "word": "erst",
+  "plural": "",
+  "example_de": "Ich trinke **erst** einen Kaffee.",
+  "example_en": "First I'll have a coffee."
+ },
+ {
+  "rank": 157,
+  "word": "Kind",
+  "plural": "Kinder",
+  "example_de": "Das **Kind** schläft schon.",
+  "example_en": "The child is already asleep."
+ },
+ {
+  "rank": 158,
+  "word": "bis",
+  "plural": "",
+  "example_de": "Der Laden ist **bis** acht Uhr offen.",
+  "example_en": "The shop is open until eight o'clock."
+ },
+ {
+  "rank": 159,
+  "word": "Freund",
+  "plural": "Freunde",
+  "example_de": "Am Samstag treffe ich einen **Freund**.",
+  "example_en": "On Saturday I'm meeting a friend."
+ },
+ {
+  "rank": 160,
+  "word": "nie",
+  "plural": "",
+  "example_de": "Ich trinke **nie** Kaffee am Abend.",
+  "example_en": "I never drink coffee in the evening."
+ },
+ {
+  "rank": 161,
+  "word": "zurück",
+  "plural": "",
+  "example_de": "Ich bin um sechs Uhr **zurück**.",
+  "example_en": "I'll be back at six o'clock."
+ },
+ {
+  "rank": 162,
+  "word": "groß",
+  "plural": "",
+  "example_de": "Unsere Küche ist sehr **groß**.",
+  "example_en": "Our kitchen is very big."
+ },
+ {
+  "rank": 163,
+  "word": "gestern",
+  "plural": "",
+  "example_de": "**Gestern** war ich beim Arzt.",
+  "example_en": "Yesterday I was at the doctor's."
+ },
+ {
+  "rank": 164,
+  "word": "Abend",
+  "plural": "Abende",
+  "example_de": "Am **Abend** essen wir zusammen.",
+  "example_en": "In the evening we eat together."
+ },
+ {
+  "rank": 165,
+  "word": "bekommen",
+  "plural": "",
+  "example_de": "Ich habe einen Brief **bekommen**.",
+  "example_en": "I got a letter."
+ },
+ {
+  "rank": 166,
+  "word": "hey",
+  "plural": "",
+  "example_de": "**Hey**, warte auf mich!",
+  "example_en": "Hey, wait for me!"
+ },
+ {
+  "rank": 167,
+  "word": "spielen",
+  "plural": "",
+  "example_de": "Die Kinder **spielen** im Park Fußball.",
+  "example_en": "The children are playing football in the park."
+ },
+ {
+  "rank": 168,
+  "word": "drei",
+  "plural": "",
+  "example_de": "Ich habe **drei** Geschwister.",
+  "example_en": "I have three siblings."
+ },
+ {
+  "rank": 169,
+  "word": "zusammen",
+  "plural": "",
+  "example_de": "Wollen wir **zusammen** essen gehen?",
+  "example_en": "Shall we go out to eat together?"
+ },
+ {
+  "rank": 170,
+  "word": "weiter",
+  "plural": "",
+  "example_de": "Wir gehen noch ein bisschen **weiter**.",
+  "example_en": "Let's walk on a bit further."
+ },
+ {
+  "rank": 171,
+  "word": "Geld",
+  "plural": "",
+  "example_de": "Ich habe nicht genug **Geld** für das Ticket.",
+  "example_en": "I don't have enough money for the ticket."
+ },
+ {
+  "rank": 172,
+  "word": "okay",
+  "plural": "",
+  "example_de": "**Okay**, wir sehen uns um acht.",
+  "example_en": "Okay, see you at eight."
+ },
+ {
+  "rank": 173,
+  "word": "dort",
+  "plural": "",
+  "example_de": "Siehst du das Café **dort**?",
+  "example_en": "Do you see the café over there?"
+ },
+ {
+  "rank": 174,
+  "word": "sicher",
+  "plural": "",
+  "example_de": "Bist du **sicher**, dass der Laden offen ist?",
+  "example_en": "Are you sure the shop is open?"
+ },
+ {
+  "rank": 175,
+  "word": "zum",
+  "plural": "",
+  "example_de": "Fährt dieser Bus **zum** Bahnhof?",
+  "example_en": "Does this bus go to the station?"
+ },
+ {
+  "rank": 176,
+  "word": "Name",
+  "plural": "Namen",
+  "example_de": "Mein **Name** ist Anna.",
+  "example_en": "My name is Anna."
+ },
+ {
+  "rank": 177,
+  "word": "sterben",
+  "plural": "",
+  "example_de": "Leider ist unser Hund letztes Jahr **gestorben**.",
+  "example_en": "Sadly, our dog died last year."
+ },
+ {
+  "rank": 178,
+  "word": "passieren",
+  "plural": "",
+  "example_de": "Was ist **passiert**?",
+  "example_en": "What happened?"
+ },
+ {
+  "rank": 179,
+  "word": "Nacht",
+  "plural": "Nächte",
+  "example_de": "Ich habe letzte **Nacht** schlecht geschlafen.",
+  "example_en": "I slept badly last night."
+ },
+ {
+  "rank": 180,
+  "word": "jeder",
+  "plural": "",
+  "example_de": "**Jeder** Schüler bekommt ein Buch.",
+  "example_en": "Every student gets a book."
+ },
+ {
+  "rank": 181,
+  "word": "lange",
+  "plural": "",
+  "example_de": "Ich habe **lange** auf den Bus gewartet.",
+  "example_en": "I waited a long time for the bus."
+ },
+ {
+  "rank": 182,
+  "word": "Welt",
+  "plural": "Welten",
+  "example_de": "Ich möchte die ganze **Welt** sehen.",
+  "example_en": "I'd like to see the whole world."
+ },
+ {
+  "rank": 183,
+  "word": "allein",
+  "plural": "",
+  "example_de": "Meine Oma wohnt **allein**.",
+  "example_en": "My grandma lives alone."
+ },
+ {
+  "rank": 184,
+  "word": "vergessen",
+  "plural": "",
+  "example_de": "Ich habe meinen Regenschirm **vergessen**.",
+  "example_en": "I forgot my umbrella."
+ },
+ {
+  "rank": 185,
+  "word": "schnell",
+  "plural": "",
+  "example_de": "Der Zug fährt sehr **schnell**.",
+  "example_en": "The train goes very fast."
+ },
+ {
+  "rank": 186,
+  "word": "alt",
+  "plural": "",
+  "example_de": "Wie **alt** bist du?",
+  "example_en": "How old are you?"
+ },
+ {
+  "rank": 187,
+  "word": "sofort",
+  "plural": "",
+  "example_de": "Komm bitte **sofort** nach Hause!",
+  "example_en": "Please come home right away!"
+ },
+ {
+  "rank": 188,
+  "word": "Hand",
+  "plural": "Hände",
+  "example_de": "Wasch dir bitte die **Hände**!",
+  "example_en": "Please wash your hands!"
+ },
+ {
+  "rank": 189,
+  "word": "Sache",
+  "plural": "Sachen",
+  "example_de": "Ich muss noch eine **Sache** erledigen.",
+  "example_en": "I still have to take care of one thing."
+ },
+ {
+  "rank": 190,
+  "word": "wichtig",
+  "plural": "",
+  "example_de": "Frühstück ist sehr **wichtig**.",
+  "example_en": "Breakfast is very important."
+ },
+ {
+  "rank": 191,
+  "word": "genau",
+  "plural": "",
+  "example_de": "Der Zug kommt **genau** um neun Uhr.",
+  "example_en": "The train arrives at exactly nine o'clock."
+ },
+ {
+  "rank": 192,
+  "word": "Morgen",
+  "plural": "Morgen",
+  "example_de": "Am **Morgen** trinke ich immer Tee.",
+  "example_en": "In the morning I always drink tea."
+ },
+ {
+  "rank": 193,
+  "word": "arbeiten",
+  "plural": "",
+  "example_de": "Meine Schwester **arbeitet** bei einer Bank.",
+  "example_en": "My sister works at a bank."
+ },
+ {
+  "rank": 194,
+  "word": "morgen",
+  "plural": "",
+  "example_de": "**Morgen** habe ich frei.",
+  "example_en": "I have the day off tomorrow."
+ },
+ {
+  "rank": 195,
+  "word": "neu",
+  "plural": "",
+  "example_de": "Wie findest du meine **neue** Jacke?",
+  "example_en": "How do you like my new jacket?"
+ },
+ {
+  "rank": 196,
+  "word": "Problem",
+  "plural": "Probleme",
+  "example_de": "Kein **Problem**, ich helfe dir.",
+  "example_en": "No problem, I'll help you."
+ },
+ {
+  "rank": 197,
+  "word": "ohne",
+  "plural": "",
+  "example_de": "Ich trinke Kaffee **ohne** Zucker.",
+  "example_en": "I drink coffee without sugar."
+ },
+ {
+  "rank": 198,
+  "word": "treffen",
+  "plural": "",
+  "example_de": "Wir **treffen** uns um sieben vor dem Kino.",
+  "example_en": "We're meeting at seven in front of the cinema."
+ },
+ {
+  "rank": 199,
+  "word": "suchen",
+  "plural": "",
+  "example_de": "Ich **suche** eine neue Wohnung.",
+  "example_en": "I'm looking for a new apartment."
+ },
+ {
+  "rank": 200,
+  "word": "tot",
+  "plural": "",
+  "example_de": "Die Pflanze ist leider **tot**.",
+  "example_en": "Unfortunately, the plant is dead."
+ },
+ {
+  "rank": 201,
+  "word": "bringen",
+  "plural": "",
+  "example_de": "Kannst du mir ein Glas Wasser **bringen**?",
+  "example_en": "Can you bring me a glass of water?"
+ },
+ {
+  "rank": 202,
+  "word": "Angst",
+  "plural": "Ängste",
+  "example_de": "Mein Sohn hat **Angst** vor Hunden.",
+  "example_en": "My son is afraid of dogs."
+ },
+ {
+  "rank": 203,
+  "word": "klein",
+  "plural": "",
+  "example_de": "Wir wohnen in einem **kleinen** Dorf.",
+  "example_en": "We live in a small village."
+ },
+ {
+  "rank": 204,
+  "word": "oh",
+  "plural": "",
+  "example_de": "**Oh**, das ist aber schön!",
+  "example_en": "Oh, that's really nice!"
+ },
+ {
+  "rank": 205,
+  "word": "Ding",
+  "plural": "Dinge",
+  "example_de": "Was ist das für ein **Ding**?",
+  "example_en": "What is that thing?"
+ },
+ {
+  "rank": 206,
+  "word": "nett",
+  "plural": "",
+  "example_de": "Deine Nachbarn sind sehr **nett**.",
+  "example_en": "Your neighbors are very nice."
+ },
+ {
+  "rank": 207,
+  "word": "gegen",
+  "plural": "",
+  "example_de": "Ich bin **gegen** diese Idee.",
+  "example_en": "I'm against this idea."
+ },
+ {
+  "rank": 208,
+  "word": "fahren",
+  "plural": "",
+  "example_de": "Morgen **fahren** wir mit dem Auto nach Wien.",
+  "example_en": "Tomorrow we're driving to Vienna."
+ },
+ {
+  "rank": 209,
+  "word": "essen",
+  "plural": "",
+  "example_de": "Was **essen** wir heute Abend?",
+  "example_en": "What are we eating tonight?"
+ },
+ {
+  "rank": 210,
+  "word": "nun",
+  "plural": "",
+  "example_de": "**Nun** ist der Sommer vorbei.",
+  "example_en": "Now the summer is over."
+ },
+ {
+  "rank": 211,
+  "word": "Mensch",
+  "plural": "Menschen",
+  "example_de": "Er ist ein sehr netter **Mensch**.",
+  "example_en": "He is a very nice person."
+ },
+ {
+  "rank": 212,
+  "word": "Frage",
+  "plural": "Fragen",
+  "example_de": "Ich habe eine **Frage**.",
+  "example_en": "I have a question."
+ },
+ {
+  "rank": 213,
+  "word": "wenig",
+  "plural": "",
+  "example_de": "Ich habe heute **wenig** Zeit.",
+  "example_en": "I have little time today."
+ },
+ {
+  "rank": 214,
+  "word": "stimmen",
+  "plural": "",
+  "example_de": "Du hast recht, das **stimmt**.",
+  "example_en": "You're right, that's true."
+ },
+ {
+  "rank": 215,
+  "word": "schlafen",
+  "plural": "",
+  "example_de": "Das Baby **schläft** im Kinderzimmer.",
+  "example_en": "The baby is sleeping in the nursery."
+ },
+ {
+  "rank": 216,
+  "word": "hoffen",
+  "plural": "",
+  "example_de": "Ich **hoffe**, du besuchst uns bald.",
+  "example_en": "I hope you'll visit us soon."
+ },
+ {
+  "rank": 217,
+  "word": "Moment",
+  "plural": "Momente",
+  "example_de": "Einen **Moment**, bitte!",
+  "example_en": "One moment, please!"
+ },
+ {
+  "rank": 218,
+  "word": "einmal",
+  "plural": "",
+  "example_de": "Ich gehe **einmal** pro Woche schwimmen.",
+  "example_en": "I go swimming once a week."
+ },
+ {
+  "rank": 219,
+  "word": "anrufen",
+  "plural": "",
+  "example_de": "**Ruf** mich bitte heute Abend **an**.",
+  "example_en": "Please call me this evening."
+ },
+ {
+  "rank": 220,
+  "word": "halt",
+  "plural": "",
+  "example_de": "Das ist **halt** so.",
+  "example_en": "That's just the way it is."
+ },
+ {
+  "rank": 221,
+  "word": "Auto",
+  "plural": "Autos",
+  "example_de": "Unser **Auto** ist kaputt.",
+  "example_en": "Our car is broken."
+ },
+ {
+  "rank": 222,
+  "word": "kriegen",
+  "plural": "",
+  "example_de": "Was **kriegst** du zum Geburtstag?",
+  "example_en": "What are you getting for your birthday?"
+ },
+ {
+  "rank": 223,
+  "word": "schlecht",
+  "plural": "",
+  "example_de": "Der Film war ziemlich **schlecht**.",
+  "example_en": "The film was pretty bad."
+ },
+ {
+  "rank": 224,
+  "word": "aussehen",
+  "plural": "",
+  "example_de": "Du **siehst** heute sehr gut **aus**.",
+  "example_en": "You look very good today."
+ },
+ {
+  "rank": 225,
+  "word": "jemand",
+  "plural": "",
+  "example_de": "Hat **jemand** meinen Schlüssel gesehen?",
+  "example_en": "Has anyone seen my key?"
+ },
+ {
+  "rank": 226,
+  "word": "Uhr",
+  "plural": "Uhren",
+  "example_de": "Meine **Uhr** ist stehen geblieben.",
+  "example_en": "My watch has stopped."
+ },
+ {
+  "rank": 227,
+  "word": "niemand",
+  "plural": "",
+  "example_de": "**Niemand** war zu Hause.",
+  "example_en": "Nobody was at home."
+ },
+ {
+  "rank": 228,
+  "word": "bisschen",
+  "plural": "",
+  "example_de": "Ich spreche ein **bisschen** Deutsch.",
+  "example_en": "I speak a little German."
+ },
+ {
+  "rank": 229,
+  "word": "Junge",
+  "plural": "Jungen",
+  "example_de": "Der **Junge** spielt mit seinem Hund.",
+  "example_en": "The boy is playing with his dog."
+ },
+ {
+  "rank": 230,
+  "word": "wohl",
+  "plural": "",
+  "example_de": "Er ist **wohl** noch im Büro.",
+  "example_en": "He's probably still at the office."
+ },
+ {
+  "rank": 231,
+  "word": "zeigen",
+  "plural": "",
+  "example_de": "Kannst du mir den Weg **zeigen**?",
+  "example_en": "Can you show me the way?"
+ },
+ {
+  "rank": 232,
+  "word": "nächste",
+  "plural": "",
+  "example_de": "Wir steigen an der **nächsten** Haltestelle aus.",
+  "example_en": "We're getting off at the next stop."
+ },
+ {
+  "rank": 233,
+  "word": "halten",
+  "plural": "",
+  "example_de": "Kannst du kurz meine Tasche **halten**?",
+  "example_en": "Can you hold my bag for a moment?"
+ },
+ {
+  "rank": 234,
+  "word": "Weg",
+  "plural": "Wege",
+  "example_de": "Ist das der richtige **Weg** zum Bahnhof?",
+  "example_en": "Is this the right way to the station?"
+ },
+ {
+  "rank": 235,
+  "word": "erste",
+  "plural": "",
+  "example_de": "Das ist mein **erster** Tag im neuen Job.",
+  "example_en": "This is my first day at the new job."
+ },
+ {
+  "rank": 236,
+  "word": "endlich",
+  "plural": "",
+  "example_de": "**Endlich** ist Wochenende!",
+  "example_en": "Finally, it's the weekend!"
+ },
+ {
+  "rank": 237,
+  "word": "beide",
+  "plural": "",
+  "example_de": "**Beide** Kinder gehen schon zur Schule.",
+  "example_en": "Both children already go to school."
+ },
+ {
+  "rank": 238,
+  "word": "Stunde",
+  "plural": "Stunden",
+  "example_de": "Der Film dauert zwei **Stunden**.",
+  "example_en": "The film lasts two hours."
+ },
+ {
+  "rank": 239,
+  "word": "setzen",
+  "plural": "",
+  "example_de": "Ich **setze** das Baby in den Kinderwagen.",
+  "example_en": "I put the baby in the pram."
+ },
+ {
+  "rank": 240,
+  "word": "letzte",
+  "plural": "",
+  "example_de": "**Letzte** Woche war ich krank.",
+  "example_en": "Last week I was sick."
+ },
+ {
+  "rank": 241,
+  "word": "gehören",
+  "plural": "",
+  "example_de": "Wem **gehört** diese Jacke?",
+  "example_en": "Whose jacket is this?"
+ },
+ {
+  "rank": 242,
+  "word": "hin",
+  "plural": "",
+  "example_de": "Wo gehst du **hin**?",
+  "example_en": "Where are you going?"
+ },
+ {
+  "rank": 243,
+  "word": "her",
+  "plural": "",
+  "example_de": "Komm bitte schnell **her**!",
+  "example_en": "Please come here quickly!"
+ },
+ {
+  "rank": 244,
+  "word": "Mädchen",
+  "plural": "Mädchen",
+  "example_de": "Das **Mädchen** liest ein Buch.",
+  "example_en": "The girl is reading a book."
+ },
+ {
+  "rank": 245,
+  "word": "dabei",
+  "plural": "",
+  "example_de": "Ich habe meinen Pass nicht **dabei**.",
+  "example_en": "I don't have my passport with me."
+ },
+ {
+  "rank": 246,
+  "word": "fühlen",
+  "plural": "",
+  "example_de": "Ich **fühle** mich heute nicht gut.",
+  "example_en": "I don't feel well today."
+ },
+ {
+  "rank": 247,
+  "word": "Ordnung",
+  "plural": "",
+  "example_de": "Ist alles in **Ordnung**?",
+  "example_en": "Is everything all right?"
+ },
+ {
+  "rank": 248,
+  "word": "einer",
+  "plural": "",
+  "example_de": "**Einer** von euch muss mir helfen.",
+  "example_en": "One of you has to help me."
+ },
+ {
+  "rank": 249,
+  "word": "verdammt",
+  "plural": "",
+  "example_de": "**Verdammt**, ich habe den Bus verpasst!",
+  "example_en": "Damn, I missed the bus!"
+ },
+ {
+  "rank": 250,
+  "word": "weniger",
+  "plural": "",
+  "example_de": "Ich sollte **weniger** Kaffee trinken.",
+  "example_en": "I should drink less coffee."
+ },
+ {
+  "rank": 251,
+  "word": "fertig",
+  "plural": "",
+  "example_de": "Bist du schon **fertig** mit den Hausaufgaben?",
+  "example_en": "Are you already done with your homework?"
+ },
+ {
+  "rank": 252,
+  "word": "verlieren",
+  "plural": "",
+  "example_de": "Ich habe meinen Schlüssel **verloren**.",
+  "example_en": "I lost my key."
+ },
+ {
+  "rank": 253,
+  "word": "Essen",
+  "plural": "Essen",
+  "example_de": "Das **Essen** ist heute sehr lecker.",
+  "example_en": "The food is very tasty today."
+ },
+ {
+  "rank": 254,
+  "word": "sitzen",
+  "plural": "",
+  "example_de": "Die Katze **sitzt** auf dem Sofa.",
+  "example_en": "The cat is sitting on the sofa."
+ },
+ {
+  "rank": 255,
+  "word": "eigentlich",
+  "plural": "",
+  "example_de": "Ich wollte **eigentlich** heute einkaufen gehen.",
+  "example_en": "I actually wanted to go shopping today."
+ },
+ {
+  "rank": 256,
+  "word": "schauen",
+  "plural": "",
+  "example_de": "**Schau** mal aus dem Fenster!",
+  "example_en": "Look out of the window!"
+ },
+ {
+  "rank": 257,
+  "word": "Papa",
+  "plural": "Papas",
+  "example_de": "Mein **Papa** kocht am Sonntag.",
+  "example_en": "My dad cooks on Sunday."
+ },
+ {
+  "rank": 258,
+  "word": "Woche",
+  "plural": "Wochen",
+  "example_de": "Nächste **Woche** fahren wir nach Berlin.",
+  "example_en": "Next week we're going to Berlin."
+ },
+ {
+  "rank": 259,
+  "word": "Mama",
+  "plural": "Mamas",
+  "example_de": "**Mama**, wann gibt es Abendessen?",
+  "example_en": "Mom, when is dinner?"
+ },
+ {
+  "rank": 260,
+  "word": "liegen",
+  "plural": "",
+  "example_de": "Meine Brille **liegt** im Auto.",
+  "example_en": "My glasses are in the car."
+ },
+ {
+  "rank": 261,
+  "word": "ziemlich",
+  "plural": "",
+  "example_de": "Heute ist es **ziemlich** kalt.",
+  "example_en": "It's quite cold today."
+ },
+ {
+  "rank": 262,
+  "word": "Minute",
+  "plural": "Minuten",
+  "example_de": "Der Bus kommt in fünf **Minuten**.",
+  "example_en": "The bus is coming in five minutes."
+ },
+ {
+  "rank": 263,
+  "word": "raus",
+  "plural": "",
+  "example_de": "Die Kinder gehen **raus** zum Spielen.",
+  "example_en": "The children are going out to play."
+ },
+ {
+  "rank": 264,
+  "word": "rein",
+  "plural": "",
+  "example_de": "Komm doch **rein**, es ist kalt!",
+  "example_en": "Come on in, it's cold!"
+ },
+ {
+  "rank": 265,
+  "word": "lang",
+  "plural": "",
+  "example_de": "Der Film war sehr **lang**.",
+  "example_en": "The movie was very long."
+ },
+ {
+  "rank": 266,
+  "word": "erinnern",
+  "plural": "",
+  "example_de": "Kannst du mich morgen an den Termin **erinnern**?",
+  "example_en": "Can you remind me about the appointment tomorrow?"
+ },
+ {
+  "rank": 267,
+  "word": "zur",
+  "plural": "",
+  "example_de": "Ich gehe jetzt **zur** Arbeit.",
+  "example_en": "I'm going to work now."
+ },
+ {
+  "rank": 268,
+  "word": "besser",
+  "plural": "",
+  "example_de": "Mein Deutsch wird jeden Tag **besser**.",
+  "example_en": "My German is getting better every day."
+ },
+ {
+  "rank": 269,
+  "word": "lieber",
+  "plural": "",
+  "example_de": "Ich trinke **lieber** Tee als Kaffee.",
+  "example_en": "I'd rather drink tea than coffee."
+ },
+ {
+  "rank": 270,
+  "word": "Geschichte",
+  "plural": "Geschichten",
+  "example_de": "Kennst du die **Geschichte** von Hänsel und Gretel?",
+  "example_en": "Do you know the story of Hansel and Gretel?"
+ },
+ {
+  "rank": 271,
+  "word": "komisch",
+  "plural": "",
+  "example_de": "Der Clown ist wirklich **komisch**.",
+  "example_en": "The clown is really funny."
+ },
+ {
+  "rank": 272,
+  "word": "erzählen",
+  "plural": "",
+  "example_de": "Papa **erzählt** den Kindern jeden Abend eine Geschichte.",
+  "example_en": "Dad tells the children a story every evening."
+ },
+ {
+  "rank": 273,
+  "word": "leider",
+  "plural": "",
+  "example_de": "Ich habe **leider** keine Zeit.",
+  "example_en": "Unfortunately, I don't have time."
+ },
+ {
+  "rank": 274,
+  "word": "froh",
+  "plural": "",
+  "example_de": "Ich bin **froh**, dass du hier bist.",
+  "example_en": "I'm glad that you're here."
+ },
+ {
+  "rank": 275,
+  "word": "verrückt",
+  "plural": "",
+  "example_de": "Mein Onkel hat eine **verrückte** Idee.",
+  "example_en": "My uncle has a crazy idea."
+ },
+ {
+  "rank": 276,
+  "word": "Ende",
+  "plural": "Enden",
+  "example_de": "Am **Ende** des Films waren alle glücklich.",
+  "example_en": "At the end of the movie, everyone was happy."
+ },
+ {
+  "rank": 277,
+  "word": "trinken",
+  "plural": "",
+  "example_de": "Morgens **trinke** ich immer einen Kaffee.",
+  "example_en": "In the morning I always drink a coffee."
+ },
+ {
+  "rank": 278,
+  "word": "selbst",
+  "plural": "",
+  "example_de": "Das habe ich **selbst** gekocht.",
+  "example_en": "I cooked that myself."
+ },
+ {
+  "rank": 279,
+  "word": "Idee",
+  "plural": "Ideen",
+  "example_de": "Das ist eine gute **Idee**!",
+  "example_en": "That's a good idea!"
+ },
+ {
+  "rank": 280,
+  "word": "kaufen",
+  "plural": "",
+  "example_de": "Wir **kaufen** Brot beim Bäcker.",
+  "example_en": "We buy bread at the bakery."
+ },
+ {
+  "rank": 281,
+  "word": "überhaupt",
+  "plural": "",
+  "example_de": "Ich habe **überhaupt** keinen Hunger.",
+  "example_en": "I'm not hungry at all."
+ },
+ {
+  "rank": 282,
+  "word": "müde",
+  "plural": "",
+  "example_de": "Nach der Arbeit bin ich immer **müde**.",
+  "example_en": "After work I'm always tired."
+ },
+ {
+  "rank": 283,
+  "word": "ach",
+  "plural": "",
+  "example_de": "**Ach** so, jetzt verstehe ich!",
+  "example_en": "Oh, I see, now I understand!"
+ },
+ {
+  "rank": 284,
+  "word": "irgendwie",
+  "plural": "",
+  "example_de": "**Irgendwie** schaffen wir das schon.",
+  "example_en": "Somehow we'll manage it."
+ },
+ {
+  "rank": 285,
+  "word": "bestimmt",
+  "plural": "",
+  "example_de": "Sie kommt **bestimmt** gleich.",
+  "example_en": "She's surely coming any minute."
+ },
+ {
+  "rank": 286,
+  "word": "wahrscheinlich",
+  "plural": "",
+  "example_de": "Morgen regnet es **wahrscheinlich**.",
+  "example_en": "It will probably rain tomorrow."
+ },
+ {
+  "rank": 287,
+  "word": "mitkommen",
+  "plural": "",
+  "example_de": "**Kommst** du heute Abend **mit** ins Kino?",
+  "example_en": "Are you coming along to the cinema tonight?"
+ },
+ {
+  "rank": 288,
+  "word": "Tür",
+  "plural": "Türen",
+  "example_de": "Bitte mach die **Tür** zu.",
+  "example_en": "Please close the door."
+ },
+ {
+  "rank": 289,
+  "word": "leidtun",
+  "plural": "",
+  "example_de": "Es **tut** mir **leid**, dass ich zu spät komme.",
+  "example_en": "I'm sorry I'm late."
+ },
+ {
+  "rank": 290,
+  "word": "wahr",
+  "plural": "",
+  "example_de": "Ist das wirklich **wahr**?",
+  "example_en": "Is that really true?"
+ },
+ {
+  "rank": 291,
+  "word": "Schule",
+  "plural": "Schulen",
+  "example_de": "Die Kinder gehen um acht Uhr in die **Schule**.",
+  "example_en": "The children go to school at eight o'clock."
+ },
+ {
+  "rank": 292,
+  "word": "wohnen",
+  "plural": "",
+  "example_de": "Ich **wohne** in einer kleinen Wohnung in Köln.",
+  "example_en": "I live in a small apartment in Cologne."
+ },
+ {
+  "rank": 293,
+  "word": "eben",
+  "plural": "",
+  "example_de": "Er ist **eben** nach Hause gegangen.",
+  "example_en": "He just went home."
+ },
+ {
+  "rank": 294,
+  "word": "Wasser",
+  "plural": "",
+  "example_de": "Kann ich bitte ein Glas **Wasser** haben?",
+  "example_en": "Can I have a glass of water, please?"
+ },
+ {
+  "rank": 295,
+  "word": "dumm",
+  "plural": "",
+  "example_de": "Entschuldigung, das war **dumm** von mir.",
+  "example_en": "Sorry, that was stupid of me."
+ },
+ {
+  "rank": 296,
+  "word": "Monat",
+  "plural": "Monate",
+  "example_de": "Im nächsten **Monat** habe ich Urlaub.",
+  "example_en": "Next month I'm on vacation."
+ },
+ {
+  "rank": 297,
+  "word": "böse",
+  "plural": "",
+  "example_de": "Im Märchen gibt es eine **böse** Hexe.",
+  "example_en": "In the fairy tale there is an evil witch."
+ },
+ {
+  "rank": 298,
+  "word": "kurz",
+  "plural": "",
+  "example_de": "Ich habe nur eine **kurze** Frage.",
+  "example_en": "I just have a short question."
+ },
+ {
+  "rank": 299,
+  "word": "schwer",
+  "plural": "",
+  "example_de": "Der Koffer ist sehr **schwer**.",
+  "example_en": "The suitcase is very heavy."
+ },
+ {
+  "rank": 300,
+  "word": "paar",
+  "plural": "",
+  "example_de": "Ich bleibe ein **paar** Tage in Hamburg.",
+  "example_en": "I'm staying in Hamburg for a few days."
+ },
+ {
+  "rank": 301,
+  "word": "leicht",
+  "plural": "",
+  "example_de": "Die Tasche ist ganz **leicht**.",
+  "example_en": "The bag is quite light."
+ },
+ {
+  "rank": 302,
+  "word": "spät",
+  "plural": "",
+  "example_de": "Es ist schon **spät**, ich gehe ins Bett.",
+  "example_en": "It's already late, I'm going to bed."
+ },
+ {
+  "rank": 303,
+  "word": "gefallen",
+  "plural": "",
+  "example_de": "Die neue Wohnung **gefällt** mir sehr.",
+  "example_en": "I like the new apartment a lot."
+ },
+ {
+  "rank": 304,
+  "word": "Liebe",
+  "plural": "",
+  "example_de": "**Liebe** ist das Wichtigste im Leben.",
+  "example_en": "Love is the most important thing in life."
+ },
+ {
+  "rank": 305,
+  "word": "anfangen",
+  "plural": "",
+  "example_de": "Der Unterricht **fängt** um neun Uhr **an**.",
+  "example_en": "The lesson starts at nine o'clock."
+ },
+ {
+  "rank": 306,
+  "word": "Stadt",
+  "plural": "Städte",
+  "example_de": "Wien ist eine sehr schöne **Stadt**.",
+  "example_en": "Vienna is a very beautiful city."
+ },
+ {
+  "rank": 307,
+  "word": "verschwinden",
+  "plural": "",
+  "example_de": "Meine Brille ist schon wieder **verschwunden**.",
+  "example_en": "My glasses have disappeared again."
+ },
+ {
+  "rank": 308,
+  "word": "Kopf",
+  "plural": "Köpfe",
+  "example_de": "Mir tut der **Kopf** weh.",
+  "example_en": "My head hurts."
+ },
+ {
+  "rank": 309,
+  "word": "egal",
+  "plural": "",
+  "example_de": "Rot oder blau? Das ist mir **egal**.",
+  "example_en": "Red or blue? I don't mind."
+ },
+ {
+  "rank": 310,
+  "word": "Land",
+  "plural": "Länder",
+  "example_de": "Aus welchem **Land** kommst du?",
+  "example_en": "Which country are you from?"
+ },
+ {
+  "rank": 311,
+  "word": "fast",
+  "plural": "",
+  "example_de": "Ich bin **fast** fertig.",
+  "example_en": "I'm almost done."
+ },
+ {
+  "rank": 312,
+  "word": "früh",
+  "plural": "",
+  "example_de": "Der Bäcker öffnet sehr **früh**.",
+  "example_en": "The bakery opens very early."
+ },
+ {
+  "rank": 313,
+  "word": "damit",
+  "plural": "",
+  "example_de": "Ich lerne Deutsch, **damit** ich in Berlin arbeiten kann.",
+  "example_en": "I'm learning German so that I can work in Berlin."
+ },
+ {
+  "rank": 314,
+  "word": "Eltern",
+  "plural": "",
+  "example_de": "Meine **Eltern** wohnen in München.",
+  "example_en": "My parents live in Munich."
+ },
+ {
+  "rank": 315,
+  "word": "Bruder",
+  "plural": "Brüder",
+  "example_de": "Mein **Bruder** ist zwei Jahre älter als ich.",
+  "example_en": "My brother is two years older than me."
+ },
+ {
+  "rank": 316,
+  "word": "glücklich",
+  "plural": "",
+  "example_de": "Wir sind sehr **glücklich** in unserem neuen Haus.",
+  "example_en": "We're very happy in our new house."
+ },
+ {
+  "rank": 317,
+  "word": "Schwester",
+  "plural": "Schwestern",
+  "example_de": "Meine **Schwester** studiert Medizin.",
+  "example_en": "My sister studies medicine."
+ },
+ {
+  "rank": 318,
+  "word": "laut",
+  "plural": "",
+  "example_de": "Die Musik ist zu **laut**.",
+  "example_en": "The music is too loud."
+ },
+ {
+  "rank": 319,
+  "word": "sogar",
+  "plural": "",
+  "example_de": "Er spricht **sogar** Japanisch.",
+  "example_en": "He even speaks Japanese."
+ },
+ {
+  "rank": 320,
+  "word": "Herz",
+  "plural": "Herzen",
+  "example_de": "Mein **Herz** schlägt ganz schnell.",
+  "example_en": "My heart is beating really fast."
+ },
+ {
+  "rank": 321,
+  "word": "na",
+  "plural": "",
+  "example_de": "**Na**, wie war dein Tag?",
+  "example_en": "Well, how was your day?"
+ },
+ {
+  "rank": 322,
+  "word": "ruhig",
+  "plural": "",
+  "example_de": "Unsere Straße ist sehr **ruhig**.",
+  "example_en": "Our street is very quiet."
+ },
+ {
+  "rank": 323,
+  "word": "danach",
+  "plural": "",
+  "example_de": "Zuerst essen wir, **danach** gehen wir spazieren.",
+  "example_en": "First we eat, afterwards we go for a walk."
+ },
+ {
+  "rank": 324,
+  "word": "vorbei",
+  "plural": "",
+  "example_de": "Der Winter ist endlich **vorbei**.",
+  "example_en": "Winter is finally over."
+ },
+ {
+  "rank": 325,
+  "word": "Hilfe",
+  "plural": "",
+  "example_de": "Vielen Dank für deine **Hilfe**!",
+  "example_en": "Thanks a lot for your help!"
+ },
+ {
+  "rank": 326,
+  "word": "durch",
+  "plural": "",
+  "example_de": "Wir gehen **durch** den Park nach Hause.",
+  "example_en": "We walk home through the park."
+ },
+ {
+  "rank": 327,
+  "word": "Buch",
+  "plural": "Bücher",
+  "example_de": "Ich lese gerade ein spannendes **Buch**.",
+  "example_en": "I'm reading an exciting book right now."
+ },
+ {
+  "rank": 328,
+  "word": "lesen",
+  "plural": "",
+  "example_de": "Am Abend **liest** meine Mutter die Zeitung.",
+  "example_en": "In the evening my mother reads the newspaper."
+ },
+ {
+  "rank": 329,
+  "word": "Arbeit",
+  "plural": "Arbeiten",
+  "example_de": "Ich fahre mit dem Fahrrad zur **Arbeit**.",
+  "example_en": "I ride my bike to work."
+ },
+ {
+  "rank": 330,
+  "word": "schreiben",
+  "plural": "",
+  "example_de": "Ich **schreibe** meiner Oma eine Karte.",
+  "example_en": "I'm writing my grandma a card."
+ },
+ {
+  "rank": 331,
+  "word": "Film",
+  "plural": "Filme",
+  "example_de": "Wollen wir heute einen **Film** sehen?",
+  "example_en": "Shall we watch a movie today?"
+ },
+ {
+  "rank": 332,
+  "word": "Spaß",
+  "plural": "",
+  "example_de": "Tanzen macht mir viel **Spaß**.",
+  "example_en": "Dancing is a lot of fun for me."
+ },
+ {
+  "rank": 333,
+  "word": "Glück",
+  "plural": "",
+  "example_de": "Viel **Glück** bei der Prüfung!",
+  "example_en": "Good luck with the exam!"
+ },
+ {
+  "rank": 334,
+  "word": "hübsch",
+  "plural": "",
+  "example_de": "Du hast ein sehr **hübsches** Kleid.",
+  "example_en": "You have a very pretty dress."
+ },
+ {
+  "rank": 335,
+  "word": "heiraten",
+  "plural": "",
+  "example_de": "Meine Schwester **heiratet** im Sommer.",
+  "example_en": "My sister is getting married in the summer."
+ },
+ {
+  "rank": 336,
+  "word": "Freundin",
+  "plural": "Freundinnen",
+  "example_de": "Ich treffe heute meine **Freundin** im Café.",
+  "example_en": "I'm meeting my friend at the café today."
+ },
+ {
+  "rank": 337,
+  "word": "zuhören",
+  "plural": "",
+  "example_de": "Bitte **hör** mir mal **zu**!",
+  "example_en": "Please listen to me!"
+ },
+ {
+  "rank": 338,
+  "word": "aufhören",
+  "plural": "",
+  "example_de": "Wann **hört** der Regen endlich **auf**?",
+  "example_en": "When will the rain finally stop?"
+ },
+ {
+  "rank": 339,
+  "word": "Zimmer",
+  "plural": "Zimmer",
+  "example_de": "Mein **Zimmer** ist klein, aber gemütlich.",
+  "example_en": "My room is small but cozy."
+ },
+ {
+  "rank": 340,
+  "word": "gucken",
+  "plural": "",
+  "example_de": "**Guck** mal, da ist ein Eichhörnchen!",
+  "example_en": "Look, there's a squirrel!"
+ },
+ {
+  "rank": 341,
+  "word": "tschüss",
+  "plural": "",
+  "example_de": "**Tschüss**, wir sehen uns morgen!",
+  "example_en": "Bye, see you tomorrow!"
+ },
+ {
+  "rank": 342,
+  "word": "Grund",
+  "plural": "Gründe",
+  "example_de": "Es gibt keinen **Grund** zur Sorge.",
+  "example_en": "There's no reason to worry."
+ },
+ {
+  "rank": 343,
+  "word": "lernen",
+  "plural": "",
+  "example_de": "Ich **lerne** jeden Tag zehn neue Wörter.",
+  "example_en": "I learn ten new words every day."
+ },
+ {
+  "rank": 344,
+  "word": "zehn",
+  "plural": "",
+  "example_de": "Mein Sohn ist **zehn** Jahre alt.",
+  "example_en": "My son is ten years old."
+ },
+ {
+  "rank": 345,
+  "word": "vier",
+  "plural": "",
+  "example_de": "Ich hätte gern **vier** Brötchen, bitte.",
+  "example_en": "I'd like four bread rolls, please."
+ },
+ {
+  "rank": 346,
+  "word": "Sohn",
+  "plural": "Söhne",
+  "example_de": "Unser **Sohn** spielt gern Fußball.",
+  "example_en": "Our son likes playing soccer."
+ },
+ {
+  "rank": 347,
+  "word": "fünf",
+  "plural": "",
+  "example_de": "Ich arbeite **fünf** Tage pro Woche.",
+  "example_en": "I work five days a week."
+ },
+ {
+  "rank": 348,
+  "word": "Tochter",
+  "plural": "Töchter",
+  "example_de": "Ihre **Tochter** geht schon in die Schule.",
+  "example_en": "Her daughter already goes to school."
+ },
+ {
+  "rank": 349,
+  "word": "Familie",
+  "plural": "Familien",
+  "example_de": "Am Wochenende besuche ich meine **Familie**.",
+  "example_en": "On the weekend I visit my family."
+ },
+ {
+  "rank": 350,
+  "word": "lachen",
+  "plural": "",
+  "example_de": "Das Baby **lacht** die ganze Zeit.",
+  "example_en": "The baby laughs all the time."
+ },
+ {
+  "rank": 351,
+  "word": "weinen",
+  "plural": "",
+  "example_de": "Warum **weinst** du denn?",
+  "example_en": "Why are you crying?"
+ },
+ {
+  "rank": 352,
+  "word": "Tod",
+  "plural": "",
+  "example_de": "Der **Tod** seines Hundes macht ihn sehr traurig.",
+  "example_en": "The death of his dog makes him very sad."
+ },
+ {
+  "rank": 353,
+  "word": "töten",
+  "plural": "",
+  "example_de": "Das Mittel **tötet** Bakterien in der Küche.",
+  "example_en": "The cleaner kills bacteria in the kitchen."
+ },
+ {
+  "rank": 354,
+  "word": "Arzt",
+  "plural": "Ärzte",
+  "example_de": "Ich muss heute zum **Arzt** gehen.",
+  "example_en": "I have to go to the doctor today."
+ },
+ {
+  "rank": 355,
+  "word": "keiner",
+  "plural": "",
+  "example_de": "**Keiner** hat mich angerufen.",
+  "example_en": "Nobody called me."
+ },
+ {
+  "rank": 356,
+  "word": "fallen",
+  "plural": "",
+  "example_de": "Im Herbst **fallen** die Blätter von den Bäumen.",
+  "example_en": "In autumn the leaves fall from the trees."
+ },
+ {
+  "rank": 357,
+  "word": "gewinnen",
+  "plural": "",
+  "example_de": "Unsere Mannschaft hat das Spiel **gewonnen**.",
+  "example_en": "Our team won the game."
+ },
+ {
+  "rank": 358,
+  "word": "Auge",
+  "plural": "Augen",
+  "example_de": "Sie hat schöne blaue **Augen**.",
+  "example_en": "She has beautiful blue eyes."
+ },
+ {
+  "rank": 359,
+  "word": "wegen",
+  "plural": "",
+  "example_de": "**Wegen** des Regens bleiben wir zu Hause.",
+  "example_en": "Because of the rain, we're staying at home."
+ },
+ {
+  "rank": 360,
+  "word": "Gesicht",
+  "plural": "Gesichter",
+  "example_de": "Wasch dir bitte das **Gesicht**!",
+  "example_en": "Please wash your face!"
+ },
+ {
+  "rank": 361,
+  "word": "Fall",
+  "plural": "Fälle",
+  "example_de": "In diesem **Fall** rufe ich dich an.",
+  "example_en": "In that case, I'll call you."
+ },
+ {
+  "rank": 362,
+  "word": "lustig",
+  "plural": "",
+  "example_de": "Unser Lehrer ist sehr **lustig**.",
+  "example_en": "Our teacher is very funny."
+ },
+ {
+  "rank": 363,
+  "word": "traurig",
+  "plural": "",
+  "example_de": "Warum bist du so **traurig**?",
+  "example_en": "Why are you so sad?"
+ },
+ {
+  "rank": 364,
+  "word": "Straße",
+  "plural": "Straßen",
+  "example_de": "Pass auf, wenn du über die **Straße** gehst!",
+  "example_en": "Be careful when you cross the street!"
+ },
+ {
+  "rank": 365,
+  "word": "Platz",
+  "plural": "Plätze",
+  "example_de": "Ist dieser **Platz** noch frei?",
+  "example_en": "Is this seat still free?"
+ },
+ {
+  "rank": 366,
+  "word": "bald",
+  "plural": "",
+  "example_de": "Das Essen ist **bald** fertig.",
+  "example_en": "The food will be ready soon."
+ },
+ {
+  "rank": 367,
+  "word": "oft",
+  "plural": "",
+  "example_de": "Wie **oft** gehst du ins Fitnessstudio?",
+  "example_en": "How often do you go to the gym?"
+ },
+ {
+  "rank": 368,
+  "word": "plötzlich",
+  "plural": "",
+  "example_de": "**Plötzlich** fing es an zu regnen.",
+  "example_en": "Suddenly it started to rain."
+ },
+ {
+  "rank": 369,
+  "word": "Wort",
+  "plural": "Wörter",
+  "example_de": "Wie heißt dieses **Wort** auf Englisch?",
+  "example_en": "What is this word in English?"
+ },
+ {
+  "rank": 370,
+  "word": "stark",
+  "plural": "",
+  "example_de": "Der Kaffee ist heute sehr **stark**.",
+  "example_en": "The coffee is very strong today."
+ },
+ {
+  "rank": 371,
+  "word": "manchmal",
+  "plural": "",
+  "example_de": "**Manchmal** fahre ich mit dem Bus zur Arbeit.",
+  "example_en": "Sometimes I take the bus to work."
+ },
+ {
+  "rank": 372,
+  "word": "Krieg",
+  "plural": "Kriege",
+  "example_de": "Mein Opa erzählt oft vom **Krieg**.",
+  "example_en": "My grandpa often talks about the war."
+ },
+ {
+  "rank": 373,
+  "word": "bereit",
+  "plural": "",
+  "example_de": "Bist du **bereit**? Wir müssen los.",
+  "example_en": "Are you ready? We have to go."
+ },
+ {
+  "rank": 374,
+  "word": "Beispiel",
+  "plural": "Beispiele",
+  "example_de": "Kannst du mir ein **Beispiel** geben?",
+  "example_en": "Can you give me an example?"
+ },
+ {
+  "rank": 375,
+  "word": "kalt",
+  "plural": "",
+  "example_de": "Im Winter ist es hier sehr **kalt**.",
+  "example_en": "In winter it's very cold here."
+ },
+ {
+  "rank": 376,
+  "word": "Scheiße",
+  "plural": "",
+  "example_de": "**Scheiße**, mein Handy ist kaputt!",
+  "example_en": "Shit, my phone is broken!"
+ },
+ {
+  "rank": 377,
+  "word": "holen",
+  "plural": "",
+  "example_de": "Ich **hole** schnell Brötchen vom Bäcker.",
+  "example_en": "I'll quickly get some bread rolls from the bakery."
+ },
+ {
+  "rank": 378,
+  "word": "Nummer",
+  "plural": "Nummern",
+  "example_de": "Kannst du mir deine **Nummer** geben?",
+  "example_en": "Can you give me your number?"
+ },
+ {
+  "rank": 379,
+  "word": "warm",
+  "plural": "",
+  "example_de": "Zieh dich **warm** an, es schneit!",
+  "example_en": "Dress warmly, it's snowing!"
+ },
+ {
+  "rank": 380,
+  "word": "Telefon",
+  "plural": "Telefone",
+  "example_de": "Kannst du bitte ans **Telefon** gehen?",
+  "example_en": "Can you answer the phone, please?"
+ },
+ {
+  "rank": 381,
+  "word": "stellen",
+  "plural": "",
+  "example_de": "**Stell** die Milch bitte in den Kühlschrank.",
+  "example_en": "Please put the milk in the fridge."
+ },
+ {
+  "rank": 382,
+  "word": "Bett",
+  "plural": "Betten",
+  "example_de": "Ich gehe heute früh ins **Bett**.",
+  "example_en": "I'm going to bed early today."
+ },
+ {
+  "rank": 383,
+  "word": "heiß",
+  "plural": "",
+  "example_de": "Vorsicht, die Suppe ist **heiß**!",
+  "example_en": "Careful, the soup is hot!"
+ },
+ {
+  "rank": 384,
+  "word": "Hund",
+  "plural": "Hunde",
+  "example_de": "Unser **Hund** heißt Bello.",
+  "example_en": "Our dog is called Bello."
+ },
+ {
+  "rank": 385,
+  "word": "wohin",
+  "plural": "",
+  "example_de": "**Wohin** fahrt ihr im Urlaub?",
+  "example_en": "Where are you going on vacation?"
+ },
+ {
+  "rank": 386,
+  "word": "schlimm",
+  "plural": "",
+  "example_de": "Keine Sorge, das ist nicht **schlimm**.",
+  "example_en": "Don't worry, that's not bad."
+ },
+ {
+  "rank": 387,
+  "word": "obwohl",
+  "plural": "",
+  "example_de": "Er geht spazieren, **obwohl** es regnet.",
+  "example_en": "He goes for a walk although it's raining."
+ },
+ {
+  "rank": 388,
+  "word": "Antwort",
+  "plural": "Antworten",
+  "example_de": "Danke für deine schnelle **Antwort**.",
+  "example_en": "Thanks for your quick reply."
+ },
+ {
+  "rank": 389,
+  "word": "schicken",
+  "plural": "",
+  "example_de": "Ich **schicke** dir die Fotos per E-Mail.",
+  "example_en": "I'll send you the photos by email."
+ },
+ {
+  "rank": 390,
+  "word": "falsch",
+  "plural": "",
+  "example_de": "Entschuldigung, ich habe die **falsche** Nummer gewählt.",
+  "example_en": "Sorry, I dialed the wrong number."
+ },
+ {
+  "rank": 391,
+  "word": "hoch",
+  "plural": "",
+  "example_de": "Der Berg ist sehr **hoch**.",
+  "example_en": "The mountain is very high."
+ },
+ {
+  "rank": 392,
+  "word": "Seite",
+  "plural": "Seiten",
+  "example_de": "Auf der anderen **Seite** der Straße ist ein Supermarkt.",
+  "example_en": "On the other side of the street there's a supermarket."
+ },
+ {
+  "rank": 393,
+  "word": "genug",
+  "plural": "",
+  "example_de": "Haben wir **genug** Milch für morgen?",
+  "example_en": "Do we have enough milk for tomorrow?"
+ },
+ {
+  "rank": 394,
+  "word": "wünschen",
+  "plural": "",
+  "example_de": "Ich **wünsche** dir alles Gute zum Geburtstag!",
+  "example_en": "I wish you a happy birthday!"
+ },
+ {
+  "rank": 395,
+  "word": "blöd",
+  "plural": "",
+  "example_de": "Das war eine **blöde** Idee.",
+  "example_en": "That was a dumb idea."
+ },
+ {
+  "rank": 396,
+  "word": "Traum",
+  "plural": "Träume",
+  "example_de": "Heute Nacht hatte ich einen schönen **Traum**.",
+  "example_en": "Last night I had a nice dream."
+ },
+ {
+  "rank": 397,
+  "word": "ins",
+  "plural": "",
+  "example_de": "Am Sonntag gehen wir **ins** Museum.",
+  "example_en": "On Sunday we're going to the museum."
+ },
+ {
+  "rank": 398,
+  "word": "Wahrheit",
+  "plural": "Wahrheiten",
+  "example_de": "Bitte sag mir die **Wahrheit**.",
+  "example_en": "Please tell me the truth."
+ },
+ {
+  "rank": 399,
+  "word": "wieso",
+  "plural": "",
+  "example_de": "**Wieso** bist du heute so spät?",
+  "example_en": "Why are you so late today?"
+ },
+ {
+  "rank": 400,
+  "word": "verlassen",
+  "plural": "",
+  "example_de": "Er **verlässt** das Haus um sieben Uhr.",
+  "example_en": "He leaves the house at seven o'clock."
+ },
+ {
+  "rank": 401,
+  "word": "gefährlich",
+  "plural": "",
+  "example_de": "Fahr langsam, die Straße ist **gefährlich**!",
+  "example_en": "Drive slowly, the road is dangerous!"
+ },
+ {
+  "rank": 402,
+  "word": "Polizei",
+  "plural": "",
+  "example_de": "Ruf sofort die **Polizei**!",
+  "example_en": "Call the police right away!"
+ },
+ {
+  "rank": 403,
+  "word": "versprechen",
+  "plural": "",
+  "example_de": "Ich **verspreche** dir, ich komme pünktlich.",
+  "example_en": "I promise you I'll be on time."
+ },
+ {
+  "rank": 404,
+  "word": "Typ",
+  "plural": "Typen",
+  "example_de": "Der neue Kollege ist ein netter **Typ**.",
+  "example_en": "The new colleague is a nice guy."
+ },
+ {
+  "rank": 405,
+  "word": "kämpfen",
+  "plural": "",
+  "example_de": "Die Feuerwehr **kämpft** gegen das Feuer.",
+  "example_en": "The fire department is fighting the fire."
+ },
+ {
+  "rank": 406,
+  "word": "sechs",
+  "plural": "",
+  "example_de": "Ich stehe jeden Tag um **sechs** Uhr auf.",
+  "example_en": "I get up at six o'clock every day."
+ },
+ {
+  "rank": 407,
+  "word": "sieben",
+  "plural": "",
+  "example_de": "Eine Woche hat **sieben** Tage.",
+  "example_en": "A week has seven days."
+ },
+ {
+  "rank": 408,
+  "word": "acht",
+  "plural": "",
+  "example_de": "Wir haben **acht** Gäste zum Abendessen eingeladen.",
+  "example_en": "We invited eight guests to dinner."
+ },
+ {
+  "rank": 409,
+  "word": "neun",
+  "plural": "",
+  "example_de": "Der Kurs dauert **neun** Wochen.",
+  "example_en": "The course lasts nine weeks."
+ },
+ {
+  "rank": 410,
+  "word": "Ahnung",
+  "plural": "Ahnungen",
+  "example_de": "Ich habe keine **Ahnung**, wo mein Handy ist.",
+  "example_en": "I have no idea where my phone is."
+ },
+ {
+  "rank": 411,
+  "word": "toll",
+  "plural": "",
+  "example_de": "Das Konzert war echt **toll**!",
+  "example_en": "The concert was really great!"
+ },
+ {
+  "rank": 412,
+  "word": "Nachricht",
+  "plural": "Nachrichten",
+  "example_de": "Ich schreibe dir später eine **Nachricht**.",
+  "example_en": "I'll write you a message later."
+ },
+ {
+  "rank": 413,
+  "word": "seit",
+  "plural": "",
+  "example_de": "Ich wohne **seit** drei Jahren in Berlin.",
+  "example_en": "I've been living in Berlin for three years."
+ },
+ {
+  "rank": 414,
+  "word": "krank",
+  "plural": "",
+  "example_de": "Ich bin heute **krank** und bleibe zu Hause.",
+  "example_en": "I'm sick today and staying at home."
+ },
+ {
+  "rank": 415,
+  "word": "unser",
+  "plural": "",
+  "example_de": "Das ist **unser** neues Auto.",
+  "example_en": "That's our new car."
+ },
+ {
+  "rank": 416,
+  "word": "Waffe",
+  "plural": "Waffen",
+  "example_de": "Der Polizist trägt eine **Waffe**.",
+  "example_en": "The police officer carries a weapon."
+ },
+ {
+  "rank": 417,
+  "word": "jung",
+  "plural": "",
+  "example_de": "Meine Oma fühlt sich noch sehr **jung**.",
+  "example_en": "My grandma still feels very young."
+ },
+ {
+  "rank": 418,
+  "word": "echt",
+  "plural": "",
+  "example_de": "Der Film war **echt** spannend.",
+  "example_en": "The movie was really exciting."
+ },
+ {
+  "rank": 419,
+  "word": "Job",
+  "plural": "Jobs",
+  "example_de": "Mein neuer **Job** macht mir viel Spaß.",
+  "example_en": "I really enjoy my new job."
+ },
+ {
+  "rank": 420,
+  "word": "möglich",
+  "plural": "",
+  "example_de": "Ist es **möglich**, heute noch einen Termin zu bekommen?",
+  "example_en": "Is it possible to get an appointment today?"
+ },
+ {
+  "rank": 421,
+  "word": "freuen",
+  "plural": "",
+  "example_de": "Ich **freue** mich sehr über dein Geschenk.",
+  "example_en": "I'm very happy about your present."
+ },
+ {
+  "rank": 422,
+  "word": "reichen",
+  "plural": "",
+  "example_de": "Zwei Brötchen **reichen** mir zum Frühstück.",
+  "example_en": "Two bread rolls are enough for me for breakfast."
+ },
+ {
+  "rank": 423,
+  "word": "weit",
+  "plural": "",
+  "example_de": "Ist es noch **weit** bis zum Bahnhof?",
+  "example_en": "Is it still far to the train station?"
+ },
+ {
+  "rank": 424,
+  "word": "Chef",
+  "plural": "Chefs",
+  "example_de": "Mein **Chef** ist heute im Urlaub.",
+  "example_en": "My boss is on vacation today."
+ },
+ {
+  "rank": 425,
+  "word": "sonst",
+  "plural": "",
+  "example_de": "Zieh eine Jacke an, **sonst** frierst du.",
+  "example_en": "Put on a jacket, otherwise you'll be cold."
+ },
+ {
+  "rank": 426,
+  "word": "Teil",
+  "plural": "Teile",
+  "example_de": "Ein **Teil** der Gruppe kommt später.",
+  "example_en": "Part of the group is coming later."
+ },
+ {
+  "rank": 427,
+  "word": "aufstehen",
+  "plural": "",
+  "example_de": "Am Sonntag **stehe** ich spät **auf**.",
+  "example_en": "On Sunday I get up late."
+ },
+ {
+  "rank": 428,
+  "word": "zwischen",
+  "plural": "",
+  "example_de": "Die Bank ist **zwischen** der Post und dem Supermarkt.",
+  "example_en": "The bank is between the post office and the supermarket."
+ },
+ {
+  "rank": 429,
+  "word": "Kaffee",
+  "plural": "Kaffees",
+  "example_de": "Möchtest du einen **Kaffee** mit Milch?",
+  "example_en": "Would you like a coffee with milk?"
+ },
+ {
+  "rank": 430,
+  "word": "schaffen",
+  "plural": "",
+  "example_de": "Wir **schaffen** das bis morgen.",
+  "example_en": "We'll manage that by tomorrow."
+ },
+ {
+  "rank": 431,
+  "word": "passen",
+  "plural": "",
+  "example_de": "Die Hose **passt** mir nicht mehr.",
+  "example_en": "The trousers don't fit me anymore."
+ },
+ {
+  "rank": 432,
+  "word": "eins",
+  "plural": "",
+  "example_de": "**Eins**, zwei, drei – los!",
+  "example_en": "One, two, three – go!"
+ },
+ {
+  "rank": 433,
+  "word": "rufen",
+  "plural": "",
+  "example_de": "Die Mutter **ruft** die Kinder zum Essen.",
+  "example_en": "The mother calls the children to dinner."
+ },
+ {
+  "rank": 434,
+  "word": "Stück",
+  "plural": "Stücke",
+  "example_de": "Möchtest du noch ein **Stück** Kuchen?",
+  "example_en": "Would you like another piece of cake?"
+ },
+ {
+  "rank": 435,
+  "word": "ihnen",
+  "plural": "",
+  "example_de": "Ich helfe **ihnen** beim Umzug.",
+  "example_en": "I'm helping them with the move."
+ },
+ {
+  "rank": 436,
+  "word": "besonders",
+  "plural": "",
+  "example_de": "Dieses Café gefällt mir **besonders** gut.",
+  "example_en": "I especially like this café."
+ },
+ {
+  "rank": 437,
+  "word": "langsam",
+  "plural": "",
+  "example_de": "Bitte sprechen Sie **langsam**.",
+  "example_en": "Please speak slowly."
+ },
+ {
+  "rank": 438,
+  "word": "Licht",
+  "plural": "Lichter",
+  "example_de": "Kannst du bitte das **Licht** anmachen?",
+  "example_en": "Can you turn on the light, please?"
+ },
+ {
+  "rank": 439,
+  "word": "scheinen",
+  "plural": "",
+  "example_de": "Er **scheint** heute müde zu sein.",
+  "example_en": "He seems to be tired today."
+ },
+ {
+  "rank": 440,
+  "word": "erklären",
+  "plural": "",
+  "example_de": "Der Lehrer **erklärt** die Grammatik sehr gut.",
+  "example_en": "The teacher explains the grammar very well."
+ },
+ {
+  "rank": 441,
+  "word": "nochmal",
+  "plural": "",
+  "example_de": "Kannst du das bitte **nochmal** sagen?",
+  "example_en": "Can you say that again, please?"
+ },
+ {
+  "rank": 442,
+  "word": "Musik",
+  "plural": "",
+  "example_de": "Welche **Musik** magst du?",
+  "example_en": "What kind of music do you like?"
+ },
+ {
+  "rank": 443,
+  "word": "welcher",
+  "plural": "",
+  "example_de": "**Welcher** Bus fährt zum Bahnhof?",
+  "example_en": "Which bus goes to the train station?"
+ },
+ {
+  "rank": 444,
+  "word": "früher",
+  "plural": "",
+  "example_de": "**Früher** habe ich in Hamburg gewohnt.",
+  "example_en": "I used to live in Hamburg."
+ },
+ {
+  "rank": 445,
+  "word": "vom",
+  "plural": "",
+  "example_de": "Ich komme gerade **vom** Arzt.",
+  "example_en": "I'm just coming from the doctor."
+ },
+ {
+  "rank": 446,
+  "word": "trotzdem",
+  "plural": "",
+  "example_de": "Ich war müde, aber ich bin **trotzdem** zur Party gegangen.",
+  "example_en": "I was tired, but I went to the party anyway."
+ },
+ {
+  "rank": 447,
+  "word": "Spiel",
+  "plural": "Spiele",
+  "example_de": "Wollen wir ein **Spiel** spielen?",
+  "example_en": "Shall we play a game?"
+ },
+ {
+  "rank": 448,
+  "word": "Plan",
+  "plural": "Pläne",
+  "example_de": "Hast du schon einen **Plan** für das Wochenende?",
+  "example_en": "Do you already have a plan for the weekend?"
+ },
+ {
+  "rank": 449,
+  "word": "draußen",
+  "plural": "",
+  "example_de": "Die Kinder spielen **draußen** im Garten.",
+  "example_en": "The children are playing outside in the garden."
+ },
+ {
+  "rank": 450,
+  "word": "klingen",
+  "plural": "",
+  "example_de": "Deine Idee **klingt** wirklich gut.",
+  "example_en": "Your idea sounds really good."
+ },
+ {
+  "rank": 451,
+  "word": "ernst",
+  "plural": "",
+  "example_de": "Das ist ein **ernstes** Problem.",
+  "example_en": "That's a serious problem."
+ },
+ {
+  "rank": 452,
+  "word": "Wohnung",
+  "plural": "Wohnungen",
+  "example_de": "Wir suchen eine **Wohnung** mit Balkon.",
+  "example_en": "We're looking for an apartment with a balcony."
+ },
+ {
+  "rank": 453,
+  "word": "Entschuldigung",
+  "plural": "Entschuldigungen",
+  "example_de": "Ich bin dir eine **Entschuldigung** schuldig.",
+  "example_en": "I owe you an apology."
+ },
+ {
+  "rank": 454,
+  "word": "frei",
+  "plural": "",
+  "example_de": "Morgen habe ich den ganzen Tag **frei**.",
+  "example_en": "Tomorrow I have the whole day free."
+ },
+ {
+  "rank": 455,
+  "word": "zuhause",
+  "plural": "",
+  "example_de": "Heute Abend bleibe ich **zuhause**.",
+  "example_en": "Tonight I'm staying at home."
+ },
+ {
+  "rank": 456,
+  "word": "bezahlen",
+  "plural": "",
+  "example_de": "Kann ich mit Karte **bezahlen**?",
+  "example_en": "Can I pay by card?"
+ },
+ {
+  "rank": 457,
+  "word": "wen",
+  "plural": "",
+  "example_de": "**Wen** hast du gestern im Park getroffen?",
+  "example_en": "Who did you meet in the park yesterday?"
+ },
+ {
+  "rank": 458,
+  "word": "Euro",
+  "plural": "Euro",
+  "example_de": "Ein Kaffee kostet hier drei **Euro**.",
+  "example_en": "A coffee costs three euros here."
+ },
+ {
+  "rank": 459,
+  "word": "beim",
+  "plural": "",
+  "example_de": "Ich habe morgen einen Termin **beim** Zahnarzt.",
+  "example_en": "I have an appointment at the dentist tomorrow."
+ },
+ {
+  "rank": 460,
+  "word": "schlagen",
+  "plural": "",
+  "example_de": "Er **schlägt** den Ball über das Netz.",
+  "example_en": "He hits the ball over the net."
+ },
+ {
+  "rank": 461,
+  "word": "irgendwas",
+  "plural": "",
+  "example_de": "Hast du **irgendwas** gehört?",
+  "example_en": "Did you hear anything?"
+ },
+ {
+  "rank": 462,
+  "word": "voll",
+  "plural": "",
+  "example_de": "Der Zug ist heute sehr **voll**.",
+  "example_en": "The train is very full today."
+ },
+ {
+  "rank": 463,
+  "word": "davon",
+  "plural": "",
+  "example_de": "Ich habe **davon** nichts gewusst.",
+  "example_en": "I didn't know anything about it."
+ },
+ {
+  "rank": 464,
+  "word": "super",
+  "plural": "",
+  "example_de": "Das Wetter ist heute **super**!",
+  "example_en": "The weather is great today!"
+ },
+ {
+  "rank": 465,
+  "word": "vorstellen",
+  "plural": "",
+  "example_de": "Darf ich Ihnen meine Frau **vorstellen**?",
+  "example_en": "May I introduce my wife to you?"
+ },
+ {
+  "rank": 466,
+  "word": "Schuld",
+  "plural": "Schulden",
+  "example_de": "Das ist nicht deine **Schuld**.",
+  "example_en": "That's not your fault."
+ },
+ {
+  "rank": 467,
+  "word": "kosten",
+  "plural": "",
+  "example_de": "Wie viel **kostet** das Ticket?",
+  "example_en": "How much does the ticket cost?"
+ },
+ {
+  "rank": 468,
+  "word": "oben",
+  "plural": "",
+  "example_de": "Das Bad ist **oben**, neben dem Schlafzimmer.",
+  "example_en": "The bathroom is upstairs, next to the bedroom."
+ },
+ {
+  "rank": 469,
+  "word": "Zeug",
+  "plural": "",
+  "example_de": "Räum bitte dein **Zeug** auf!",
+  "example_en": "Please tidy up your stuff!"
+ },
+ {
+  "rank": 470,
+  "word": "perfekt",
+  "plural": "",
+  "example_de": "Dein Deutsch ist fast **perfekt**!",
+  "example_en": "Your German is almost perfect!"
+ },
+ {
+  "rank": 471,
+  "word": "zahlen",
+  "plural": "",
+  "example_de": "Wir möchten bitte **zahlen**.",
+  "example_en": "We'd like to pay, please."
+ },
+ {
+  "rank": 472,
+  "word": "legen",
+  "plural": "",
+  "example_de": "**Leg** den Schlüssel bitte auf den Tisch.",
+  "example_en": "Please put the key on the table."
+ },
+ {
+  "rank": 473,
+  "word": "einem",
+  "plural": "",
+  "example_de": "Ich wohne in **einem** kleinen Dorf.",
+  "example_en": "I live in a small village."
+ },
+ {
+  "rank": 474,
+  "word": "bevor",
+  "plural": "",
+  "example_de": "Wasch dir die Hände, **bevor** du isst.",
+  "example_en": "Wash your hands before you eat."
+ },
+ {
+  "rank": 475,
+  "word": "total",
+  "plural": "",
+  "example_de": "Der Urlaub war **total** schön.",
+  "example_en": "The vacation was totally lovely."
+ },
+ {
+  "rank": 476,
+  "word": "Himmel",
+  "plural": "Himmel",
+  "example_de": "Heute ist der **Himmel** ganz blau.",
+  "example_en": "Today the sky is completely blue."
+ },
+ {
+  "rank": 477,
+  "word": "Schatz",
+  "plural": "Schätze",
+  "example_de": "Die Piraten suchen einen **Schatz**.",
+  "example_en": "The pirates are looking for treasure."
+ },
+ {
+  "rank": 478,
+  "word": "retten",
+  "plural": "",
+  "example_de": "Der Feuerwehrmann **rettet** die Katze vom Baum.",
+  "example_en": "The firefighter rescues the cat from the tree."
+ },
+ {
+  "rank": 479,
+  "word": "Fehler",
+  "plural": "Fehler",
+  "example_de": "Jeder macht mal **Fehler**.",
+  "example_en": "Everyone makes mistakes sometimes."
+ },
+ {
+  "rank": 480,
+  "word": "aufpassen",
+  "plural": "",
+  "example_de": "Im Unterricht muss man gut **aufpassen**.",
+  "example_en": "In class you have to pay close attention."
+ },
+ {
+  "rank": 481,
+  "word": "Hunger",
+  "plural": "",
+  "example_de": "Ich habe großen **Hunger**.",
+  "example_en": "I'm very hungry."
+ },
+ {
+  "rank": 482,
+  "word": "cool",
+  "plural": "",
+  "example_de": "Deine neue Jacke ist echt **cool**.",
+  "example_en": "Your new jacket is really cool."
+ },
+ {
+  "rank": 483,
+  "word": "deshalb",
+  "plural": "",
+  "example_de": "Es regnet, **deshalb** nehme ich einen Regenschirm mit.",
+  "example_en": "It's raining, that's why I'm taking an umbrella."
+ },
+ {
+  "rank": 484,
+  "word": "Chance",
+  "plural": "Chancen",
+  "example_de": "Das ist eine große **Chance** für dich.",
+  "example_en": "This is a great opportunity for you."
+ },
+ {
+  "rank": 485,
+  "word": "Feuer",
+  "plural": "Feuer",
+  "example_de": "Am Abend sitzen wir am **Feuer** und singen.",
+  "example_en": "In the evening we sit by the fire and sing."
+ },
+ {
+  "rank": 486,
+  "word": "schießen",
+  "plural": "",
+  "example_de": "Er **schießt** den Ball ins Tor.",
+  "example_en": "He shoots the ball into the goal."
+ },
+ {
+  "rank": 487,
+  "word": "Bild",
+  "plural": "Bilder",
+  "example_de": "Das **Bild** hängt über dem Sofa.",
+  "example_en": "The picture hangs above the sofa."
+ },
+ {
+  "rank": 488,
+  "word": "antworten",
+  "plural": "",
+  "example_de": "Warum **antwortest** du nicht auf meine Nachricht?",
+  "example_en": "Why aren't you answering my message?"
+ },
+ {
+  "rank": 489,
+  "word": "nennen",
+  "plural": "",
+  "example_de": "Alle **nennen** ihn einfach Tom.",
+  "example_en": "Everyone just calls him Tom."
+ },
+ {
+  "rank": 490,
+  "word": "ansehen",
+  "plural": "",
+  "example_de": "**Sieh** dir mal dieses Foto **an**!",
+  "example_en": "Take a look at this photo!"
+ },
+ {
+  "rank": 491,
+  "word": "schrecklich",
+  "plural": "",
+  "example_de": "Das Wetter im Urlaub war **schrecklich**.",
+  "example_en": "The weather on vacation was terrible."
+ },
+ {
+  "rank": 492,
+  "word": "Kerl",
+  "plural": "Kerle",
+  "example_de": "Der **Kerl** da drüben ist mein Nachbar.",
+  "example_en": "The guy over there is my neighbor."
+ },
+ {
+  "rank": 493,
+  "word": "verkaufen",
+  "plural": "",
+  "example_de": "Wir **verkaufen** unser altes Auto.",
+  "example_en": "We're selling our old car."
+ },
+ {
+  "rank": 494,
+  "word": "Tisch",
+  "plural": "Tische",
+  "example_de": "Das Essen steht schon auf dem **Tisch**.",
+  "example_en": "The food is already on the table."
+ },
+ {
+  "rank": 495,
+  "word": "Wagen",
+  "plural": "Wagen",
+  "example_de": "Wo hast du deinen **Wagen** geparkt?",
+  "example_en": "Where did you park your car?"
+ },
+ {
+  "rank": 496,
+  "word": "Sekunde",
+  "plural": "Sekunden",
+  "example_de": "Warte eine **Sekunde**, ich komme gleich!",
+  "example_en": "Wait a second, I'm coming!"
+ },
+ {
+  "rank": 497,
+  "word": "halb",
+  "plural": "",
+  "example_de": "Ich hätte gern ein **halbes** Kilo Tomaten.",
+  "example_en": "I'd like half a kilo of tomatoes."
+ },
+ {
+  "rank": 498,
+  "word": "wiedersehen",
+  "plural": "",
+  "example_de": "Ich freue mich, dich **wiederzusehen**.",
+  "example_en": "I'm happy to see you again."
+ },
+ {
+  "rank": 499,
+  "word": "Person",
+  "plural": "Personen",
+  "example_de": "Einen Tisch für vier **Personen**, bitte.",
+  "example_en": "A table for four people, please."
+ },
+ {
+  "rank": 500,
+  "word": "eigen",
+  "plural": "",
+  "example_de": "Mit 18 hatte ich meine **eigene** Wohnung.",
+  "example_en": "At 18, I had my own apartment."
+ },
+ {
+  "rank": 501,
+  "word": "vorher",
+  "plural": "",
+  "example_de": "Wasch dir **vorher** bitte die Hände.",
+  "example_en": "Please wash your hands beforehand."
+ },
+ {
+  "rank": 502,
+  "word": "Baby",
+  "plural": "Babys",
+  "example_de": "Das **Baby** schläft endlich.",
+  "example_en": "The baby is finally asleep."
+ },
+ {
+  "rank": 503,
+  "word": "Ort",
+  "plural": "Orte",
+  "example_de": "Das ist ein schöner **Ort** für ein Picknick.",
+  "example_en": "This is a nice place for a picnic."
+ },
+ {
+  "rank": 504,
+  "word": "sorgen",
+  "plural": "",
+  "example_de": "Meine Mutter **sorgt** heute für das Essen.",
+  "example_en": "My mother is taking care of the food today."
+ },
+ {
+  "rank": 505,
+  "word": "kaum",
+  "plural": "",
+  "example_de": "Ich habe letzte Nacht **kaum** geschlafen.",
+  "example_en": "I hardly slept last night."
+ },
+ {
+  "rank": 506,
+  "word": "Party",
+  "plural": "Partys",
+  "example_de": "Kommst du am Samstag zur **Party**?",
+  "example_en": "Are you coming to the party on Saturday?"
+ },
+ {
+  "rank": 507,
+  "word": "verstecken",
+  "plural": "",
+  "example_de": "Die Kinder **verstecken** sich im Garten.",
+  "example_en": "The children are hiding in the garden."
+ },
+ {
+  "rank": 508,
+  "word": "Sinn",
+  "plural": "Sinne",
+  "example_de": "Das ergibt für mich keinen **Sinn**.",
+  "example_en": "That doesn't make any sense to me."
+ },
+ {
+  "rank": 509,
+  "word": "wem",
+  "plural": "",
+  "example_de": "**Wem** gehört diese Tasche?",
+  "example_en": "Who does this bag belong to?"
+ },
+ {
+  "rank": 510,
+  "word": "einzige",
+  "plural": "",
+  "example_de": "Das ist mein **einziges** Foto von ihr.",
+  "example_en": "That is my only photo of her."
+ },
+ {
+  "rank": 511,
+  "word": "Million",
+  "plural": "Millionen",
+  "example_de": "Die Stadt hat über eine **Million** Einwohner.",
+  "example_en": "The city has over a million inhabitants."
+ },
+ {
+  "rank": 512,
+  "word": "Krankenhaus",
+  "plural": "Krankenhäuser",
+  "example_de": "Mein Opa liegt seit Montag im **Krankenhaus**.",
+  "example_en": "My grandpa has been in the hospital since Monday."
+ },
+ {
+  "rank": 513,
+  "word": "irgendwann",
+  "plural": "",
+  "example_de": "**Irgendwann** möchte ich nach Japan reisen.",
+  "example_en": "Someday I'd like to travel to Japan."
+ },
+ {
+  "rank": 514,
+  "word": "dafür",
+  "plural": "",
+  "example_de": "Leider habe ich heute keine Zeit **dafür**.",
+  "example_en": "Unfortunately, I don't have time for that today."
+ },
+ {
+  "rank": 515,
+  "word": "Doktor",
+  "plural": "Doktoren",
+  "example_de": "Herr **Doktor**, mein Bein tut weh.",
+  "example_en": "Doctor, my leg hurts."
+ },
+ {
+  "rank": 516,
+  "word": "kümmern",
+  "plural": "",
+  "example_de": "Ich **kümmere** mich heute um die Kinder.",
+  "example_en": "I'm looking after the children today."
+ },
+ {
+  "rank": 517,
+  "word": "rot",
+  "plural": "",
+  "example_de": "Sie trägt heute ein **rotes** Kleid.",
+  "example_en": "She is wearing a red dress today."
+ },
+ {
+  "rank": 518,
+  "word": "Hölle",
+  "plural": "",
+  "example_de": "Der Verkehr heute Morgen war die **Hölle**.",
+  "example_en": "The traffic this morning was hell."
+ },
+ {
+  "rank": 519,
+  "word": "Stimme",
+  "plural": "Stimmen",
+  "example_de": "Deine Schwester hat eine schöne **Stimme**.",
+  "example_en": "Your sister has a beautiful voice."
+ },
+ {
+  "rank": 520,
+  "word": "fehlen",
+  "plural": "",
+  "example_de": "Wer **fehlt** heute im Unterricht?",
+  "example_en": "Who is missing from class today?"
+ },
+ {
+  "rank": 521,
+  "word": "verdienen",
+  "plural": "",
+  "example_de": "Er **verdient** als Koch ganz gut.",
+  "example_en": "He earns quite well as a cook."
+ },
+ {
+  "rank": 522,
+  "word": "überall",
+  "plural": "",
+  "example_de": "Ich habe **überall** nach meinem Schlüssel gesucht.",
+  "example_en": "I looked everywhere for my key."
+ },
+ {
+  "rank": 523,
+  "word": "Dollar",
+  "plural": "Dollar",
+  "example_de": "Das Buch kostet zehn **Dollar**.",
+  "example_en": "The book costs ten dollars."
+ },
+ {
+  "rank": 524,
+  "word": "Ruhe",
+  "plural": "",
+  "example_de": "Nach der Arbeit brauche ich ein bisschen **Ruhe**.",
+  "example_en": "After work I need a bit of peace and quiet."
+ },
+ {
+  "rank": 525,
+  "word": "dunkel",
+  "plural": "",
+  "example_de": "Im Winter wird es früh **dunkel**.",
+  "example_en": "In winter it gets dark early."
+ },
+ {
+  "rank": 526,
+  "word": "Gefahr",
+  "plural": "Gefahren",
+  "example_de": "Rauchen ist eine **Gefahr** für die Gesundheit.",
+  "example_en": "Smoking is a danger to your health."
+ },
+ {
+  "rank": 527,
+  "word": "hassen",
+  "plural": "",
+  "example_de": "Ich **hasse** Montage!",
+  "example_en": "I hate Mondays!"
+ },
+ {
+  "rank": 528,
+  "word": "Ziel",
+  "plural": "Ziele",
+  "example_de": "Mein **Ziel** ist, gut Deutsch zu sprechen.",
+  "example_en": "My goal is to speak German well."
+ },
+ {
+  "rank": 529,
+  "word": "bedeuten",
+  "plural": "",
+  "example_de": "Was **bedeutet** dieses Wort?",
+  "example_en": "What does this word mean?"
+ },
+ {
+  "rank": 530,
+  "word": "Sonne",
+  "plural": "Sonnen",
+  "example_de": "Heute scheint endlich wieder die **Sonne**.",
+  "example_en": "Today the sun is finally shining again."
+ },
+ {
+  "rank": 531,
+  "word": "interessant",
+  "plural": "",
+  "example_de": "Das Buch ist wirklich sehr **interessant**.",
+  "example_en": "The book is really very interesting."
+ },
+ {
+  "rank": 532,
+  "word": "schwierig",
+  "plural": "",
+  "example_de": "Die Prüfung war ziemlich **schwierig**.",
+  "example_en": "The exam was quite difficult."
+ },
+ {
+  "rank": 533,
+  "word": "Tier",
+  "plural": "Tiere",
+  "example_de": "Welches **Tier** magst du am liebsten?",
+  "example_en": "Which animal do you like best?"
+ },
+ {
+  "rank": 534,
+  "word": "Kino",
+  "plural": "Kinos",
+  "example_de": "Wollen wir heute Abend ins **Kino** gehen?",
+  "example_en": "Shall we go to the cinema tonight?"
+ },
+ {
+  "rank": 535,
+  "word": "süß",
+  "plural": "",
+  "example_de": "Der Kuchen ist mir zu **süß**.",
+  "example_en": "The cake is too sweet for me."
+ },
+ {
+  "rank": 536,
+  "word": "Meer",
+  "plural": "Meere",
+  "example_de": "Im Sommer fahren wir ans **Meer**.",
+  "example_en": "In summer we go to the sea."
+ },
+ {
+  "rank": 537,
+  "word": "offen",
+  "plural": "",
+  "example_de": "Ist die Bäckerei am Sonntag **offen**?",
+  "example_en": "Is the bakery open on Sunday?"
+ },
+ {
+  "rank": 538,
+  "word": "Onkel",
+  "plural": "Onkel",
+  "example_de": "Mein **Onkel** wohnt in Hamburg.",
+  "example_en": "My uncle lives in Hamburg."
+ },
+ {
+  "rank": 539,
+  "word": "zurückkommen",
+  "plural": "",
+  "example_de": "Wann **kommst** du aus dem Urlaub **zurück**?",
+  "example_en": "When are you coming back from vacation?"
+ },
+ {
+  "rank": 540,
+  "word": "entschuldigen",
+  "plural": "",
+  "example_de": "**Entschuldigen** Sie, wo ist der Bahnhof?",
+  "example_en": "Excuse me, where is the train station?"
+ },
+ {
+  "rank": 541,
+  "word": "Mist",
+  "plural": "",
+  "example_de": "So ein **Mist**, es regnet schon wieder!",
+  "example_en": "Oh, rubbish, it's raining again!"
+ },
+ {
+  "rank": 542,
+  "word": "Punkt",
+  "plural": "Punkte",
+  "example_de": "Das ist ein wichtiger **Punkt**.",
+  "example_en": "That is an important point."
+ },
+ {
+  "rank": 543,
+  "word": "Sommer",
+  "plural": "Sommer",
+  "example_de": "Im **Sommer** gehen wir oft schwimmen.",
+  "example_en": "In summer we often go swimming."
+ },
+ {
+  "rank": 544,
+  "word": "verletzen",
+  "plural": "",
+  "example_de": "Ich habe mich beim Kochen am Finger **verletzt**.",
+  "example_en": "I hurt my finger while cooking."
+ },
+ {
+  "rank": 545,
+  "word": "Art",
+  "plural": "Arten",
+  "example_de": "Welche **Art** von Musik hörst du gern?",
+  "example_en": "What kind of music do you like to listen to?"
+ },
+ {
+  "rank": 546,
+  "word": "besuchen",
+  "plural": "",
+  "example_de": "Am Wochenende **besuche** ich meine Großeltern.",
+  "example_en": "At the weekend I'm visiting my grandparents."
+ },
+ {
+  "rank": 547,
+  "word": "Zukunft",
+  "plural": "",
+  "example_de": "Was planst du für die **Zukunft**?",
+  "example_en": "What are you planning for the future?"
+ },
+ {
+  "rank": 548,
+  "word": "Anfang",
+  "plural": "Anfänge",
+  "example_de": "Am **Anfang** war der Kurs schwer.",
+  "example_en": "At the beginning the course was hard."
+ },
+ {
+  "rank": 549,
+  "word": "schwarz",
+  "plural": "",
+  "example_de": "Ich trinke meinen Kaffee immer **schwarz**.",
+  "example_en": "I always drink my coffee black."
+ },
+ {
+  "rank": 550,
+  "word": "wach",
+  "plural": "",
+  "example_de": "Bist du schon **wach**?",
+  "example_en": "Are you awake yet?"
+ },
+ {
+  "rank": 551,
+  "word": "umbringen",
+  "plural": "",
+  "example_de": "Diese Hitze **bringt** mich noch **um**!",
+  "example_en": "This heat is going to kill me!"
+ },
+ {
+  "rank": 552,
+  "word": "Geburtstag",
+  "plural": "Geburtstage",
+  "example_de": "Wann hast du **Geburtstag**?",
+  "example_en": "When is your birthday?"
+ },
+ {
+  "rank": 553,
+  "word": "Idiot",
+  "plural": "Idioten",
+  "example_de": "Ich bin so ein **Idiot**, ich habe den Termin vergessen.",
+  "example_en": "I'm such an idiot, I forgot the appointment."
+ },
+ {
+  "rank": 554,
+  "word": "fliegen",
+  "plural": "",
+  "example_de": "Wir **fliegen** im Mai nach Spanien.",
+  "example_en": "We're flying to Spain in May."
+ },
+ {
+  "rank": 555,
+  "word": "Rest",
+  "plural": "Reste",
+  "example_de": "Den **Rest** essen wir morgen.",
+  "example_en": "We'll eat the rest tomorrow."
+ },
+ {
+  "rank": 556,
+  "word": "damals",
+  "plural": "",
+  "example_de": "**Damals** gab es noch keine Handys.",
+  "example_en": "Back then there were no cell phones yet."
+ },
+ {
+  "rank": 557,
+  "word": "Wetter",
+  "plural": "",
+  "example_de": "Wie ist das **Wetter** heute bei euch?",
+  "example_en": "What's the weather like where you are today?"
+ },
+ {
+  "rank": 558,
+  "word": "Tante",
+  "plural": "Tanten",
+  "example_de": "Meine **Tante** backt den besten Kuchen.",
+  "example_en": "My aunt bakes the best cake."
+ },
+ {
+  "rank": 559,
+  "word": "folgen",
+  "plural": "",
+  "example_de": "Bitte **folgen** Sie mir.",
+  "example_en": "Please follow me."
+ },
+ {
+  "rank": 560,
+  "word": "erwarten",
+  "plural": "",
+  "example_de": "Wir **erwarten** heute Abend Gäste.",
+  "example_en": "We're expecting guests this evening."
+ },
+ {
+  "rank": 561,
+  "word": "Blick",
+  "plural": "Blicke",
+  "example_de": "Auf den ersten **Blick** sieht es einfach aus.",
+  "example_en": "At first glance it looks easy."
+ },
+ {
+  "rank": 562,
+  "word": "lügen",
+  "plural": "",
+  "example_de": "Ehrlich, ich **lüge** nicht!",
+  "example_en": "Honestly, I'm not lying!"
+ },
+ {
+  "rank": 563,
+  "word": "Bier",
+  "plural": "Biere",
+  "example_de": "Er bestellt ein kaltes **Bier**.",
+  "example_en": "He orders a cold beer."
+ },
+ {
+  "rank": 564,
+  "word": "weiß",
+  "plural": "",
+  "example_de": "Ich brauche ein **weißes** Hemd für die Arbeit.",
+  "example_en": "I need a white shirt for work."
+ },
+ {
+  "rank": 565,
+  "word": "kaputt",
+  "plural": "",
+  "example_de": "Unsere Waschmaschine ist schon wieder **kaputt**.",
+  "example_en": "Our washing machine is broken again."
+ },
+ {
+  "rank": 566,
+  "word": "anders",
+  "plural": "",
+  "example_de": "Heute machen wir es mal **anders**.",
+  "example_en": "Today we'll do it differently for a change."
+ },
+ {
+  "rank": 567,
+  "word": "Teufel",
+  "plural": "Teufel",
+  "example_de": "Wenn man vom **Teufel** spricht!",
+  "example_en": "Speak of the devil!"
+ },
+ {
+  "rank": 568,
+  "word": "mitnehmen",
+  "plural": "",
+  "example_de": "**Nimm** lieber einen Regenschirm **mit**!",
+  "example_en": "You'd better take an umbrella with you!"
+ },
+ {
+  "rank": 569,
+  "word": "wunderbar",
+  "plural": "",
+  "example_de": "Das Essen war einfach **wunderbar**.",
+  "example_en": "The food was simply wonderful."
+ },
+ {
+  "rank": 570,
+  "word": "zuerst",
+  "plural": "",
+  "example_de": "Wasch dir **zuerst** die Hände!",
+  "example_en": "Wash your hands first!"
+ },
+ {
+  "rank": 571,
+  "word": "unten",
+  "plural": "",
+  "example_de": "Die Küche ist **unten**, das Bad ist oben.",
+  "example_en": "The kitchen is downstairs, the bathroom is upstairs."
+ },
+ {
+  "rank": 572,
+  "word": "tragen",
+  "plural": "",
+  "example_de": "Kannst du mir helfen, die Kiste zu **tragen**?",
+  "example_en": "Can you help me carry the box?"
+ },
+ {
+  "rank": 573,
+  "word": "Wein",
+  "plural": "Weine",
+  "example_de": "Möchtest du ein Glas **Wein**?",
+  "example_en": "Would you like a glass of wine?"
+ },
+ {
+  "rank": 574,
+  "word": "ändern",
+  "plural": "",
+  "example_de": "Wir müssen unseren Plan **ändern**.",
+  "example_en": "We have to change our plan."
+ },
+ {
+  "rank": 575,
+  "word": "erkennen",
+  "plural": "",
+  "example_de": "Ich habe dich fast nicht **erkannt**!",
+  "example_en": "I almost didn't recognize you!"
+ },
+ {
+  "rank": 576,
+  "word": "überlegen",
+  "plural": "",
+  "example_de": "Ich **überlege** noch, was ich heute koche.",
+  "example_en": "I'm still thinking about what to cook today."
+ },
+ {
+  "rank": 577,
+  "word": "Gefängnis",
+  "plural": "Gefängnisse",
+  "example_de": "Der Dieb muss für zwei Jahre ins **Gefängnis**.",
+  "example_en": "The thief has to go to prison for two years."
+ },
+ {
+  "rank": 578,
+  "word": "vermissen",
+  "plural": "",
+  "example_de": "Ich **vermisse** meine Familie sehr.",
+  "example_en": "I miss my family a lot."
+ },
+ {
+  "rank": 579,
+  "word": "wenigstens",
+  "plural": "",
+  "example_de": "Es regnet, aber **wenigstens** ist es warm.",
+  "example_en": "It's raining, but at least it's warm."
+ },
+ {
+  "rank": 580,
+  "word": "Hochzeit",
+  "plural": "Hochzeiten",
+  "example_de": "Die **Hochzeit** ist im Juni.",
+  "example_en": "The wedding is in June."
+ },
+ {
+  "rank": 581,
+  "word": "ziehen",
+  "plural": "",
+  "example_de": "Du musst die Tür **ziehen**, nicht drücken.",
+  "example_en": "You have to pull the door, not push it."
+ },
+ {
+  "rank": 582,
+  "word": "tanzen",
+  "plural": "",
+  "example_de": "Meine Frau und ich **tanzen** gern zusammen.",
+  "example_en": "My wife and I like dancing together."
+ },
+ {
+  "rank": 583,
+  "word": "solche",
+  "plural": "",
+  "example_de": "Ich mag **solche** Filme nicht.",
+  "example_en": "I don't like films like that."
+ },
+ {
+  "rank": 584,
+  "word": "Ohr",
+  "plural": "Ohren",
+  "example_de": "Mein linkes **Ohr** tut weh.",
+  "example_en": "My left ear hurts."
+ },
+ {
+  "rank": 585,
+  "word": "zwar",
+  "plural": "",
+  "example_de": "Das Hotel ist **zwar** teuer, aber sehr schön.",
+  "example_en": "The hotel is expensive, admittedly, but very nice."
+ },
+ {
+  "rank": 586,
+  "word": "kennenlernen",
+  "plural": "",
+  "example_de": "Heute **lerne** ich ihre Eltern **kennen**.",
+  "example_en": "Today I'm meeting her parents for the first time."
+ },
+ {
+  "rank": 587,
+  "word": "Boden",
+  "plural": "Böden",
+  "example_de": "Deine Schuhe liegen auf dem **Boden**.",
+  "example_en": "Your shoes are lying on the floor."
+ },
+ {
+  "rank": 588,
+  "word": "verheiratet",
+  "plural": "",
+  "example_de": "Meine Schwester ist seit zwei Jahren **verheiratet**.",
+  "example_en": "My sister has been married for two years."
+ },
+ {
+  "rank": 589,
+  "word": "überleben",
+  "plural": "",
+  "example_de": "Die Pflanze hat den Winter **überlebt**.",
+  "example_en": "The plant survived the winter."
+ },
+ {
+  "rank": 590,
+  "word": "Zug",
+  "plural": "Züge",
+  "example_de": "Der **Zug** hat zehn Minuten Verspätung.",
+  "example_en": "The train is ten minutes late."
+ },
+ {
+  "rank": 591,
+  "word": "singen",
+  "plural": "",
+  "example_de": "Mein Bruder **singt** in einem Chor.",
+  "example_en": "My brother sings in a choir."
+ },
+ {
+  "rank": 592,
+  "word": "des",
+  "plural": "",
+  "example_de": "Das ist das Auto **des** Lehrers.",
+  "example_en": "That is the teacher's car."
+ },
+ {
+  "rank": 593,
+  "word": "bereits",
+  "plural": "",
+  "example_de": "Der Film hat **bereits** angefangen.",
+  "example_en": "The film has already started."
+ },
+ {
+  "rank": 594,
+  "word": "Katze",
+  "plural": "Katzen",
+  "example_de": "Unsere **Katze** schläft am liebsten auf dem Sofa.",
+  "example_en": "Our cat likes sleeping on the sofa best."
+ },
+ {
+  "rank": 595,
+  "word": "nämlich",
+  "plural": "",
+  "example_de": "Ich komme heute nicht, ich bin **nämlich** krank.",
+  "example_en": "I'm not coming today – I'm sick, you see."
+ },
+ {
+  "rank": 596,
+  "word": "aufgeben",
+  "plural": "",
+  "example_de": "**Gib** jetzt nicht **auf**!",
+  "example_en": "Don't give up now!"
+ },
+ {
+  "rank": 597,
+  "word": "Arsch",
+  "plural": "Ärsche",
+  "example_de": "Draußen friere ich mir den **Arsch** ab.",
+  "example_en": "I'm freezing my butt off outside."
+ },
+ {
+  "rank": 598,
+  "word": "normal",
+  "plural": "",
+  "example_de": "Keine Sorge, das ist ganz **normal**.",
+  "example_en": "Don't worry, that's completely normal."
+ },
+ {
+  "rank": 599,
+  "word": "falls",
+  "plural": "",
+  "example_de": "Nimm eine Jacke mit, **falls** es regnet.",
+  "example_en": "Take a jacket in case it rains."
+ },
+ {
+  "rank": 600,
+  "word": "genauso",
+  "plural": "",
+  "example_de": "Mein Sohn ist schon **genauso** groß wie ich.",
+  "example_en": "My son is already just as tall as me."
+ },
+ {
+  "rank": 601,
+  "word": "Nähe",
+  "plural": "",
+  "example_de": "Gibt es hier in der **Nähe** einen Supermarkt?",
+  "example_en": "Is there a supermarket nearby?"
+ },
+ {
+  "rank": 602,
+  "word": "verzeihen",
+  "plural": "",
+  "example_de": "Bitte **verzeih** mir, das war mein Fehler.",
+  "example_en": "Please forgive me, that was my mistake."
+ },
+ {
+  "rank": 603,
+  "word": "Ecke",
+  "plural": "Ecken",
+  "example_de": "Die Apotheke ist gleich um die **Ecke**.",
+  "example_en": "The pharmacy is just around the corner."
+ },
+ {
+  "rank": 604,
+  "word": "wundern",
+  "plural": "",
+  "example_de": "Ich **wundere** mich, dass er noch nicht da ist.",
+  "example_en": "I'm surprised that he isn't here yet."
+ },
+ {
+  "rank": 605,
+  "word": "Sprache",
+  "plural": "Sprachen",
+  "example_de": "Wie viele **Sprachen** sprichst du?",
+  "example_en": "How many languages do you speak?"
+ },
+ {
+  "rank": 606,
+  "word": "tief",
+  "plural": "",
+  "example_de": "Vorsicht, der See ist hier sehr **tief**.",
+  "example_en": "Careful, the lake is very deep here."
+ },
+ {
+  "rank": 607,
+  "word": "einige",
+  "plural": "",
+  "example_de": "Ich habe noch **einige** Fragen.",
+  "example_en": "I still have a few questions."
+ },
+ {
+  "rank": 608,
+  "word": "hart",
+  "plural": "",
+  "example_de": "Das Bett im Hotel war viel zu **hart**.",
+  "example_en": "The bed in the hotel was much too hard."
+ },
+ {
+  "rank": 609,
+  "word": "Wochenende",
+  "plural": "Wochenenden",
+  "example_de": "Am **Wochenende** schlafe ich lange.",
+  "example_en": "At the weekend I sleep in."
+ },
+ {
+  "rank": 610,
+  "word": "schreien",
+  "plural": "",
+  "example_de": "Das Baby **schreit** die ganze Nacht.",
+  "example_en": "The baby screams all night long."
+ },
+ {
+  "rank": 611,
+  "word": "Luft",
+  "plural": "",
+  "example_de": "Mach das Fenster auf, ich brauche frische **Luft**.",
+  "example_en": "Open the window, I need some fresh air."
+ },
+ {
+  "rank": 612,
+  "word": "nachdenken",
+  "plural": "",
+  "example_de": "Ich **denke** noch einmal darüber **nach**.",
+  "example_en": "I'll think about it again."
+ },
+ {
+  "rank": 613,
+  "word": "Erde",
+  "plural": "",
+  "example_de": "Die **Erde** dreht sich um die Sonne.",
+  "example_en": "The earth revolves around the sun."
+ },
+ {
+  "rank": 614,
+  "word": "Stein",
+  "plural": "Steine",
+  "example_de": "Das Kind wirft einen **Stein** ins Wasser.",
+  "example_en": "The child throws a stone into the water."
+ },
+ {
+  "rank": 615,
+  "word": "Wald",
+  "plural": "Wälder",
+  "example_de": "Sonntags gehen wir im **Wald** spazieren.",
+  "example_en": "On Sundays we go for a walk in the woods."
+ },
+ {
+  "rank": 616,
+  "word": "gesund",
+  "plural": "",
+  "example_de": "Obst und Gemüse sind sehr **gesund**.",
+  "example_en": "Fruit and vegetables are very healthy."
+ },
+ {
+  "rank": 617,
+  "word": "Winter",
+  "plural": "Winter",
+  "example_de": "Im **Winter** fahren wir gern Ski.",
+  "example_en": "In winter we like to go skiing."
+ },
+ {
+  "rank": 618,
+  "word": "Bus",
+  "plural": "Busse",
+  "example_de": "Ich fahre jeden Tag mit dem **Bus** zur Arbeit.",
+  "example_en": "I take the bus to work every day."
+ },
+ {
+  "rank": 619,
+  "word": "dazu",
+  "plural": "",
+  "example_de": "Ich nehme eine Pizza und **dazu** einen Salat.",
+  "example_en": "I'll have a pizza and a salad with it."
+ },
+ {
+  "rank": 620,
+  "word": "Anwalt",
+  "plural": "Anwälte",
+  "example_de": "Mein Bruder arbeitet als **Anwalt** in München.",
+  "example_en": "My brother works as a lawyer in Munich."
+ },
+ {
+  "rank": 621,
+  "word": "Beweis",
+  "plural": "Beweise",
+  "example_de": "Die Polizei hat noch keinen **Beweis**.",
+  "example_en": "The police don't have any proof yet."
+ },
+ {
+  "rank": 622,
+  "word": "während",
+  "plural": "",
+  "example_de": "**Während** des Essens schaue ich nicht aufs Handy.",
+  "example_en": "During meals I don't look at my phone."
+ },
+ {
+  "rank": 623,
+  "word": "sauer",
+  "plural": "",
+  "example_de": "Bist du noch **sauer** auf mich?",
+  "example_en": "Are you still angry with me?"
+ },
+ {
+  "rank": 624,
+  "word": "Handy",
+  "plural": "Handys",
+  "example_de": "Hast du dein **Handy** dabei?",
+  "example_en": "Do you have your phone with you?"
+ },
+ {
+  "rank": 625,
+  "word": "unmöglich",
+  "plural": "",
+  "example_de": "Bis morgen fertig? Das ist **unmöglich**!",
+  "example_en": "Finished by tomorrow? That's impossible!"
+ },
+ {
+  "rank": 626,
+  "word": "fremd",
+  "plural": "",
+  "example_de": "Tut mir leid, ich bin auch **fremd** hier.",
+  "example_en": "Sorry, I'm a stranger here too."
+ },
+ {
+  "rank": 627,
+  "word": "wütend",
+  "plural": "",
+  "example_de": "Mein Vater war gestern sehr **wütend**.",
+  "example_en": "My father was very angry yesterday."
+ },
+ {
+  "rank": 628,
+  "word": "stolz",
+  "plural": "",
+  "example_de": "Wir sind sehr **stolz** auf dich.",
+  "example_en": "We're very proud of you."
+ },
+ {
+  "rank": 629,
+  "word": "irgendwo",
+  "plural": "",
+  "example_de": "Meine Brille muss **irgendwo** hier sein.",
+  "example_en": "My glasses must be somewhere around here."
+ },
+ {
+  "rank": 630,
+  "word": "bekannt",
+  "plural": "",
+  "example_de": "Dieses Restaurant ist in der Stadt sehr **bekannt**.",
+  "example_en": "This restaurant is very well-known in the city."
+ },
+ {
+  "rank": 631,
+  "word": "Mord",
+  "plural": "Morde",
+  "example_de": "In dem Krimi geht es um einen **Mord**.",
+  "example_en": "The crime novel is about a murder."
+ },
+ {
+  "rank": 632,
+  "word": "Frühstück",
+  "plural": "Frühstücke",
+  "example_de": "Zum **Frühstück** esse ich meistens Müsli.",
+  "example_en": "For breakfast I usually eat muesli."
+ },
+ {
+  "rank": 633,
+  "word": "Krankheit",
+  "plural": "Krankheiten",
+  "example_de": "Grippe ist eine ansteckende **Krankheit**.",
+  "example_en": "Flu is a contagious illness."
+ },
+ {
+  "rank": 634,
+  "word": "Büro",
+  "plural": "Büros",
+  "example_de": "Ich bin bis fünf Uhr im **Büro**.",
+  "example_en": "I'm at the office until five o'clock."
+ },
+ {
+  "rank": 635,
+  "word": "vertrauen",
+  "plural": "",
+  "example_de": "Du kannst mir **vertrauen**.",
+  "example_en": "You can trust me."
+ },
+ {
+  "rank": 636,
+  "word": "Gespräch",
+  "plural": "Gespräche",
+  "example_de": "Wir hatten gestern ein langes **Gespräch**.",
+  "example_en": "We had a long conversation yesterday."
+ },
+ {
+  "rank": 637,
+  "word": "Fenster",
+  "plural": "Fenster",
+  "example_de": "Kannst du bitte das **Fenster** zumachen?",
+  "example_en": "Can you close the window, please?"
+ },
+ {
+  "rank": 638,
+  "word": "erlauben",
+  "plural": "",
+  "example_de": "Rauchen ist hier nicht **erlaubt**.",
+  "example_en": "Smoking is not allowed here."
+ },
+ {
+  "rank": 639,
+  "word": "Meinung",
+  "plural": "Meinungen",
+  "example_de": "Was ist deine **Meinung** dazu?",
+  "example_en": "What's your opinion on that?"
+ },
+ {
+  "rank": 640,
+  "word": "aufwachen",
+  "plural": "",
+  "example_de": "Ich **wache** jeden Tag um sechs Uhr **auf**.",
+  "example_en": "I wake up at six o'clock every day."
+ },
+ {
+  "rank": 641,
+  "word": "Brief",
+  "plural": "Briefe",
+  "example_de": "Ich schreibe meiner Oma einen **Brief**.",
+  "example_en": "I'm writing a letter to my grandma."
+ },
+ {
+  "rank": 642,
+  "word": "Gericht",
+  "plural": "Gerichte",
+  "example_de": "Der Streit mit dem Vermieter kommt vor **Gericht**.",
+  "example_en": "The dispute with the landlord is going to court."
+ },
+ {
+  "rank": 643,
+  "word": "küssen",
+  "plural": "",
+  "example_de": "Er **küsst** seine Frau zum Abschied.",
+  "example_en": "He kisses his wife goodbye."
+ },
+ {
+  "rank": 644,
+  "word": "Möglichkeit",
+  "plural": "Möglichkeiten",
+  "example_de": "Gibt es noch eine andere **Möglichkeit**?",
+  "example_en": "Is there another option?"
+ },
+ {
+  "rank": 645,
+  "word": "Lehrer",
+  "plural": "Lehrer",
+  "example_de": "Unser **Lehrer** erklärt alles sehr geduldig.",
+  "example_en": "Our teacher explains everything very patiently."
+ },
+ {
+  "rank": 646,
+  "word": "teuer",
+  "plural": "",
+  "example_de": "Das neue Handy ist mir zu **teuer**.",
+  "example_en": "The new phone is too expensive for me."
+ },
+ {
+  "rank": 647,
+  "word": "wehtun",
+  "plural": "",
+  "example_de": "Mein Rücken **tut** seit gestern **weh**.",
+  "example_en": "My back has been hurting since yesterday."
+ },
+ {
+  "rank": 648,
+  "word": "Entscheidung",
+  "plural": "Entscheidungen",
+  "example_de": "Das ist eine schwere **Entscheidung**.",
+  "example_en": "That is a difficult decision."
+ },
+ {
+  "rank": 649,
+  "word": "entscheiden",
+  "plural": "",
+  "example_de": "Du musst dich jetzt **entscheiden**.",
+  "example_en": "You have to decide now."
+ },
+ {
+  "rank": 650,
+  "word": "Kirche",
+  "plural": "Kirchen",
+  "example_de": "Die alte **Kirche** steht mitten im Dorf.",
+  "example_en": "The old church stands in the middle of the village."
+ },
+ {
+  "rank": 651,
+  "word": "Oma",
+  "plural": "Omas",
+  "example_de": "Meine **Oma** wird nächste Woche achtzig.",
+  "example_en": "My grandma turns eighty next week."
+ },
+ {
+  "rank": 652,
+  "word": "Bein",
+  "plural": "Beine",
+  "example_de": "Er hat sich beim Skifahren das **Bein** gebrochen.",
+  "example_en": "He broke his leg skiing."
+ },
+ {
+  "rank": 653,
+  "word": "Feind",
+  "plural": "Feinde",
+  "example_de": "Hund und Katze sind nicht immer **Feinde**.",
+  "example_en": "Dogs and cats aren't always enemies."
+ },
+ {
+  "rank": 654,
+  "word": "verpassen",
+  "plural": "",
+  "example_de": "Beeil dich, sonst **verpassen** wir den Zug!",
+  "example_en": "Hurry up, or we'll miss the train!"
+ },
+ {
+  "rank": 655,
+  "word": "Blut",
+  "plural": "",
+  "example_de": "Mein Mann kann kein **Blut** sehen.",
+  "example_en": "My husband can't stand the sight of blood."
+ },
+ {
+  "rank": 656,
+  "word": "stören",
+  "plural": "",
+  "example_de": "Entschuldigung, **störe** ich gerade?",
+  "example_en": "Excuse me, am I disturbing you?"
+ },
+ {
+  "rank": 657,
+  "word": "öffnen",
+  "plural": "",
+  "example_de": "Der Supermarkt **öffnet** um acht Uhr.",
+  "example_en": "The supermarket opens at eight o'clock."
+ },
+ {
+  "rank": 658,
+  "word": "König",
+  "plural": "Könige",
+  "example_de": "Der **König** wohnt in einem großen Schloss.",
+  "example_en": "The king lives in a big castle."
+ },
+ {
+  "rank": 659,
+  "word": "Küche",
+  "plural": "Küchen",
+  "example_de": "Wir essen meistens in der **Küche**.",
+  "example_en": "We usually eat in the kitchen."
+ },
+ {
+  "rank": 660,
+  "word": "Fuß",
+  "plural": "Füße",
+  "example_de": "Ich gehe jeden Morgen zu **Fuß** zur Arbeit.",
+  "example_en": "I walk to work every morning."
+ },
+ {
+  "rank": 661,
+  "word": "Geschenk",
+  "plural": "Geschenke",
+  "example_de": "Vielen Dank für das schöne **Geschenk**!",
+  "example_en": "Thank you very much for the lovely present!"
+ },
+ {
+  "rank": 662,
+  "word": "mitbringen",
+  "plural": "",
+  "example_de": "**Bringst** du bitte Brot vom Bäcker **mit**?",
+  "example_en": "Can you bring some bread from the bakery, please?"
+ },
+ {
+  "rank": 663,
+  "word": "Arm",
+  "plural": "Arme",
+  "example_de": "Sie nimmt das Baby auf den **Arm**.",
+  "example_en": "She picks the baby up in her arms."
+ },
+ {
+  "rank": 664,
+  "word": "Soldat",
+  "plural": "Soldaten",
+  "example_de": "Mein Großvater war früher **Soldat**.",
+  "example_en": "My grandfather used to be a soldier."
+ },
+ {
+  "rank": 665,
+  "word": "fürchten",
+  "plural": "",
+  "example_de": "Ich **fürchte**, wir kommen zu spät.",
+  "example_en": "I'm afraid we're going to be late."
+ },
+ {
+  "rank": 666,
+  "word": "Thema",
+  "plural": "Themen",
+  "example_de": "Lass uns lieber das **Thema** wechseln.",
+  "example_en": "Let's change the subject."
+ },
+ {
+  "rank": 667,
+  "word": "Haar",
+  "plural": "Haare",
+  "example_de": "Meine Tochter hat lange, blonde **Haare**.",
+  "example_en": "My daughter has long blond hair."
+ },
+ {
+  "rank": 668,
+  "word": "einladen",
+  "plural": "",
+  "example_de": "Ich **lade** dich heute zum Essen **ein**.",
+  "example_en": "I'm treating you to dinner today."
+ },
+ {
+  "rank": 669,
+  "word": "Berg",
+  "plural": "Berge",
+  "example_de": "Im Urlaub wandern wir in den **Bergen**.",
+  "example_en": "On vacation we go hiking in the mountains."
+ },
+ {
+  "rank": 670,
+  "word": "hundert",
+  "plural": "",
+  "example_de": "Das gebrauchte Fahrrad kostet **hundert** Euro.",
+  "example_en": "The used bike costs a hundred euros."
+ },
+ {
+  "rank": 671,
+  "word": "Quatsch",
+  "plural": "",
+  "example_de": "Das ist doch totaler **Quatsch**!",
+  "example_en": "That's complete nonsense!"
+ },
+ {
+  "rank": 672,
+  "word": "Kraft",
+  "plural": "Kräfte",
+  "example_de": "Nach dem langen Tag habe ich keine **Kraft** mehr.",
+  "example_en": "After the long day I have no strength left."
+ },
+ {
+  "rank": 673,
+  "word": "beginnen",
+  "plural": "",
+  "example_de": "Der Unterricht **beginnt** um neun Uhr.",
+  "example_en": "Class begins at nine o'clock."
+ },
+ {
+  "rank": 674,
+  "word": "ärgern",
+  "plural": "",
+  "example_de": "Mein kleiner Bruder **ärgert** mich ständig.",
+  "example_en": "My little brother is always annoying me."
+ },
+ {
+  "rank": 675,
+  "word": "Firma",
+  "plural": "Firmen",
+  "example_de": "Sie arbeitet bei einer großen **Firma**.",
+  "example_en": "She works for a big company."
+ },
+ {
+  "rank": 676,
+  "word": "nass",
+  "plural": "",
+  "example_de": "Meine Schuhe sind vom Regen ganz **nass**.",
+  "example_en": "My shoes are soaking wet from the rain."
+ },
+ {
+  "rank": 677,
+  "word": "einkaufen",
+  "plural": "",
+  "example_de": "Nach der Arbeit **kaufe** ich noch schnell **ein**.",
+  "example_en": "After work I'll quickly go shopping."
+ },
+ {
+  "rank": 678,
+  "word": "benutzen",
+  "plural": "",
+  "example_de": "Darf ich kurz dein Telefon **benutzen**?",
+  "example_en": "May I use your phone for a moment?"
+ },
+ {
+  "rank": 679,
+  "word": "Karte",
+  "plural": "Karten",
+  "example_de": "Kann ich hier mit **Karte** zahlen?",
+  "example_en": "Can I pay by card here?"
+ },
+ {
+  "rank": 680,
+  "word": "unglaublich",
+  "plural": "",
+  "example_de": "Die Aussicht vom Turm ist **unglaublich**!",
+  "example_en": "The view from the tower is incredible!"
+ },
+ {
+  "rank": 681,
+  "word": "Foto",
+  "plural": "Fotos",
+  "example_de": "Kannst du bitte ein **Foto** von uns machen?",
+  "example_en": "Can you take a photo of us, please?"
+ },
+ {
+  "rank": 682,
+  "word": "Lied",
+  "plural": "Lieder",
+  "example_de": "Ich liebe dieses **Lied**!",
+  "example_en": "I love this song!"
+ },
+ {
+  "rank": 683,
+  "word": "aufmachen",
+  "plural": "",
+  "example_de": "**Mach** bitte die Tür **auf**!",
+  "example_en": "Please open the door!"
+ },
+ {
+  "rank": 684,
+  "word": "Nachbar",
+  "plural": "Nachbarn",
+  "example_de": "Unser **Nachbar** hat einen großen Hund.",
+  "example_en": "Our neighbor has a big dog."
+ },
+ {
+  "rank": 685,
+  "word": "leise",
+  "plural": "",
+  "example_de": "Bitte sei **leise**, das Baby schläft.",
+  "example_en": "Please be quiet, the baby is sleeping."
+ },
+ {
+  "rank": 686,
+  "word": "Opa",
+  "plural": "Opas",
+  "example_de": "Mein **Opa** erzählt gern Geschichten von früher.",
+  "example_en": "My grandpa likes telling stories about the old days."
+ },
+ {
+  "rank": 687,
+  "word": "Kleid",
+  "plural": "Kleider",
+  "example_de": "Das blaue **Kleid** steht dir gut.",
+  "example_en": "The blue dress looks good on you."
+ },
+ {
+  "rank": 688,
+  "word": "Reise",
+  "plural": "Reisen",
+  "example_de": "Die **Reise** nach Italien war toll.",
+  "example_en": "The trip to Italy was great."
+ },
+ {
+  "rank": 689,
+  "word": "Richtung",
+  "plural": "Richtungen",
+  "example_de": "In welche **Richtung** müssen wir gehen?",
+  "example_en": "Which direction do we have to go?"
+ },
+ {
+  "rank": 690,
+  "word": "verschieden",
+  "plural": "",
+  "example_de": "Die zwei Schwestern sind sehr **verschieden**.",
+  "example_en": "The two sisters are very different."
+ },
+ {
+  "rank": 691,
+  "word": "Präsident",
+  "plural": "Präsidenten",
+  "example_de": "Der **Präsident** hält heute eine Rede.",
+  "example_en": "The president is giving a speech today."
+ },
+ {
+  "rank": 692,
+  "word": "anziehen",
+  "plural": "",
+  "example_de": "**Zieh** dir eine warme Jacke **an**!",
+  "example_en": "Put on a warm jacket!"
+ },
+ {
+  "rank": 693,
+  "word": "dringend",
+  "plural": "",
+  "example_de": "Ich muss **dringend** mit dir sprechen.",
+  "example_en": "I urgently need to talk to you."
+ },
+ {
+  "rank": 694,
+  "word": "Situation",
+  "plural": "Situationen",
+  "example_de": "Das ist eine schwierige **Situation** für uns alle.",
+  "example_en": "This is a difficult situation for all of us."
+ },
+ {
+  "rank": 695,
+  "word": "abholen",
+  "plural": "",
+  "example_de": "Ich **hole** dich um sieben Uhr **ab**.",
+  "example_en": "I'll pick you up at seven o'clock."
+ },
+ {
+  "rank": 696,
+  "word": "Bahnhof",
+  "plural": "Bahnhöfe",
+  "example_de": "Wie komme ich zum **Bahnhof**?",
+  "example_en": "How do I get to the train station?"
+ },
+ {
+  "rank": 697,
+  "word": "Fisch",
+  "plural": "Fische",
+  "example_de": "Heute gibt es **Fisch** zum Abendessen.",
+  "example_en": "We're having fish for dinner today."
+ },
+ {
+  "rank": 698,
+  "word": "Regen",
+  "plural": "",
+  "example_de": "Morgen soll es viel **Regen** geben.",
+  "example_en": "There's supposed to be a lot of rain tomorrow."
+ },
+ {
+  "rank": 699,
+  "word": "Glas",
+  "plural": "Gläser",
+  "example_de": "Vorsicht, das **Glas** ist heiß!",
+  "example_en": "Careful, the glass is hot!"
+ },
+ {
+  "rank": 700,
+  "word": "Flasche",
+  "plural": "Flaschen",
+  "example_de": "Wir kaufen noch eine **Flasche** Apfelsaft.",
+  "example_en": "Let's buy another bottle of apple juice."
+ },
+ {
+  "rank": 701,
+  "word": "leer",
+  "plural": "",
+  "example_de": "Der Kühlschrank ist fast **leer**.",
+  "example_en": "The fridge is almost empty."
+ },
+ {
+  "rank": 702,
+  "word": "nervös",
+  "plural": "",
+  "example_de": "Vor einer Prüfung bin ich immer **nervös**.",
+  "example_en": "I'm always nervous before an exam."
+ },
+ {
+  "rank": 703,
+  "word": "springen",
+  "plural": "",
+  "example_de": "Die Kinder **springen** ins Wasser.",
+  "example_en": "The children jump into the water."
+ },
+ {
+  "rank": 704,
+  "word": "Erinnerung",
+  "plural": "Erinnerungen",
+  "example_de": "Ich habe schöne **Erinnerungen** an meine Kindheit.",
+  "example_en": "I have lovely memories of my childhood."
+ },
+ {
+  "rank": 705,
+  "word": "Brot",
+  "plural": "Brote",
+  "example_de": "Ich kaufe frisches **Brot** beim Bäcker.",
+  "example_en": "I buy fresh bread at the bakery."
+ },
+ {
+  "rank": 706,
+  "word": "hinten",
+  "plural": "",
+  "example_de": "Die Toiletten sind **hinten** links.",
+  "example_en": "The restrooms are at the back on the left."
+ },
+ {
+  "rank": 707,
+  "word": "Stern",
+  "plural": "Sterne",
+  "example_de": "Heute Nacht sieht man viele **Sterne**.",
+  "example_en": "You can see a lot of stars tonight."
+ },
+ {
+  "rank": 708,
+  "word": "tausend",
+  "plural": "",
+  "example_de": "In der Halle sitzen fast **tausend** Menschen.",
+  "example_en": "Almost a thousand people are sitting in the hall."
+ },
+ {
+  "rank": 709,
+  "word": "rennen",
+  "plural": "",
+  "example_de": "Ich muss **rennen**, sonst verpasse ich den Bus.",
+  "example_en": "I have to run, or I'll miss the bus."
+ },
+ {
+  "rank": 710,
+  "word": "Zeitung",
+  "plural": "Zeitungen",
+  "example_de": "Mein Vater liest jeden Morgen die **Zeitung**.",
+  "example_en": "My father reads the newspaper every morning."
+ },
+ {
+  "rank": 711,
+  "word": "mindestens",
+  "plural": "",
+  "example_de": "Du solltest **mindestens** zwei Liter Wasser trinken.",
+  "example_en": "You should drink at least two liters of water."
+ },
+ {
+  "rank": 712,
+  "word": "Hotel",
+  "plural": "Hotels",
+  "example_de": "Unser **Hotel** liegt direkt am Strand.",
+  "example_en": "Our hotel is right on the beach."
+ },
+ {
+  "rank": 713,
+  "word": "schwimmen",
+  "plural": "",
+  "example_de": "Kannst du gut **schwimmen**?",
+  "example_en": "Can you swim well?"
+ },
+ {
+  "rank": 714,
+  "word": "Mund",
+  "plural": "Münder",
+  "example_de": "Man spricht nicht mit vollem **Mund**.",
+  "example_en": "Don't talk with your mouth full."
+ },
+ {
+  "rank": 715,
+  "word": "Kollege",
+  "plural": "Kollegen",
+  "example_de": "Mein **Kollege** hilft mir oft bei der Arbeit.",
+  "example_en": "My colleague often helps me at work."
+ },
+ {
+  "rank": 716,
+  "word": "Bar",
+  "plural": "Bars",
+  "example_de": "Wir treffen uns heute Abend in einer **Bar**.",
+  "example_en": "We're meeting in a bar tonight."
+ },
+ {
+  "rank": 717,
+  "word": "kochen",
+  "plural": "",
+  "example_de": "Heute **koche** ich Spaghetti für alle.",
+  "example_en": "Today I'm cooking spaghetti for everyone."
+ },
+ {
+  "rank": 718,
+  "word": "Klasse",
+  "plural": "Klassen",
+  "example_de": "In meiner **Klasse** sind zwanzig Schüler.",
+  "example_en": "There are twenty students in my class."
+ },
+ {
+  "rank": 719,
+  "word": "Spiegel",
+  "plural": "Spiegel",
+  "example_de": "Sie schaut morgens lange in den **Spiegel**.",
+  "example_en": "She looks in the mirror for a long time in the morning."
+ },
+ {
+  "rank": 720,
+  "word": "erfahren",
+  "plural": "",
+  "example_de": "Wann **erfährst** du das Ergebnis?",
+  "example_en": "When will you find out the result?"
+ },
+ {
+  "rank": 721,
+  "word": "Schlüssel",
+  "plural": "Schlüssel",
+  "example_de": "Hast du den **Schlüssel** für die Wohnung?",
+  "example_en": "Do you have the key to the flat?"
+ },
+ {
+  "rank": 722,
+  "word": "Aufgabe",
+  "plural": "Aufgaben",
+  "example_de": "Meine **Aufgabe** ist es, den Tisch zu decken.",
+  "example_en": "My task is to set the table."
+ },
+ {
+  "rank": 723,
+  "word": "Wunder",
+  "plural": "Wunder",
+  "example_de": "Kein **Wunder**, dass du so müde bist!",
+  "example_en": "No wonder you're so tired!"
+ },
+ {
+  "rank": 724,
+  "word": "Pistole",
+  "plural": "Pistolen",
+  "example_de": "Der Polizist trägt eine **Pistole** am Gürtel.",
+  "example_en": "The police officer carries a pistol on his belt."
+ },
+ {
+  "rank": 725,
+  "word": "Sorge",
+  "plural": "Sorgen",
+  "example_de": "Keine **Sorge**, ich bin pünktlich.",
+  "example_en": "Don't worry, I'll be on time."
+ },
+ {
+  "rank": 726,
+  "word": "schließen",
+  "plural": "",
+  "example_de": "Bitte **schließen** Sie die Tür hinter sich.",
+  "example_en": "Please close the door behind you."
+ },
+ {
+  "rank": 727,
+  "word": "Kampf",
+  "plural": "Kämpfe",
+  "example_de": "Das Spiel war ein harter **Kampf**.",
+  "example_en": "The game was a tough fight."
+ },
+ {
+  "rank": 728,
+  "word": "Kunst",
+  "plural": "Künste",
+  "example_de": "Meine Tochter interessiert sich sehr für **Kunst**.",
+  "example_en": "My daughter is very interested in art."
+ },
+ {
+  "rank": 729,
+  "word": "Schiff",
+  "plural": "Schiffe",
+  "example_de": "Wir fahren mit dem **Schiff** nach Schweden.",
+  "example_en": "We're going to Sweden by ship."
+ },
+ {
+  "rank": 730,
+  "word": "Stress",
+  "plural": "",
+  "example_de": "Ich habe gerade viel **Stress** bei der Arbeit.",
+  "example_en": "I'm under a lot of stress at work right now."
+ },
+ {
+  "rank": 731,
+  "word": "langweilig",
+  "plural": "",
+  "example_de": "Der Film war total **langweilig**.",
+  "example_en": "The film was totally boring."
+ },
+ {
+  "rank": 732,
+  "word": "werfen",
+  "plural": "",
+  "example_de": "Er **wirft** den Ball über den Zaun.",
+  "example_en": "He throws the ball over the fence."
+ },
+ {
+  "rank": 733,
+  "word": "Gast",
+  "plural": "Gäste",
+  "example_de": "Unser **Gast** kommt aus Kanada.",
+  "example_en": "Our guest is from Canada."
+ },
+ {
+  "rank": 734,
+  "word": "Hälfte",
+  "plural": "Hälften",
+  "example_de": "Ich esse nur die **Hälfte** der Pizza.",
+  "example_en": "I'm only eating half of the pizza."
+ },
+ {
+  "rank": 735,
+  "word": "Witz",
+  "plural": "Witze",
+  "example_de": "Kennst du einen guten **Witz**?",
+  "example_en": "Do you know a good joke?"
+ },
+ {
+  "rank": 736,
+  "word": "hoffentlich",
+  "plural": "",
+  "example_de": "**Hoffentlich** scheint morgen die Sonne.",
+  "example_en": "Hopefully the sun will shine tomorrow."
+ },
+ {
+  "rank": 737,
+  "word": "Professor",
+  "plural": "Professoren",
+  "example_de": "Der **Professor** erklärt das Thema sehr gut.",
+  "example_en": "The professor explains the topic very well."
+ },
+ {
+  "rank": 738,
+  "word": "verlangen",
+  "plural": "",
+  "example_de": "Der Chef **verlangt** zu viel von uns.",
+  "example_en": "The boss demands too much of us."
+ },
+ {
+  "rank": 739,
+  "word": "Besuch",
+  "plural": "Besuche",
+  "example_de": "Vielen Dank für deinen **Besuch**!",
+  "example_en": "Thank you so much for your visit!"
+ },
+ {
+  "rank": 740,
+  "word": "fangen",
+  "plural": "",
+  "example_de": "Der Hund **fängt** den Ball mit dem Maul.",
+  "example_en": "The dog catches the ball in its mouth."
+ },
+ {
+  "rank": 741,
+  "word": "Unfall",
+  "plural": "Unfälle",
+  "example_de": "Auf der Autobahn gab es einen **Unfall**.",
+  "example_en": "There was an accident on the highway."
+ },
+ {
+  "rank": 742,
+  "word": "grün",
+  "plural": "",
+  "example_de": "Die Ampel ist **grün**, wir können gehen.",
+  "example_en": "The light is green, we can go."
+ },
+ {
+  "rank": 743,
+  "word": "zwanzig",
+  "plural": "",
+  "example_de": "Mein Bruder ist **zwanzig** Jahre alt.",
+  "example_en": "My brother is twenty years old."
+ },
+ {
+  "rank": 744,
+  "word": "Schmerz",
+  "plural": "Schmerzen",
+  "example_de": "Wo haben Sie **Schmerzen**?",
+  "example_en": "Where are you in pain?"
+ },
+ {
+  "rank": 745,
+  "word": "blau",
+  "plural": "",
+  "example_de": "Der Himmel ist heute ganz **blau**.",
+  "example_en": "The sky is completely blue today."
+ },
+ {
+  "rank": 746,
+  "word": "zumindest",
+  "plural": "",
+  "example_de": "Ruf mich **zumindest** kurz an!",
+  "example_en": "At least give me a quick call!"
+ },
+ {
+  "rank": 747,
+  "word": "Opfer",
+  "plural": "Opfer",
+  "example_de": "Die Polizei spricht mit den **Opfern** des Unfalls.",
+  "example_en": "The police are talking to the victims of the accident."
+ },
+ {
+  "rank": 748,
+  "word": "Regel",
+  "plural": "Regeln",
+  "example_de": "Kennst du die **Regeln** von diesem Spiel?",
+  "example_en": "Do you know the rules of this game?"
+ },
+ {
+  "rank": 749,
+  "word": "Gruppe",
+  "plural": "Gruppen",
+  "example_de": "Wir reisen mit einer kleinen **Gruppe**.",
+  "example_en": "We're traveling with a small group."
+ },
+ {
+  "rank": 750,
+  "word": "übrigens",
+  "plural": "",
+  "example_de": "**Übrigens**, ich habe morgen frei.",
+  "example_en": "By the way, I have the day off tomorrow."
+ },
+ {
+  "rank": 751,
+  "word": "nötig",
+  "plural": "",
+  "example_de": "Das ist nicht **nötig**, danke.",
+  "example_en": "That's not necessary, thanks."
+ },
+ {
+  "rank": 752,
+  "word": "bauen",
+  "plural": "",
+  "example_de": "Mein Vater **baut** ein Haus am See.",
+  "example_en": "My father is building a house by the lake."
+ },
+ {
+  "rank": 753,
+  "word": "Garten",
+  "plural": "Gärten",
+  "example_de": "Unser **Garten** ist klein, aber schön.",
+  "example_en": "Our garden is small but nice."
+ },
+ {
+  "rank": 754,
+  "word": "Gedanke",
+  "plural": "Gedanken",
+  "example_de": "Das ist ein guter **Gedanke**.",
+  "example_en": "That's a good thought."
+ },
+ {
+  "rank": 755,
+  "word": "Team",
+  "plural": "Teams",
+  "example_de": "Unser **Team** arbeitet sehr gut zusammen.",
+  "example_en": "Our team works very well together."
+ },
+ {
+  "rank": 756,
+  "word": "Pferd",
+  "plural": "Pferde",
+  "example_de": "Meine Schwester reitet gern auf ihrem **Pferd**.",
+  "example_en": "My sister likes riding her horse."
+ },
+ {
+  "rank": 757,
+  "word": "brennen",
+  "plural": "",
+  "example_de": "Das Feuer **brennt** im Kamin.",
+  "example_en": "The fire is burning in the fireplace."
+ },
+ {
+  "rank": 758,
+  "word": "niemals",
+  "plural": "",
+  "example_de": "Ich vergesse dich **niemals**.",
+  "example_en": "I will never forget you."
+ },
+ {
+  "rank": 759,
+  "word": "Preis",
+  "plural": "Preise",
+  "example_de": "Der **Preis** ist mir zu hoch.",
+  "example_en": "The price is too high for me."
+ },
+ {
+  "rank": 760,
+  "word": "Ehe",
+  "plural": "Ehen",
+  "example_de": "Ihre **Ehe** ist sehr glücklich.",
+  "example_en": "Their marriage is very happy."
+ },
+ {
+  "rank": 761,
+  "word": "Freiheit",
+  "plural": "Freiheiten",
+  "example_de": "Im Urlaub genieße ich meine **Freiheit**.",
+  "example_en": "On vacation I enjoy my freedom."
+ },
+ {
+  "rank": 762,
+  "word": "Fleisch",
+  "plural": "",
+  "example_de": "Ich esse kein **Fleisch**.",
+  "example_en": "I don't eat meat."
+ },
+ {
+  "rank": 763,
+  "word": "Streit",
+  "plural": "",
+  "example_de": "Die Geschwister haben oft **Streit**.",
+  "example_en": "The siblings often have arguments."
+ },
+ {
+  "rank": 764,
+  "word": "streiten",
+  "plural": "",
+  "example_de": "Warum **streitet** ihr schon wieder?",
+  "example_en": "Why are you arguing again?"
+ },
+ {
+  "rank": 765,
+  "word": "Nase",
+  "plural": "Nasen",
+  "example_de": "Meine **Nase** läuft, ich bin erkältet.",
+  "example_en": "My nose is running; I have a cold."
+ },
+ {
+  "rank": 766,
+  "word": "Papier",
+  "plural": "Papiere",
+  "example_de": "Hast du ein Blatt **Papier** für mich?",
+  "example_en": "Do you have a sheet of paper for me?"
+ },
+ {
+  "rank": 767,
+  "word": "Montag",
+  "plural": "Montage",
+  "example_de": "Am **Montag** habe ich einen Termin beim Arzt.",
+  "example_en": "On Monday I have a doctor's appointment."
+ },
+ {
+  "rank": 768,
+  "word": "begleiten",
+  "plural": "",
+  "example_de": "Ich **begleite** dich zum Bahnhof.",
+  "example_en": "I'll go with you to the station."
+ },
+ {
+  "rank": 769,
+  "word": "Freitag",
+  "plural": "Freitage",
+  "example_de": "Am **Freitag** gehen wir ins Kino.",
+  "example_en": "On Friday we're going to the cinema."
+ },
+ {
+  "rank": 770,
+  "word": "Samstag",
+  "plural": "Samstage",
+  "example_de": "Am **Samstag** kaufe ich auf dem Markt ein.",
+  "example_en": "On Saturday I go shopping at the market."
+ },
+ {
+  "rank": 771,
+  "word": "beenden",
+  "plural": "",
+  "example_de": "Wir **beenden** das Meeting um fünf Uhr.",
+  "example_en": "We'll end the meeting at five o'clock."
+ },
+ {
+  "rank": 772,
+  "word": "Gebäude",
+  "plural": "Gebäude",
+  "example_de": "Das **Gebäude** dort ist ein Krankenhaus.",
+  "example_en": "That building over there is a hospital."
+ },
+ {
+  "rank": 773,
+  "word": "Sonntag",
+  "plural": "Sonntage",
+  "example_de": "Am **Sonntag** schlafe ich lange.",
+  "example_en": "On Sunday I sleep in."
+ },
+ {
+  "rank": 774,
+  "word": "verraten",
+  "plural": "",
+  "example_de": "Er hat seinen besten Freund **verraten**.",
+  "example_en": "He betrayed his best friend."
+ },
+ {
+  "rank": 775,
+  "word": "Laden",
+  "plural": "Läden",
+  "example_de": "Der kleine **Laden** an der Ecke hat bis acht offen.",
+  "example_en": "The little shop on the corner is open until eight."
+ },
+ {
+  "rank": 776,
+  "word": "Gold",
+  "plural": "",
+  "example_de": "Der Ring ist aus **Gold**.",
+  "example_en": "The ring is made of gold."
+ },
+ {
+  "rank": 777,
+  "word": "schneiden",
+  "plural": "",
+  "example_de": "Kannst du bitte das Brot **schneiden**?",
+  "example_en": "Can you cut the bread, please?"
+ },
+ {
+  "rank": 778,
+  "word": "Universität",
+  "plural": "Universitäten",
+  "example_de": "Mein Bruder studiert an der **Universität** in Berlin.",
+  "example_en": "My brother studies at the university in Berlin."
+ },
+ {
+  "rank": 779,
+  "word": "Zweifel",
+  "plural": "Zweifel",
+  "example_de": "Daran habe ich keinen **Zweifel**.",
+  "example_en": "I have no doubt about that."
+ },
+ {
+  "rank": 780,
+  "word": "links",
+  "plural": "",
+  "example_de": "Biegen Sie an der Ampel **links** ab.",
+  "example_en": "Turn left at the traffic light."
+ },
+ {
+  "rank": 781,
+  "word": "rechts",
+  "plural": "",
+  "example_de": "Der Supermarkt ist **rechts** neben der Bank.",
+  "example_en": "The supermarket is on the right, next to the bank."
+ },
+ {
+  "rank": 782,
+  "word": "Student",
+  "plural": "Studenten",
+  "example_de": "Er ist **Student** in München.",
+  "example_en": "He's a student in Munich."
+ },
+ {
+  "rank": 783,
+  "word": "geheim",
+  "plural": "",
+  "example_de": "Unser Plan bleibt **geheim**!",
+  "example_en": "Our plan stays secret!"
+ },
+ {
+  "rank": 784,
+  "word": "Geheimnis",
+  "plural": "Geheimnisse",
+  "example_de": "Kannst du ein **Geheimnis** für dich behalten?",
+  "example_en": "Can you keep a secret?"
+ },
+ {
+  "rank": 785,
+  "word": "Tasche",
+  "plural": "Taschen",
+  "example_de": "Meine Schlüssel sind in der **Tasche**.",
+  "example_en": "My keys are in the bag."
+ },
+ {
+  "rank": 786,
+  "word": "klopfen",
+  "plural": "",
+  "example_de": "Jemand **klopft** an die Tür.",
+  "example_en": "Someone is knocking on the door."
+ },
+ {
+  "rank": 787,
+  "word": "Ring",
+  "plural": "Ringe",
+  "example_de": "Sie trägt einen schönen **Ring**.",
+  "example_en": "She's wearing a beautiful ring."
+ },
+ {
+  "rank": 788,
+  "word": "Schuh",
+  "plural": "Schuhe",
+  "example_de": "Diese **Schuhe** sind sehr bequem.",
+  "example_en": "These shoes are very comfortable."
+ },
+ {
+  "rank": 789,
+  "word": "Regierung",
+  "plural": "Regierungen",
+  "example_de": "Die **Regierung** plant neue Gesetze.",
+  "example_en": "The government is planning new laws."
+ },
+ {
+  "rank": 790,
+  "word": "Milch",
+  "plural": "",
+  "example_de": "Ich trinke Kaffee mit **Milch**.",
+  "example_en": "I drink coffee with milk."
+ },
+ {
+  "rank": 791,
+  "word": "Bad",
+  "plural": "Bäder",
+  "example_de": "Das **Bad** ist oben links.",
+  "example_en": "The bathroom is upstairs on the left."
+ },
+ {
+  "rank": 792,
+  "word": "erledigen",
+  "plural": "",
+  "example_de": "Ich muss heute noch viel **erledigen**.",
+  "example_en": "I still have a lot to get done today."
+ },
+ {
+  "rank": 793,
+  "word": "witzig",
+  "plural": "",
+  "example_de": "Dein Freund ist echt **witzig**.",
+  "example_en": "Your friend is really funny."
+ },
+ {
+  "rank": 794,
+  "word": "Tasse",
+  "plural": "Tassen",
+  "example_de": "Möchtest du eine **Tasse** Tee?",
+  "example_en": "Would you like a cup of tea?"
+ },
+ {
+  "rank": 795,
+  "word": "Boot",
+  "plural": "Boote",
+  "example_de": "Am Wochenende fahren wir mit dem **Boot**.",
+  "example_en": "At the weekend we're going out on the boat."
+ },
+ {
+  "rank": 796,
+  "word": "schlau",
+  "plural": "",
+  "example_de": "Das ist eine **schlaue** Idee.",
+  "example_en": "That's a clever idea."
+ },
+ {
+  "rank": 797,
+  "word": "Zahn",
+  "plural": "Zähne",
+  "example_de": "Mir tut ein **Zahn** weh.",
+  "example_en": "One of my teeth hurts."
+ },
+ {
+  "rank": 798,
+  "word": "drüben",
+  "plural": "",
+  "example_de": "Das Café ist da **drüben**.",
+  "example_en": "The café is over there."
+ },
+ {
+  "rank": 799,
+  "word": "Fernseher",
+  "plural": "Fernseher",
+  "example_de": "Der **Fernseher** im Wohnzimmer ist neu.",
+  "example_en": "The TV in the living room is new."
+ },
+ {
+  "rank": 800,
+  "word": "Hemd",
+  "plural": "Hemden",
+  "example_de": "Er trägt heute ein weißes **Hemd**.",
+  "example_en": "He's wearing a white shirt today."
+ },
+ {
+  "rank": 801,
+  "word": "vorsichtig",
+  "plural": "",
+  "example_de": "Fahr bitte **vorsichtig**!",
+  "example_en": "Please drive carefully!"
+ },
+ {
+  "rank": 802,
+  "word": "Vorsicht",
+  "plural": "",
+  "example_de": "**Vorsicht**, der Teller ist heiß!",
+  "example_en": "Careful, the plate is hot!"
+ },
+ {
+  "rank": 803,
+  "word": "Kuchen",
+  "plural": "Kuchen",
+  "example_de": "Oma backt einen **Kuchen** für uns.",
+  "example_en": "Grandma is baking a cake for us."
+ },
+ {
+  "rank": 804,
+  "word": "schmecken",
+  "plural": "",
+  "example_de": "Wie **schmeckt** dir der Kuchen?",
+  "example_en": "How do you like the cake?"
+ },
+ {
+  "rank": 805,
+  "word": "Finger",
+  "plural": "Finger",
+  "example_de": "Ich habe mir in den **Finger** geschnitten.",
+  "example_en": "I cut my finger."
+ },
+ {
+  "rank": 806,
+  "word": "Hals",
+  "plural": "Hälse",
+  "example_de": "Sie trägt einen Schal um den **Hals**.",
+  "example_en": "She's wearing a scarf around her neck."
+ },
+ {
+  "rank": 807,
+  "word": "komplett",
+  "plural": "",
+  "example_de": "Das Hotel ist **komplett** ausgebucht.",
+  "example_en": "The hotel is completely booked up."
+ },
+ {
+  "rank": 808,
+  "word": "Erfolg",
+  "plural": "Erfolge",
+  "example_de": "Das Konzert war ein großer **Erfolg**.",
+  "example_en": "The concert was a big success."
+ },
+ {
+  "rank": 809,
+  "word": "dauern",
+  "plural": "",
+  "example_de": "Die Fahrt **dauert** zwei Stunden.",
+  "example_en": "The trip takes two hours."
+ },
+ {
+  "rank": 810,
+  "word": "Wunsch",
+  "plural": "Wünsche",
+  "example_de": "Hast du einen **Wunsch** zum Geburtstag?",
+  "example_en": "Is there anything you'd like for your birthday?"
+ },
+ {
+  "rank": 811,
+  "word": "schenken",
+  "plural": "",
+  "example_de": "Ich **schenke** meiner Mutter Blumen.",
+  "example_en": "I'm giving my mother flowers."
+ },
+ {
+  "rank": 812,
+  "word": "direkt",
+  "plural": "",
+  "example_de": "Der Bus fährt **direkt** zum Flughafen.",
+  "example_en": "The bus goes directly to the airport."
+ },
+ {
+  "rank": 813,
+  "word": "feiern",
+  "plural": "",
+  "example_de": "Wir **feiern** am Samstag meinen Geburtstag.",
+  "example_en": "We're celebrating my birthday on Saturday."
+ },
+ {
+  "rank": 814,
+  "word": "Sturm",
+  "plural": "Stürme",
+  "example_de": "Heute Nacht kommt ein starker **Sturm**.",
+  "example_en": "A strong storm is coming tonight."
+ },
+ {
+  "rank": 815,
+  "word": "Decke",
+  "plural": "Decken",
+  "example_de": "Mir ist kalt. Hast du eine **Decke**?",
+  "example_en": "I'm cold. Do you have a blanket?"
+ },
+ {
+  "rank": 816,
+  "word": "Keller",
+  "plural": "Keller",
+  "example_de": "Die Fahrräder stehen im **Keller**.",
+  "example_en": "The bikes are in the basement."
+ },
+ {
+  "rank": 817,
+  "word": "Museum",
+  "plural": "Museen",
+  "example_de": "Am Sonntag besuchen wir das **Museum**.",
+  "example_en": "On Sunday we're visiting the museum."
+ },
+ {
+  "rank": 818,
+  "word": "Held",
+  "plural": "Helden",
+  "example_de": "Für mich ist mein Vater ein **Held**.",
+  "example_en": "For me, my father is a hero."
+ },
+ {
+  "rank": 819,
+  "word": "angreifen",
+  "plural": "",
+  "example_de": "Der Hund **greift** die Katze **an**.",
+  "example_en": "The dog attacks the cat."
+ },
+ {
+  "rank": 820,
+  "word": "Flughafen",
+  "plural": "Flughäfen",
+  "example_de": "Wie komme ich zum **Flughafen**?",
+  "example_en": "How do I get to the airport?"
+ },
+ {
+  "rank": 821,
+  "word": "Flugzeug",
+  "plural": "Flugzeuge",
+  "example_de": "Das **Flugzeug** landet um zehn Uhr.",
+  "example_en": "The plane lands at ten o'clock."
+ },
+ {
+  "rank": 822,
+  "word": "Brücke",
+  "plural": "Brücken",
+  "example_de": "Wir gehen über die **Brücke**.",
+  "example_en": "We walk across the bridge."
+ },
+ {
+  "rank": 823,
+  "word": "schließlich",
+  "plural": "",
+  "example_de": "**Schließlich** haben wir den Bahnhof gefunden.",
+  "example_en": "Finally we found the station."
+ },
+ {
+  "rank": 824,
+  "word": "ehrlich",
+  "plural": "",
+  "example_de": "Sei bitte **ehrlich** zu mir.",
+  "example_en": "Please be honest with me."
+ },
+ {
+  "rank": 825,
+  "word": "melden",
+  "plural": "",
+  "example_de": "Ich **melde** mich morgen bei dir.",
+  "example_en": "I'll get in touch with you tomorrow."
+ },
+ {
+  "rank": 826,
+  "word": "Loch",
+  "plural": "Löcher",
+  "example_de": "In meiner Socke ist ein **Loch**.",
+  "example_en": "There's a hole in my sock."
+ },
+ {
+  "rank": 827,
+  "word": "Mond",
+  "plural": "Monde",
+  "example_de": "Heute Nacht ist der **Mond** sehr hell.",
+  "example_en": "The moon is very bright tonight."
+ },
+ {
+  "rank": 828,
+  "word": "trocken",
+  "plural": "",
+  "example_de": "Die Wäsche ist schon **trocken**.",
+  "example_en": "The laundry is already dry."
+ },
+ {
+  "rank": 829,
+  "word": "Vogel",
+  "plural": "Vögel",
+  "example_de": "Ein kleiner **Vogel** singt im Garten.",
+  "example_en": "A little bird is singing in the garden."
+ },
+ {
+  "rank": 830,
+  "word": "weich",
+  "plural": "",
+  "example_de": "Das Bett im Hotel ist sehr **weich**.",
+  "example_en": "The bed in the hotel is very soft."
+ },
+ {
+  "rank": 831,
+  "word": "Dach",
+  "plural": "Dächer",
+  "example_de": "Unser Haus hat ein rotes **Dach**.",
+  "example_en": "Our house has a red roof."
+ },
+ {
+  "rank": 832,
+  "word": "Schnee",
+  "plural": "",
+  "example_de": "Im Winter liegt hier viel **Schnee**.",
+  "example_en": "In winter there's a lot of snow here."
+ },
+ {
+  "rank": 833,
+  "word": "atmen",
+  "plural": "",
+  "example_de": "Ich kann durch die Nase nicht **atmen**.",
+  "example_en": "I can't breathe through my nose."
+ },
+ {
+  "rank": 834,
+  "word": "Wand",
+  "plural": "Wände",
+  "example_de": "Wir streichen die **Wand** blau.",
+  "example_en": "We are painting the wall blue."
+ },
+ {
+  "rank": 835,
+  "word": "Stuhl",
+  "plural": "Stühle",
+  "example_de": "Bitte nimm dir einen **Stuhl**.",
+  "example_en": "Please take a chair."
+ },
+ {
+  "rank": 836,
+  "word": "Treppe",
+  "plural": "Treppen",
+  "example_de": "Der Aufzug ist kaputt, wir nehmen die **Treppe**.",
+  "example_en": "The elevator is broken, so we'll take the stairs."
+ },
+ {
+  "rank": 837,
+  "word": "Dorf",
+  "plural": "Dörfer",
+  "example_de": "Meine Großeltern wohnen in einem kleinen **Dorf**.",
+  "example_en": "My grandparents live in a small village."
+ },
+ {
+  "rank": 838,
+  "word": "sammeln",
+  "plural": "",
+  "example_de": "Mein Sohn **sammelt** Briefmarken.",
+  "example_en": "My son collects stamps."
+ },
+ {
+  "rank": 839,
+  "word": "klettern",
+  "plural": "",
+  "example_de": "Die Kinder **klettern** auf den Baum.",
+  "example_en": "The children are climbing the tree."
+ },
+ {
+  "rank": 840,
+  "word": "mutig",
+  "plural": "",
+  "example_de": "Das war sehr **mutig** von dir.",
+  "example_en": "That was very brave of you."
+ },
+ {
+  "rank": 841,
+  "word": "Mut",
+  "plural": "",
+  "example_de": "Für diese Rede brauche ich viel **Mut**.",
+  "example_en": "I need a lot of courage for this speech."
+ },
+ {
+  "rank": 842,
+  "word": "Prüfung",
+  "plural": "Prüfungen",
+  "example_de": "Morgen habe ich eine **Prüfung** in Deutsch.",
+  "example_en": "Tomorrow I have a German exam."
+ },
+ {
+  "rank": 843,
+  "word": "bestehen",
+  "plural": "",
+  "example_de": "Ich habe die Prüfung **bestanden**!",
+  "example_en": "I passed the exam!"
+ },
+ {
+  "rank": 844,
+  "word": "Anruf",
+  "plural": "Anrufe",
+  "example_de": "Danke für deinen **Anruf**.",
+  "example_en": "Thanks for your call."
+ },
+ {
+  "rank": 845,
+  "word": "Menge",
+  "plural": "Mengen",
+  "example_de": "Ich habe heute eine **Menge** Arbeit.",
+  "example_en": "I have a lot of work today."
+ },
+ {
+  "rank": 846,
+  "word": "Termin",
+  "plural": "Termine",
+  "example_de": "Ich habe um drei einen **Termin** beim Zahnarzt.",
+  "example_en": "I have a dentist appointment at three."
+ },
+ {
+  "rank": 847,
+  "word": "wetten",
+  "plural": "",
+  "example_de": "**Wetten**, dass er wieder zu spät kommt?",
+  "example_en": "Wanna bet he'll be late again?"
+ },
+ {
+  "rank": 848,
+  "word": "ungefähr",
+  "plural": "",
+  "example_de": "Das kostet **ungefähr** zwanzig Euro.",
+  "example_en": "That costs about twenty euros."
+ },
+ {
+  "rank": 849,
+  "word": "deswegen",
+  "plural": "",
+  "example_de": "Ich war krank, **deswegen** bin ich zu Hause geblieben.",
+  "example_en": "I was sick, that's why I stayed at home."
+ },
+ {
+  "rank": 850,
+  "word": "bitten",
+  "plural": "",
+  "example_de": "Darf ich Sie um Hilfe **bitten**?",
+  "example_en": "May I ask you for help?"
+ },
+ {
+  "rank": 851,
+  "word": "seltsam",
+  "plural": "",
+  "example_de": "Er benimmt sich heute sehr **seltsam**.",
+  "example_en": "He's acting very strangely today."
+ },
+ {
+  "rank": 852,
+  "word": "Bank",
+  "plural": "Banken / Bänke",
+  "example_de": "Ich muss noch Geld von der **Bank** holen.",
+  "example_en": "I still have to get money from the bank."
+ },
+ {
+  "rank": 853,
+  "word": "träumen",
+  "plural": "",
+  "example_de": "Ich **träume** oft vom Meer.",
+  "example_en": "I often dream about the sea."
+ },
+ {
+  "rank": 854,
+  "word": "klappen",
+  "plural": "",
+  "example_de": "Hat alles gut **geklappt**?",
+  "example_en": "Did everything work out well?"
+ },
+ {
+  "rank": 855,
+  "word": "reich",
+  "plural": "",
+  "example_de": "Mein Onkel ist sehr **reich**.",
+  "example_en": "My uncle is very rich."
+ },
+ {
+  "rank": 856,
+  "word": "etwa",
+  "plural": "",
+  "example_de": "Die Fahrt dauert **etwa** eine Stunde.",
+  "example_en": "The trip takes about an hour."
+ },
+ {
+  "rank": 857,
+  "word": "Baum",
+  "plural": "Bäume",
+  "example_de": "Vor unserem Haus steht ein großer **Baum**.",
+  "example_en": "There's a big tree in front of our house."
+ },
+ {
+  "rank": 858,
+  "word": "arm",
+  "plural": "",
+  "example_de": "Die Familie ist **arm**, aber glücklich.",
+  "example_en": "The family is poor but happy."
+ },
+ {
+  "rank": 859,
+  "word": "darüber",
+  "plural": "",
+  "example_de": "Lass uns morgen **darüber** sprechen.",
+  "example_en": "Let's talk about it tomorrow."
+ },
+ {
+  "rank": 860,
+  "word": "wunderschön",
+  "plural": "",
+  "example_de": "Der Strand hier ist **wunderschön**.",
+  "example_en": "The beach here is gorgeous."
+ },
+ {
+  "rank": 861,
+  "word": "Messer",
+  "plural": "Messer",
+  "example_de": "Kannst du mir bitte das **Messer** geben?",
+  "example_en": "Can you pass me the knife, please?"
+ },
+ {
+  "rank": 862,
+  "word": "diesmal",
+  "plural": "",
+  "example_de": "**Diesmal** bezahle ich.",
+  "example_en": "This time I'm paying."
+ },
+ {
+  "rank": 863,
+  "word": "funktionieren",
+  "plural": "",
+  "example_de": "Mein Handy **funktioniert** nicht mehr.",
+  "example_en": "My phone doesn't work anymore."
+ },
+ {
+  "rank": 864,
+  "word": "Sport",
+  "plural": "",
+  "example_de": "Ich mache dreimal pro Woche **Sport**.",
+  "example_en": "I do sports three times a week."
+ },
+ {
+  "rank": 865,
+  "word": "furchtbar",
+  "plural": "",
+  "example_de": "Das Essen im Hotel war **furchtbar**.",
+  "example_en": "The food at the hotel was terrible."
+ },
+ {
+  "rank": 866,
+  "word": "bestellen",
+  "plural": "",
+  "example_de": "Ich **bestelle** eine Pizza und ein Wasser.",
+  "example_en": "I'll order a pizza and a water."
+ },
+ {
+  "rank": 867,
+  "word": "schwach",
+  "plural": "",
+  "example_de": "Nach der Grippe bin ich noch **schwach**.",
+  "example_en": "After the flu I'm still weak."
+ },
+ {
+  "rank": 868,
+  "word": "Alter",
+  "plural": "",
+  "example_de": "Sie hat zwei Kinder im **Alter** von fünf und acht Jahren.",
+  "example_en": "She has two children aged five and eight."
+ },
+ {
+  "rank": 869,
+  "word": "nachdem",
+  "plural": "",
+  "example_de": "**Nachdem** wir gegessen haben, spülen wir ab.",
+  "example_en": "After we've eaten, we'll do the dishes."
+ },
+ {
+  "rank": 870,
+  "word": "drehen",
+  "plural": "",
+  "example_de": "Du musst den Schlüssel nach links **drehen**.",
+  "example_en": "You have to turn the key to the left."
+ },
+ {
+  "rank": 871,
+  "word": "gemein",
+  "plural": "",
+  "example_de": "Das war echt **gemein** von dir!",
+  "example_en": "That was really mean of you!"
+ },
+ {
+  "rank": 872,
+  "word": "darauf",
+  "plural": "",
+  "example_de": "Siehst du den Tisch? Stell die Tasse **darauf**.",
+  "example_en": "Do you see the table? Put the cup on it."
+ },
+ {
+  "rank": 873,
+  "word": "Restaurant",
+  "plural": "Restaurants",
+  "example_de": "Wir gehen heute Abend ins **Restaurant**.",
+  "example_en": "We're going to a restaurant this evening."
+ },
+ {
+  "rank": 874,
+  "word": "verliebt",
+  "plural": "",
+  "example_de": "Mein Bruder ist **verliebt**.",
+  "example_en": "My brother is in love."
+ },
+ {
+  "rank": 875,
+  "word": "stecken",
+  "plural": "",
+  "example_de": "Ich **stecke** das Handy in die Tasche.",
+  "example_en": "I put my phone in my bag."
+ },
+ {
+  "rank": 876,
+  "word": "außerdem",
+  "plural": "",
+  "example_de": "Das Hotel ist billig, und **außerdem** liegt es zentral.",
+  "example_en": "The hotel is cheap, and besides, it's central."
+ },
+ {
+  "rank": 877,
+  "word": "Fahrrad",
+  "plural": "Fahrräder",
+  "example_de": "Ich fahre jeden Tag mit dem **Fahrrad** zur Arbeit.",
+  "example_en": "I ride my bike to work every day."
+ },
+ {
+  "rank": 878,
+  "word": "hängen",
+  "plural": "",
+  "example_de": "Die Jacke **hängt** an der Tür.",
+  "example_en": "The jacket is hanging on the door."
+ },
+ {
+  "rank": 879,
+  "word": "einsam",
+  "plural": "",
+  "example_de": "Ohne meine Freunde fühle ich mich **einsam**.",
+  "example_en": "Without my friends I feel lonely."
+ },
+ {
+  "rank": 880,
+  "word": "zerstören",
+  "plural": "",
+  "example_de": "Der Sturm hat das Dach **zerstört**.",
+  "example_en": "The storm destroyed the roof."
+ },
+ {
+  "rank": 881,
+  "word": "berühmt",
+  "plural": "",
+  "example_de": "Diese Stadt ist für ihren Käse **berühmt**.",
+  "example_en": "This town is famous for its cheese."
+ },
+ {
+  "rank": 882,
+  "word": "Engel",
+  "plural": "Engel",
+  "example_de": "Danke, du bist ein **Engel**!",
+  "example_en": "Thanks, you're an angel!"
+ },
+ {
+  "rank": 883,
+  "word": "nachher",
+  "plural": "",
+  "example_de": "Ich rufe dich **nachher** an.",
+  "example_en": "I'll call you later."
+ },
+ {
+  "rank": 884,
+  "word": "hell",
+  "plural": "",
+  "example_de": "Die Wohnung ist schön **hell**.",
+  "example_en": "The apartment is nice and bright."
+ },
+ {
+  "rank": 885,
+  "word": "Geist",
+  "plural": "Geister",
+  "example_de": "Glaubst du an **Geister**?",
+  "example_en": "Do you believe in ghosts?"
+ },
+ {
+  "rank": 886,
+  "word": "schwören",
+  "plural": "",
+  "example_de": "Ich **schwöre**, ich habe nichts gesagt!",
+  "example_en": "I swear I didn't say anything!"
+ },
+ {
+  "rank": 887,
+  "word": "jedenfalls",
+  "plural": "",
+  "example_de": "Wir sehen uns **jedenfalls** am Freitag.",
+  "example_en": "Anyway, we'll see each other on Friday."
+ },
+ {
+  "rank": 888,
+  "word": "vorbereiten",
+  "plural": "",
+  "example_de": "Ich **bereite** das Abendessen **vor**.",
+  "example_en": "I'm preparing dinner."
+ },
+ {
+  "rank": 889,
+  "word": "Polizist",
+  "plural": "Polizisten",
+  "example_de": "Ein **Polizist** hat uns den Weg gezeigt.",
+  "example_en": "A police officer showed us the way."
+ },
+ {
+  "rank": 890,
+  "word": "außer",
+  "plural": "",
+  "example_de": "Alle kommen, **außer** Peter.",
+  "example_en": "Everyone is coming except Peter."
+ },
+ {
+  "rank": 891,
+  "word": "lächeln",
+  "plural": "",
+  "example_de": "Sie **lächelt** immer so freundlich.",
+  "example_en": "She always smiles so kindly."
+ },
+ {
+  "rank": 892,
+  "word": "Erfahrung",
+  "plural": "Erfahrungen",
+  "example_de": "Er hat viel **Erfahrung** in diesem Beruf.",
+  "example_en": "He has a lot of experience in this job."
+ },
+ {
+  "rank": 893,
+  "word": "Strand",
+  "plural": "Strände",
+  "example_de": "Im Sommer liegen wir am **Strand**.",
+  "example_en": "In summer we lie on the beach."
+ },
+ {
+  "rank": 894,
+  "word": "vorhin",
+  "plural": "",
+  "example_de": "Deine Mutter hat **vorhin** angerufen.",
+  "example_en": "Your mother called a moment ago."
+ },
+ {
+  "rank": 895,
+  "word": "hungrig",
+  "plural": "",
+  "example_de": "Nach dem Sport bin ich immer **hungrig**.",
+  "example_en": "After sports I'm always hungry."
+ },
+ {
+  "rank": 896,
+  "word": "Liste",
+  "plural": "Listen",
+  "example_de": "Hast du die **Liste** für den Einkauf?",
+  "example_en": "Do you have the shopping list?"
+ },
+ {
+  "rank": 897,
+  "word": "darum",
+  "plural": "",
+  "example_de": "Es regnet, **darum** bleiben wir zu Hause.",
+  "example_en": "It's raining, that's why we're staying at home."
+ },
+ {
+  "rank": 898,
+  "word": "Weihnachten",
+  "plural": "",
+  "example_de": "An **Weihnachten** besuchen wir meine Eltern.",
+  "example_en": "At Christmas we visit my parents."
+ },
+ {
+  "rank": 899,
+  "word": "zugeben",
+  "plural": "",
+  "example_de": "Ich **gebe** es **zu**, ich habe den Kuchen gegessen.",
+  "example_en": "I admit it, I ate the cake."
+ },
+ {
+  "rank": 900,
+  "word": "Ball",
+  "plural": "Bälle",
+  "example_de": "Der Hund spielt mit dem **Ball**.",
+  "example_en": "The dog is playing with the ball."
+ },
+ {
+  "rank": 901,
+  "word": "längst",
+  "plural": "",
+  "example_de": "Der Zug ist **längst** weg.",
+  "example_en": "The train left long ago."
+ },
+ {
+  "rank": 902,
+  "word": "Ei",
+  "plural": "Eier",
+  "example_de": "Zum Frühstück esse ich ein **Ei**.",
+  "example_en": "I eat an egg for breakfast."
+ },
+ {
+  "rank": 903,
+  "word": "sowieso",
+  "plural": "",
+  "example_de": "Ich gehe **sowieso** einkaufen.",
+  "example_en": "I'm going shopping anyway."
+ },
+ {
+  "rank": 904,
+  "word": "Urlaub",
+  "plural": "Urlaube",
+  "example_de": "Im August machen wir **Urlaub** in Italien.",
+  "example_en": "In August we're going on vacation in Italy."
+ },
+ {
+  "rank": 905,
+  "word": "geschehen",
+  "plural": "",
+  "example_de": "Was ist hier **geschehen**?",
+  "example_en": "What happened here?"
+ },
+ {
+  "rank": 906,
+  "word": "Haut",
+  "plural": "",
+  "example_de": "Im Sommer brauche ich Sonnencreme für meine **Haut**.",
+  "example_en": "In summer I need sunscreen for my skin."
+ },
+ {
+  "rank": 907,
+  "word": "waschen",
+  "plural": "",
+  "example_de": "Ich **wasche** mir die Hände.",
+  "example_en": "I'm washing my hands."
+ },
+ {
+  "rank": 908,
+  "word": "dick",
+  "plural": "",
+  "example_de": "Das Buch ist sehr **dick**.",
+  "example_en": "The book is very thick."
+ },
+ {
+  "rank": 909,
+  "word": "Träne",
+  "plural": "Tränen",
+  "example_de": "Sie hatte **Tränen** in den Augen.",
+  "example_en": "She had tears in her eyes."
+ },
+ {
+  "rank": 910,
+  "word": "entweder",
+  "plural": "",
+  "example_de": "Wir essen **entweder** Pizza oder Nudeln.",
+  "example_en": "We'll eat either pizza or pasta."
+ },
+ {
+  "rank": 911,
+  "word": "Seele",
+  "plural": "Seelen",
+  "example_de": "Musik ist gut für die **Seele**.",
+  "example_en": "Music is good for the soul."
+ },
+ {
+  "rank": 912,
+  "word": "peinlich",
+  "plural": "",
+  "example_de": "Das ist mir so **peinlich**!",
+  "example_en": "I'm so embarrassed!"
+ },
+ {
+  "rank": 913,
+  "word": "stehlen",
+  "plural": "",
+  "example_de": "Jemand hat mein Fahrrad **gestohlen**.",
+  "example_en": "Someone stole my bike."
+ },
+ {
+  "rank": 914,
+  "word": "Alkohol",
+  "plural": "",
+  "example_de": "Möchtest du ein Getränk ohne **Alkohol**?",
+  "example_en": "Would you like a drink without alcohol?"
+ },
+ {
+  "rank": 915,
+  "word": "erreichen",
+  "plural": "",
+  "example_de": "Wir **erreichen** Berlin um acht Uhr.",
+  "example_en": "We'll reach Berlin at eight o'clock."
+ },
+ {
+  "rank": 916,
+  "word": "Ehemann",
+  "plural": "Ehemänner",
+  "example_de": "Das ist mein **Ehemann**, Thomas.",
+  "example_en": "This is my husband, Thomas."
+ },
+ {
+  "rank": 917,
+  "word": "mitten",
+  "plural": "",
+  "example_de": "Das Hotel liegt **mitten** in der Stadt.",
+  "example_en": "The hotel is in the middle of the city."
+ },
+ {
+  "rank": 918,
+  "word": "Taxi",
+  "plural": "Taxis",
+  "example_de": "Wir nehmen ein **Taxi** zum Bahnhof.",
+  "example_en": "We're taking a taxi to the station."
+ },
+ {
+  "rank": 919,
+  "word": "Droge",
+  "plural": "Drogen",
+  "example_de": "**Drogen** sind schlecht für die Gesundheit.",
+  "example_en": "Drugs are bad for your health."
+ },
+ {
+  "rank": 920,
+  "word": "zweimal",
+  "plural": "",
+  "example_de": "Ich putze mir **zweimal** am Tag die Zähne.",
+  "example_en": "I brush my teeth twice a day."
+ },
+ {
+  "rank": 921,
+  "word": "Zigarette",
+  "plural": "Zigaretten",
+  "example_de": "Im Restaurant sind **Zigaretten** verboten.",
+  "example_en": "Cigarettes are not allowed in the restaurant."
+ },
+ {
+  "rank": 922,
+  "word": "erschießen",
+  "plural": "",
+  "example_de": "Im Film wird der Bösewicht am Ende **erschossen**.",
+  "example_en": "In the film, the villain is shot dead at the end."
+ },
+ {
+  "rank": 923,
+  "word": "Blume",
+  "plural": "Blumen",
+  "example_de": "Ich kaufe **Blumen** für meine Freundin.",
+  "example_en": "I'm buying flowers for my girlfriend."
+ },
+ {
+  "rank": 924,
+  "word": "klug",
+  "plural": "",
+  "example_de": "Sie ist ein sehr **kluges** Mädchen.",
+  "example_en": "She's a very clever girl."
+ },
+ {
+  "rank": 925,
+  "word": "Fußball",
+  "plural": "Fußbälle",
+  "example_de": "Am Samstag spielen wir **Fußball** im Park.",
+  "example_en": "On Saturday we're playing soccer in the park."
+ },
+ {
+  "rank": 926,
+  "word": "enttäuscht",
+  "plural": "",
+  "example_de": "Ich bin ein bisschen **enttäuscht**.",
+  "example_en": "I'm a little disappointed."
+ },
+ {
+  "rank": 927,
+  "word": "Verbrechen",
+  "plural": "Verbrechen",
+  "example_de": "Die Polizei untersucht das **Verbrechen**.",
+  "example_en": "The police are investigating the crime."
+ },
+ {
+  "rank": 928,
+  "word": "Hose",
+  "plural": "Hosen",
+  "example_de": "Diese **Hose** ist mir zu eng.",
+  "example_en": "These pants are too tight for me."
+ },
+ {
+  "rank": 929,
+  "word": "bisher",
+  "plural": "",
+  "example_de": "**Bisher** gefällt mir der Kurs sehr gut.",
+  "example_en": "So far I really like the course."
+ },
+ {
+  "rank": 930,
+  "word": "Richter",
+  "plural": "Richter",
+  "example_de": "Der **Richter** hat eine Frage an den Zeugen.",
+  "example_en": "The judge has a question for the witness."
+ },
+ {
+  "rank": 931,
+  "word": "übel",
+  "plural": "",
+  "example_de": "Mir ist **übel**.",
+  "example_en": "I feel sick."
+ },
+ {
+  "rank": 932,
+  "word": "Zeuge",
+  "plural": "Zeugen",
+  "example_de": "Gab es einen **Zeugen** für den Unfall?",
+  "example_en": "Was there a witness to the accident?"
+ },
+ {
+  "rank": 933,
+  "word": "aufgeregt",
+  "plural": "",
+  "example_de": "Vor der Prüfung bin ich immer **aufgeregt**.",
+  "example_en": "Before an exam I'm always nervous."
+ },
+ {
+  "rank": 934,
+  "word": "Maschine",
+  "plural": "Maschinen",
+  "example_de": "Die neue **Maschine** in der Fabrik ist sehr laut.",
+  "example_en": "The new machine in the factory is very loud."
+ },
+ {
+  "rank": 935,
+  "word": "beten",
+  "plural": "",
+  "example_de": "Meine Oma **betet** jeden Abend.",
+  "example_en": "My grandma prays every evening."
+ },
+ {
+  "rank": 936,
+  "word": "Koffer",
+  "plural": "Koffer",
+  "example_de": "Mein **Koffer** ist zu schwer.",
+  "example_en": "My suitcase is too heavy."
+ },
+ {
+  "rank": 937,
+  "word": "verfolgen",
+  "plural": "",
+  "example_de": "Die Polizei **verfolgt** das Auto.",
+  "example_en": "The police are chasing the car."
+ },
+ {
+  "rank": 938,
+  "word": "Brille",
+  "plural": "Brillen",
+  "example_de": "Ich brauche eine neue **Brille**.",
+  "example_en": "I need new glasses."
+ },
+ {
+  "rank": 939,
+  "word": "gelb",
+  "plural": "",
+  "example_de": "Die Banane ist schon **gelb**.",
+  "example_en": "The banana is already yellow."
+ },
+ {
+  "rank": 940,
+  "word": "nachts",
+  "plural": "",
+  "example_de": "**Nachts** ist es hier sehr ruhig.",
+  "example_en": "At night it's very quiet here."
+ },
+ {
+  "rank": 941,
+  "word": "verhaften",
+  "plural": "",
+  "example_de": "Die Polizei hat den Dieb **verhaftet**.",
+  "example_en": "The police arrested the thief."
+ },
+ {
+  "rank": 942,
+  "word": "Interesse",
+  "plural": "Interessen",
+  "example_de": "Ich habe großes **Interesse** an Musik.",
+  "example_en": "I'm very interested in music."
+ },
+ {
+  "rank": 943,
+  "word": "solange",
+  "plural": "",
+  "example_de": "**Solange** es regnet, bleiben wir drinnen.",
+  "example_en": "As long as it's raining, we'll stay inside."
+ },
+ {
+  "rank": 944,
+  "word": "weitermachen",
+  "plural": "",
+  "example_de": "Nach der Pause **machen** wir **weiter**.",
+  "example_en": "After the break we'll carry on."
+ },
+ {
+  "rank": 945,
+  "word": "Rechnung",
+  "plural": "Rechnungen",
+  "example_de": "Die **Rechnung**, bitte!",
+  "example_en": "The bill, please!"
+ },
+ {
+  "rank": 946,
+  "word": "Schauspieler",
+  "plural": "Schauspieler",
+  "example_de": "Er ist ein bekannter **Schauspieler**.",
+  "example_en": "He's a well-known actor."
+ },
+ {
+  "rank": 947,
+  "word": "grau",
+  "plural": "",
+  "example_de": "Der Himmel ist heute ganz **grau**.",
+  "example_en": "The sky is completely gray today."
+ },
+ {
+  "rank": 948,
+  "word": "besorgt",
+  "plural": "",
+  "example_de": "Meine Mutter ist **besorgt**, weil ich krank bin.",
+  "example_en": "My mother is worried because I'm sick."
+ },
+ {
+  "rank": 949,
+  "word": "schweigen",
+  "plural": "",
+  "example_de": "Er **schweigt** und sagt kein Wort.",
+  "example_en": "He stays silent and doesn't say a word."
+ },
+ {
+  "rank": 950,
+  "word": "trotz",
+  "plural": "",
+  "example_de": "**Trotz** des Regens gehen wir spazieren.",
+  "example_en": "Despite the rain, we're going for a walk."
+ },
+ {
+  "rank": 951,
+  "word": "Mitte",
+  "plural": "",
+  "example_de": "Der Tisch steht in der **Mitte** des Zimmers.",
+  "example_en": "The table is in the middle of the room."
+ },
+ {
+  "rank": 952,
+  "word": "loslassen",
+  "plural": "",
+  "example_de": "**Lass** bitte meine Hand nicht **los**!",
+  "example_en": "Please don't let go of my hand!"
+ },
+ {
+  "rank": 953,
+  "word": "billig",
+  "plural": "",
+  "example_de": "Das T-Shirt war sehr **billig**.",
+  "example_en": "The T-shirt was very cheap."
+ },
+ {
+  "rank": 954,
+  "word": "Schloss",
+  "plural": "Schlösser",
+  "example_de": "Wir besichtigen heute ein altes **Schloss**.",
+  "example_en": "Today we're visiting an old castle."
+ },
+ {
+  "rank": 955,
+  "word": "inzwischen",
+  "plural": "",
+  "example_de": "**Inzwischen** wohne ich in Hamburg.",
+  "example_en": "I live in Hamburg now."
+ },
+ {
+  "rank": 956,
+  "word": "drücken",
+  "plural": "",
+  "example_de": "**Drücken** Sie bitte den grünen Knopf.",
+  "example_en": "Please press the green button."
+ },
+ {
+  "rank": 957,
+  "word": "Kamera",
+  "plural": "Kameras",
+  "example_de": "Ich habe meine **Kamera** im Hotel vergessen.",
+  "example_en": "I left my camera at the hotel."
+ },
+ {
+  "rank": 958,
+  "word": "sauber",
+  "plural": "",
+  "example_de": "Die Küche ist jetzt wieder **sauber**.",
+  "example_en": "The kitchen is clean again now."
+ },
+ {
+  "rank": 959,
+  "word": "geil",
+  "plural": "",
+  "example_de": "Das Konzert war echt **geil**!",
+  "example_en": "The concert was really awesome!"
+ },
+ {
+  "rank": 960,
+  "word": "Wind",
+  "plural": "Winde",
+  "example_de": "Heute weht ein kalter **Wind**.",
+  "example_en": "A cold wind is blowing today."
+ },
+ {
+  "rank": 961,
+  "word": "sobald",
+  "plural": "",
+  "example_de": "Ich rufe dich an, **sobald** ich zu Hause bin.",
+  "example_en": "I'll call you as soon as I'm home."
+ },
+ {
+  "rank": 962,
+  "word": "Teller",
+  "plural": "Teller",
+  "example_de": "Stell die **Teller** bitte auf den Tisch.",
+  "example_en": "Please put the plates on the table."
+ },
+ {
+  "rank": 963,
+  "word": "fair",
+  "plural": "",
+  "example_de": "Das ist nicht **fair**!",
+  "example_en": "That's not fair!"
+ },
+ {
+  "rank": 964,
+  "word": "Medikament",
+  "plural": "Medikamente",
+  "example_de": "Nimm dieses **Medikament** zweimal am Tag.",
+  "example_en": "Take this medicine twice a day."
+ },
+ {
+  "rank": 965,
+  "word": "Insel",
+  "plural": "Inseln",
+  "example_de": "Wir machen Urlaub auf einer kleinen **Insel**.",
+  "example_en": "We're vacationing on a small island."
+ },
+ {
+  "rank": 966,
+  "word": "dagegen",
+  "plural": "",
+  "example_de": "Ich habe nichts **dagegen**.",
+  "example_en": "I don't mind."
+ },
+ {
+  "rank": 967,
+  "word": "Dieb",
+  "plural": "Diebe",
+  "example_de": "Der **Dieb** ist mit meiner Tasche weggelaufen.",
+  "example_en": "The thief ran off with my bag."
+ },
+ {
+  "rank": 968,
+  "word": "anhalten",
+  "plural": "",
+  "example_de": "Der Bus **hält** hier nicht **an**.",
+  "example_en": "The bus doesn't stop here."
+ },
+ {
+  "rank": 969,
+  "word": "schmutzig",
+  "plural": "",
+  "example_de": "Deine Schuhe sind ganz **schmutzig**.",
+  "example_en": "Your shoes are really dirty."
+ },
+ {
+  "rank": 970,
+  "word": "Fluss",
+  "plural": "Flüsse",
+  "example_de": "Der **Fluss** fließt durch die ganze Stadt.",
+  "example_en": "The river flows through the whole city."
+ },
+ {
+  "rank": 971,
+  "word": "daran",
+  "plural": "",
+  "example_de": "Denk bitte **daran**, Brot zu kaufen.",
+  "example_en": "Please remember to buy bread."
+ },
+ {
+  "rank": 972,
+  "word": "vorne",
+  "plural": "",
+  "example_de": "Im Kino sitzen wir gern ganz **vorne**.",
+  "example_en": "At the cinema we like to sit right at the front."
+ },
+ {
+  "rank": 973,
+  "word": "fliehen",
+  "plural": "",
+  "example_de": "Die Katze **flieht** vor dem Hund.",
+  "example_en": "The cat flees from the dog."
+ },
+ {
+  "rank": 974,
+  "word": "Ehefrau",
+  "plural": "Ehefrauen",
+  "example_de": "Meine **Ehefrau** arbeitet als Lehrerin.",
+  "example_en": "My wife works as a teacher."
+ },
+ {
+  "rank": 975,
+  "word": "Apfel",
+  "plural": "Äpfel",
+  "example_de": "Möchtest du einen **Apfel**?",
+  "example_en": "Would you like an apple?"
+ },
+ {
+  "rank": 976,
+  "word": "gegenüber",
+  "plural": "",
+  "example_de": "Die Bäckerei ist direkt **gegenüber** dem Bahnhof.",
+  "example_en": "The bakery is right opposite the station."
+ },
+ {
+  "rank": 977,
+  "word": "umdrehen",
+  "plural": "",
+  "example_de": "**Dreh** dich bitte **um**!",
+  "example_en": "Please turn around!"
+ },
+ {
+  "rank": 978,
+  "word": "Salz",
+  "plural": "",
+  "example_de": "Die Suppe braucht noch etwas **Salz**.",
+  "example_en": "The soup needs a bit more salt."
+ },
+ {
+  "rank": 979,
+  "word": "aussteigen",
+  "plural": "",
+  "example_de": "Bitte **steigen** Sie hier **aus**.",
+  "example_en": "Please get off here."
+ },
+ {
+  "rank": 980,
+  "word": "Wolke",
+  "plural": "Wolken",
+  "example_de": "Am Himmel ist keine einzige **Wolke**.",
+  "example_en": "There isn't a single cloud in the sky."
+ },
+ {
+  "rank": 981,
+  "word": "satt",
+  "plural": "",
+  "example_de": "Danke, ich bin **satt**.",
+  "example_en": "Thanks, I'm full."
+ },
+ {
+  "rank": 982,
+  "word": "See",
+  "plural": "Seen",
+  "example_de": "Im Sommer schwimmen wir im **See**.",
+  "example_en": "In summer we swim in the lake."
+ },
+ {
+  "rank": 983,
+  "word": "eng",
+  "plural": "",
+  "example_de": "Die Straße ist hier sehr **eng**.",
+  "example_en": "The street is very narrow here."
+ },
+ {
+  "rank": 984,
+  "word": "erwachsen",
+  "plural": "",
+  "example_de": "Meine Kinder sind schon **erwachsen**.",
+  "example_en": "My children are already grown up."
+ },
+ {
+  "rank": 985,
+  "word": "Zucker",
+  "plural": "",
+  "example_de": "Nimmst du **Zucker** in den Tee?",
+  "example_en": "Do you take sugar in your tea?"
+ },
+ {
+  "rank": 986,
+  "word": "empfehlen",
+  "plural": "",
+  "example_de": "Was können Sie heute **empfehlen**?",
+  "example_en": "What can you recommend today?"
+ },
+ {
+  "rank": 987,
+  "word": "Übung",
+  "plural": "Übungen",
+  "example_de": "Macht bitte **Übung** drei auf Seite zehn.",
+  "example_en": "Please do exercise three on page ten."
+ },
+ {
+  "rank": 988,
+  "word": "dünn",
+  "plural": "",
+  "example_de": "Die Wände hier sind sehr **dünn**.",
+  "example_en": "The walls here are very thin."
+ },
+ {
+  "rank": 989,
+  "word": "nirgendwo",
+  "plural": "",
+  "example_de": "Ich finde meinen Schlüssel **nirgendwo**.",
+  "example_en": "I can't find my key anywhere."
+ },
+ {
+  "rank": 990,
+  "word": "Mantel",
+  "plural": "Mäntel",
+  "example_de": "Zieh deinen **Mantel** an, es ist kalt.",
+  "example_en": "Put your coat on, it's cold."
+ },
+ {
+  "rank": 991,
+  "word": "seitdem",
+  "plural": "",
+  "example_de": "Er ist letztes Jahr umgezogen. **Seitdem** sehe ich ihn selten.",
+  "example_en": "He moved last year. Since then I rarely see him."
+ },
+ {
+  "rank": 992,
+  "word": "Suppe",
+  "plural": "Suppen",
+  "example_de": "Heute gibt es **Suppe** zum Mittagessen.",
+  "example_en": "Today there's soup for lunch."
+ },
+ {
+  "rank": 993,
+  "word": "Käse",
+  "plural": "",
+  "example_de": "Ich esse gern Brot mit **Käse**.",
+  "example_en": "I like eating bread with cheese."
+ },
+ {
+  "rank": 994,
+  "word": "weder",
+  "plural": "",
+  "example_de": "Ich trinke **weder** Kaffee noch Tee.",
+  "example_en": "I drink neither coffee nor tea."
+ },
+ {
+  "rank": 995,
+  "word": "Konzert",
+  "plural": "Konzerte",
+  "example_de": "Gehst du mit mir ins **Konzert**?",
+  "example_en": "Will you go to the concert with me?"
+ },
+ {
+  "rank": 996,
+  "word": "reparieren",
+  "plural": "",
+  "example_de": "Kannst du mein Fahrrad **reparieren**?",
+  "example_en": "Can you repair my bike?"
+ },
+ {
+  "rank": 997,
+  "word": "Künstler",
+  "plural": "Künstler",
+  "example_de": "Der **Künstler** malt schöne Bilder.",
+  "example_en": "The artist paints beautiful pictures."
+ },
+ {
+  "rank": 998,
+  "word": "mittlerweile",
+  "plural": "",
+  "example_de": "**Mittlerweile** spreche ich ganz gut Deutsch.",
+  "example_en": "By now I speak German pretty well."
+ },
+ {
+  "rank": 999,
+  "word": "einsteigen",
+  "plural": "",
+  "example_de": "Bitte **steigen** Sie jetzt **ein**, der Zug fährt gleich ab.",
+  "example_en": "Please get on now, the train is about to leave."
+ },
+ {
+  "rank": 1000,
+  "word": "landen",
+  "plural": "",
+  "example_de": "Unser Flugzeug **landet** pünktlich in Wien.",
+  "example_en": "Our plane lands on time in Vienna."
+ }
+]
