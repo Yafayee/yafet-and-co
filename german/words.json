@@ -1,0 +1,7364 @@
+[
+ {
+  "rank": 1,
+  "word": "ich",
+  "translation": "I",
+  "pos": "pronoun",
+  "cefr": "A1"
+ },
+ {
+  "rank": 2,
+  "word": "sein",
+  "translation": "to be; (as determiner) his, its",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 3,
+  "word": "das",
+  "translation": "the (neuter); that, this",
+  "pos": "article",
+  "cefr": "A1"
+ },
+ {
+  "rank": 4,
+  "word": "die",
+  "translation": "the (feminine; plural); who, which",
+  "pos": "article",
+  "cefr": "A1"
+ },
+ {
+  "rank": 5,
+  "word": "du",
+  "translation": "you (informal singular)",
+  "pos": "pronoun",
+  "cefr": "A1"
+ },
+ {
+  "rank": 6,
+  "word": "der",
+  "translation": "the (masculine); who, which",
+  "pos": "article",
+  "cefr": "A1"
+ },
+ {
+  "rank": 7,
+  "word": "nicht",
+  "translation": "not",
+  "pos": "adverb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 8,
+  "word": "und",
+  "translation": "and",
+  "pos": "conjunction",
+  "cefr": "A1"
+ },
+ {
+  "rank": 9,
+  "word": "es",
+  "translation": "it",
+  "pos": "pronoun",
+  "cefr": "A1"
+ },
+ {
+  "rank": 10,
+  "word": "sie",
+  "translation": "she; they; (Sie) you (formal)",
+  "pos": "pronoun",
+  "cefr": "A1"
+ },
+ {
+  "rank": 11,
+  "word": "haben",
+  "translation": "to have",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 12,
+  "word": "was",
+  "translation": "what; something (colloquial)",
+  "pos": "pronoun",
+  "cefr": "A1"
+ },
+ {
+  "rank": 13,
+  "word": "wir",
+  "translation": "we",
+  "pos": "pronoun",
+  "cefr": "A1"
+ },
+ {
+  "rank": 14,
+  "word": "zu",
+  "translation": "to; too (excessively)",
+  "pos": "preposition",
+  "cefr": "A1"
+ },
+ {
+  "rank": 15,
+  "word": "ein",
+  "translation": "a, an; one",
+  "pos": "article",
+  "cefr": "A1"
+ },
+ {
+  "rank": 16,
+  "word": "er",
+  "translation": "he",
+  "pos": "pronoun",
+  "cefr": "A1"
+ },
+ {
+  "rank": 17,
+  "word": "werden",
+  "translation": "to become; will (future auxiliary)",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 18,
+  "word": "in",
+  "translation": "in, into",
+  "pos": "preposition",
+  "cefr": "A1"
+ },
+ {
+  "rank": 19,
+  "word": "mit",
+  "translation": "with",
+  "pos": "preposition",
+  "cefr": "A1"
+ },
+ {
+  "rank": 20,
+  "word": "ja",
+  "translation": "yes; (particle) indeed, after all",
+  "pos": "adverb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 21,
+  "word": "wie",
+  "translation": "how; like, as",
+  "pos": "adverb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 22,
+  "word": "den",
+  "translation": "the (masculine accusative; dative plural)",
+  "pos": "article",
+  "cefr": "A1"
+ },
+ {
+  "rank": 23,
+  "word": "mir",
+  "translation": "me (dative), to me",
+  "pos": "pronoun",
+  "cefr": "A1"
+ },
+ {
+  "rank": 24,
+  "word": "können",
+  "translation": "can, to be able to",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 25,
+  "word": "auf",
+  "translation": "on, onto, upon",
+  "pos": "preposition",
+  "cefr": "A1"
+ },
+ {
+  "rank": 26,
+  "word": "mich",
+  "translation": "me (accusative); myself",
+  "pos": "pronoun",
+  "cefr": "A1"
+ },
+ {
+  "rank": 27,
+  "word": "dass",
+  "translation": "that (conjunction)",
+  "pos": "conjunction",
+  "cefr": "A1"
+ },
+ {
+  "rank": 28,
+  "word": "so",
+  "translation": "so, like this, such",
+  "pos": "adverb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 29,
+  "word": "eine",
+  "translation": "a, an (feminine)",
+  "pos": "article",
+  "cefr": "A1"
+ },
+ {
+  "rank": 30,
+  "word": "aber",
+  "translation": "but, however",
+  "pos": "conjunction",
+  "cefr": "A1"
+ },
+ {
+  "rank": 31,
+  "word": "hier",
+  "translation": "here",
+  "pos": "adverb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 32,
+  "word": "für",
+  "translation": "for",
+  "pos": "preposition",
+  "cefr": "A1"
+ },
+ {
+  "rank": 33,
+  "word": "von",
+  "translation": "from, of, by",
+  "pos": "preposition",
+  "cefr": "A1"
+ },
+ {
+  "rank": 34,
+  "word": "wollen",
+  "translation": "to want",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 35,
+  "word": "dich",
+  "translation": "you (accusative); yourself",
+  "pos": "pronoun",
+  "cefr": "A1"
+ },
+ {
+  "rank": 36,
+  "word": "noch",
+  "translation": "still, yet; another",
+  "pos": "adverb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 37,
+  "word": "an",
+  "translation": "at, on, to",
+  "pos": "preposition",
+  "cefr": "A1"
+ },
+ {
+  "rank": 38,
+  "word": "da",
+  "translation": "there, here; (conjunction) since, as",
+  "pos": "adverb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 39,
+  "word": "dir",
+  "translation": "you (dative), to you",
+  "pos": "pronoun",
+  "cefr": "A1"
+ },
+ {
+  "rank": 40,
+  "word": "wenn",
+  "translation": "if, when, whenever",
+  "pos": "conjunction",
+  "cefr": "A1"
+ },
+ {
+  "rank": 41,
+  "word": "gut",
+  "translation": "good; well",
+  "pos": "adjective",
+  "cefr": "A1"
+ },
+ {
+  "rank": 42,
+  "word": "man",
+  "translation": "one, you, people (impersonal)",
+  "pos": "pronoun",
+  "cefr": "A1"
+ },
+ {
+  "rank": 43,
+  "word": "auch",
+  "translation": "also, too, as well",
+  "pos": "adverb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 44,
+  "word": "nur",
+  "translation": "only, just",
+  "pos": "adverb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 45,
+  "word": "machen",
+  "translation": "to do, to make",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 46,
+  "word": "wissen",
+  "translation": "to know (a fact)",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 47,
+  "word": "gehen",
+  "translation": "to go, to walk; to work out (das geht)",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 48,
+  "word": "jetzt",
+  "translation": "now",
+  "pos": "adverb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 49,
+  "word": "mein",
+  "translation": "my",
+  "pos": "determiner",
+  "cefr": "A1"
+ },
+ {
+  "rank": 50,
+  "word": "doch",
+  "translation": "yet, but; (particle) after all; yes, it is (contradicting)",
+  "pos": "adverb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 51,
+  "word": "kommen",
+  "translation": "to come",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 52,
+  "word": "müssen",
+  "translation": "must, to have to",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 53,
+  "word": "sagen",
+  "translation": "to say, to tell",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 54,
+  "word": "sehen",
+  "translation": "to see",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 55,
+  "word": "nein",
+  "translation": "no",
+  "pos": "adverb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 56,
+  "word": "dann",
+  "translation": "then, after that",
+  "pos": "adverb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 57,
+  "word": "sehr",
+  "translation": "very, very much",
+  "pos": "adverb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 58,
+  "word": "im",
+  "translation": "in the (contraction of in + dem)",
+  "pos": "preposition",
+  "cefr": "A1"
+ },
+ {
+  "rank": 59,
+  "word": "sollen",
+  "translation": "should, to be supposed to",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 60,
+  "word": "ihn",
+  "translation": "him (accusative)",
+  "pos": "pronoun",
+  "cefr": "A1"
+ },
+ {
+  "rank": 61,
+  "word": "uns",
+  "translation": "us; ourselves",
+  "pos": "pronoun",
+  "cefr": "A1"
+ },
+ {
+  "rank": 62,
+  "word": "schon",
+  "translation": "already; (particle) all right, surely",
+  "pos": "adverb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 63,
+  "word": "mal",
+  "translation": "time(s), once; (particle) just (komm mal her)",
+  "pos": "adverb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 64,
+  "word": "kein",
+  "translation": "no, not a, none",
+  "pos": "determiner",
+  "cefr": "A1"
+ },
+ {
+  "rank": 65,
+  "word": "oder",
+  "translation": "or; …right? (tag question)",
+  "pos": "conjunction",
+  "cefr": "A1"
+ },
+ {
+  "rank": 66,
+  "word": "denn",
+  "translation": "because, for; (particle) then (was ist denn los?)",
+  "pos": "conjunction",
+  "cefr": "A1"
+ },
+ {
+  "rank": 67,
+  "word": "um",
+  "translation": "around; at (clock time); (um … zu) in order to",
+  "pos": "preposition",
+  "cefr": "A1"
+ },
+ {
+  "rank": 68,
+  "word": "mehr",
+  "translation": "more",
+  "pos": "adverb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 69,
+  "word": "also",
+  "translation": "so, therefore; well then",
+  "pos": "adverb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 70,
+  "word": "ihm",
+  "translation": "him, it (dative), to him",
+  "pos": "pronoun",
+  "cefr": "A1"
+ },
+ {
+  "rank": 71,
+  "word": "wo",
+  "translation": "where",
+  "pos": "adverb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 72,
+  "word": "sich",
+  "translation": "himself, herself, itself, themselves; each other",
+  "pos": "pronoun",
+  "cefr": "A1"
+ },
+ {
+  "rank": 73,
+  "word": "alles",
+  "translation": "everything, all",
+  "pos": "pronoun",
+  "cefr": "A1"
+ },
+ {
+  "rank": 74,
+  "word": "nach",
+  "translation": "after; to (a place); according to",
+  "pos": "preposition",
+  "cefr": "A1"
+ },
+ {
+  "rank": 75,
+  "word": "ihr",
+  "translation": "you (informal plural); her, their (possessive)",
+  "pos": "pronoun",
+  "cefr": "A1"
+ },
+ {
+  "rank": 76,
+  "word": "aus",
+  "translation": "out of, from; over, finished",
+  "pos": "preposition",
+  "cefr": "A1"
+ },
+ {
+  "rank": 77,
+  "word": "bei",
+  "translation": "at, near; at (someone’s) place",
+  "pos": "preposition",
+  "cefr": "A1"
+ },
+ {
+  "rank": 78,
+  "word": "geben",
+  "translation": "to give; (es gibt) there is, there are",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 79,
+  "word": "immer",
+  "translation": "always",
+  "pos": "adverb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 80,
+  "word": "etwas",
+  "translation": "something; some, a little",
+  "pos": "pronoun",
+  "cefr": "A1"
+ },
+ {
+  "rank": 81,
+  "word": "warum",
+  "translation": "why",
+  "pos": "adverb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 82,
+  "word": "nichts",
+  "translation": "nothing",
+  "pos": "pronoun",
+  "cefr": "A1"
+ },
+ {
+  "rank": 83,
+  "word": "wieder",
+  "translation": "again",
+  "pos": "adverb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 84,
+  "word": "tun",
+  "translation": "to do",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 85,
+  "word": "lassen",
+  "translation": "to let, to allow; to leave (something)",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 86,
+  "word": "denken",
+  "translation": "to think",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 87,
+  "word": "als",
+  "translation": "when (single past event); than; as",
+  "pos": "conjunction",
+  "cefr": "A1"
+ },
+ {
+  "rank": 88,
+  "word": "dem",
+  "translation": "the (dative masculine/neuter)",
+  "pos": "article",
+  "cefr": "A1"
+ },
+ {
+  "rank": 89,
+  "word": "gerade",
+  "translation": "just, right now; straight",
+  "pos": "adverb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 90,
+  "word": "wirklich",
+  "translation": "really, truly",
+  "pos": "adverb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 91,
+  "word": "glauben",
+  "translation": "to believe, to think",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 92,
+  "word": "viel",
+  "translation": "much, a lot (of)",
+  "pos": "determiner",
+  "cefr": "A1"
+ },
+ {
+  "rank": 93,
+  "word": "brauchen",
+  "translation": "to need",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 94,
+  "word": "weil",
+  "translation": "because",
+  "pos": "conjunction",
+  "cefr": "A1"
+ },
+ {
+  "rank": 95,
+  "word": "vielleicht",
+  "translation": "maybe, perhaps",
+  "pos": "adverb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 96,
+  "word": "wer",
+  "translation": "who",
+  "pos": "pronoun",
+  "cefr": "A1"
+ },
+ {
+  "rank": 97,
+  "word": "gern",
+  "translation": "gladly, with pleasure; (verb + gern) to like doing",
+  "pos": "adverb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 98,
+  "word": "bitte",
+  "translation": "please; you’re welcome; pardon?",
+  "pos": "interjection",
+  "cefr": "A1"
+ },
+ {
+  "rank": 99,
+  "word": "ganz",
+  "translation": "quite, completely; whole",
+  "pos": "adverb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 100,
+  "word": "los",
+  "translation": "(was ist los?) what’s going on; (los!) go!, come on",
+  "pos": "adverb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 101,
+  "word": "Mann",
+  "translation": "man; husband",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A1"
+ },
+ {
+  "rank": 102,
+  "word": "heißen",
+  "translation": "to be called; to mean",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 103,
+  "word": "Gott",
+  "translation": "God; (oh Gott!) oh my God",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A1"
+ },
+ {
+  "rank": 104,
+  "word": "einen",
+  "translation": "a, an (masculine accusative)",
+  "pos": "article",
+  "cefr": "A1"
+ },
+ {
+  "rank": 105,
+  "word": "finden",
+  "translation": "to find; to think (opinion)",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 106,
+  "word": "Zeit",
+  "translation": "time",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A1"
+ },
+ {
+  "rank": 107,
+  "word": "danke",
+  "translation": "thank you, thanks",
+  "pos": "interjection",
+  "cefr": "A1"
+ },
+ {
+  "rank": 108,
+  "word": "reden",
+  "translation": "to talk, to speak",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 109,
+  "word": "nehmen",
+  "translation": "to take",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 110,
+  "word": "Tag",
+  "translation": "day",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A1"
+ },
+ {
+  "rank": 111,
+  "word": "vor",
+  "translation": "before, in front of; ago",
+  "pos": "preposition",
+  "cefr": "A1"
+ },
+ {
+  "rank": 112,
+  "word": "bleiben",
+  "translation": "to stay, to remain",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 113,
+  "word": "dieser",
+  "translation": "this, this one",
+  "pos": "determiner",
+  "cefr": "A1"
+ },
+ {
+  "rank": 114,
+  "word": "mögen",
+  "translation": "to like; (möchte) would like",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 115,
+  "word": "Frau",
+  "translation": "woman; wife; Mrs",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A1"
+ },
+ {
+  "rank": 116,
+  "word": "sprechen",
+  "translation": "to speak, to talk",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 117,
+  "word": "hallo",
+  "translation": "hello, hi",
+  "pos": "interjection",
+  "cefr": "A1"
+ },
+ {
+  "rank": 118,
+  "word": "wann",
+  "translation": "when",
+  "pos": "adverb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 119,
+  "word": "alle",
+  "translation": "all; everyone, everybody",
+  "pos": "pronoun",
+  "cefr": "A1"
+ },
+ {
+  "rank": 120,
+  "word": "fragen",
+  "translation": "to ask",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 121,
+  "word": "Leute",
+  "translation": "people",
+  "pos": "noun",
+  "gender": "pl",
+  "cefr": "A1"
+ },
+ {
+  "rank": 122,
+  "word": "gleich",
+  "translation": "in a moment, right away; same, equal",
+  "pos": "adverb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 123,
+  "word": "einfach",
+  "translation": "simply, just; simple, easy",
+  "pos": "adverb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 124,
+  "word": "ob",
+  "translation": "whether, if",
+  "pos": "conjunction",
+  "cefr": "A1"
+ },
+ {
+  "rank": 125,
+  "word": "hören",
+  "translation": "to hear, to listen",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 126,
+  "word": "verstehen",
+  "translation": "to understand",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 127,
+  "word": "natürlich",
+  "translation": "of course, naturally; natural",
+  "pos": "adverb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 128,
+  "word": "warten",
+  "translation": "to wait",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 129,
+  "word": "über",
+  "translation": "over, above; about",
+  "pos": "preposition",
+  "cefr": "A1"
+ },
+ {
+  "rank": 130,
+  "word": "richtig",
+  "translation": "right, correct; real",
+  "pos": "adjective",
+  "cefr": "A1"
+ },
+ {
+  "rank": 131,
+  "word": "Leben",
+  "translation": "life",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A1"
+ },
+ {
+  "rank": 132,
+  "word": "andere",
+  "translation": "other, different (one)",
+  "pos": "determiner",
+  "cefr": "A1"
+ },
+ {
+  "rank": 133,
+  "word": "meinen",
+  "translation": "to mean, to think (was meinst du?)",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 134,
+  "word": "stehen",
+  "translation": "to stand; to be written (somewhere)",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 135,
+  "word": "dein",
+  "translation": "your (informal singular)",
+  "pos": "determiner",
+  "cefr": "A1"
+ },
+ {
+  "rank": 136,
+  "word": "Vater",
+  "translation": "father",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A1"
+ },
+ {
+  "rank": 137,
+  "word": "gar",
+  "translation": "(gar nicht, gar kein) at all; even",
+  "pos": "adverb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 138,
+  "word": "klar",
+  "translation": "clear; (colloquial) sure, of course",
+  "pos": "adjective",
+  "cefr": "A1"
+ },
+ {
+  "rank": 139,
+  "word": "leben",
+  "translation": "to live",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 140,
+  "word": "Mutter",
+  "translation": "mother",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A1"
+ },
+ {
+  "rank": 141,
+  "word": "helfen",
+  "translation": "to help",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 142,
+  "word": "schön",
+  "translation": "beautiful, nice, lovely",
+  "pos": "adjective",
+  "cefr": "A1"
+ },
+ {
+  "rank": 143,
+  "word": "kennen",
+  "translation": "to know (a person or place)",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 144,
+  "word": "weg",
+  "translation": "away, gone",
+  "pos": "adverb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 145,
+  "word": "zwei",
+  "translation": "two",
+  "pos": "number",
+  "cefr": "A1"
+ },
+ {
+  "rank": 146,
+  "word": "laufen",
+  "translation": "to run; to walk; to be going on",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 147,
+  "word": "Jahr",
+  "translation": "year",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A1"
+ },
+ {
+  "rank": 148,
+  "word": "lieben",
+  "translation": "to love",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 149,
+  "word": "dürfen",
+  "translation": "may, to be allowed to",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 150,
+  "word": "heute",
+  "translation": "today",
+  "pos": "adverb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 151,
+  "word": "versuchen",
+  "translation": "to try, to attempt",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 152,
+  "word": "Haus",
+  "translation": "house; home",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A1"
+ },
+ {
+  "rank": 153,
+  "word": "am",
+  "translation": "at the, on the (an + dem); (am + superlative) the most",
+  "pos": "preposition",
+  "cefr": "A1"
+ },
+ {
+  "rank": 154,
+  "word": "Herr",
+  "translation": "gentleman; Mr; (der Herr) the Lord",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A1"
+ },
+ {
+  "rank": 155,
+  "word": "euch",
+  "translation": "you (plural accusative/dative); yourselves",
+  "pos": "pronoun",
+  "cefr": "A1"
+ },
+ {
+  "rank": 156,
+  "word": "erst",
+  "translation": "first; only, not until",
+  "pos": "adverb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 157,
+  "word": "Kind",
+  "translation": "child",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A1"
+ },
+ {
+  "rank": 158,
+  "word": "bis",
+  "translation": "until, till; by",
+  "pos": "preposition",
+  "cefr": "A1"
+ },
+ {
+  "rank": 159,
+  "word": "Freund",
+  "translation": "friend; boyfriend",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A1"
+ },
+ {
+  "rank": 160,
+  "word": "nie",
+  "translation": "never",
+  "pos": "adverb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 161,
+  "word": "zurück",
+  "translation": "back",
+  "pos": "adverb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 162,
+  "word": "groß",
+  "translation": "big, large; tall; great",
+  "pos": "adjective",
+  "cefr": "A1"
+ },
+ {
+  "rank": 163,
+  "word": "gestern",
+  "translation": "yesterday",
+  "pos": "adverb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 164,
+  "word": "Abend",
+  "translation": "evening",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A1"
+ },
+ {
+  "rank": 165,
+  "word": "bekommen",
+  "translation": "to get, to receive",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 166,
+  "word": "hey",
+  "translation": "hey",
+  "pos": "interjection",
+  "cefr": "A1"
+ },
+ {
+  "rank": 167,
+  "word": "spielen",
+  "translation": "to play",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 168,
+  "word": "drei",
+  "translation": "three",
+  "pos": "number",
+  "cefr": "A1"
+ },
+ {
+  "rank": 169,
+  "word": "zusammen",
+  "translation": "together",
+  "pos": "adverb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 170,
+  "word": "weiter",
+  "translation": "further, on; (mach weiter) keep going",
+  "pos": "adverb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 171,
+  "word": "Geld",
+  "translation": "money",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A1"
+ },
+ {
+  "rank": 172,
+  "word": "okay",
+  "translation": "okay, OK",
+  "pos": "interjection",
+  "cefr": "A1"
+ },
+ {
+  "rank": 173,
+  "word": "dort",
+  "translation": "there",
+  "pos": "adverb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 174,
+  "word": "sicher",
+  "translation": "sure, certain(ly); safe",
+  "pos": "adjective",
+  "cefr": "A1"
+ },
+ {
+  "rank": 175,
+  "word": "zum",
+  "translation": "to the (zu + dem)",
+  "pos": "preposition",
+  "cefr": "A1"
+ },
+ {
+  "rank": 176,
+  "word": "Name",
+  "translation": "name",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A1"
+ },
+ {
+  "rank": 177,
+  "word": "sterben",
+  "translation": "to die",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 178,
+  "word": "passieren",
+  "translation": "to happen",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 179,
+  "word": "Nacht",
+  "translation": "night",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A1"
+ },
+ {
+  "rank": 180,
+  "word": "jeder",
+  "translation": "each, every; everyone",
+  "pos": "determiner",
+  "cefr": "A1"
+ },
+ {
+  "rank": 181,
+  "word": "lange",
+  "translation": "for a long time",
+  "pos": "adverb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 182,
+  "word": "Welt",
+  "translation": "world",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A1"
+ },
+ {
+  "rank": 183,
+  "word": "allein",
+  "translation": "alone; on one’s own",
+  "pos": "adverb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 184,
+  "word": "vergessen",
+  "translation": "to forget",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 185,
+  "word": "schnell",
+  "translation": "fast, quick(ly)",
+  "pos": "adjective",
+  "cefr": "A1"
+ },
+ {
+  "rank": 186,
+  "word": "alt",
+  "translation": "old",
+  "pos": "adjective",
+  "cefr": "A1"
+ },
+ {
+  "rank": 187,
+  "word": "sofort",
+  "translation": "immediately, right away",
+  "pos": "adverb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 188,
+  "word": "Hand",
+  "translation": "hand",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A1"
+ },
+ {
+  "rank": 189,
+  "word": "Sache",
+  "translation": "thing, matter",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A2"
+ },
+ {
+  "rank": 190,
+  "word": "wichtig",
+  "translation": "important",
+  "pos": "adjective",
+  "cefr": "A1"
+ },
+ {
+  "rank": 191,
+  "word": "genau",
+  "translation": "exactly; (genau!) exactly, right",
+  "pos": "adverb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 192,
+  "word": "Morgen",
+  "translation": "morning",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A1"
+ },
+ {
+  "rank": 193,
+  "word": "arbeiten",
+  "translation": "to work",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 194,
+  "word": "morgen",
+  "translation": "tomorrow",
+  "pos": "adverb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 195,
+  "word": "neu",
+  "translation": "new",
+  "pos": "adjective",
+  "cefr": "A1"
+ },
+ {
+  "rank": 196,
+  "word": "Problem",
+  "translation": "problem",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A1"
+ },
+ {
+  "rank": 197,
+  "word": "ohne",
+  "translation": "without",
+  "pos": "preposition",
+  "cefr": "A1"
+ },
+ {
+  "rank": 198,
+  "word": "treffen",
+  "translation": "to meet; to hit",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 199,
+  "word": "suchen",
+  "translation": "to look for, to search",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 200,
+  "word": "tot",
+  "translation": "dead",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 201,
+  "word": "bringen",
+  "translation": "to bring, to take (somewhere)",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 202,
+  "word": "Angst",
+  "translation": "fear; (Angst haben) to be afraid",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A2"
+ },
+ {
+  "rank": 203,
+  "word": "klein",
+  "translation": "small, little",
+  "pos": "adjective",
+  "cefr": "A1"
+ },
+ {
+  "rank": 204,
+  "word": "oh",
+  "translation": "oh",
+  "pos": "interjection",
+  "cefr": "A1"
+ },
+ {
+  "rank": 205,
+  "word": "Ding",
+  "translation": "thing",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A2"
+ },
+ {
+  "rank": 206,
+  "word": "nett",
+  "translation": "nice, kind",
+  "pos": "adjective",
+  "cefr": "A1"
+ },
+ {
+  "rank": 207,
+  "word": "gegen",
+  "translation": "against; around (time)",
+  "pos": "preposition",
+  "cefr": "A2"
+ },
+ {
+  "rank": 208,
+  "word": "fahren",
+  "translation": "to drive, to go (by vehicle)",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 209,
+  "word": "essen",
+  "translation": "to eat",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 210,
+  "word": "nun",
+  "translation": "now; well",
+  "pos": "adverb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 211,
+  "word": "Mensch",
+  "translation": "human being, person; (Mensch!) man!",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A1"
+ },
+ {
+  "rank": 212,
+  "word": "Frage",
+  "translation": "question",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A1"
+ },
+ {
+  "rank": 213,
+  "word": "wenig",
+  "translation": "little, few",
+  "pos": "determiner",
+  "cefr": "A1"
+ },
+ {
+  "rank": 214,
+  "word": "stimmen",
+  "translation": "(das stimmt) to be right, to be true; to vote",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 215,
+  "word": "schlafen",
+  "translation": "to sleep",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 216,
+  "word": "hoffen",
+  "translation": "to hope",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 217,
+  "word": "Moment",
+  "translation": "moment; (Moment!) just a second",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A2"
+ },
+ {
+  "rank": 218,
+  "word": "einmal",
+  "translation": "once; (noch einmal) once more; (auf einmal) suddenly",
+  "pos": "adverb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 219,
+  "word": "anrufen",
+  "translation": "to call (on the phone)",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 220,
+  "word": "halt",
+  "translation": "(particle) just, simply (colloquial)",
+  "pos": "adverb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 221,
+  "word": "Auto",
+  "translation": "car",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A1"
+ },
+ {
+  "rank": 222,
+  "word": "kriegen",
+  "translation": "to get (colloquial)",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 223,
+  "word": "schlecht",
+  "translation": "bad",
+  "pos": "adjective",
+  "cefr": "A1"
+ },
+ {
+  "rank": 224,
+  "word": "aussehen",
+  "translation": "to look, to appear (appearance)",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 225,
+  "word": "jemand",
+  "translation": "someone, somebody",
+  "pos": "pronoun",
+  "cefr": "A2"
+ },
+ {
+  "rank": 226,
+  "word": "Uhr",
+  "translation": "clock, watch; o’clock",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A1"
+ },
+ {
+  "rank": 227,
+  "word": "niemand",
+  "translation": "no one, nobody",
+  "pos": "pronoun",
+  "cefr": "A2"
+ },
+ {
+  "rank": 228,
+  "word": "bisschen",
+  "translation": "(ein bisschen) a little, a bit",
+  "pos": "determiner",
+  "cefr": "A1"
+ },
+ {
+  "rank": 229,
+  "word": "Junge",
+  "translation": "boy",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A1"
+ },
+ {
+  "rank": 230,
+  "word": "wohl",
+  "translation": "probably, presumably; (particle) I suppose",
+  "pos": "adverb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 231,
+  "word": "zeigen",
+  "translation": "to show",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 232,
+  "word": "nächste",
+  "translation": "next",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 233,
+  "word": "halten",
+  "translation": "to hold; to stop; (halten für) to consider",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 234,
+  "word": "Weg",
+  "translation": "way, path",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A2"
+ },
+ {
+  "rank": 235,
+  "word": "erste",
+  "translation": "first",
+  "pos": "adjective",
+  "cefr": "A1"
+ },
+ {
+  "rank": 236,
+  "word": "endlich",
+  "translation": "finally, at last",
+  "pos": "adverb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 237,
+  "word": "beide",
+  "translation": "both",
+  "pos": "determiner",
+  "cefr": "A2"
+ },
+ {
+  "rank": 238,
+  "word": "Stunde",
+  "translation": "hour; lesson",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A1"
+ },
+ {
+  "rank": 239,
+  "word": "setzen",
+  "translation": "to set, to put; (sich setzen) to sit down",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 240,
+  "word": "letzte",
+  "translation": "last",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 241,
+  "word": "gehören",
+  "translation": "to belong to",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 242,
+  "word": "hin",
+  "translation": "(direction) there, toward; (hin und her) back and forth",
+  "pos": "adverb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 243,
+  "word": "her",
+  "translation": "(direction) here, toward the speaker (komm her!)",
+  "pos": "adverb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 244,
+  "word": "Mädchen",
+  "translation": "girl",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A1"
+ },
+ {
+  "rank": 245,
+  "word": "dabei",
+  "translation": "with it; in the process; (dabei sein) to take part",
+  "pos": "adverb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 246,
+  "word": "fühlen",
+  "translation": "to feel",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 247,
+  "word": "Ordnung",
+  "translation": "order; (in Ordnung) all right, okay",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A2"
+ },
+ {
+  "rank": 248,
+  "word": "einer",
+  "translation": "one (of them), somebody; a, an (feminine dative)",
+  "pos": "pronoun",
+  "cefr": "A2"
+ },
+ {
+  "rank": 249,
+  "word": "verdammt",
+  "translation": "damn(ed) (mild expletive)",
+  "pos": "adjective",
+  "cefr": "B1"
+ },
+ {
+  "rank": 250,
+  "word": "weniger",
+  "translation": "less, fewer",
+  "pos": "adverb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 251,
+  "word": "fertig",
+  "translation": "finished, done; ready",
+  "pos": "adjective",
+  "cefr": "A1"
+ },
+ {
+  "rank": 252,
+  "word": "verlieren",
+  "translation": "to lose",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 253,
+  "word": "Essen",
+  "translation": "food, meal",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A1"
+ },
+ {
+  "rank": 254,
+  "word": "sitzen",
+  "translation": "to sit, to be sitting",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 255,
+  "word": "eigentlich",
+  "translation": "actually, in fact",
+  "pos": "adverb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 256,
+  "word": "schauen",
+  "translation": "to look",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 257,
+  "word": "Papa",
+  "translation": "dad, daddy",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A1"
+ },
+ {
+  "rank": 258,
+  "word": "Woche",
+  "translation": "week",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A1"
+ },
+ {
+  "rank": 259,
+  "word": "Mama",
+  "translation": "mom, mum",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A1"
+ },
+ {
+  "rank": 260,
+  "word": "liegen",
+  "translation": "to lie, to be lying; to be located",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 261,
+  "word": "ziemlich",
+  "translation": "quite, fairly",
+  "pos": "adverb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 262,
+  "word": "Minute",
+  "translation": "minute",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A1"
+ },
+ {
+  "rank": 263,
+  "word": "raus",
+  "translation": "out (colloquial; raus hier!: get out!)",
+  "pos": "adverb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 264,
+  "word": "rein",
+  "translation": "in(side) (colloquial; komm rein!: come in!)",
+  "pos": "adverb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 265,
+  "word": "lang",
+  "translation": "long",
+  "pos": "adjective",
+  "cefr": "A1"
+ },
+ {
+  "rank": 266,
+  "word": "erinnern",
+  "translation": "to remind; (sich erinnern) to remember",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 267,
+  "word": "zur",
+  "translation": "to the (zu + der)",
+  "pos": "preposition",
+  "cefr": "A1"
+ },
+ {
+  "rank": 268,
+  "word": "besser",
+  "translation": "better",
+  "pos": "adjective",
+  "cefr": "A1"
+ },
+ {
+  "rank": 269,
+  "word": "lieber",
+  "translation": "rather, preferably (ich bleibe lieber hier)",
+  "pos": "adverb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 270,
+  "word": "Geschichte",
+  "translation": "story; history",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A2"
+ },
+ {
+  "rank": 271,
+  "word": "komisch",
+  "translation": "funny; strange, odd",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 272,
+  "word": "erzählen",
+  "translation": "to tell (a story)",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 273,
+  "word": "leider",
+  "translation": "unfortunately",
+  "pos": "adverb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 274,
+  "word": "froh",
+  "translation": "glad, happy",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 275,
+  "word": "verrückt",
+  "translation": "crazy, mad",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 276,
+  "word": "Ende",
+  "translation": "end",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A1"
+ },
+ {
+  "rank": 277,
+  "word": "trinken",
+  "translation": "to drink",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 278,
+  "word": "selbst",
+  "translation": "myself, yourself, himself (emphatic); even (selbst wenn)",
+  "pos": "pronoun",
+  "cefr": "A2"
+ },
+ {
+  "rank": 279,
+  "word": "Idee",
+  "translation": "idea",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A2"
+ },
+ {
+  "rank": 280,
+  "word": "kaufen",
+  "translation": "to buy",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 281,
+  "word": "überhaupt",
+  "translation": "at all; anyway",
+  "pos": "adverb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 282,
+  "word": "müde",
+  "translation": "tired",
+  "pos": "adjective",
+  "cefr": "A1"
+ },
+ {
+  "rank": 283,
+  "word": "ach",
+  "translation": "oh, ah; (ach so) I see",
+  "pos": "interjection",
+  "cefr": "A2"
+ },
+ {
+  "rank": 284,
+  "word": "irgendwie",
+  "translation": "somehow",
+  "pos": "adverb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 285,
+  "word": "bestimmt",
+  "translation": "certainly, surely; certain",
+  "pos": "adverb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 286,
+  "word": "wahrscheinlich",
+  "translation": "probably, likely",
+  "pos": "adverb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 287,
+  "word": "mitkommen",
+  "translation": "to come along",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 288,
+  "word": "Tür",
+  "translation": "door",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A1"
+ },
+ {
+  "rank": 289,
+  "word": "leidtun",
+  "translation": "(es tut mir leid) to be sorry",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 290,
+  "word": "wahr",
+  "translation": "true",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 291,
+  "word": "Schule",
+  "translation": "school",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A1"
+ },
+ {
+  "rank": 292,
+  "word": "wohnen",
+  "translation": "to live, to reside (wo wohnst du?)",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 293,
+  "word": "eben",
+  "translation": "just now; (particle) exactly, precisely; flat",
+  "pos": "adverb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 294,
+  "word": "Wasser",
+  "translation": "water",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A1"
+ },
+ {
+  "rank": 295,
+  "word": "dumm",
+  "translation": "stupid, dumb",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 296,
+  "word": "Monat",
+  "translation": "month",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A1"
+ },
+ {
+  "rank": 297,
+  "word": "böse",
+  "translation": "evil, angry; mean",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 298,
+  "word": "kurz",
+  "translation": "short, brief",
+  "pos": "adjective",
+  "cefr": "A1"
+ },
+ {
+  "rank": 299,
+  "word": "schwer",
+  "translation": "heavy; difficult, hard",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 300,
+  "word": "paar",
+  "translation": "(ein paar) a few, a couple of",
+  "pos": "determiner",
+  "cefr": "A2"
+ },
+ {
+  "rank": 301,
+  "word": "leicht",
+  "translation": "light; easy",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 302,
+  "word": "spät",
+  "translation": "late",
+  "pos": "adjective",
+  "cefr": "A1"
+ },
+ {
+  "rank": 303,
+  "word": "gefallen",
+  "translation": "to please (das gefällt mir: I like it)",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 304,
+  "word": "Liebe",
+  "translation": "love",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A2"
+ },
+ {
+  "rank": 305,
+  "word": "anfangen",
+  "translation": "to begin, to start",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 306,
+  "word": "Stadt",
+  "translation": "city, town",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A1"
+ },
+ {
+  "rank": 307,
+  "word": "verschwinden",
+  "translation": "to disappear; (verschwinde!) get lost!",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 308,
+  "word": "Kopf",
+  "translation": "head",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A2"
+ },
+ {
+  "rank": 309,
+  "word": "egal",
+  "translation": "(das ist egal) it doesn’t matter; no matter",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 310,
+  "word": "Land",
+  "translation": "country; land",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A1"
+ },
+ {
+  "rank": 311,
+  "word": "fast",
+  "translation": "almost, nearly",
+  "pos": "adverb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 312,
+  "word": "früh",
+  "translation": "early",
+  "pos": "adjective",
+  "cefr": "A1"
+ },
+ {
+  "rank": 313,
+  "word": "damit",
+  "translation": "so that; with it",
+  "pos": "conjunction",
+  "cefr": "A2"
+ },
+ {
+  "rank": 314,
+  "word": "Eltern",
+  "translation": "parents",
+  "pos": "noun",
+  "gender": "pl",
+  "cefr": "A1"
+ },
+ {
+  "rank": 315,
+  "word": "Bruder",
+  "translation": "brother",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A1"
+ },
+ {
+  "rank": 316,
+  "word": "glücklich",
+  "translation": "happy",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 317,
+  "word": "Schwester",
+  "translation": "sister; nurse",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A1"
+ },
+ {
+  "rank": 318,
+  "word": "laut",
+  "translation": "loud",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 319,
+  "word": "sogar",
+  "translation": "even",
+  "pos": "adverb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 320,
+  "word": "Herz",
+  "translation": "heart",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A2"
+ },
+ {
+  "rank": 321,
+  "word": "na",
+  "translation": "well; (na ja) oh well; (na und?) so what?",
+  "pos": "interjection",
+  "cefr": "A2"
+ },
+ {
+  "rank": 322,
+  "word": "ruhig",
+  "translation": "calm, quiet",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 323,
+  "word": "danach",
+  "translation": "afterwards, after that",
+  "pos": "adverb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 324,
+  "word": "vorbei",
+  "translation": "over, past; (vorbei sein) to be over",
+  "pos": "adverb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 325,
+  "word": "Hilfe",
+  "translation": "help",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A1"
+ },
+ {
+  "rank": 326,
+  "word": "durch",
+  "translation": "through, by",
+  "pos": "preposition",
+  "cefr": "A2"
+ },
+ {
+  "rank": 327,
+  "word": "Buch",
+  "translation": "book",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A1"
+ },
+ {
+  "rank": 328,
+  "word": "lesen",
+  "translation": "to read",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 329,
+  "word": "Arbeit",
+  "translation": "work, job",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A1"
+ },
+ {
+  "rank": 330,
+  "word": "schreiben",
+  "translation": "to write",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 331,
+  "word": "Film",
+  "translation": "movie, film",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A1"
+ },
+ {
+  "rank": 332,
+  "word": "Spaß",
+  "translation": "fun; (Spaß machen) to be fun",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A2"
+ },
+ {
+  "rank": 333,
+  "word": "Glück",
+  "translation": "luck; happiness",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A2"
+ },
+ {
+  "rank": 334,
+  "word": "hübsch",
+  "translation": "pretty",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 335,
+  "word": "heiraten",
+  "translation": "to marry, to get married",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 336,
+  "word": "Freundin",
+  "translation": "friend (female); girlfriend",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A1"
+ },
+ {
+  "rank": 337,
+  "word": "zuhören",
+  "translation": "to listen (to someone)",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 338,
+  "word": "aufhören",
+  "translation": "to stop, to quit",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 339,
+  "word": "Zimmer",
+  "translation": "room",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A1"
+ },
+ {
+  "rank": 340,
+  "word": "gucken",
+  "translation": "to look (colloquial)",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 341,
+  "word": "tschüss",
+  "translation": "bye (informal)",
+  "pos": "interjection",
+  "cefr": "A1"
+ },
+ {
+  "rank": 342,
+  "word": "Grund",
+  "translation": "reason; ground",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 343,
+  "word": "lernen",
+  "translation": "to learn",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 344,
+  "word": "zehn",
+  "translation": "ten",
+  "pos": "number",
+  "cefr": "A1"
+ },
+ {
+  "rank": 345,
+  "word": "vier",
+  "translation": "four",
+  "pos": "number",
+  "cefr": "A1"
+ },
+ {
+  "rank": 346,
+  "word": "Sohn",
+  "translation": "son",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A2"
+ },
+ {
+  "rank": 347,
+  "word": "fünf",
+  "translation": "five",
+  "pos": "number",
+  "cefr": "A1"
+ },
+ {
+  "rank": 348,
+  "word": "Tochter",
+  "translation": "daughter",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A2"
+ },
+ {
+  "rank": 349,
+  "word": "Familie",
+  "translation": "family",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A1"
+ },
+ {
+  "rank": 350,
+  "word": "lachen",
+  "translation": "to laugh",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 351,
+  "word": "weinen",
+  "translation": "to cry, to weep",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 352,
+  "word": "Tod",
+  "translation": "death",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 353,
+  "word": "töten",
+  "translation": "to kill",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 354,
+  "word": "Arzt",
+  "translation": "doctor, physician",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A1"
+ },
+ {
+  "rank": 355,
+  "word": "keiner",
+  "translation": "no one, nobody; none",
+  "pos": "pronoun",
+  "cefr": "A2"
+ },
+ {
+  "rank": 356,
+  "word": "fallen",
+  "translation": "to fall",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 357,
+  "word": "gewinnen",
+  "translation": "to win",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 358,
+  "word": "Auge",
+  "translation": "eye",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A2"
+ },
+ {
+  "rank": 359,
+  "word": "wegen",
+  "translation": "because of",
+  "pos": "preposition",
+  "cefr": "B1"
+ },
+ {
+  "rank": 360,
+  "word": "Gesicht",
+  "translation": "face",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A2"
+ },
+ {
+  "rank": 361,
+  "word": "Fall",
+  "translation": "case; fall; (auf jeden Fall) definitely",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 362,
+  "word": "lustig",
+  "translation": "funny, amusing",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 363,
+  "word": "traurig",
+  "translation": "sad",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 364,
+  "word": "Straße",
+  "translation": "street, road",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A1"
+ },
+ {
+  "rank": 365,
+  "word": "Platz",
+  "translation": "place, seat; square",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A2"
+ },
+ {
+  "rank": 366,
+  "word": "bald",
+  "translation": "soon",
+  "pos": "adverb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 367,
+  "word": "oft",
+  "translation": "often",
+  "pos": "adverb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 368,
+  "word": "plötzlich",
+  "translation": "suddenly",
+  "pos": "adverb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 369,
+  "word": "Wort",
+  "translation": "word",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A2"
+ },
+ {
+  "rank": 370,
+  "word": "stark",
+  "translation": "strong",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 371,
+  "word": "manchmal",
+  "translation": "sometimes",
+  "pos": "adverb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 372,
+  "word": "Krieg",
+  "translation": "war",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 373,
+  "word": "bereit",
+  "translation": "ready, prepared",
+  "pos": "adjective",
+  "cefr": "B1"
+ },
+ {
+  "rank": 374,
+  "word": "Beispiel",
+  "translation": "example; (zum Beispiel) for example",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A2"
+ },
+ {
+  "rank": 375,
+  "word": "kalt",
+  "translation": "cold",
+  "pos": "adjective",
+  "cefr": "A1"
+ },
+ {
+  "rank": 376,
+  "word": "Scheiße",
+  "translation": "shit (vulgar)",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "B1"
+ },
+ {
+  "rank": 377,
+  "word": "holen",
+  "translation": "to fetch, to get",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 378,
+  "word": "Nummer",
+  "translation": "number",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A2"
+ },
+ {
+  "rank": 379,
+  "word": "warm",
+  "translation": "warm",
+  "pos": "adjective",
+  "cefr": "A1"
+ },
+ {
+  "rank": 380,
+  "word": "Telefon",
+  "translation": "telephone",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A1"
+ },
+ {
+  "rank": 381,
+  "word": "stellen",
+  "translation": "to put, to place; (eine Frage stellen) to ask",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 382,
+  "word": "Bett",
+  "translation": "bed",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A1"
+ },
+ {
+  "rank": 383,
+  "word": "heiß",
+  "translation": "hot",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 384,
+  "word": "Hund",
+  "translation": "dog",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A1"
+ },
+ {
+  "rank": 385,
+  "word": "wohin",
+  "translation": "where (to)",
+  "pos": "adverb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 386,
+  "word": "schlimm",
+  "translation": "bad, terrible",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 387,
+  "word": "obwohl",
+  "translation": "although, even though",
+  "pos": "conjunction",
+  "cefr": "A2"
+ },
+ {
+  "rank": 388,
+  "word": "Antwort",
+  "translation": "answer, reply",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A1"
+ },
+ {
+  "rank": 389,
+  "word": "schicken",
+  "translation": "to send",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 390,
+  "word": "falsch",
+  "translation": "wrong, false",
+  "pos": "adjective",
+  "cefr": "A1"
+ },
+ {
+  "rank": 391,
+  "word": "hoch",
+  "translation": "high, tall; up",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 392,
+  "word": "Seite",
+  "translation": "side; page",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A2"
+ },
+ {
+  "rank": 393,
+  "word": "genug",
+  "translation": "enough",
+  "pos": "adverb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 394,
+  "word": "wünschen",
+  "translation": "to wish",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 395,
+  "word": "blöd",
+  "translation": "stupid, dumb (colloquial)",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 396,
+  "word": "Traum",
+  "translation": "dream",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A2"
+ },
+ {
+  "rank": 397,
+  "word": "ins",
+  "translation": "into the (in + das)",
+  "pos": "preposition",
+  "cefr": "A1"
+ },
+ {
+  "rank": 398,
+  "word": "Wahrheit",
+  "translation": "truth",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "B1"
+ },
+ {
+  "rank": 399,
+  "word": "wieso",
+  "translation": "why, how come",
+  "pos": "adverb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 400,
+  "word": "verlassen",
+  "translation": "to leave (someone/somewhere); (sich verlassen auf) to rely on",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 401,
+  "word": "gefährlich",
+  "translation": "dangerous",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 402,
+  "word": "Polizei",
+  "translation": "police",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A2"
+ },
+ {
+  "rank": 403,
+  "word": "versprechen",
+  "translation": "to promise",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 404,
+  "word": "Typ",
+  "translation": "guy (colloquial); type",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 405,
+  "word": "kämpfen",
+  "translation": "to fight",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 406,
+  "word": "sechs",
+  "translation": "six",
+  "pos": "number",
+  "cefr": "A1"
+ },
+ {
+  "rank": 407,
+  "word": "sieben",
+  "translation": "seven",
+  "pos": "number",
+  "cefr": "A1"
+ },
+ {
+  "rank": 408,
+  "word": "acht",
+  "translation": "eight",
+  "pos": "number",
+  "cefr": "A1"
+ },
+ {
+  "rank": 409,
+  "word": "neun",
+  "translation": "nine",
+  "pos": "number",
+  "cefr": "A1"
+ },
+ {
+  "rank": 410,
+  "word": "Ahnung",
+  "translation": "(keine Ahnung) no idea, no clue; idea, inkling",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "B1"
+ },
+ {
+  "rank": 411,
+  "word": "toll",
+  "translation": "great, awesome",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 412,
+  "word": "Nachricht",
+  "translation": "message; (Nachrichten) news",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A2"
+ },
+ {
+  "rank": 413,
+  "word": "seit",
+  "translation": "since, for (a period of time)",
+  "pos": "preposition",
+  "cefr": "A2"
+ },
+ {
+  "rank": 414,
+  "word": "krank",
+  "translation": "sick, ill",
+  "pos": "adjective",
+  "cefr": "A1"
+ },
+ {
+  "rank": 415,
+  "word": "unser",
+  "translation": "our",
+  "pos": "determiner",
+  "cefr": "A1"
+ },
+ {
+  "rank": 416,
+  "word": "Waffe",
+  "translation": "weapon, gun",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "B1"
+ },
+ {
+  "rank": 417,
+  "word": "jung",
+  "translation": "young",
+  "pos": "adjective",
+  "cefr": "A1"
+ },
+ {
+  "rank": 418,
+  "word": "echt",
+  "translation": "really (colloquial); genuine, real",
+  "pos": "adverb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 419,
+  "word": "Job",
+  "translation": "job",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A2"
+ },
+ {
+  "rank": 420,
+  "word": "möglich",
+  "translation": "possible",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 421,
+  "word": "freuen",
+  "translation": "(sich freuen) to be glad; (sich freuen auf) to look forward to",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 422,
+  "word": "reichen",
+  "translation": "(das reicht) to be enough; to hand, to pass",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 423,
+  "word": "weit",
+  "translation": "far; wide",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 424,
+  "word": "Chef",
+  "translation": "boss",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A2"
+ },
+ {
+  "rank": 425,
+  "word": "sonst",
+  "translation": "otherwise, or else; (sonst noch was?) anything else?",
+  "pos": "adverb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 426,
+  "word": "Teil",
+  "translation": "part",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 427,
+  "word": "aufstehen",
+  "translation": "to get up, to stand up",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 428,
+  "word": "zwischen",
+  "translation": "between",
+  "pos": "preposition",
+  "cefr": "A2"
+ },
+ {
+  "rank": 429,
+  "word": "Kaffee",
+  "translation": "coffee",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A1"
+ },
+ {
+  "rank": 430,
+  "word": "schaffen",
+  "translation": "to manage, to accomplish; to create",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 431,
+  "word": "passen",
+  "translation": "to fit, to suit",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 432,
+  "word": "eins",
+  "translation": "one (counting)",
+  "pos": "number",
+  "cefr": "A1"
+ },
+ {
+  "rank": 433,
+  "word": "rufen",
+  "translation": "to call, to shout",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 434,
+  "word": "Stück",
+  "translation": "piece; play (theater)",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A2"
+ },
+ {
+  "rank": 435,
+  "word": "ihnen",
+  "translation": "them (dative); (Ihnen) you (formal, dative)",
+  "pos": "pronoun",
+  "cefr": "A1"
+ },
+ {
+  "rank": 436,
+  "word": "besonders",
+  "translation": "especially, particularly",
+  "pos": "adverb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 437,
+  "word": "langsam",
+  "translation": "slow(ly)",
+  "pos": "adjective",
+  "cefr": "A1"
+ },
+ {
+  "rank": 438,
+  "word": "Licht",
+  "translation": "light",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A2"
+ },
+ {
+  "rank": 439,
+  "word": "scheinen",
+  "translation": "to seem, to appear; to shine",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 440,
+  "word": "erklären",
+  "translation": "to explain",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 441,
+  "word": "nochmal",
+  "translation": "again, once more (colloquial)",
+  "pos": "adverb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 442,
+  "word": "Musik",
+  "translation": "music",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A1"
+ },
+ {
+  "rank": 443,
+  "word": "welcher",
+  "translation": "which",
+  "pos": "determiner",
+  "cefr": "A1"
+ },
+ {
+  "rank": 444,
+  "word": "früher",
+  "translation": "in the past, formerly; earlier",
+  "pos": "adverb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 445,
+  "word": "vom",
+  "translation": "from the, of the (von + dem)",
+  "pos": "preposition",
+  "cefr": "A1"
+ },
+ {
+  "rank": 446,
+  "word": "trotzdem",
+  "translation": "nevertheless, anyway",
+  "pos": "adverb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 447,
+  "word": "Spiel",
+  "translation": "game; play",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A1"
+ },
+ {
+  "rank": 448,
+  "word": "Plan",
+  "translation": "plan",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A2"
+ },
+ {
+  "rank": 449,
+  "word": "draußen",
+  "translation": "outside, outdoors",
+  "pos": "adverb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 450,
+  "word": "klingen",
+  "translation": "to sound",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 451,
+  "word": "ernst",
+  "translation": "serious",
+  "pos": "adjective",
+  "cefr": "B1"
+ },
+ {
+  "rank": 452,
+  "word": "Wohnung",
+  "translation": "apartment, flat",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A1"
+ },
+ {
+  "rank": 453,
+  "word": "Entschuldigung",
+  "translation": "apology; (Entschuldigung!) excuse me, sorry",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A1"
+ },
+ {
+  "rank": 454,
+  "word": "frei",
+  "translation": "free",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 455,
+  "word": "zuhause",
+  "translation": "at home (also spelled zu Hause)",
+  "pos": "adverb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 456,
+  "word": "bezahlen",
+  "translation": "to pay",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 457,
+  "word": "wen",
+  "translation": "whom (accusative)",
+  "pos": "pronoun",
+  "cefr": "A2"
+ },
+ {
+  "rank": 458,
+  "word": "Euro",
+  "translation": "euro (currency)",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A1"
+ },
+ {
+  "rank": 459,
+  "word": "beim",
+  "translation": "at the, by the (bei + dem)",
+  "pos": "preposition",
+  "cefr": "A1"
+ },
+ {
+  "rank": 460,
+  "word": "schlagen",
+  "translation": "to hit, to beat",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 461,
+  "word": "irgendwas",
+  "translation": "something (or other), anything (colloquial)",
+  "pos": "pronoun",
+  "cefr": "B1"
+ },
+ {
+  "rank": 462,
+  "word": "voll",
+  "translation": "full; (colloquial) totally",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 463,
+  "word": "davon",
+  "translation": "of it, about it; away",
+  "pos": "adverb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 464,
+  "word": "super",
+  "translation": "great, super",
+  "pos": "adjective",
+  "cefr": "A1"
+ },
+ {
+  "rank": 465,
+  "word": "vorstellen",
+  "translation": "to introduce; (sich vorstellen) to imagine",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 466,
+  "word": "Schuld",
+  "translation": "guilt, fault; (Schulden) debts",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "B1"
+ },
+ {
+  "rank": 467,
+  "word": "kosten",
+  "translation": "to cost",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 468,
+  "word": "oben",
+  "translation": "up, upstairs, at the top",
+  "pos": "adverb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 469,
+  "word": "Zeug",
+  "translation": "stuff (colloquial)",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "B1"
+ },
+ {
+  "rank": 470,
+  "word": "perfekt",
+  "translation": "perfect",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 471,
+  "word": "zahlen",
+  "translation": "to pay",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 472,
+  "word": "legen",
+  "translation": "to lay, to put (down flat)",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 473,
+  "word": "einem",
+  "translation": "a, an (dative masculine/neuter)",
+  "pos": "article",
+  "cefr": "A1"
+ },
+ {
+  "rank": 474,
+  "word": "bevor",
+  "translation": "before (conjunction)",
+  "pos": "conjunction",
+  "cefr": "A2"
+ },
+ {
+  "rank": 475,
+  "word": "total",
+  "translation": "totally (colloquial)",
+  "pos": "adverb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 476,
+  "word": "Himmel",
+  "translation": "sky; heaven",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A2"
+ },
+ {
+  "rank": 477,
+  "word": "Schatz",
+  "translation": "treasure; (mein Schatz) darling, honey",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 478,
+  "word": "retten",
+  "translation": "to save, to rescue",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 479,
+  "word": "Fehler",
+  "translation": "mistake, error",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A2"
+ },
+ {
+  "rank": 480,
+  "word": "aufpassen",
+  "translation": "to pay attention, to watch out",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 481,
+  "word": "Hunger",
+  "translation": "hunger; (Hunger haben) to be hungry",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A1"
+ },
+ {
+  "rank": 482,
+  "word": "cool",
+  "translation": "cool (colloquial)",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 483,
+  "word": "deshalb",
+  "translation": "therefore, that’s why",
+  "pos": "adverb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 484,
+  "word": "Chance",
+  "translation": "chance, opportunity",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "B1"
+ },
+ {
+  "rank": 485,
+  "word": "Feuer",
+  "translation": "fire",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A2"
+ },
+ {
+  "rank": 486,
+  "word": "schießen",
+  "translation": "to shoot",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 487,
+  "word": "Bild",
+  "translation": "picture, image",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A2"
+ },
+ {
+  "rank": 488,
+  "word": "antworten",
+  "translation": "to answer, to reply",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 489,
+  "word": "nennen",
+  "translation": "to name, to call (someone something)",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 490,
+  "word": "ansehen",
+  "translation": "to look at; (sich ansehen) to watch",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 491,
+  "word": "schrecklich",
+  "translation": "terrible, awful",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 492,
+  "word": "Kerl",
+  "translation": "guy, fellow (colloquial)",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 493,
+  "word": "verkaufen",
+  "translation": "to sell",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 494,
+  "word": "Tisch",
+  "translation": "table",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A1"
+ },
+ {
+  "rank": 495,
+  "word": "Wagen",
+  "translation": "car; wagon, cart",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A2"
+ },
+ {
+  "rank": 496,
+  "word": "Sekunde",
+  "translation": "second (time)",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A2"
+ },
+ {
+  "rank": 497,
+  "word": "halb",
+  "translation": "half",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 498,
+  "word": "wiedersehen",
+  "translation": "to see again; (auf Wiedersehen) goodbye",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 499,
+  "word": "Person",
+  "translation": "person",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A2"
+ },
+ {
+  "rank": 500,
+  "word": "eigen",
+  "translation": "own",
+  "pos": "adjective",
+  "cefr": "B1"
+ },
+ {
+  "rank": 501,
+  "word": "vorher",
+  "translation": "before, beforehand",
+  "pos": "adverb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 502,
+  "word": "Baby",
+  "translation": "baby",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A1"
+ },
+ {
+  "rank": 503,
+  "word": "Ort",
+  "translation": "place, location",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 504,
+  "word": "sorgen",
+  "translation": "(sorgen für) to take care of; (sich sorgen) to worry",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 505,
+  "word": "kaum",
+  "translation": "hardly, barely",
+  "pos": "adverb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 506,
+  "word": "Party",
+  "translation": "party",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A2"
+ },
+ {
+  "rank": 507,
+  "word": "verstecken",
+  "translation": "to hide",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 508,
+  "word": "Sinn",
+  "translation": "sense, meaning; (Sinn ergeben) to make sense",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 509,
+  "word": "wem",
+  "translation": "whom (dative), to whom",
+  "pos": "pronoun",
+  "cefr": "A2"
+ },
+ {
+  "rank": 510,
+  "word": "einzige",
+  "translation": "only, sole (the only one)",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 511,
+  "word": "Million",
+  "translation": "million",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A2"
+ },
+ {
+  "rank": 512,
+  "word": "Krankenhaus",
+  "translation": "hospital",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A2"
+ },
+ {
+  "rank": 513,
+  "word": "irgendwann",
+  "translation": "sometime, someday",
+  "pos": "adverb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 514,
+  "word": "dafür",
+  "translation": "for it, for that; in return",
+  "pos": "adverb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 515,
+  "word": "Doktor",
+  "translation": "doctor (title)",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A2"
+ },
+ {
+  "rank": 516,
+  "word": "kümmern",
+  "translation": "(sich kümmern um) to take care of, to look after",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 517,
+  "word": "rot",
+  "translation": "red",
+  "pos": "adjective",
+  "cefr": "A1"
+ },
+ {
+  "rank": 518,
+  "word": "Hölle",
+  "translation": "hell; (was zur Hölle) what the hell",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "B1"
+ },
+ {
+  "rank": 519,
+  "word": "Stimme",
+  "translation": "voice; vote",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "B1"
+ },
+ {
+  "rank": 520,
+  "word": "fehlen",
+  "translation": "to be missing, to be absent; (du fehlst mir) I miss you",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 521,
+  "word": "verdienen",
+  "translation": "to earn; to deserve",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 522,
+  "word": "überall",
+  "translation": "everywhere",
+  "pos": "adverb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 523,
+  "word": "Dollar",
+  "translation": "dollar",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A2"
+ },
+ {
+  "rank": 524,
+  "word": "Ruhe",
+  "translation": "quiet, calm; (lass mich in Ruhe) leave me alone",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "B1"
+ },
+ {
+  "rank": 525,
+  "word": "dunkel",
+  "translation": "dark",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 526,
+  "word": "Gefahr",
+  "translation": "danger",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "B1"
+ },
+ {
+  "rank": 527,
+  "word": "hassen",
+  "translation": "to hate",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 528,
+  "word": "Ziel",
+  "translation": "goal, aim; destination",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "B1"
+ },
+ {
+  "rank": 529,
+  "word": "bedeuten",
+  "translation": "to mean",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 530,
+  "word": "Sonne",
+  "translation": "sun",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A2"
+ },
+ {
+  "rank": 531,
+  "word": "interessant",
+  "translation": "interesting",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 532,
+  "word": "schwierig",
+  "translation": "difficult",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 533,
+  "word": "Tier",
+  "translation": "animal",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A1"
+ },
+ {
+  "rank": 534,
+  "word": "Kino",
+  "translation": "cinema, movie theater",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A1"
+ },
+ {
+  "rank": 535,
+  "word": "süß",
+  "translation": "sweet; cute",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 536,
+  "word": "Meer",
+  "translation": "sea, ocean",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A2"
+ },
+ {
+  "rank": 537,
+  "word": "offen",
+  "translation": "open",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 538,
+  "word": "Onkel",
+  "translation": "uncle",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A2"
+ },
+ {
+  "rank": 539,
+  "word": "zurückkommen",
+  "translation": "to come back, to return",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 540,
+  "word": "entschuldigen",
+  "translation": "to excuse; (sich entschuldigen) to apologize",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 541,
+  "word": "Mist",
+  "translation": "crap, darn (mild expletive); manure",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 542,
+  "word": "Punkt",
+  "translation": "point; dot, period",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 543,
+  "word": "Sommer",
+  "translation": "summer",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A1"
+ },
+ {
+  "rank": 544,
+  "word": "verletzen",
+  "translation": "to hurt, to injure",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 545,
+  "word": "Art",
+  "translation": "kind, sort; way, manner",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "B1"
+ },
+ {
+  "rank": 546,
+  "word": "besuchen",
+  "translation": "to visit",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 547,
+  "word": "Zukunft",
+  "translation": "future",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "B1"
+ },
+ {
+  "rank": 548,
+  "word": "Anfang",
+  "translation": "beginning, start",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A2"
+ },
+ {
+  "rank": 549,
+  "word": "schwarz",
+  "translation": "black",
+  "pos": "adjective",
+  "cefr": "A1"
+ },
+ {
+  "rank": 550,
+  "word": "wach",
+  "translation": "awake",
+  "pos": "adjective",
+  "cefr": "B1"
+ },
+ {
+  "rank": 551,
+  "word": "umbringen",
+  "translation": "to kill (colloquial)",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 552,
+  "word": "Geburtstag",
+  "translation": "birthday",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A1"
+ },
+ {
+  "rank": 553,
+  "word": "Idiot",
+  "translation": "idiot",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 554,
+  "word": "fliegen",
+  "translation": "to fly",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 555,
+  "word": "Rest",
+  "translation": "rest, remainder",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 556,
+  "word": "damals",
+  "translation": "back then, at that time",
+  "pos": "adverb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 557,
+  "word": "Wetter",
+  "translation": "weather",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A1"
+ },
+ {
+  "rank": 558,
+  "word": "Tante",
+  "translation": "aunt",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A2"
+ },
+ {
+  "rank": 559,
+  "word": "folgen",
+  "translation": "to follow",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 560,
+  "word": "erwarten",
+  "translation": "to expect",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 561,
+  "word": "Blick",
+  "translation": "look, glance; view",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 562,
+  "word": "lügen",
+  "translation": "to lie (to tell untruths)",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 563,
+  "word": "Bier",
+  "translation": "beer",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A1"
+ },
+ {
+  "rank": 564,
+  "word": "weiß",
+  "translation": "white",
+  "pos": "adjective",
+  "cefr": "A1"
+ },
+ {
+  "rank": 565,
+  "word": "kaputt",
+  "translation": "broken",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 566,
+  "word": "anders",
+  "translation": "differently; different",
+  "pos": "adverb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 567,
+  "word": "Teufel",
+  "translation": "devil; (zum Teufel!) damn it!",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 568,
+  "word": "mitnehmen",
+  "translation": "to take along",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 569,
+  "word": "wunderbar",
+  "translation": "wonderful",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 570,
+  "word": "zuerst",
+  "translation": "first, at first",
+  "pos": "adverb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 571,
+  "word": "unten",
+  "translation": "down, downstairs, below",
+  "pos": "adverb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 572,
+  "word": "tragen",
+  "translation": "to carry; to wear",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 573,
+  "word": "Wein",
+  "translation": "wine",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A2"
+ },
+ {
+  "rank": 574,
+  "word": "ändern",
+  "translation": "to change",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 575,
+  "word": "erkennen",
+  "translation": "to recognize",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 576,
+  "word": "überlegen",
+  "translation": "to think about, to consider",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 577,
+  "word": "Gefängnis",
+  "translation": "prison, jail",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "B1"
+ },
+ {
+  "rank": 578,
+  "word": "vermissen",
+  "translation": "to miss (someone)",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 579,
+  "word": "wenigstens",
+  "translation": "at least",
+  "pos": "adverb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 580,
+  "word": "Hochzeit",
+  "translation": "wedding",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A2"
+ },
+ {
+  "rank": 581,
+  "word": "ziehen",
+  "translation": "to pull; to move (house)",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 582,
+  "word": "tanzen",
+  "translation": "to dance",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 583,
+  "word": "solche",
+  "translation": "such",
+  "pos": "determiner",
+  "cefr": "A2"
+ },
+ {
+  "rank": 584,
+  "word": "Ohr",
+  "translation": "ear",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A2"
+ },
+ {
+  "rank": 585,
+  "word": "zwar",
+  "translation": "(zwar … aber) admittedly … but; namely",
+  "pos": "adverb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 586,
+  "word": "kennenlernen",
+  "translation": "to get to know, to meet",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 587,
+  "word": "Boden",
+  "translation": "floor, ground",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 588,
+  "word": "verheiratet",
+  "translation": "married",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 589,
+  "word": "überleben",
+  "translation": "to survive",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 590,
+  "word": "Zug",
+  "translation": "train",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A2"
+ },
+ {
+  "rank": 591,
+  "word": "singen",
+  "translation": "to sing",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 592,
+  "word": "des",
+  "translation": "of the (genitive masculine/neuter)",
+  "pos": "article",
+  "cefr": "B1"
+ },
+ {
+  "rank": 593,
+  "word": "bereits",
+  "translation": "already (formal)",
+  "pos": "adverb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 594,
+  "word": "Katze",
+  "translation": "cat",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A1"
+ },
+ {
+  "rank": 595,
+  "word": "nämlich",
+  "translation": "namely; you see (giving a reason)",
+  "pos": "adverb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 596,
+  "word": "aufgeben",
+  "translation": "to give up",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 597,
+  "word": "Arsch",
+  "translation": "ass, butt (vulgar)",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 598,
+  "word": "normal",
+  "translation": "normal",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 599,
+  "word": "falls",
+  "translation": "in case, if",
+  "pos": "conjunction",
+  "cefr": "B1"
+ },
+ {
+  "rank": 600,
+  "word": "genauso",
+  "translation": "just as, exactly the same",
+  "pos": "adverb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 601,
+  "word": "Nähe",
+  "translation": "closeness; (in der Nähe) nearby",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "B1"
+ },
+ {
+  "rank": 602,
+  "word": "verzeihen",
+  "translation": "to forgive; (Verzeihung!) pardon me",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 603,
+  "word": "Ecke",
+  "translation": "corner",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A2"
+ },
+ {
+  "rank": 604,
+  "word": "wundern",
+  "translation": "(sich wundern) to be surprised",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 605,
+  "word": "Sprache",
+  "translation": "language",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A1"
+ },
+ {
+  "rank": 606,
+  "word": "tief",
+  "translation": "deep",
+  "pos": "adjective",
+  "cefr": "B1"
+ },
+ {
+  "rank": 607,
+  "word": "einige",
+  "translation": "some, a few, several",
+  "pos": "determiner",
+  "cefr": "A2"
+ },
+ {
+  "rank": 608,
+  "word": "hart",
+  "translation": "hard, tough",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 609,
+  "word": "Wochenende",
+  "translation": "weekend",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A1"
+ },
+ {
+  "rank": 610,
+  "word": "schreien",
+  "translation": "to scream, to shout",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 611,
+  "word": "Luft",
+  "translation": "air",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A2"
+ },
+ {
+  "rank": 612,
+  "word": "nachdenken",
+  "translation": "to think (about), to reflect",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 613,
+  "word": "Erde",
+  "translation": "earth; soil",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A2"
+ },
+ {
+  "rank": 614,
+  "word": "Stein",
+  "translation": "stone, rock",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 615,
+  "word": "Wald",
+  "translation": "forest, woods",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A2"
+ },
+ {
+  "rank": 616,
+  "word": "gesund",
+  "translation": "healthy",
+  "pos": "adjective",
+  "cefr": "A1"
+ },
+ {
+  "rank": 617,
+  "word": "Winter",
+  "translation": "winter",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A1"
+ },
+ {
+  "rank": 618,
+  "word": "Bus",
+  "translation": "bus",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A1"
+ },
+ {
+  "rank": 619,
+  "word": "dazu",
+  "translation": "to it, in addition",
+  "pos": "adverb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 620,
+  "word": "Anwalt",
+  "translation": "lawyer",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 621,
+  "word": "Beweis",
+  "translation": "proof, evidence",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 622,
+  "word": "während",
+  "translation": "during; while",
+  "pos": "preposition",
+  "cefr": "B1"
+ },
+ {
+  "rank": 623,
+  "word": "sauer",
+  "translation": "angry (colloquial); sour",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 624,
+  "word": "Handy",
+  "translation": "cell phone, mobile phone",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A1"
+ },
+ {
+  "rank": 625,
+  "word": "unmöglich",
+  "translation": "impossible",
+  "pos": "adjective",
+  "cefr": "B1"
+ },
+ {
+  "rank": 626,
+  "word": "fremd",
+  "translation": "foreign, strange, unfamiliar",
+  "pos": "adjective",
+  "cefr": "B1"
+ },
+ {
+  "rank": 627,
+  "word": "wütend",
+  "translation": "angry, furious",
+  "pos": "adjective",
+  "cefr": "B1"
+ },
+ {
+  "rank": 628,
+  "word": "stolz",
+  "translation": "proud",
+  "pos": "adjective",
+  "cefr": "B1"
+ },
+ {
+  "rank": 629,
+  "word": "irgendwo",
+  "translation": "somewhere",
+  "pos": "adverb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 630,
+  "word": "bekannt",
+  "translation": "well-known, familiar",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 631,
+  "word": "Mord",
+  "translation": "murder",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 632,
+  "word": "Frühstück",
+  "translation": "breakfast",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A1"
+ },
+ {
+  "rank": 633,
+  "word": "Krankheit",
+  "translation": "illness, disease",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "B1"
+ },
+ {
+  "rank": 634,
+  "word": "Büro",
+  "translation": "office",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A2"
+ },
+ {
+  "rank": 635,
+  "word": "vertrauen",
+  "translation": "to trust",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 636,
+  "word": "Gespräch",
+  "translation": "conversation, talk",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "B1"
+ },
+ {
+  "rank": 637,
+  "word": "Fenster",
+  "translation": "window",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A1"
+ },
+ {
+  "rank": 638,
+  "word": "erlauben",
+  "translation": "to allow, to permit",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 639,
+  "word": "Meinung",
+  "translation": "opinion",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "B1"
+ },
+ {
+  "rank": 640,
+  "word": "aufwachen",
+  "translation": "to wake up",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 641,
+  "word": "Brief",
+  "translation": "letter (mail)",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A2"
+ },
+ {
+  "rank": 642,
+  "word": "Gericht",
+  "translation": "court; dish (food)",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "B1"
+ },
+ {
+  "rank": 643,
+  "word": "küssen",
+  "translation": "to kiss",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 644,
+  "word": "Möglichkeit",
+  "translation": "possibility, option",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "B1"
+ },
+ {
+  "rank": 645,
+  "word": "Lehrer",
+  "translation": "teacher",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A1"
+ },
+ {
+  "rank": 646,
+  "word": "teuer",
+  "translation": "expensive",
+  "pos": "adjective",
+  "cefr": "A1"
+ },
+ {
+  "rank": 647,
+  "word": "wehtun",
+  "translation": "to hurt (das tut weh: that hurts)",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 648,
+  "word": "Entscheidung",
+  "translation": "decision",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "B1"
+ },
+ {
+  "rank": 649,
+  "word": "entscheiden",
+  "translation": "to decide",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 650,
+  "word": "Kirche",
+  "translation": "church",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A2"
+ },
+ {
+  "rank": 651,
+  "word": "Oma",
+  "translation": "grandma",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A1"
+ },
+ {
+  "rank": 652,
+  "word": "Bein",
+  "translation": "leg",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A2"
+ },
+ {
+  "rank": 653,
+  "word": "Feind",
+  "translation": "enemy",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 654,
+  "word": "verpassen",
+  "translation": "to miss (a train, a chance)",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 655,
+  "word": "Blut",
+  "translation": "blood",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "B1"
+ },
+ {
+  "rank": 656,
+  "word": "stören",
+  "translation": "to disturb, to bother",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 657,
+  "word": "öffnen",
+  "translation": "to open",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 658,
+  "word": "König",
+  "translation": "king",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 659,
+  "word": "Küche",
+  "translation": "kitchen",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A1"
+ },
+ {
+  "rank": 660,
+  "word": "Fuß",
+  "translation": "foot",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A2"
+ },
+ {
+  "rank": 661,
+  "word": "Geschenk",
+  "translation": "present, gift",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A2"
+ },
+ {
+  "rank": 662,
+  "word": "mitbringen",
+  "translation": "to bring along",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 663,
+  "word": "Arm",
+  "translation": "arm",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A2"
+ },
+ {
+  "rank": 664,
+  "word": "Soldat",
+  "translation": "soldier",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 665,
+  "word": "fürchten",
+  "translation": "to fear; (sich fürchten) to be afraid",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 666,
+  "word": "Thema",
+  "translation": "topic, subject",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "B1"
+ },
+ {
+  "rank": 667,
+  "word": "Haar",
+  "translation": "hair",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A2"
+ },
+ {
+  "rank": 668,
+  "word": "einladen",
+  "translation": "to invite",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 669,
+  "word": "Berg",
+  "translation": "mountain",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A2"
+ },
+ {
+  "rank": 670,
+  "word": "hundert",
+  "translation": "hundred",
+  "pos": "number",
+  "cefr": "A2"
+ },
+ {
+  "rank": 671,
+  "word": "Quatsch",
+  "translation": "nonsense (colloquial)",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 672,
+  "word": "Kraft",
+  "translation": "strength, power",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "B1"
+ },
+ {
+  "rank": 673,
+  "word": "beginnen",
+  "translation": "to begin",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 674,
+  "word": "ärgern",
+  "translation": "to annoy; (sich ärgern) to be annoyed",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 675,
+  "word": "Firma",
+  "translation": "company, firm",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A2"
+ },
+ {
+  "rank": 676,
+  "word": "nass",
+  "translation": "wet",
+  "pos": "adjective",
+  "cefr": "B1"
+ },
+ {
+  "rank": 677,
+  "word": "einkaufen",
+  "translation": "to shop, to go shopping",
+  "pos": "verb",
+  "cefr": "A1"
+ },
+ {
+  "rank": 678,
+  "word": "benutzen",
+  "translation": "to use",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 679,
+  "word": "Karte",
+  "translation": "card; map; ticket",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A2"
+ },
+ {
+  "rank": 680,
+  "word": "unglaublich",
+  "translation": "unbelievable, incredible",
+  "pos": "adjective",
+  "cefr": "B1"
+ },
+ {
+  "rank": 681,
+  "word": "Foto",
+  "translation": "photo",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A1"
+ },
+ {
+  "rank": 682,
+  "word": "Lied",
+  "translation": "song",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A2"
+ },
+ {
+  "rank": 683,
+  "word": "aufmachen",
+  "translation": "to open (colloquial)",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 684,
+  "word": "Nachbar",
+  "translation": "neighbor",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A2"
+ },
+ {
+  "rank": 685,
+  "word": "leise",
+  "translation": "quiet, soft(ly)",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 686,
+  "word": "Opa",
+  "translation": "grandpa",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A1"
+ },
+ {
+  "rank": 687,
+  "word": "Kleid",
+  "translation": "dress",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A2"
+ },
+ {
+  "rank": 688,
+  "word": "Reise",
+  "translation": "trip, journey",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A2"
+ },
+ {
+  "rank": 689,
+  "word": "Richtung",
+  "translation": "direction",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "B1"
+ },
+ {
+  "rank": 690,
+  "word": "verschieden",
+  "translation": "different, various",
+  "pos": "adjective",
+  "cefr": "B1"
+ },
+ {
+  "rank": 691,
+  "word": "Präsident",
+  "translation": "president",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 692,
+  "word": "anziehen",
+  "translation": "to put on, to get dressed",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 693,
+  "word": "dringend",
+  "translation": "urgent(ly)",
+  "pos": "adjective",
+  "cefr": "B1"
+ },
+ {
+  "rank": 694,
+  "word": "Situation",
+  "translation": "situation",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "B1"
+ },
+ {
+  "rank": 695,
+  "word": "abholen",
+  "translation": "to pick up (someone/something)",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 696,
+  "word": "Bahnhof",
+  "translation": "train station",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A1"
+ },
+ {
+  "rank": 697,
+  "word": "Fisch",
+  "translation": "fish",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A1"
+ },
+ {
+  "rank": 698,
+  "word": "Regen",
+  "translation": "rain",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A2"
+ },
+ {
+  "rank": 699,
+  "word": "Glas",
+  "translation": "glass",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A2"
+ },
+ {
+  "rank": 700,
+  "word": "Flasche",
+  "translation": "bottle",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A2"
+ },
+ {
+  "rank": 701,
+  "word": "leer",
+  "translation": "empty",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 702,
+  "word": "nervös",
+  "translation": "nervous",
+  "pos": "adjective",
+  "cefr": "B1"
+ },
+ {
+  "rank": 703,
+  "word": "springen",
+  "translation": "to jump",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 704,
+  "word": "Erinnerung",
+  "translation": "memory, remembrance",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "B1"
+ },
+ {
+  "rank": 705,
+  "word": "Brot",
+  "translation": "bread",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A1"
+ },
+ {
+  "rank": 706,
+  "word": "hinten",
+  "translation": "at the back, behind",
+  "pos": "adverb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 707,
+  "word": "Stern",
+  "translation": "star",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 708,
+  "word": "tausend",
+  "translation": "thousand",
+  "pos": "number",
+  "cefr": "A2"
+ },
+ {
+  "rank": 709,
+  "word": "rennen",
+  "translation": "to run, to race",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 710,
+  "word": "Zeitung",
+  "translation": "newspaper",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A2"
+ },
+ {
+  "rank": 711,
+  "word": "mindestens",
+  "translation": "at least (quantity)",
+  "pos": "adverb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 712,
+  "word": "Hotel",
+  "translation": "hotel",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A1"
+ },
+ {
+  "rank": 713,
+  "word": "schwimmen",
+  "translation": "to swim",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 714,
+  "word": "Mund",
+  "translation": "mouth",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A2"
+ },
+ {
+  "rank": 715,
+  "word": "Kollege",
+  "translation": "colleague",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A2"
+ },
+ {
+  "rank": 716,
+  "word": "Bar",
+  "translation": "bar (for drinks)",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "B1"
+ },
+ {
+  "rank": 717,
+  "word": "kochen",
+  "translation": "to cook",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 718,
+  "word": "Klasse",
+  "translation": "class; (klasse!) great",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A2"
+ },
+ {
+  "rank": 719,
+  "word": "Spiegel",
+  "translation": "mirror",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 720,
+  "word": "erfahren",
+  "translation": "to find out, to learn (news)",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 721,
+  "word": "Schlüssel",
+  "translation": "key",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A2"
+ },
+ {
+  "rank": 722,
+  "word": "Aufgabe",
+  "translation": "task; homework",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A2"
+ },
+ {
+  "rank": 723,
+  "word": "Wunder",
+  "translation": "miracle, wonder",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "B1"
+ },
+ {
+  "rank": 724,
+  "word": "Pistole",
+  "translation": "pistol, gun",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "B1"
+ },
+ {
+  "rank": 725,
+  "word": "Sorge",
+  "translation": "worry; (keine Sorge) don’t worry",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "B1"
+ },
+ {
+  "rank": 726,
+  "word": "schließen",
+  "translation": "to close; to conclude",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 727,
+  "word": "Kampf",
+  "translation": "fight, battle",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 728,
+  "word": "Kunst",
+  "translation": "art",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "B1"
+ },
+ {
+  "rank": 729,
+  "word": "Schiff",
+  "translation": "ship",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A2"
+ },
+ {
+  "rank": 730,
+  "word": "Stress",
+  "translation": "stress",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 731,
+  "word": "langweilig",
+  "translation": "boring",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 732,
+  "word": "werfen",
+  "translation": "to throw",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 733,
+  "word": "Gast",
+  "translation": "guest",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A2"
+ },
+ {
+  "rank": 734,
+  "word": "Hälfte",
+  "translation": "half",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "B1"
+ },
+ {
+  "rank": 735,
+  "word": "Witz",
+  "translation": "joke",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 736,
+  "word": "hoffentlich",
+  "translation": "hopefully",
+  "pos": "adverb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 737,
+  "word": "Professor",
+  "translation": "professor",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 738,
+  "word": "verlangen",
+  "translation": "to demand, to require",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 739,
+  "word": "Besuch",
+  "translation": "visit; visitor(s)",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A2"
+ },
+ {
+  "rank": 740,
+  "word": "fangen",
+  "translation": "to catch",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 741,
+  "word": "Unfall",
+  "translation": "accident",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 742,
+  "word": "grün",
+  "translation": "green",
+  "pos": "adjective",
+  "cefr": "A1"
+ },
+ {
+  "rank": 743,
+  "word": "zwanzig",
+  "translation": "twenty",
+  "pos": "number",
+  "cefr": "A1"
+ },
+ {
+  "rank": 744,
+  "word": "Schmerz",
+  "translation": "pain",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 745,
+  "word": "blau",
+  "translation": "blue",
+  "pos": "adjective",
+  "cefr": "A1"
+ },
+ {
+  "rank": 746,
+  "word": "zumindest",
+  "translation": "at least (concessive)",
+  "pos": "adverb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 747,
+  "word": "Opfer",
+  "translation": "victim; sacrifice",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "B2"
+ },
+ {
+  "rank": 748,
+  "word": "Regel",
+  "translation": "rule",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "B1"
+ },
+ {
+  "rank": 749,
+  "word": "Gruppe",
+  "translation": "group",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "B1"
+ },
+ {
+  "rank": 750,
+  "word": "übrigens",
+  "translation": "by the way",
+  "pos": "adverb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 751,
+  "word": "nötig",
+  "translation": "necessary; (nicht nötig) no need",
+  "pos": "adjective",
+  "cefr": "B1"
+ },
+ {
+  "rank": 752,
+  "word": "bauen",
+  "translation": "to build",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 753,
+  "word": "Garten",
+  "translation": "garden, yard",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A1"
+ },
+ {
+  "rank": 754,
+  "word": "Gedanke",
+  "translation": "thought",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 755,
+  "word": "Team",
+  "translation": "team",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "B1"
+ },
+ {
+  "rank": 756,
+  "word": "Pferd",
+  "translation": "horse",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A2"
+ },
+ {
+  "rank": 757,
+  "word": "brennen",
+  "translation": "to burn",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 758,
+  "word": "niemals",
+  "translation": "never (emphatic)",
+  "pos": "adverb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 759,
+  "word": "Preis",
+  "translation": "price; prize",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 760,
+  "word": "Ehe",
+  "translation": "marriage",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "B2"
+ },
+ {
+  "rank": 761,
+  "word": "Freiheit",
+  "translation": "freedom",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "B1"
+ },
+ {
+  "rank": 762,
+  "word": "Fleisch",
+  "translation": "meat; flesh",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A2"
+ },
+ {
+  "rank": 763,
+  "word": "Streit",
+  "translation": "argument, quarrel",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 764,
+  "word": "streiten",
+  "translation": "to argue, to quarrel",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 765,
+  "word": "Nase",
+  "translation": "nose",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A2"
+ },
+ {
+  "rank": 766,
+  "word": "Papier",
+  "translation": "paper",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A2"
+ },
+ {
+  "rank": 767,
+  "word": "Montag",
+  "translation": "Monday",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A1"
+ },
+ {
+  "rank": 768,
+  "word": "begleiten",
+  "translation": "to accompany",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 769,
+  "word": "Freitag",
+  "translation": "Friday",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A1"
+ },
+ {
+  "rank": 770,
+  "word": "Samstag",
+  "translation": "Saturday",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A1"
+ },
+ {
+  "rank": 771,
+  "word": "beenden",
+  "translation": "to end, to finish",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 772,
+  "word": "Gebäude",
+  "translation": "building",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "B1"
+ },
+ {
+  "rank": 773,
+  "word": "Sonntag",
+  "translation": "Sunday",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A1"
+ },
+ {
+  "rank": 774,
+  "word": "verraten",
+  "translation": "to betray; to reveal",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 775,
+  "word": "Laden",
+  "translation": "shop, store",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 776,
+  "word": "Gold",
+  "translation": "gold",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "B1"
+ },
+ {
+  "rank": 777,
+  "word": "schneiden",
+  "translation": "to cut",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 778,
+  "word": "Universität",
+  "translation": "university",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A2"
+ },
+ {
+  "rank": 779,
+  "word": "Zweifel",
+  "translation": "doubt",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B2"
+ },
+ {
+  "rank": 780,
+  "word": "links",
+  "translation": "left, on the left",
+  "pos": "adverb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 781,
+  "word": "rechts",
+  "translation": "right, on the right",
+  "pos": "adverb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 782,
+  "word": "Student",
+  "translation": "student (university)",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A2"
+ },
+ {
+  "rank": 783,
+  "word": "geheim",
+  "translation": "secret",
+  "pos": "adjective",
+  "cefr": "B1"
+ },
+ {
+  "rank": 784,
+  "word": "Geheimnis",
+  "translation": "secret",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "B1"
+ },
+ {
+  "rank": 785,
+  "word": "Tasche",
+  "translation": "bag; pocket",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A2"
+ },
+ {
+  "rank": 786,
+  "word": "klopfen",
+  "translation": "to knock",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 787,
+  "word": "Ring",
+  "translation": "ring",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 788,
+  "word": "Schuh",
+  "translation": "shoe",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A1"
+ },
+ {
+  "rank": 789,
+  "word": "Regierung",
+  "translation": "government",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "B2"
+ },
+ {
+  "rank": 790,
+  "word": "Milch",
+  "translation": "milk",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A1"
+ },
+ {
+  "rank": 791,
+  "word": "Bad",
+  "translation": "bathroom; bath",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A2"
+ },
+ {
+  "rank": 792,
+  "word": "erledigen",
+  "translation": "to take care of, to get done",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 793,
+  "word": "witzig",
+  "translation": "funny, witty",
+  "pos": "adjective",
+  "cefr": "B1"
+ },
+ {
+  "rank": 794,
+  "word": "Tasse",
+  "translation": "cup",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A2"
+ },
+ {
+  "rank": 795,
+  "word": "Boot",
+  "translation": "boat",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "B1"
+ },
+ {
+  "rank": 796,
+  "word": "schlau",
+  "translation": "clever, smart",
+  "pos": "adjective",
+  "cefr": "B1"
+ },
+ {
+  "rank": 797,
+  "word": "Zahn",
+  "translation": "tooth",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A2"
+ },
+ {
+  "rank": 798,
+  "word": "drüben",
+  "translation": "over there",
+  "pos": "adverb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 799,
+  "word": "Fernseher",
+  "translation": "TV set, television",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A2"
+ },
+ {
+  "rank": 800,
+  "word": "Hemd",
+  "translation": "shirt",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A2"
+ },
+ {
+  "rank": 801,
+  "word": "vorsichtig",
+  "translation": "careful, cautious",
+  "pos": "adjective",
+  "cefr": "B1"
+ },
+ {
+  "rank": 802,
+  "word": "Vorsicht",
+  "translation": "caution; (Vorsicht!) watch out!",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "B1"
+ },
+ {
+  "rank": 803,
+  "word": "Kuchen",
+  "translation": "cake",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A2"
+ },
+ {
+  "rank": 804,
+  "word": "schmecken",
+  "translation": "to taste (good)",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 805,
+  "word": "Finger",
+  "translation": "finger",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A2"
+ },
+ {
+  "rank": 806,
+  "word": "Hals",
+  "translation": "neck, throat",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 807,
+  "word": "komplett",
+  "translation": "complete(ly)",
+  "pos": "adjective",
+  "cefr": "B1"
+ },
+ {
+  "rank": 808,
+  "word": "Erfolg",
+  "translation": "success",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 809,
+  "word": "dauern",
+  "translation": "to last, to take (time)",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 810,
+  "word": "Wunsch",
+  "translation": "wish",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 811,
+  "word": "schenken",
+  "translation": "to give (as a gift)",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 812,
+  "word": "direkt",
+  "translation": "direct(ly)",
+  "pos": "adjective",
+  "cefr": "B1"
+ },
+ {
+  "rank": 813,
+  "word": "feiern",
+  "translation": "to celebrate",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 814,
+  "word": "Sturm",
+  "translation": "storm",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 815,
+  "word": "Decke",
+  "translation": "blanket; ceiling",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "B1"
+ },
+ {
+  "rank": 816,
+  "word": "Keller",
+  "translation": "basement, cellar",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 817,
+  "word": "Museum",
+  "translation": "museum",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A2"
+ },
+ {
+  "rank": 818,
+  "word": "Held",
+  "translation": "hero",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 819,
+  "word": "angreifen",
+  "translation": "to attack",
+  "pos": "verb",
+  "cefr": "B2"
+ },
+ {
+  "rank": 820,
+  "word": "Flughafen",
+  "translation": "airport",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A2"
+ },
+ {
+  "rank": 821,
+  "word": "Flugzeug",
+  "translation": "airplane",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A2"
+ },
+ {
+  "rank": 822,
+  "word": "Brücke",
+  "translation": "bridge",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "B1"
+ },
+ {
+  "rank": 823,
+  "word": "schließlich",
+  "translation": "finally; after all",
+  "pos": "adverb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 824,
+  "word": "ehrlich",
+  "translation": "honest(ly)",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 825,
+  "word": "melden",
+  "translation": "(sich melden) to get in touch; to report",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 826,
+  "word": "Loch",
+  "translation": "hole",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "B2"
+ },
+ {
+  "rank": 827,
+  "word": "Mond",
+  "translation": "moon",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 828,
+  "word": "trocken",
+  "translation": "dry",
+  "pos": "adjective",
+  "cefr": "B1"
+ },
+ {
+  "rank": 829,
+  "word": "Vogel",
+  "translation": "bird",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A2"
+ },
+ {
+  "rank": 830,
+  "word": "weich",
+  "translation": "soft",
+  "pos": "adjective",
+  "cefr": "B1"
+ },
+ {
+  "rank": 831,
+  "word": "Dach",
+  "translation": "roof",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "B1"
+ },
+ {
+  "rank": 832,
+  "word": "Schnee",
+  "translation": "snow",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A2"
+ },
+ {
+  "rank": 833,
+  "word": "atmen",
+  "translation": "to breathe",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 834,
+  "word": "Wand",
+  "translation": "wall (interior)",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "B1"
+ },
+ {
+  "rank": 835,
+  "word": "Stuhl",
+  "translation": "chair",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A2"
+ },
+ {
+  "rank": 836,
+  "word": "Treppe",
+  "translation": "stairs, staircase",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "B1"
+ },
+ {
+  "rank": 837,
+  "word": "Dorf",
+  "translation": "village",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "B1"
+ },
+ {
+  "rank": 838,
+  "word": "sammeln",
+  "translation": "to collect, to gather",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 839,
+  "word": "klettern",
+  "translation": "to climb",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 840,
+  "word": "mutig",
+  "translation": "brave, courageous",
+  "pos": "adjective",
+  "cefr": "B1"
+ },
+ {
+  "rank": 841,
+  "word": "Mut",
+  "translation": "courage",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 842,
+  "word": "Prüfung",
+  "translation": "exam, test",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A2"
+ },
+ {
+  "rank": 843,
+  "word": "bestehen",
+  "translation": "to pass (an exam); to consist of; to insist on",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 844,
+  "word": "Anruf",
+  "translation": "phone call",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 845,
+  "word": "Menge",
+  "translation": "(eine Menge) a lot; crowd, amount",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "B1"
+ },
+ {
+  "rank": 846,
+  "word": "Termin",
+  "translation": "appointment",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A2"
+ },
+ {
+  "rank": 847,
+  "word": "wetten",
+  "translation": "to bet; (wetten, dass …?) wanna bet?",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 848,
+  "word": "ungefähr",
+  "translation": "approximately, about",
+  "pos": "adverb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 849,
+  "word": "deswegen",
+  "translation": "that’s why, therefore",
+  "pos": "adverb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 850,
+  "word": "bitten",
+  "translation": "to ask (for), to request",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 851,
+  "word": "seltsam",
+  "translation": "strange, odd",
+  "pos": "adjective",
+  "cefr": "B1"
+ },
+ {
+  "rank": 852,
+  "word": "Bank",
+  "translation": "bank; bench",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A2"
+ },
+ {
+  "rank": 853,
+  "word": "träumen",
+  "translation": "to dream",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 854,
+  "word": "klappen",
+  "translation": "(es klappt) to work out (colloquial)",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 855,
+  "word": "reich",
+  "translation": "rich",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 856,
+  "word": "etwa",
+  "translation": "about, roughly; by any chance",
+  "pos": "adverb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 857,
+  "word": "Baum",
+  "translation": "tree",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A2"
+ },
+ {
+  "rank": 858,
+  "word": "arm",
+  "translation": "poor",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 859,
+  "word": "darüber",
+  "translation": "about it, over it",
+  "pos": "adverb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 860,
+  "word": "wunderschön",
+  "translation": "gorgeous, very beautiful",
+  "pos": "adjective",
+  "cefr": "B1"
+ },
+ {
+  "rank": 861,
+  "word": "Messer",
+  "translation": "knife",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A2"
+ },
+ {
+  "rank": 862,
+  "word": "diesmal",
+  "translation": "this time",
+  "pos": "adverb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 863,
+  "word": "funktionieren",
+  "translation": "to work, to function",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 864,
+  "word": "Sport",
+  "translation": "sport(s)",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A1"
+ },
+ {
+  "rank": 865,
+  "word": "furchtbar",
+  "translation": "terrible, awful",
+  "pos": "adjective",
+  "cefr": "B1"
+ },
+ {
+  "rank": 866,
+  "word": "bestellen",
+  "translation": "to order (food, goods)",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 867,
+  "word": "schwach",
+  "translation": "weak",
+  "pos": "adjective",
+  "cefr": "B1"
+ },
+ {
+  "rank": 868,
+  "word": "Alter",
+  "translation": "age",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "B1"
+ },
+ {
+  "rank": 869,
+  "word": "nachdem",
+  "translation": "after (conjunction)",
+  "pos": "conjunction",
+  "cefr": "B1"
+ },
+ {
+  "rank": 870,
+  "word": "drehen",
+  "translation": "to turn; to shoot (a film)",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 871,
+  "word": "gemein",
+  "translation": "mean, nasty",
+  "pos": "adjective",
+  "cefr": "B1"
+ },
+ {
+  "rank": 872,
+  "word": "darauf",
+  "translation": "on it; thereupon",
+  "pos": "adverb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 873,
+  "word": "Restaurant",
+  "translation": "restaurant",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A1"
+ },
+ {
+  "rank": 874,
+  "word": "verliebt",
+  "translation": "in love",
+  "pos": "adjective",
+  "cefr": "B1"
+ },
+ {
+  "rank": 875,
+  "word": "stecken",
+  "translation": "to put (into); to be (stuck) somewhere",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 876,
+  "word": "außerdem",
+  "translation": "besides, moreover",
+  "pos": "adverb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 877,
+  "word": "Fahrrad",
+  "translation": "bicycle",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A1"
+ },
+ {
+  "rank": 878,
+  "word": "hängen",
+  "translation": "to hang",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 879,
+  "word": "einsam",
+  "translation": "lonely",
+  "pos": "adjective",
+  "cefr": "B1"
+ },
+ {
+  "rank": 880,
+  "word": "zerstören",
+  "translation": "to destroy",
+  "pos": "verb",
+  "cefr": "B2"
+ },
+ {
+  "rank": 881,
+  "word": "berühmt",
+  "translation": "famous",
+  "pos": "adjective",
+  "cefr": "B1"
+ },
+ {
+  "rank": 882,
+  "word": "Engel",
+  "translation": "angel",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 883,
+  "word": "nachher",
+  "translation": "afterwards, later",
+  "pos": "adverb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 884,
+  "word": "hell",
+  "translation": "bright, light",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 885,
+  "word": "Geist",
+  "translation": "ghost; spirit, mind",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B2"
+ },
+ {
+  "rank": 886,
+  "word": "schwören",
+  "translation": "to swear (an oath)",
+  "pos": "verb",
+  "cefr": "B2"
+ },
+ {
+  "rank": 887,
+  "word": "jedenfalls",
+  "translation": "in any case, anyway",
+  "pos": "adverb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 888,
+  "word": "vorbereiten",
+  "translation": "to prepare",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 889,
+  "word": "Polizist",
+  "translation": "police officer",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A2"
+ },
+ {
+  "rank": 890,
+  "word": "außer",
+  "translation": "except (for), besides",
+  "pos": "preposition",
+  "cefr": "B1"
+ },
+ {
+  "rank": 891,
+  "word": "lächeln",
+  "translation": "to smile",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 892,
+  "word": "Erfahrung",
+  "translation": "experience",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "B1"
+ },
+ {
+  "rank": 893,
+  "word": "Strand",
+  "translation": "beach",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A2"
+ },
+ {
+  "rank": 894,
+  "word": "vorhin",
+  "translation": "a moment ago, earlier",
+  "pos": "adverb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 895,
+  "word": "hungrig",
+  "translation": "hungry",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 896,
+  "word": "Liste",
+  "translation": "list",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "B1"
+ },
+ {
+  "rank": 897,
+  "word": "darum",
+  "translation": "that’s why; around it",
+  "pos": "adverb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 898,
+  "word": "Weihnachten",
+  "translation": "Christmas",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A1"
+ },
+ {
+  "rank": 899,
+  "word": "zugeben",
+  "translation": "to admit",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 900,
+  "word": "Ball",
+  "translation": "ball",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A2"
+ },
+ {
+  "rank": 901,
+  "word": "längst",
+  "translation": "long since, long ago",
+  "pos": "adverb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 902,
+  "word": "Ei",
+  "translation": "egg",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A1"
+ },
+ {
+  "rank": 903,
+  "word": "sowieso",
+  "translation": "anyway, in any case",
+  "pos": "adverb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 904,
+  "word": "Urlaub",
+  "translation": "vacation, holiday",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A1"
+ },
+ {
+  "rank": 905,
+  "word": "geschehen",
+  "translation": "to happen, to occur",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 906,
+  "word": "Haut",
+  "translation": "skin",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "B1"
+ },
+ {
+  "rank": 907,
+  "word": "waschen",
+  "translation": "to wash",
+  "pos": "verb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 908,
+  "word": "dick",
+  "translation": "thick; fat",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 909,
+  "word": "Träne",
+  "translation": "tear (from crying)",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "B2"
+ },
+ {
+  "rank": 910,
+  "word": "entweder",
+  "translation": "(entweder … oder) either … or",
+  "pos": "conjunction",
+  "cefr": "B1"
+ },
+ {
+  "rank": 911,
+  "word": "Seele",
+  "translation": "soul",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "B2"
+ },
+ {
+  "rank": 912,
+  "word": "peinlich",
+  "translation": "embarrassing",
+  "pos": "adjective",
+  "cefr": "B1"
+ },
+ {
+  "rank": 913,
+  "word": "stehlen",
+  "translation": "to steal",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 914,
+  "word": "Alkohol",
+  "translation": "alcohol",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 915,
+  "word": "erreichen",
+  "translation": "to reach, to achieve",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 916,
+  "word": "Ehemann",
+  "translation": "husband",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 917,
+  "word": "mitten",
+  "translation": "(mitten in) in the middle of",
+  "pos": "adverb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 918,
+  "word": "Taxi",
+  "translation": "taxi",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A2"
+ },
+ {
+  "rank": 919,
+  "word": "Droge",
+  "translation": "drug",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "B2"
+ },
+ {
+  "rank": 920,
+  "word": "zweimal",
+  "translation": "twice",
+  "pos": "adverb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 921,
+  "word": "Zigarette",
+  "translation": "cigarette",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "B1"
+ },
+ {
+  "rank": 922,
+  "word": "erschießen",
+  "translation": "to shoot dead",
+  "pos": "verb",
+  "cefr": "B2"
+ },
+ {
+  "rank": 923,
+  "word": "Blume",
+  "translation": "flower",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A2"
+ },
+ {
+  "rank": 924,
+  "word": "klug",
+  "translation": "clever, intelligent",
+  "pos": "adjective",
+  "cefr": "B1"
+ },
+ {
+  "rank": 925,
+  "word": "Fußball",
+  "translation": "football, soccer",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A1"
+ },
+ {
+  "rank": 926,
+  "word": "enttäuscht",
+  "translation": "disappointed",
+  "pos": "adjective",
+  "cefr": "B1"
+ },
+ {
+  "rank": 927,
+  "word": "Verbrechen",
+  "translation": "crime",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "B2"
+ },
+ {
+  "rank": 928,
+  "word": "Hose",
+  "translation": "pants, trousers",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A1"
+ },
+ {
+  "rank": 929,
+  "word": "bisher",
+  "translation": "so far, until now",
+  "pos": "adverb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 930,
+  "word": "Richter",
+  "translation": "judge",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B2"
+ },
+ {
+  "rank": 931,
+  "word": "übel",
+  "translation": "nasty; (mir ist übel) I feel sick",
+  "pos": "adjective",
+  "cefr": "B1"
+ },
+ {
+  "rank": 932,
+  "word": "Zeuge",
+  "translation": "witness",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B2"
+ },
+ {
+  "rank": 933,
+  "word": "aufgeregt",
+  "translation": "excited, nervous",
+  "pos": "adjective",
+  "cefr": "B1"
+ },
+ {
+  "rank": 934,
+  "word": "Maschine",
+  "translation": "machine",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "B1"
+ },
+ {
+  "rank": 935,
+  "word": "beten",
+  "translation": "to pray",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 936,
+  "word": "Koffer",
+  "translation": "suitcase",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A2"
+ },
+ {
+  "rank": 937,
+  "word": "verfolgen",
+  "translation": "to pursue, to chase",
+  "pos": "verb",
+  "cefr": "B2"
+ },
+ {
+  "rank": 938,
+  "word": "Brille",
+  "translation": "glasses",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A2"
+ },
+ {
+  "rank": 939,
+  "word": "gelb",
+  "translation": "yellow",
+  "pos": "adjective",
+  "cefr": "A1"
+ },
+ {
+  "rank": 940,
+  "word": "nachts",
+  "translation": "at night",
+  "pos": "adverb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 941,
+  "word": "verhaften",
+  "translation": "to arrest",
+  "pos": "verb",
+  "cefr": "B2"
+ },
+ {
+  "rank": 942,
+  "word": "Interesse",
+  "translation": "interest",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "B1"
+ },
+ {
+  "rank": 943,
+  "word": "solange",
+  "translation": "as long as",
+  "pos": "conjunction",
+  "cefr": "B1"
+ },
+ {
+  "rank": 944,
+  "word": "weitermachen",
+  "translation": "to carry on, to keep going",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 945,
+  "word": "Rechnung",
+  "translation": "bill, invoice",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A2"
+ },
+ {
+  "rank": 946,
+  "word": "Schauspieler",
+  "translation": "actor",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 947,
+  "word": "grau",
+  "translation": "gray",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 948,
+  "word": "besorgt",
+  "translation": "worried",
+  "pos": "adjective",
+  "cefr": "B2"
+ },
+ {
+  "rank": 949,
+  "word": "schweigen",
+  "translation": "to be silent, to say nothing",
+  "pos": "verb",
+  "cefr": "B2"
+ },
+ {
+  "rank": 950,
+  "word": "trotz",
+  "translation": "despite, in spite of",
+  "pos": "preposition",
+  "cefr": "B2"
+ },
+ {
+  "rank": 951,
+  "word": "Mitte",
+  "translation": "middle, center",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "B1"
+ },
+ {
+  "rank": 952,
+  "word": "loslassen",
+  "translation": "to let go",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 953,
+  "word": "billig",
+  "translation": "cheap",
+  "pos": "adjective",
+  "cefr": "A1"
+ },
+ {
+  "rank": 954,
+  "word": "Schloss",
+  "translation": "castle; lock",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "B1"
+ },
+ {
+  "rank": 955,
+  "word": "inzwischen",
+  "translation": "meanwhile, by now",
+  "pos": "adverb",
+  "cefr": "B2"
+ },
+ {
+  "rank": 956,
+  "word": "drücken",
+  "translation": "to press, to push; (die Daumen drücken) to cross one’s fingers",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 957,
+  "word": "Kamera",
+  "translation": "camera",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "B1"
+ },
+ {
+  "rank": 958,
+  "word": "sauber",
+  "translation": "clean",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 959,
+  "word": "geil",
+  "translation": "awesome (colloquial); horny (vulgar)",
+  "pos": "adjective",
+  "cefr": "B1"
+ },
+ {
+  "rank": 960,
+  "word": "Wind",
+  "translation": "wind",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A2"
+ },
+ {
+  "rank": 961,
+  "word": "sobald",
+  "translation": "as soon as",
+  "pos": "conjunction",
+  "cefr": "B1"
+ },
+ {
+  "rank": 962,
+  "word": "Teller",
+  "translation": "plate",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A2"
+ },
+ {
+  "rank": 963,
+  "word": "fair",
+  "translation": "fair",
+  "pos": "adjective",
+  "cefr": "B1"
+ },
+ {
+  "rank": 964,
+  "word": "Medikament",
+  "translation": "medicine, medication",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "B1"
+ },
+ {
+  "rank": 965,
+  "word": "Insel",
+  "translation": "island",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "B1"
+ },
+ {
+  "rank": 966,
+  "word": "dagegen",
+  "translation": "against it; on the other hand",
+  "pos": "adverb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 967,
+  "word": "Dieb",
+  "translation": "thief",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 968,
+  "word": "anhalten",
+  "translation": "to stop (a vehicle); to last",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 969,
+  "word": "schmutzig",
+  "translation": "dirty",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 970,
+  "word": "Fluss",
+  "translation": "river",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 971,
+  "word": "daran",
+  "translation": "on it, of it (denk daran!)",
+  "pos": "adverb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 972,
+  "word": "vorne",
+  "translation": "at the front, in front",
+  "pos": "adverb",
+  "cefr": "A2"
+ },
+ {
+  "rank": 973,
+  "word": "fliehen",
+  "translation": "to flee, to escape",
+  "pos": "verb",
+  "cefr": "B2"
+ },
+ {
+  "rank": 974,
+  "word": "Ehefrau",
+  "translation": "wife",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "B1"
+ },
+ {
+  "rank": 975,
+  "word": "Apfel",
+  "translation": "apple",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A1"
+ },
+ {
+  "rank": 976,
+  "word": "gegenüber",
+  "translation": "opposite; towards",
+  "pos": "preposition",
+  "cefr": "B2"
+ },
+ {
+  "rank": 977,
+  "word": "umdrehen",
+  "translation": "to turn around",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 978,
+  "word": "Salz",
+  "translation": "salt",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A2"
+ },
+ {
+  "rank": 979,
+  "word": "aussteigen",
+  "translation": "to get out, to get off",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 980,
+  "word": "Wolke",
+  "translation": "cloud",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "B1"
+ },
+ {
+  "rank": 981,
+  "word": "satt",
+  "translation": "full (after eating); (satt haben) to be fed up with",
+  "pos": "adjective",
+  "cefr": "B1"
+ },
+ {
+  "rank": 982,
+  "word": "See",
+  "translation": "lake",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 983,
+  "word": "eng",
+  "translation": "narrow, tight",
+  "pos": "adjective",
+  "cefr": "B1"
+ },
+ {
+  "rank": 984,
+  "word": "erwachsen",
+  "translation": "grown-up, adult",
+  "pos": "adjective",
+  "cefr": "B2"
+ },
+ {
+  "rank": 985,
+  "word": "Zucker",
+  "translation": "sugar",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A2"
+ },
+ {
+  "rank": 986,
+  "word": "empfehlen",
+  "translation": "to recommend",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 987,
+  "word": "Übung",
+  "translation": "exercise, practice",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A2"
+ },
+ {
+  "rank": 988,
+  "word": "dünn",
+  "translation": "thin",
+  "pos": "adjective",
+  "cefr": "A2"
+ },
+ {
+  "rank": 989,
+  "word": "nirgendwo",
+  "translation": "nowhere",
+  "pos": "adverb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 990,
+  "word": "Mantel",
+  "translation": "coat",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A2"
+ },
+ {
+  "rank": 991,
+  "word": "seitdem",
+  "translation": "since then",
+  "pos": "adverb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 992,
+  "word": "Suppe",
+  "translation": "soup",
+  "pos": "noun",
+  "gender": "die",
+  "cefr": "A2"
+ },
+ {
+  "rank": 993,
+  "word": "Käse",
+  "translation": "cheese",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "A1"
+ },
+ {
+  "rank": 994,
+  "word": "weder",
+  "translation": "(weder … noch) neither … nor",
+  "pos": "conjunction",
+  "cefr": "B2"
+ },
+ {
+  "rank": 995,
+  "word": "Konzert",
+  "translation": "concert",
+  "pos": "noun",
+  "gender": "das",
+  "cefr": "A2"
+ },
+ {
+  "rank": 996,
+  "word": "reparieren",
+  "translation": "to repair",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 997,
+  "word": "Künstler",
+  "translation": "artist",
+  "pos": "noun",
+  "gender": "der",
+  "cefr": "B1"
+ },
+ {
+  "rank": 998,
+  "word": "mittlerweile",
+  "translation": "by now, meanwhile",
+  "pos": "adverb",
+  "cefr": "B2"
+ },
+ {
+  "rank": 999,
+  "word": "einsteigen",
+  "translation": "to get in, to board",
+  "pos": "verb",
+  "cefr": "B1"
+ },
+ {
+  "rank": 1000,
+  "word": "landen",
+  "translation": "to land",
+  "pos": "verb",
+  "cefr": "B1"
+ }
+]
