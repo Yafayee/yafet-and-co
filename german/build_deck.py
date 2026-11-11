@@ -11,10 +11,15 @@ Outputs:
 Run: pip install genanki && python3 build_deck.py
 """
 
+import copy
 import csv
 import html
 import json
 import re
+import sqlite3
+import tempfile
+import time
+import zipfile
 from pathlib import Path
 
 import genanki
@@ -24,6 +29,7 @@ HERE = Path(__file__).parent
 # Fixed IDs so re-importing an updated deck updates cards instead of duplicating them.
 MODEL_ID = 1731320001
 DECK_ID = 1731320002
+PRESET_ID = 1731320003
 
 CSS = """
 .card { font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif; font-size: 22px;
@@ -106,6 +112,47 @@ def rank_band(rank: int) -> str:
     return f"rank_{lo:04d}-{lo + 99:04d}"
 
 
+DECK_DESCRIPTION = """
+<b>30 new words a day, most common first.</b><br>
+Do your reviews, then the new cards.<br><br>
+Countdown: Browse &rarr; search <code>deck:"German Top 1000" is:new</code><br>
+Learned: Stats &rarr; Card Counts &rarr; <i>Mature</i>
+"""
+
+
+def apply_deck_options(apkg: Path):
+    """Give the deck its own options preset (30 new/day, no review cap) and a description.
+
+    Anki imports the preset along with the deck, so nothing has to be set by hand.
+    """
+    with tempfile.TemporaryDirectory() as tmp:
+        with zipfile.ZipFile(apkg) as z:
+            z.extractall(tmp)
+            names = z.namelist()
+        db = sqlite3.connect(Path(tmp) / "collection.anki2")
+        dconf_json, decks_json = db.execute("SELECT dconf, decks FROM col").fetchone()
+        dconf, decks = json.loads(dconf_json), json.loads(decks_json)
+
+        preset = copy.deepcopy(dconf["1"])
+        preset.update(id=PRESET_ID, name="German Top 1000 (30/day)", mod=int(time.time()))
+        preset["new"]["perDay"] = 30
+        preset["new"]["order"] = 1  # show new cards in deck order (frequency rank)
+        preset["rev"]["perDay"] = 9999
+        dconf[str(PRESET_ID)] = preset
+
+        deck = decks[str(DECK_ID)]
+        deck["conf"] = PRESET_ID
+        deck["desc"] = DECK_DESCRIPTION.strip()
+
+        db.execute("UPDATE col SET dconf = ?, decks = ?", (json.dumps(dconf), json.dumps(decks)))
+        db.commit()
+        db.close()
+
+        with zipfile.ZipFile(apkg, "w", zipfile.ZIP_DEFLATED) as z:
+            for name in names:
+                z.write(Path(tmp) / name, name)
+
+
 def main():
     words = json.loads((HERE / "words.json").read_text(encoding="utf-8"))
     extra = {e["rank"]: e for e in json.loads((HERE / "enriched.json").read_text(encoding="utf-8"))}
@@ -139,6 +186,7 @@ def main():
                      ex_de.replace("**", ""), ex_en])
 
     genanki.Package(deck).write_to_file(HERE / "German_Top_1000.apkg")
+    apply_deck_options(HERE / "German_Top_1000.apkg")
     with open(HERE / "German_Top_1000.tsv", "w", encoding="utf-8", newline="") as f:
         out = csv.writer(f, delimiter="\t")
         out.writerow(["Rank", "German", "Plural", "English", "Type", "CEFR",

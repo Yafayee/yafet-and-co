@@ -25,13 +25,15 @@ A few swear and slang words (*verdammt, Scheiße, Mist, Arsch, geil*) are on the
 
 ## Set it up (once)
 
-1. Install Anki (desktop, AnkiDroid, or AnkiMobile) and import `German_Top_1000.apkg`.
-2. Click the gear next to the deck → **Options**:
-   - **New cards/day:** 30
-   - **Maximum reviews/day:** 9999, so reviews never get stuck behind a limit
-   - **FSRS:** on (under Advanced)
-   - Leave the new-card order as it is. The cards already come in frequency order.
-3. If you hear no audio, install a German voice on your device (on Windows: Settings → Time & Language → Speech).
+The deck file already has its settings built in: **30 new cards a day**, no cap on reviews, and new cards in frequency order.
+
+1. Install Anki (desktop, AnkiDroid, or AnkiMobile) and open `German_Top_1000.apkg`.
+2. On the import screen, tick **Import deck presets**, then click Import. This applies the built-in settings.
+   - If you forgot to tick it, you'll get 20 new cards a day instead of 30. To fix it, click the gear next to the deck → Options → set **New cards/day** to 30 and **Maximum reviews/day** to 9999.
+3. Optional: turn on **FSRS** (gear → Options → Advanced). It's Anki's newer scheduler and needs fewer reviews for the same memory.
+4. If you hear no audio, install a German voice on your device (on Windows: Settings → Time & Language → Speech).
+
+Using Anki on phone and computer? Import on one device, then sync through a free AnkiWeb account. Progress stays in sync.
 
 ## Your countdown
 
