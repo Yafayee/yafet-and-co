@@ -20,7 +20,7 @@ export function Composer({ customer, text, purpose, label, product, campaignId, 
   /** Extra change to make in the same save, e.g. marking an opportunity as contacted. */
   also?: (d: DB) => void;
 }) {
-  const { update } = useStore();
+  const { db, update } = useStore();
   const options = allowedChannels(customer).filter((ch) => !channels || channels.includes(ch));
   const [channel, setChannel] = useState<Channel | undefined>(options[0]);
   const [subject, setSubject] = useState(text.subject);
@@ -29,7 +29,7 @@ export function Composer({ customer, text, purpose, label, product, campaignId, 
 
   if (!channel) return <p className="text-sm text-mute">No agreed channel with contact details for this customer.</p>;
   const href = sendLink(customer, channel, { subject, body });
-  const warnings = checkMessage(`${channel === "email" ? subject : ""}\n${body}`);
+  const warnings = checkMessage(`${channel === "email" ? subject : ""}\n${body}`, db.knowledge.avoid);
   const onSend = () => update((d) => { recordSent(d, { customer, channel, purpose, label, body, product, campaignId }); also?.(d); }, `${label} to ${fullName(customer)} via ${CHANNEL_LABEL[channel]}`);
 
   return (

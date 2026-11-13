@@ -8,17 +8,18 @@ import { Composer } from "@/components/composer";
 import { CustomerForm } from "@/components/customer-form";
 import { Avatar, Card, ChannelIcon, ConfidenceChip, OppStatusChip, StatusChip, Toggle } from "@/components/ui";
 import { auditName, deleteCustomer, logEvent, setOpp } from "@/lib/actions";
-import { GUIDES } from "@/lib/knowledge";
+import { guideFor } from "@/lib/knowledge";
 import { addDays, age, daysToBirthday, fmtDate, toIso, todayIso } from "@/lib/dates";
-import { canMarket, coverage, daysSinceMarketing, eventsOf, fullName, initials, lifeStage, opportunitiesFor, templateFor } from "@/lib/rules";
+import { canMarket, coverage, daysSinceMarketing, eventsOf, fullName, initials, lifeStage, opportunitiesFor, templateFor, productsOf } from "@/lib/rules";
 import { download, uid } from "@/lib/send";
 import { useStore } from "@/lib/store";
-import { CHANNELS, CHANNEL_LABEL, PRODUCTS, type Channel, type Consent, type CrmEvent, type Customer, type OppStatus, type Product } from "@/lib/types";
+import { CHANNELS, CHANNEL_LABEL, type Channel, type Consent, type CrmEvent, type Customer, type OppStatus, type Product } from "@/lib/types";
 
 const KIND_ICON = { sent: Mail, reply: MessageSquareReply, call: PhoneCall, meeting: CalendarCheck, note: StickyNote, system: Settings2 };
 
 export function Profile() {
   const { db, update } = useStore();
+  const products = productsOf(db);
   const router = useRouter();
   const id = useSearchParams().get("id") ?? "";
   const c = db.customers.find((x) => x.id === id);
@@ -186,12 +187,12 @@ export function Profile() {
             <div className="px-5 pb-5 pt-3">
               {policy ? (
                 <form className="flex flex-wrap items-end gap-2" onSubmit={(e) => { e.preventDefault(); mutate((x) => { x.policies.push({ id: uid(), product: policy.product, number: policy.number.trim(), since: todayIso(), premium: Number(policy.premium.replace(",", ".")) || 0 }); }, `Added ${policy.product} policy to ${auditName(c)}`); setPolicy(null); }}>
-                  <label className="block"><span className="label">Product</span><select className="input mt-1" value={policy.product} onChange={(e) => setPolicy({ ...policy, product: e.target.value as Product })}>{PRODUCTS.map((p) => <option key={p}>{p}</option>)}</select></label>
+                  <label className="block"><span className="label">Product</span><select className="input mt-1" value={policy.product} onChange={(e) => setPolicy({ ...policy, product: e.target.value as Product })}>{products.map((p) => <option key={p}>{p}</option>)}</select></label>
                   <label className="block"><span className="label">Policy number</span><input className="input mt-1" value={policy.number} onChange={(e) => setPolicy({ ...policy, number: e.target.value })} /></label>
                   <label className="block"><span className="label">Premium / month (€)</span><input className="input mt-1 max-w-28" inputMode="decimal" value={policy.premium} onChange={(e) => setPolicy({ ...policy, premium: e.target.value })} /></label>
                   <button className="btn btn-primary">Add</button><button type="button" className="btn" onClick={() => setPolicy(null)}>Cancel</button>
                 </form>
-              ) : <button className="btn" onClick={() => setPolicy({ product: PRODUCTS.find((p) => !c.policies.some((q) => q.product === p)) ?? "Health", number: "", premium: "" })}><Plus className="h-4 w-4" /> Add policy</button>}
+              ) : <button className="btn" onClick={() => setPolicy({ product: products.find((p) => !c.policies.some((q) => q.product === p)) ?? "Health", number: "", premium: "" })}><Plus className="h-4 w-4" /> Add policy</button>}
             </div>
           </Card>
 
@@ -213,12 +214,12 @@ export function Profile() {
                       </select>
                     </div>
                     <p className="mt-1 text-sm text-ink-2">{o.reason}</p>
-                    {GUIDES[o.product] && (
+                    {guideFor(db, o.product) && (
                       <details className="mt-2 text-sm">
                         <summary className="cursor-pointer text-primary hover:underline">Talking points</summary>
                         <div className="mt-2 grid gap-3 sm:grid-cols-2">
-                          <div><span className="label">Ask</span><ul className="mt-1 list-disc space-y-1 pl-4 text-ink-2">{GUIDES[o.product]!.ask.map((x) => <li key={x}>{x}</li>)}</ul></div>
-                          <div><span className="label">Do not say</span><ul className="mt-1 list-disc space-y-1 pl-4 text-ink-2">{GUIDES[o.product]!.never.map((x) => <li key={x}>{x}</li>)}</ul></div>
+                          <div><span className="label">Ask</span><ul className="mt-1 list-disc space-y-1 pl-4 text-ink-2">{guideFor(db, o.product)!.ask.map((x) => <li key={x}>{x}</li>)}</ul></div>
+                          <div><span className="label">Do not say</span><ul className="mt-1 list-disc space-y-1 pl-4 text-ink-2">{guideFor(db, o.product)!.never.map((x) => <li key={x}>{x}</li>)}</ul></div>
                         </div>
                       </details>
                     )}
@@ -248,7 +249,7 @@ export function Profile() {
               {log.kind === "reply" && (
                 <>
                   <label className="block"><span className="label">Via</span><select className="input mt-1" value={log.channel} onChange={(e) => setLog({ ...log, channel: e.target.value as Channel })}>{CHANNELS.map((ch) => <option key={ch} value={ch}>{CHANNEL_LABEL[ch]}</option>)}</select></label>
-                  <label className="block"><span className="label">Interested in</span><select className="input mt-1" value={log.interest} onChange={(e) => setLog({ ...log, interest: e.target.value })}><option value="">Nothing specific</option>{PRODUCTS.map((p) => <option key={p}>{p}</option>)}</select></label>
+                  <label className="block"><span className="label">Interested in</span><select className="input mt-1" value={log.interest} onChange={(e) => setLog({ ...log, interest: e.target.value })}><option value="">Nothing specific</option>{products.map((p) => <option key={p}>{p}</option>)}</select></label>
                 </>
               )}
               <input className="input min-w-0 flex-1 basis-56" aria-label="What happened" placeholder={log.kind === "reply" ? "What the customer wrote" : "What was discussed"} value={log.text} onChange={(e) => setLog({ ...log, text: e.target.value })} />

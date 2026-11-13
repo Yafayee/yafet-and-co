@@ -1,4 +1,5 @@
 import { addDays, toIso } from "./dates";
+import { emptyKnowledge } from "./knowledge";
 import { DEFAULT_SETTINGS } from "./templates";
 import type { Channel, CrmEvent, Customer, DB, Policy, Product } from "./types";
 
@@ -22,7 +23,7 @@ const JOBS = ["Teacher", "Nurse", "Software developer", "Electrician", "Accounta
 const INTERESTS = ["Family", "Property", "Travel", "Sport", "Retirement planning", "Investing", "Self-employment", "Cycling", "Skiing"];
 const NOTES = ["Prefers contact in the evening.", "Bought a flat last year; mortgage running.", "Expecting a second child in spring.", "Recently changed employer.", "Asked for an annual review each autumn.", "", ""];
 const POOL: Product[] = ["Health", "Life", "Household", "Liability", "Car", "Accident", "Legal protection", "Pension", "Disability"];
-const PREMIUM: Record<Product, number> = { Health: 96, Life: 45, Household: 19, Liability: 8, Car: 74, Accident: 14, "Legal protection": 22, Pension: 120, Disability: 58, "Home financing": 0, "Child savings": 50 };
+const PREMIUM: Record<string, number> = { Health: 96, Life: 45, Household: 19, Liability: 8, Car: 74, Accident: 14, "Legal protection": 22, Pension: 120, Disability: 58, "Home financing": 0, "Child savings": 50 };
 
 export function demoDb(): DB {
   const r = rng(20261113);
@@ -95,6 +96,7 @@ export function demoDb(): DB {
       { id: "k2", name: "Car insurance check", templateKey: "offer", product: "Car", audience: "missing:Car", channels: ["email"], date: back(10), createdAt: back(12), sentTo: customers.filter((c) => c.consent.marketing && c.consent.email && !c.policies.some((p) => p.product === "Car")).slice(0, 4).map((c) => c.id) },
     ],
     settings: structuredClone(DEFAULT_SETTINGS),
+    knowledge: emptyKnowledge(),
     audit: [{ ts: Date.now(), action: "Demo opened with invented customers" }],
   };
 }

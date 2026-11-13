@@ -1,4 +1,4 @@
-import type { Product } from "./types";
+import type { DB, Guide, Knowledge, Product } from "./types";
 
 /**
  * What the system knows about the products and the rules for talking about
@@ -6,17 +6,7 @@ import type { Product } from "./types";
  * names its source. The source documents themselves are not stored here, and
  * their wording and example figures are deliberately not copied.
  */
-export interface Guide {
-  title: string;
-  summary: string;
-  fits: string[];
-  ask: string[];
-  say: string[];
-  never: string[];
-  source: string;
-}
-
-export const GUIDES: Partial<Record<Product, Guide>> = {
+export const GUIDES: Record<string, Guide | undefined> = {
   "Home financing": {
     title: "Home financing and refinancing",
     summary: "Help with paying for a home: a new loan for buying or building, or moving an existing home loan to better terms. The adviser collects offers from several lenders, explains the differences, and the customer decides.",
@@ -97,3 +87,11 @@ export const RULES: { title: string; text: string; source: string }[] = [
   { title: "Do not reuse the provider's material", text: "Brochure text and graphics may not be reused or reprinted without OVB's consent. Messages from this system use their own wording and never paste brochure text.", source: "Both brochures" },
   { title: "Only with consent, and not too often", text: "Product messages go only to customers who agreed to offers, on a channel they agreed to, and no more often than the frequency limit in Settings.", source: "This system" },
 ];
+
+export const emptyKnowledge = (): Knowledge => ({ products: [], guides: [], rules: [], recs: [], avoid: [], apiKey: "" });
+
+/** The guide for a product: the newest one taught in the app, else the built-in one. */
+export function guideFor(db: DB, product: Product): Guide | undefined {
+  const own = db.knowledge.guides.filter((g) => g.product === product);
+  return own[own.length - 1] ?? GUIDES[product];
+}

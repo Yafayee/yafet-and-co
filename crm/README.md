@@ -25,13 +25,19 @@ running cost.
 | Approvals | Suggested product messages, only for customers who agreed to offers and outside the frequency limit |
 | Replies & tasks | Logged customer replies and follow-up tasks |
 | Campaigns | Greeting and product campaigns with a per-recipient send list and a mail-merge export |
-| Product guide | What the system knows about each product and the rules for talking about it, written from provided material |
+| Product guide | What the system knows about each product and the rules for talking about it, and where it is taught more: by hand, from outcomes, or by reading a document with AI |
 | Import | Excel (.xlsx) or CSV import with column matching, validation, merging of duplicate rows |
 | Settings | Signature, frequency limit, message texts, backup, passphrase, activity record |
 
 Sending works without a server: each Send button opens your own email,
 WhatsApp or SMS app with the message filled in and records it in the
 customer's history. For many emails at once, export the list for a mail merge.
+
+## How the system learns
+
+- **By hand:** on the Product guide page, add product knowledge, new products, rules for when to recommend a product, conduct rules and words to avoid. They apply at once and are stored in the encrypted workspace.
+- **From outcomes:** each opportunity marked won or dismissed feeds the ranking. After five decisions for a product, a high share of wins ranks it higher and a low share ranks it lower.
+- **From documents, optional:** with the user's own Anthropic API key, a PDF or text file is sent to Claude and comes back as a proposal (products, guide entries, rules, phrases to avoid, recommendation rules) that the user reviews before adding. Only the document and the product names are sent, never customer data. This is the only part of the app that costs money or contacts a third party. The code is in `src/lib/ai.ts`.
 
 ## Run it on your own computer
 

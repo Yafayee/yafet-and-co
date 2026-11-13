@@ -5,15 +5,16 @@ import { useMemo, useState } from "react";
 import { Avatar, ConfidenceChip, Empty, PageHeader, Pager, StatusChip } from "@/components/ui";
 import { auditName, setOpp } from "@/lib/actions";
 import { fmtDate } from "@/lib/dates";
-import { allOpportunities, canMarket, fullName, initials } from "@/lib/rules";
+import { allOpportunities, canMarket, fullName, initials, productsOf } from "@/lib/rules";
 import { useStore } from "@/lib/store";
-import { PRODUCTS, type OppStatus } from "@/lib/types";
+import { type OppStatus } from "@/lib/types";
 
 const TABS: { key: OppStatus; label: string }[] = [{ key: "open", label: "Open" }, { key: "contacted", label: "Contacted" }, { key: "won", label: "Won" }, { key: "dismissed", label: "Dismissed" }];
 const PER_PAGE = 40;
 
 export default function OpportunitiesPage() {
   const { db, update } = useStore();
+  const products = productsOf(db);
   const [tab, setTab] = useState<OppStatus>("open");
   const [product, setProduct] = useState("");
   const [fit, setFit] = useState("");
@@ -41,7 +42,7 @@ export default function OpportunitiesPage() {
         </div>
         <span className="flex-1" />
         <select className="input !w-auto" aria-label="Product" value={product} onChange={(e) => { setProduct(e.target.value); setPage(1); }}>
-          <option value="">All products</option>{PRODUCTS.map((p) => <option key={p}>{p}</option>)}
+          <option value="">All products</option>{products.map((p) => <option key={p}>{p}</option>)}
         </select>
         <select className="input !w-auto" aria-label="Fit" value={fit} onChange={(e) => { setFit(e.target.value); setPage(1); }}>
           <option value="">Any fit</option><option value="high">Strong fit</option><option value="medium">Possible fit</option><option value="low">Ask first</option>

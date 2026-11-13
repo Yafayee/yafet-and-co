@@ -8,15 +8,16 @@ import { blankCustomer, CustomerForm } from "@/components/customer-form";
 import { Avatar, ChannelIcon, ConfidenceChip, Empty, PageHeader, Pager } from "@/components/ui";
 import { logEvent } from "@/lib/actions";
 import { daysAgo, daysToBirthday, fmtDayMonth, relative } from "@/lib/dates";
-import { coverage, fullName, hasProduct, initials, lifeStage, opportunitiesFor } from "@/lib/rules";
+import { coverage, fullName, hasProduct, initials, lifeStage, opportunitiesFor, productsOf } from "@/lib/rules";
 import { useStore } from "@/lib/store";
-import { CHANNELS, CHANNEL_LABEL, PRODUCTS, type Product } from "@/lib/types";
+import { CHANNELS, CHANNEL_LABEL, type Product } from "@/lib/types";
 
 const PER_PAGE = 50;
 const STAGES = ["Starting out", "Building", "Pre-retirement", "Retired", "Age not known"];
 
 export function CustomerList() {
   const { db, update } = useStore();
+  const products = productsOf(db);
   const params = useSearchParams();
   const router = useRouter();
   const [q, setQ] = useState("");
@@ -79,11 +80,11 @@ export function CustomerList() {
         </label>
         <select className="input" aria-label="Has product" value={product} onChange={(e) => filter(setProduct)(e.target.value)}>
           <option value="">Has any product</option>
-          {PRODUCTS.map((p) => <option key={p} value={p}>Has {p}</option>)}
+          {products.map((p) => <option key={p} value={p}>Has {p}</option>)}
         </select>
         <select className="input" aria-label="Missing product" value={missing} onChange={(e) => filter(setMissing)(e.target.value)}>
           <option value="">Missing: no filter</option>
-          {PRODUCTS.map((p) => <option key={p} value={p}>Without {p}</option>)}
+          {products.map((p) => <option key={p} value={p}>Without {p}</option>)}
         </select>
         <select className="input" aria-label="Marketing consent" value={consent} onChange={(e) => filter(setConsent)(e.target.value)}>
           <option value="">Any consent</option>

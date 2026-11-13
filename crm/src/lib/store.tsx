@@ -3,6 +3,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { deleteEnvelope, isEnvelope, loadEnvelope, newSession, open, saveEnvelope, seal, type Envelope, type Session } from "./crypto";
 import { demoDb } from "./demo";
+import { emptyKnowledge } from "./knowledge";
 import { DEFAULT_SETTINGS, DEFAULT_TEMPLATES } from "./templates";
 import type { DB } from "./types";
 
@@ -26,13 +27,13 @@ interface Store {
   erase: () => Promise<void>;
 }
 
-const emptyDb = (): DB => ({ version: 1, customers: [], events: [], tasks: [], opp: {}, campaigns: [], settings: structuredClone(DEFAULT_SETTINGS), audit: [] });
+const emptyDb = (): DB => ({ version: 1, customers: [], events: [], tasks: [], opp: {}, campaigns: [], settings: structuredClone(DEFAULT_SETTINGS), knowledge: emptyKnowledge(), audit: [] });
 
 /** Fill in anything a stored workspace from an older version may lack. */
 function normalise(db: DB): DB {
   const base = emptyDb();
   const customers = (db.customers ?? []).map((c) => ({ ...c, housing: c.housing ?? "unknown", children: c.children ?? "unknown" }));
-  const out = { ...base, ...db, customers, settings: { ...base.settings, ...db.settings, templates: { ...DEFAULT_TEMPLATES, ...(db.settings?.templates ?? {}) } } };
+  const out = { ...base, ...db, customers, knowledge: { ...emptyKnowledge(), ...(db.knowledge ?? {}) }, settings: { ...base.settings, ...db.settings, templates: { ...DEFAULT_TEMPLATES, ...(db.settings?.templates ?? {}) } } };
   return out;
 }
 
