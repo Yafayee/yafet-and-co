@@ -6,13 +6,14 @@ import { useMemo, useState, type FormEvent } from "react";
 import { Avatar, Card, ChannelChip, Empty, PageHeader, StatusChip } from "@/components/ui";
 import { logEvent } from "@/lib/actions";
 import { addDays, fmtDayMonth, relative, toIso, todayIso } from "@/lib/dates";
-import { fullName, initials } from "@/lib/rules";
+import { fullName, initials, productsOf } from "@/lib/rules";
 import { uid } from "@/lib/send";
 import { useStore } from "@/lib/store";
-import { CHANNELS, CHANNEL_LABEL, PRODUCTS, type Channel, type Product } from "@/lib/types";
+import { CHANNELS, CHANNEL_LABEL, type Channel, type Product } from "@/lib/types";
 
 export default function InboxPage() {
   const { db, update } = useStore();
+  const products = productsOf(db);
   const byId = useMemo(() => new Map(db.customers.map((c) => [c.id, c])), [db]);
   const sorted = useMemo(() => [...db.customers].sort((a, b) => fullName(a).localeCompare(fullName(b))), [db]);
   const replies = db.events.filter((e) => e.kind === "reply" && byId.has(e.customerId)).sort((a, b) => b.ts - a.ts);
@@ -54,7 +55,7 @@ export default function InboxPage() {
           <form onSubmit={submitReply} className="grid grid-cols-1 gap-2 px-5 pt-3 sm:grid-cols-3">
             {picker(form.customerId, (v) => setForm({ ...form, customerId: v }))}
             <select className="input" aria-label="Channel" value={form.channel} onChange={(e) => setForm({ ...form, channel: e.target.value as Channel })}>{CHANNELS.map((ch) => <option key={ch} value={ch}>via {CHANNEL_LABEL[ch]}</option>)}</select>
-            <select className="input" aria-label="Interested in" value={form.interest} onChange={(e) => setForm({ ...form, interest: e.target.value })}><option value="">No product interest</option>{PRODUCTS.map((p) => <option key={p} value={p}>Interested in {p}</option>)}</select>
+            <select className="input" aria-label="Interested in" value={form.interest} onChange={(e) => setForm({ ...form, interest: e.target.value })}><option value="">No product interest</option>{products.map((p) => <option key={p} value={p}>Interested in {p}</option>)}</select>
             <input className="input sm:col-span-2" aria-label="Reply text" placeholder="What the customer answered" value={form.text} onChange={(e) => setForm({ ...form, text: e.target.value })} required />
             <button className="btn btn-primary"><Plus className="h-4 w-4" /> Log reply</button>
           </form>

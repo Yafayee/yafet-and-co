@@ -1,7 +1,5 @@
-export type Product =
-  | "Health" | "Life" | "Household" | "Liability" | "Car"
-  | "Accident" | "Legal protection" | "Pension" | "Disability"
-  | "Home financing" | "Child savings";
+/** A product name. The built-in ones are listed below; more can be taught in the Product guide. */
+export type Product = string;
 
 export const PRODUCTS: Product[] = [
   "Health", "Life", "Household", "Liability", "Car",
@@ -9,13 +7,13 @@ export const PRODUCTS: Product[] = [
   "Home financing", "Child savings",
 ];
 
-export const PRODUCT_DE: Record<Product, string> = {
+export const PRODUCT_DE: Record<string, string> = {
   Health: "Krankenversicherung", Life: "Lebensversicherung", Household: "Haushaltsversicherung",
   Liability: "Haftpflichtversicherung", Car: "Kfz-Versicherung", Accident: "Unfallversicherung",
   "Legal protection": "Rechtsschutzversicherung", Pension: "private Pensionsvorsorge", Disability: "Berufsunfähigkeitsversicherung",
   "Home financing": "Immobilienfinanzierung", "Child savings": "Kindervorsorge",
 };
-export const PRODUCT_EN: Record<Product, string> = {
+export const PRODUCT_EN: Record<string, string> = {
   Health: "health insurance", Life: "life insurance", Household: "household insurance",
   Liability: "personal liability insurance", Car: "car insurance", Accident: "accident insurance",
   "Legal protection": "legal protection insurance", Pension: "a private pension plan", Disability: "occupational disability insurance",
@@ -101,7 +99,7 @@ export interface Task {
   done: boolean;
 }
 
-export type Audience = "all" | "marketing" | `missing:${Product}` | `has:${Product}`;
+export type Audience = string; // "all" | "marketing" | "missing:<product>" | "has:<product>"
 
 export interface Campaign {
   id: string;
@@ -126,6 +124,39 @@ export interface Settings {
   templates: Record<string, Template>;
 }
 
+export interface Guide {
+  title: string;
+  summary: string;
+  fits: string[];
+  ask: string[];
+  say: string[];
+  never: string[];
+  source: string;
+}
+
+/** A condition on a customer profile. Every field that is set must hold. */
+export interface Condition {
+  has: Product[];
+  lacks: Product[];
+  ageMin: number | null;
+  ageMax: number | null;
+  housing: Customer["housing"] | "any";
+  children: "yes" | "no" | "any";
+  ownsCar: "yes" | "no" | "any";
+}
+
+/** Knowledge added inside the app, on top of what is built in. */
+export interface Knowledge {
+  products: { name: Product; de: string; en: string }[];
+  guides: (Guide & { id: string; product: Product; addedAt: string })[];
+  rules: { id: string; title: string; text: string; source: string }[];
+  recs: { id: string; product: Product; confidence: Confidence; reason: string; when: Condition; source: string }[];
+  /** Words or phrases the message check flags. */
+  avoid: string[];
+  /** Optional key for reading documents with AI. Stored only in the encrypted workspace. */
+  apiKey: string;
+}
+
 export interface DB {
   version: 1;
   customers: Customer[];
@@ -134,5 +165,6 @@ export interface DB {
   opp: Record<string, { status: Exclude<OppStatus, "open">; date: string }>;
   campaigns: Campaign[];
   settings: Settings;
+  knowledge: Knowledge;
   audit: { ts: number; action: string }[];
 }

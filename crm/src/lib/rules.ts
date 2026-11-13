@@ -1,5 +1,5 @@
 import { age, daysAgo, daysSinceBirthday } from "./dates";
-import { PRODUCT_DE, PRODUCT_EN, type Audience, type Channel, type Confidence, type CrmEvent, type Customer, type DB, type Opportunity, type Product, type Purpose, type TemplateText } from "./types";
+import { PRODUCT_DE, PRODUCT_EN, PRODUCTS, type Audience, type Condition, type Channel, type Confidence, type CrmEvent, type Customer, type DB, type Opportunity, type Product, type Purpose, type TemplateText } from "./types";
 
 export const fullName = (c: Customer) => `${c.firstName} ${c.lastName}`.trim() || "Unnamed customer";
 export const initials = (c: Customer) => `${c.firstName[0] ?? ""}${c.lastName[0] ?? ""}`.toUpperCase() || "?";
@@ -24,7 +24,50 @@ export const canMarket = (c: Customer) => c.consent.marketing && allowedChannels
  * what; no AI and no running cost. Each rule returns a reason the
  * representative can read and defend.
  */
-function rawOpportunities(c: Customer): { product: Product; reason: string; confidence: Confidence }[] {
+/** Built-in products plus the ones taught in the app. */
+export function productsOf(db: DB): Product[] {
+  return [...new Set([...PRODUCTS, ...db.knowledge.products.map((p) => p.name)])];
+}
+
+export function matches(c: Customer, w: Condition): boolean {
+  const years = age(c.dob);
+  if (w.has.some((p) => !hasProduct(c, p)) || w.lacks.some((p) => hasProduct(c, p))) return false;
+  if (w.ageMin !== null && (years === null || years < w.ageMin)) return false;
+  if (w.ageMax !== null && (years === null || years > w.ageMax)) return false;
+  if (w.housing !== "any" && c.housing !== w.housing) return false;
+  if (w.children !== "any" && c.children !== w.children) return false;
+  if (w.ownsCar !== "any" && c.ownsCar !== w.ownsCar) return false;
+  return true;
+}
+
+export interface Learned { suggested: number; contacted: number; won: number; dismissed: number; shift: -1 | 0 | 1 }
+const learnedCache = new WeakMap<object, Map<Product, Learned>>();
+/**
+ * What the outcomes so far say about each product. Once at least five
+ * opportunities for a product are decided, a high share of wins ranks it
+ * higher and a low share ranks it lower.
+ */
+export function learned(db: DB): Map<Product, Learned> {
+  const hit = learnedCache.get(db.opp);
+  if (hit) return hit;
+  const m = new Map<Product, Learned>();
+  for (const [key, st] of Object.entries(db.opp)) {
+    const product = key.slice(key.indexOf("|") + 1);
+    const l = m.get(product) ?? { suggested: 0, contacted: 0, won: 0, dismissed: 0, shift: 0 as const };
+    l.suggested++; l[st.status]++;
+    m.set(product, l);
+  }
+  for (const l of m.values()) {
+    const decided = l.won + l.dismissed;
+    if (decided >= 5) l.shift = l.won / decided >= 0.5 ? 1 : l.won / decided <= 0.15 ? -1 : 0;
+  }
+  learnedCache.set(db.opp, m);
+  return m;
+}
+const LEVELS: Confidence[] = ["low", "medium", "high"];
+const shifted = (c: Confidence, by: number): Confidence => LEVELS[Math.min(2, Math.max(0, LEVELS.indexOf(c) + by))];
+
+function rawOpportunities(db: DB, c: Customer): { product: Product; reason: string; confidence: Confidence }[] {
   const has = (p: Product) => hasProduct(c, p);
   const years = age(c.dob);
   const out: { product: Product; reason: string; confidence: Confidence }[] = [];
@@ -51,13 +94,24 @@ function rawOpportunities(c: Customer): { product: Product; reason: string; conf
     out.push({ product: "Car", confidence: "low", reason: "We do not know whether they own a car. Ask first." });
   if (c.policies.length >= 3 && !has("Legal protection"))
     out.push({ product: "Legal protection", confidence: "low", reason: "Holds three or more policies but no legal protection." });
-  return out;
+
+  // Rules taught in the app.
+  for (const r of db.knowledge.recs) {
+    if (!has(r.product) && !out.some((o) => o.product === r.product) && matches(c, r.when)) out.push({ product: r.product, confidence: r.confidence, reason: r.reason });
+  }
+  // Learned from outcomes: products that are often won move up, often dismissed move down.
+  const l = learned(db);
+  const rank = { high: 0, medium: 1, low: 2 };
+  return out
+    .map((o, i) => ({ ...o, confidence: shifted(o.confidence, l.get(o.product)?.shift ?? 0), i }))
+    .sort((a, b) => rank[a.confidence] - rank[b.confidence] || a.i - b.i)
+    .map(({ product, reason, confidence }) => ({ product, reason, confidence }));
 }
 
 export const oppKey = (customerId: string, product: Product) => `${customerId}|${product}`;
 
 export function opportunitiesFor(db: DB, c: Customer): Opportunity[] {
-  return rawOpportunities(c).slice(0, 4).map((o) => {
+  return rawOpportunities(db, c).slice(0, 4).map((o) => {
     const key = oppKey(c.id, o.product);
     const st = db.opp[key];
     return { ...o, key, customerId: c.id, status: st?.status ?? "open", statusDate: st?.date };
@@ -70,7 +124,7 @@ export function allOpportunities(db: DB): Opportunity[] {
   const seen = new Set(live.map((o) => o.key));
   for (const [key, st] of Object.entries(db.opp)) {
     if (seen.has(key)) continue;
-    const [customerId, product] = key.split("|") as [string, Product];
+    const customerId = key.slice(0, key.indexOf("|")), product = key.slice(key.indexOf("|") + 1);
     if (!db.customers.some((c) => c.id === customerId)) continue;
     live.push({ key, customerId, product, reason: st.status === "won" ? "Policy added." : "No longer applies.", confidence: "medium", status: st.status, statusDate: st.date });
   }
@@ -115,8 +169,8 @@ export function daysSinceMarketing(events: CrmEvent[], id: string): number | nul
   return best ? daysAgo(best) : null;
 }
 
-export function render(t: TemplateText, c: Customer, sender: string, product?: Product): TemplateText {
-  const p = product ? (c.language === "de" ? PRODUCT_DE[product] : PRODUCT_EN[product]) : "";
+export function render(t: TemplateText, c: Customer, sender: string, product?: Product, names?: { de: string; en: string }): TemplateText {
+  const p = product ? (c.language === "de" ? names?.de || PRODUCT_DE[product] : names?.en || PRODUCT_EN[product]) || product : "";
   const fill = (s: string) => s.replaceAll("{firstName}", c.firstName).replaceAll("{lastName}", c.lastName).replaceAll("{product}", p).replaceAll("{sender}", sender).replace(/ {2,}/g, " ");
   return { subject: fill(t.subject), body: fill(t.body) };
 }
@@ -131,7 +185,7 @@ function specialKey(c: Customer, product?: Product): string | null {
 export function templateFor(db: DB, key: string, c: Customer, product?: Product): TemplateText {
   if (key === "offer" || key === "followUp") key = specialKey(c, product) ?? key;
   const t = db.settings.templates[key] ?? db.settings.templates.offer;
-  return render(t[c.language] ?? t.de, c, db.settings.senderName, product);
+  return render(t[c.language] ?? t.de, c, db.settings.senderName, product, db.knowledge.products.find((x) => x.name === product));
 }
 
 export interface Suggestion {
@@ -183,7 +237,7 @@ export function audienceMembers(db: DB, a: Audience, channels: Channel[], purpos
     if (purpose === "marketing" && !c.consent.marketing) return false;
     if (a === "all") return true;
     if (a === "marketing") return c.consent.marketing;
-    const [kind, p] = a.split(":") as ["missing" | "has", Product];
+    const kind = a.slice(0, a.indexOf(":")), p = a.slice(a.indexOf(":") + 1);
     return c.consent.marketing && (kind === "has" ? hasProduct(c, p) : !hasProduct(c, p));
   });
 }

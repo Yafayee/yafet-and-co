@@ -5,13 +5,14 @@ import Link from "next/link";
 import { useState, type FormEvent } from "react";
 import { ChannelChip, Empty, PageHeader, StatusChip } from "@/components/ui";
 import { fmtDate, todayIso } from "@/lib/dates";
-import { audienceLabel, audienceMembers } from "@/lib/rules";
+import { audienceLabel, audienceMembers, productsOf } from "@/lib/rules";
 import { uid } from "@/lib/send";
 import { useStore } from "@/lib/store";
-import { CHANNELS, CHANNEL_LABEL, PRODUCTS, type Audience, type Channel, type Product } from "@/lib/types";
+import { CHANNELS, CHANNEL_LABEL, type Audience, type Channel, type Product } from "@/lib/types";
 
 export default function CampaignsPage() {
   const { db, update } = useStore();
+  const products = productsOf(db);
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
   const [templateKey, setTemplateKey] = useState("christmas");
@@ -47,14 +48,14 @@ export default function CampaignsPage() {
           <label className="block"><span className="label">Planned date</span><input type="date" className="input mt-1" value={date} onChange={(e) => setDate(e.target.value)} required /></label>
           {isOffer ? (
             <>
-              <label className="block"><span className="label">Product</span><select className="input mt-1" value={product} onChange={(e) => { setProduct(e.target.value as Product); setAudience(`missing:${e.target.value as Product}`); }}>{PRODUCTS.map((p) => <option key={p}>{p}</option>)}</select></label>
+              <label className="block"><span className="label">Product</span><select className="input mt-1" value={product} onChange={(e) => { setProduct(e.target.value as Product); setAudience(`missing:${e.target.value as Product}`); }}>{products.map((p) => <option key={p}>{p}</option>)}</select></label>
               <div className="text-sm text-ink-2"><span className="label block">Audience</span><span className="mt-2 block">Customers who agreed to product offers and do not have {product}.</span></div>
             </>
           ) : (
             <label className="block"><span className="label">Audience</span>
               <select className="input mt-1" value={audience} onChange={(e) => setAudience(e.target.value as Audience)}>
                 <option value="all">{audienceLabel("all")}</option><option value="marketing">{audienceLabel("marketing")}</option>
-                {PRODUCTS.map((p) => <option key={p} value={`has:${p}`}>{audienceLabel(`has:${p}`)}</option>)}
+                {products.map((p) => <option key={p} value={`has:${p}`}>{audienceLabel(`has:${p}`)}</option>)}
               </select>
             </label>
           )}

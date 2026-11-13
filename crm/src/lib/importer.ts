@@ -134,10 +134,10 @@ const PRODUCT_WORDS: [RegExp, Product][] = [
   [/rechtsschutz|legal/i, "Legal protection"],
   [/pension|vorsorge|rente|retire/i, "Pension"],
 ];
-export function parseProducts(v: Cell): { products: Product[]; unknown: string[] } {
+export function parseProducts(v: Cell, known: Product[] = PRODUCTS): { products: Product[]; unknown: string[] } {
   const products: Product[] = [], unknown: string[] = [];
   for (const token of str(v).split(/[,;/|+\n]/).map((t) => t.trim()).filter(Boolean)) {
-    const exact = PRODUCTS.find((p) => p.toLowerCase() === token.toLowerCase());
+    const exact = known.find((p) => p.toLowerCase() === token.toLowerCase());
     const hit = exact ?? PRODUCT_WORDS.find(([re]) => re.test(token))?.[1];
     if (hit) { if (!products.includes(hit)) products.push(hit); } else unknown.push(token);
   }
@@ -182,7 +182,7 @@ const personKey = (c: { email: string; firstName: string; lastName: string; dob:
  * Consent already recorded on an existing profile is kept unless
  * `overwriteConsent` is set, so an old file cannot undo an opt-out.
  */
-export function convert(rows: Cell[][], mapping: Field[], existing: Customer[], source: string, overwriteConsent = false): ImportResult {
+export function convert(rows: Cell[][], mapping: Field[], existing: Customer[], source: string, overwriteConsent = false, known: Product[] = PRODUCTS): ImportResult {
   const col = (f: Field) => mapping.indexOf(f);
   const get = (r: Cell[], f: Field): Cell => (col(f) >= 0 ? r[col(f)] : "");
   const has = (f: Field) => col(f) >= 0;
@@ -213,7 +213,7 @@ export function convert(rows: Cell[][], mapping: Field[], existing: Customer[], 
     const dob = parseDate(rawDob);
     if (str(rawDob) && !dob) note(`Date of birth "${str(rawDob)}" could not be read; left empty.`);
 
-    const { products, unknown } = parseProducts(get(r, "Products"));
+    const { products, unknown } = parseProducts(get(r, "Products"), known);
     if (unknown.length) note(`Unknown product "${unknown.join(", ")}" ignored.`);
     const premium = Number(str(get(r, "Premium per month")).replace(/[^\d.,]/g, "").replace(",", ".")) || 0;
     const policies: Policy[] = products.map((product) => ({

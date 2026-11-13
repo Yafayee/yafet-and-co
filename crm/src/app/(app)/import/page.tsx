@@ -6,6 +6,7 @@ import { useMemo, useState, type ChangeEvent } from "react";
 import { Card, PageHeader, StatusChip } from "@/components/ui";
 import { logEvent } from "@/lib/actions";
 import { convert, FIELDS, guessMapping, readFile, TEMPLATE_CSV, type Cell, type Field } from "@/lib/importer";
+import { productsOf } from "@/lib/rules";
 import { download, toCsv } from "@/lib/send";
 import { useStore } from "@/lib/store";
 
@@ -36,7 +37,7 @@ export default function ImportPage() {
 
   const header = (rows[0] ?? []).map(show);
   const body = useMemo(() => rows.slice(1), [rows]);
-  const result = useMemo(() => (body.length ? convert(body, map, db.customers, file, overwrite) : null), [body, map, db.customers, file, overwrite]);
+  const result = useMemo(() => (body.length ? convert(body, map, db.customers, file, overwrite, productsOf(db)) : null), [body, map, db, file, overwrite]);
   const hasName = map.includes("Last name") || map.includes("Full name") || map.includes("First name");
   const step = done ? 4 : rows.length === 0 ? 1 : 2;
 
