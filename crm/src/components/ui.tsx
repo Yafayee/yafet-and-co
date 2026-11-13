@@ -1,6 +1,6 @@
 import { Mail, MessageCircle, MessageSquareText } from "lucide-react";
 import type { ReactNode } from "react";
-import { CHANNEL_LABEL, type Channel, type Confidence } from "@/lib/types";
+import { CHANNEL_LABEL, type Channel, type Confidence, type OppStatus } from "@/lib/types";
 
 export function PageHeader({ title, subtitle, children }: { title: string; subtitle?: string; children?: ReactNode }) {
   return (
@@ -93,5 +93,22 @@ export function Toggle({ checked, onChange, label }: { checked: boolean; onChang
         <span className="absolute left-0.5 top-0.5 h-4 w-4 rounded-full bg-white transition-transform peer-checked:translate-x-4" />
       </span>
     </label>
+  );
+}
+
+const OPP_TONE: Record<OppStatus, "info" | "warn" | "good" | "mute"> = { open: "info", contacted: "warn", won: "good", dismissed: "mute" };
+const OPP_LABEL: Record<OppStatus, string> = { open: "Open", contacted: "Contacted", won: "Won", dismissed: "Dismissed" };
+export function OppStatusChip({ status }: { status: OppStatus }) {
+  return <StatusChip tone={OPP_TONE[status]}>{OPP_LABEL[status]}</StatusChip>;
+}
+
+export function Pager({ page, pages, onPage }: { page: number; pages: number; onPage: (p: number) => void }) {
+  if (pages <= 1) return null;
+  return (
+    <div className="flex items-center justify-between gap-3 border-t border-line/60 px-4 py-3 text-sm text-ink-2">
+      <button className="btn" disabled={page <= 1} onClick={() => onPage(page - 1)}>Previous</button>
+      <span>Page {page} of {pages}</span>
+      <button className="btn" disabled={page >= pages} onClick={() => onPage(page + 1)}>Next</button>
+    </div>
   );
 }
