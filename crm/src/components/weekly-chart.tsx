@@ -6,7 +6,7 @@ import { fmtDayMonth } from "@/lib/dates";
 /** Single-series column chart with a hover/focus tooltip. */
 export function WeeklyChart({ data }: { data: { week: string; sent: number }[] }) {
   const [hover, setHover] = useState<number | null>(null);
-  const max = Math.ceil(Math.max(...data.map((d) => d.sent)) / 10) * 10;
+  const max = Math.max(10, Math.ceil(Math.max(...data.map((d) => d.sent)) / 10) * 10);
   const ticks = [max, max / 2, 0];
   return (
     <div className="px-5 pb-5 pt-3">
