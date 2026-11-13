@@ -25,6 +25,7 @@ running cost.
 | Approvals | Suggested product messages, only for customers who agreed to offers and outside the frequency limit |
 | Replies & tasks | Logged customer replies and follow-up tasks |
 | Campaigns | Greeting and product campaigns with a per-recipient send list and a mail-merge export |
+| Product guide | What the system knows about each product and the rules for talking about it, written from provided material |
 | Import | Excel (.xlsx) or CSV import with column matching, validation, merging of duplicate rows |
 | Settings | Signature, frequency limit, message texts, backup, passphrase, activity record |
 
@@ -65,6 +66,8 @@ address means restoring a backup there.
 - `src/lib/rules.ts`: recommendation rules, audiences, message suggestions.
 - `src/lib/importer.ts`: spreadsheet parsing, validation and merging.
 - `src/lib/crypto.ts`, `src/lib/store.tsx`: encryption and storage.
+- `src/lib/knowledge.ts`: product guide and conduct rules, each with its source. Add an entry when new material is provided; do not copy the provider's wording or example figures.
+- `src/lib/compliance.ts`: warnings for figures and promises in a drafted message.
 - `src/lib/templates.ts`: default message texts in German and English.
 - `src/lib/demo.ts`: generator for the invented demo customers.
 - `src/app/globals.css`: colours and fonts, taken from cpconsulting.at.

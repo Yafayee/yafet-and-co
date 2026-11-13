@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowLeft, Cake, CalendarCheck, Car, Download, Mail, MapPin, MessageSquareReply, Pencil, Phone, PhoneCall, Plus, Settings2, StickyNote, Trash2, UserRound } from "lucide-react";
+import { ArrowLeft, Baby, Cake, CalendarCheck, Car, Download, Home, Mail, MapPin, MessageSquareReply, Pencil, Phone, PhoneCall, Plus, Settings2, StickyNote, Trash2, UserRound } from "lucide-react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState, type FormEvent } from "react";
@@ -8,6 +8,7 @@ import { Composer } from "@/components/composer";
 import { CustomerForm } from "@/components/customer-form";
 import { Avatar, Card, ChannelIcon, ConfidenceChip, OppStatusChip, StatusChip, Toggle } from "@/components/ui";
 import { auditName, deleteCustomer, logEvent, setOpp } from "@/lib/actions";
+import { GUIDES } from "@/lib/knowledge";
 import { addDays, age, daysToBirthday, fmtDate, toIso, todayIso } from "@/lib/dates";
 import { canMarket, coverage, daysSinceMarketing, eventsOf, fullName, initials, lifeStage, opportunitiesFor, templateFor } from "@/lib/rules";
 import { download, uid } from "@/lib/send";
@@ -109,6 +110,8 @@ export function Profile() {
               <Row icon={<MapPin className="h-4 w-4" />} label="Address">{[c.street, [c.postcode, c.city].filter(Boolean).join(" ")].filter(Boolean).join(", ") || "Not known"}</Row>
               <Row icon={<Cake className="h-4 w-4" />} label="Born">{c.dob ? `${fmtDate(c.dob)} (age ${years}, birthday ${bday === 0 ? "today" : `in ${bday} days`})` : "Not known"}</Row>
               <Row icon={<Car className="h-4 w-4" />} label="Car">{c.ownsCar === "yes" ? "Owns a car" : c.ownsCar === "no" ? "No car" : "Not known"}</Row>
+              <Row icon={<Home className="h-4 w-4" />} label="Home">{{ rent: "Rents", owner: "Owns, no home loan", mortgage: "Owns, with a home loan", unknown: "Not known" }[c.housing]}</Row>
+              <Row icon={<Baby className="h-4 w-4" />} label="Children">{c.children === "yes" ? "Yes" : c.children === "no" ? "No" : "Not known"}</Row>
               <Row icon={<UserRound className="h-4 w-4" />} label="Interests">{c.interests.join(", ") || "None recorded"}</Row>
             </dl>
           </Card>
@@ -210,6 +213,15 @@ export function Profile() {
                       </select>
                     </div>
                     <p className="mt-1 text-sm text-ink-2">{o.reason}</p>
+                    {GUIDES[o.product] && (
+                      <details className="mt-2 text-sm">
+                        <summary className="cursor-pointer text-primary hover:underline">Talking points</summary>
+                        <div className="mt-2 grid gap-3 sm:grid-cols-2">
+                          <div><span className="label">Ask</span><ul className="mt-1 list-disc space-y-1 pl-4 text-ink-2">{GUIDES[o.product]!.ask.map((x) => <li key={x}>{x}</li>)}</ul></div>
+                          <div><span className="label">Do not say</span><ul className="mt-1 list-disc space-y-1 pl-4 text-ink-2">{GUIDES[o.product]!.never.map((x) => <li key={x}>{x}</li>)}</ul></div>
+                        </div>
+                      </details>
+                    )}
                     {o.status === "open" && !allowed && <p className="mt-2 text-xs text-mute">No consent for product offers, or no agreed channel. Raise this in person or by phone.</p>}
                     {o.status === "open" && allowed && capped && <p className="mt-2 text-xs text-warn">A product message went out {sinceMarketing} days ago. The limit is one every {db.settings.capDays} days.</p>}
                     {o.status === "open" && allowed && (

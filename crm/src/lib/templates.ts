@@ -37,6 +37,21 @@ export const DEFAULT_TEMPLATES: Record<string, Template> = {
     de: { subject: "Kurz nachgefragt", body: "Guten Tag {firstName} {lastName},\n\nich hoffe, Sie hatten einen schönen Geburtstag. Bei dieser Gelegenheit habe ich mir Ihre Absicherung angesehen: Eine {product} fehlt derzeit noch. Darf ich Ihnen dazu unverbindlich ein paar Informationen geben?\n\nHerzliche Grüße\n{sender}" },
     en: { subject: "A quick follow-up", body: "Hello {firstName},\n\nI hope you had a lovely birthday. I took the occasion to look at your cover: you do not yet have {product}. May I send you some information, with no obligation?\n\nKind regards\n{sender}" },
   },
+  financing: {
+    label: "Home financing (renting today)", purpose: "marketing",
+    de: { subject: "Vom Mieten zum Eigenheim?", body: "Guten Tag {firstName} {lastName},\n\ndenken Sie darüber nach, eine Wohnung oder ein Haus zu kaufen oder zu bauen? Gerne hole ich unverbindlich Finanzierungsangebote mehrerer Banken für Sie ein und erkläre Ihnen die Unterschiede.\n\nDie konkreten Konditionen hängen von Ihrer persönlichen Situation ab und werden von der jeweiligen Bank nach ihrer Prüfung festgelegt.\n\nHaben Sie Interesse an einem kurzen Gespräch?\n\nHerzliche Grüße\n{sender}" },
+    en: { subject: "From renting to your own home?", body: "Hello {firstName},\n\nAre you thinking about buying or building a home? I would be glad to collect financing offers from several banks for you, with no obligation, and explain the differences.\n\nThe actual terms depend on your personal situation and are set by the bank after its own check.\n\nWould a short conversation interest you?\n\nKind regards\n{sender}" },
+  },
+  refinancing: {
+    label: "Home financing (existing loan)", purpose: "marketing",
+    de: { subject: "Ihre laufende Finanzierung im Vergleich", body: "Guten Tag {firstName} {lastName},\n\nSie haben eine laufende Immobilienfinanzierung. Es kann sinnvoll sein, die Konditionen von Zeit zu Zeit vergleichen zu lassen. Gerne prüfe ich unverbindlich, ob eine Umschuldung für Sie in Frage kommt.\n\nOb sich ein Wechsel lohnt, hängt von Ihrem bestehenden Vertrag und Ihrer persönlichen Situation ab; verbindliche Konditionen nennt erst die Bank nach ihrer Prüfung.\n\nDarf ich mich dazu bei Ihnen melden?\n\nHerzliche Grüße\n{sender}" },
+    en: { subject: "Comparing your current home loan", body: "Hello {firstName},\n\nYou have a home loan running. It can be worth having the terms compared from time to time. I would be glad to check, with no obligation, whether refinancing is an option for you.\n\nWhether a switch pays off depends on your existing contract and your personal situation; binding terms come only from the bank after its own check.\n\nMay I get in touch about this?\n\nKind regards\n{sender}" },
+  },
+  childSavings: {
+    label: "Savings plan for a child", purpose: "marketing",
+    de: { subject: "Vorsorge für Ihr Kind", body: "Guten Tag {firstName} {lastName},\n\nwer früh beginnt, für ein Kind vorzusorgen, gibt dem Ersparten viel Zeit zu wachsen. Gerne zeige ich Ihnen unverbindlich, welche Möglichkeiten der Kindervorsorge es gibt und was zu Ihrer Familie passt.\n\nHaben Sie Interesse an einem kurzen Gespräch?\n\nHerzliche Grüße\n{sender}" },
+    en: { subject: "Saving for your child", body: "Hello {firstName},\n\nStarting early to save for a child gives the money a long time to grow. I would be glad to show you, with no obligation, which options exist and what suits your family.\n\nWould a short conversation interest you?\n\nKind regards\n{sender}" },
+  },
 };
 
 export const DEFAULT_SETTINGS: Settings = {
