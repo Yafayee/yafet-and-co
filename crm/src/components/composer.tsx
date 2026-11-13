@@ -3,6 +3,7 @@
 import { ExternalLink, Pencil } from "lucide-react";
 import { useState } from "react";
 import { recordSent } from "@/lib/actions";
+import { checkMessage } from "@/lib/compliance";
 import { allowedChannels, fullName } from "@/lib/rules";
 import { sendLink } from "@/lib/send";
 import { useStore } from "@/lib/store";
@@ -28,6 +29,7 @@ export function Composer({ customer, text, purpose, label, product, campaignId, 
 
   if (!channel) return <p className="text-sm text-mute">No agreed channel with contact details for this customer.</p>;
   const href = sendLink(customer, channel, { subject, body });
+  const warnings = checkMessage(`${channel === "email" ? subject : ""}\n${body}`);
   const onSend = () => update((d) => { recordSent(d, { customer, channel, purpose, label, body, product, campaignId }); also?.(d); }, `${label} to ${fullName(customer)} via ${CHANNEL_LABEL[channel]}`);
 
   return (
@@ -39,6 +41,11 @@ export function Composer({ customer, text, purpose, label, product, campaignId, 
         </div>
       ) : (
         <p className="line-clamp-2 text-sm text-ink-2">{body}</p>
+      )}
+      {warnings.length > 0 && (
+        <ul className="mt-2 space-y-1 rounded-md border border-warn/30 bg-warn/5 px-3 py-2 text-xs text-warn" role="status">
+          {warnings.map((w) => <li key={w}>{w}</li>)}
+        </ul>
       )}
       <div className="mt-3 flex flex-wrap items-center gap-2">
         {options.length > 1 ? (

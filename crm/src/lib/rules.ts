@@ -31,10 +31,16 @@ function rawOpportunities(c: Customer): { product: Product; reason: string; conf
 
   if (!has("Car") && c.ownsCar === "yes")
     out.push({ product: "Car", confidence: "high", reason: "Owns a car but has no car insurance with us." });
+  if (c.housing === "mortgage" && !has("Home financing"))
+    out.push({ product: "Home financing", confidence: "high", reason: "Has a home loan that does not run through us. Offer to compare whether refinancing would lower the cost." });
   if (has("Household") && !has("Liability"))
     out.push({ product: "Liability", confidence: "high", reason: "Has household insurance but no personal liability cover." });
   if (years !== null && years >= 25 && years <= 45 && !has("Pension"))
-    out.push({ product: "Pension", confidence: "medium", reason: `Aged ${years} with no private pension plan yet.` });
+    out.push({ product: "Pension", confidence: "medium", reason: years < 35 ? `Aged ${years} with no private pension plan. Starting early gives savings the longest time to grow.` : `Aged ${years} with no private pension plan yet.` });
+  if (c.children === "yes" && !has("Child savings"))
+    out.push({ product: "Child savings", confidence: "medium", reason: "Has children but no savings plan for them. The earlier it starts, the longer it can grow." });
+  if (c.housing === "rent" && !has("Home financing") && (years === null || (years >= 25 && years <= 50)))
+    out.push({ product: "Home financing", confidence: "medium", reason: "Rents their home. Ask whether buying or building is a goal." });
   if ((years === null || years < 50) && !has("Disability") && has("Life"))
     out.push({ product: "Disability", confidence: "medium", reason: "Has life insurance but income is not protected against disability." });
   if (has("Health") && !has("Accident"))
@@ -51,7 +57,7 @@ function rawOpportunities(c: Customer): { product: Product; reason: string; conf
 export const oppKey = (customerId: string, product: Product) => `${customerId}|${product}`;
 
 export function opportunitiesFor(db: DB, c: Customer): Opportunity[] {
-  return rawOpportunities(c).slice(0, 3).map((o) => {
+  return rawOpportunities(c).slice(0, 4).map((o) => {
     const key = oppKey(c.id, o.product);
     const st = db.opp[key];
     return { ...o, key, customerId: c.id, status: st?.status ?? "open", statusDate: st?.date };
@@ -87,6 +93,7 @@ export function coverage(c: Customer): { held: number; of: number; pct: number }
   const relevant: Product[] = ["Health", "Household", "Liability", "Accident", "Legal protection", "Life"];
   if (a === null || a < 60) relevant.push("Pension", "Disability");
   if (c.ownsCar !== "no") relevant.push("Car");
+  if (c.children === "yes") relevant.push("Child savings");
   const held = relevant.filter((p) => hasProduct(c, p)).length;
   return { held, of: relevant.length, pct: Math.round((held / relevant.length) * 100) };
 }
@@ -114,7 +121,15 @@ export function render(t: TemplateText, c: Customer, sender: string, product?: P
   return { subject: fill(t.subject), body: fill(t.body) };
 }
 
+/** Products with their own message text instead of the general offer. */
+function specialKey(c: Customer, product?: Product): string | null {
+  if (product === "Home financing") return c.housing === "mortgage" ? "refinancing" : "financing";
+  if (product === "Child savings") return "childSavings";
+  return null;
+}
+
 export function templateFor(db: DB, key: string, c: Customer, product?: Product): TemplateText {
+  if (key === "offer" || key === "followUp") key = specialKey(c, product) ?? key;
   const t = db.settings.templates[key] ?? db.settings.templates.offer;
   return render(t[c.language] ?? t.de, c, db.settings.senderName, product);
 }

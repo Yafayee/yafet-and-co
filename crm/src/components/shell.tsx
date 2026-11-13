@@ -1,6 +1,6 @@
 "use client";
 
-import { CheckCheck, FlaskConical, Inbox, LayoutDashboard, Lock, Megaphone, Menu, Settings, ShieldCheck, Target, Upload, Users, X } from "lucide-react";
+import { BookOpen, CheckCheck, FlaskConical, Inbox, LayoutDashboard, Lock, Megaphone, Menu, Settings, ShieldCheck, Target, Upload, Users, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useMemo, useState, type ReactNode } from "react";
@@ -29,6 +29,7 @@ export function Shell({ children }: { children: ReactNode }) {
     { href: "/approvals/", label: "Approvals", icon: CheckCheck, badge: approvals },
     { href: "/inbox/", label: "Replies & tasks", icon: Inbox, badge: replies },
     { href: "/campaigns/", label: "Campaigns", icon: Megaphone },
+    { href: "/knowledge/", label: "Product guide", icon: BookOpen },
     { href: "/import/", label: "Import", icon: Upload },
     { href: "/settings/", label: "Settings", icon: Settings },
   ];

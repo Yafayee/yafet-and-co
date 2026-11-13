@@ -22,7 +22,7 @@ const JOBS = ["Teacher", "Nurse", "Software developer", "Electrician", "Accounta
 const INTERESTS = ["Family", "Property", "Travel", "Sport", "Retirement planning", "Investing", "Self-employment", "Cycling", "Skiing"];
 const NOTES = ["Prefers contact in the evening.", "Bought a flat last year; mortgage running.", "Expecting a second child in spring.", "Recently changed employer.", "Asked for an annual review each autumn.", "", ""];
 const POOL: Product[] = ["Health", "Life", "Household", "Liability", "Car", "Accident", "Legal protection", "Pension", "Disability"];
-const PREMIUM: Record<Product, number> = { Health: 96, Life: 45, Household: 19, Liability: 8, Car: 74, Accident: 14, "Legal protection": 22, Pension: 120, Disability: 58 };
+const PREMIUM: Record<Product, number> = { Health: 96, Life: 45, Household: 19, Liability: 8, Car: 74, Accident: 14, "Legal protection": 22, Pension: 120, Disability: 58, "Home financing": 0, "Child savings": 50 };
 
 export function demoDb(): DB {
   const r = rng(20261113);
@@ -54,6 +54,8 @@ export function demoDb(): DB {
       dob, street: `Beispielgasse ${1 + Math.floor(r() * 80)}`, postcode: "1050", city: pick(CITY),
       language: chance(0.8) ? "de" : "en", occupation: pick(JOBS),
       ownsCar: products.includes("Car") ? "yes" : pick(["yes", "no", "unknown", "unknown"] as const),
+      housing: pick(["rent", "rent", "owner", "mortgage", "unknown", "unknown"] as const),
+      children: pick(["yes", "no", "unknown", "unknown"] as const),
       interests: shuffle(INTERESTS).slice(0, 1 + Math.floor(r() * 3)), policies,
       consent: { email, whatsapp, sms, marketing: channels.length > 0 && chance(0.7) },
       consentUpdated: first, consentSource: "First meeting", preferredChannel: channels[0] ?? "email",

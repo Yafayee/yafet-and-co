@@ -33,8 +33,8 @@ export default function SettingsPage() {
   };
   const backup = async () => { download(`cp-crm-backup-${todayIso()}.crmbackup`, await s.backup(), "application/json"); update(() => {}, "Encrypted backup file downloaded"); };
   const exportCsv = () => {
-    const rows = [["First name", "Last name", "Email", "Phone", "Date of birth", "Street", "Postcode", "City", "Language", "Occupation", "Owns a car", "Products", "Email consent", "SMS consent", "WhatsApp consent", "Marketing consent", "Preferred channel", "Notes"],
-      ...db.customers.map((c) => [c.firstName, c.lastName, c.email, c.phone, c.dob, c.street, c.postcode, c.city, c.language, c.occupation, c.ownsCar === "unknown" ? "" : c.ownsCar === "yes" ? "ja" : "nein", c.policies.map((p) => p.product).join(", "), c.consent.email ? "ja" : "nein", c.consent.sms ? "ja" : "nein", c.consent.whatsapp ? "ja" : "nein", c.consent.marketing ? "ja" : "nein", CHANNEL_LABEL[c.preferredChannel], c.notes])];
+    const rows = [["First name", "Last name", "Email", "Phone", "Date of birth", "Street", "Postcode", "City", "Language", "Occupation", "Owns a car", "Housing", "Children", "Products", "Email consent", "SMS consent", "WhatsApp consent", "Marketing consent", "Preferred channel", "Notes"],
+      ...db.customers.map((c) => [c.firstName, c.lastName, c.email, c.phone, c.dob, c.street, c.postcode, c.city, c.language, c.occupation, c.ownsCar === "unknown" ? "" : c.ownsCar === "yes" ? "ja" : "nein", { rent: "Miete", owner: "Eigentum", mortgage: "Eigentum mit Kredit", unknown: "" }[c.housing], c.children === "unknown" ? "" : c.children === "yes" ? "ja" : "nein", c.policies.map((p) => p.product).join(", "), c.consent.email ? "ja" : "nein", c.consent.sms ? "ja" : "nein", c.consent.whatsapp ? "ja" : "nein", c.consent.marketing ? "ja" : "nein", CHANNEL_LABEL[c.preferredChannel], c.notes])];
     download(`customers-${todayIso()}.csv`, toCsv(rows), "text/csv");
     update(() => {}, `Exported all ${db.customers.length} customers as an unencrypted CSV file`);
   };

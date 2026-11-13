@@ -9,7 +9,7 @@ import { Toggle } from "./ui";
 export function blankCustomer(): Customer {
   return {
     id: uid(), firstName: "", lastName: "", email: "", phone: "", dob: "", street: "", postcode: "", city: "",
-    language: "de", occupation: "", ownsCar: "unknown", interests: [], policies: [],
+    language: "de", occupation: "", ownsCar: "unknown", housing: "unknown", children: "unknown", interests: [], policies: [],
     consent: { email: false, sms: false, whatsapp: false, marketing: false }, consentUpdated: "", consentSource: "",
     preferredChannel: "email", notes: "", createdAt: todayIso(),
   };
@@ -52,6 +52,12 @@ export function CustomerForm({ initial, isNew, onSave, onCancel }: { initial: Cu
         </label>
         <label className="block"><span className="label">Owns a car</span>
           <select className="input mt-1" value={c.ownsCar} onChange={(e) => set("ownsCar", e.target.value as Customer["ownsCar"])}><option value="unknown">Not known</option><option value="yes">Yes</option><option value="no">No</option></select>
+        </label>
+        <label className="block"><span className="label">Home</span>
+          <select className="input mt-1" value={c.housing} onChange={(e) => set("housing", e.target.value as Customer["housing"])}><option value="unknown">Not known</option><option value="rent">Rents</option><option value="owner">Owns, no home loan</option><option value="mortgage">Owns, with a home loan</option></select>
+        </label>
+        <label className="block"><span className="label">Children</span>
+          <select className="input mt-1" value={c.children} onChange={(e) => set("children", e.target.value as Customer["children"])}><option value="unknown">Not known</option><option value="yes">Yes</option><option value="no">No</option></select>
         </label>
         <label className="block"><span className="label">Preferred channel</span>
           <select className="input mt-1" value={c.preferredChannel} onChange={(e) => set("preferredChannel", e.target.value as Customer["preferredChannel"])}>{CHANNELS.map((ch) => <option key={ch} value={ch}>{CHANNEL_LABEL[ch]}</option>)}</select>

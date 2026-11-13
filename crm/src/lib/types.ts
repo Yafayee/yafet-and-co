@@ -1,21 +1,25 @@
 export type Product =
   | "Health" | "Life" | "Household" | "Liability" | "Car"
-  | "Accident" | "Legal protection" | "Pension" | "Disability";
+  | "Accident" | "Legal protection" | "Pension" | "Disability"
+  | "Home financing" | "Child savings";
 
 export const PRODUCTS: Product[] = [
   "Health", "Life", "Household", "Liability", "Car",
   "Accident", "Legal protection", "Pension", "Disability",
+  "Home financing", "Child savings",
 ];
 
 export const PRODUCT_DE: Record<Product, string> = {
   Health: "Krankenversicherung", Life: "Lebensversicherung", Household: "Haushaltsversicherung",
   Liability: "Haftpflichtversicherung", Car: "Kfz-Versicherung", Accident: "Unfallversicherung",
   "Legal protection": "Rechtsschutzversicherung", Pension: "private Pensionsvorsorge", Disability: "Berufsunfähigkeitsversicherung",
+  "Home financing": "Immobilienfinanzierung", "Child savings": "Kindervorsorge",
 };
 export const PRODUCT_EN: Record<Product, string> = {
   Health: "health insurance", Life: "life insurance", Household: "household insurance",
   Liability: "personal liability insurance", Car: "car insurance", Accident: "accident insurance",
   "Legal protection": "legal protection insurance", Pension: "a private pension plan", Disability: "occupational disability insurance",
+  "Home financing": "home financing", "Child savings": "a savings plan for your child",
 };
 
 export type Channel = "email" | "sms" | "whatsapp";
@@ -45,6 +49,9 @@ export interface Customer {
   language: "de" | "en";
   occupation: string;
   ownsCar: "yes" | "no" | "unknown";
+  /** rent = tenant, owner = owns without a loan, mortgage = owns with a running home loan */
+  housing: "rent" | "owner" | "mortgage" | "unknown";
+  children: "yes" | "no" | "unknown";
   interests: string[];
   policies: Policy[];
   consent: Consent;
