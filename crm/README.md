@@ -4,14 +4,31 @@ Customer relationship and communication platform. This is the interface
 preview: every screen works in the browser, but it runs on invented sample
 customers. Nothing is sent and nothing is saved yet.
 
-## Run it
+## Run it on your own computer
+
+You need Node.js 20 or newer installed.
 
 ```bash
 npm install
 npm run dev
 ```
 
-Then open http://localhost:3000.
+Then open http://localhost:3000. The address only works on the computer where
+these commands are running.
+
+## Put it on a web domain
+
+```bash
+npm run build
+```
+
+This writes plain static files to the `out/` folder. Upload the contents of
+`out/` to the root folder of a domain or subdomain (for example
+`crm.example.com`) on any web hosting; no Node.js or database is needed for
+the preview.
+
+If the files must live in a subfolder such as `example.com/crm`, build with
+`BASE_PATH=/crm npm run build` instead.
 
 ## Screens
 
