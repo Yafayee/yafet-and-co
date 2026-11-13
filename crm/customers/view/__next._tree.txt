@@ -1,7 +1,7 @@
-:HL["/yafet-and-co/crm/_next/static/chunks/1oelk6r5w1rtk.css","style"]
+:HL["/yafet-and-co/crm/_next/static/chunks/33lgah739rvbc.css","style"]
 :HC["/",""]
 4:[["children",{"s":"__PAGE__","h":160}]]
 3:[["children",{"s":"view","h":96,"c":"$Q4"}]]
 2:[["children",{"s":"customers","h":96,"c":"$Q3"}]]
 1:[["children",{"s":"(app)","h":96,"c":"$Q2"}]]
-0:{"b":"yVJcc1DoWdw6GMOzYCaxn","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
+0:{"b":"-oXFyPoK4DwjhkMMLdY7r","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
