@@ -45,7 +45,7 @@ export function demoDb(): DB {
     const bd = addDays(today, offset);
     const dob = toIso(new Date(today.getFullYear() - years - 1, bd.getMonth(), bd.getDate()));
     const products = shuffle(POOL).slice(0, 1 + Math.floor(r() * 4));
-    const policies: Policy[] = products.map((product, k) => ({ id: id("p"), product, number: `AT-${100000 + i * 37 + k * 11}`, since: back(Math.floor(200 + r() * 2800)), premium: Math.round(PREMIUM[product] * (0.8 + r() * 0.5)) }));
+    const policies: Policy[] = products.map((product, k) => ({ id: id("p"), product, number: `AT-${100000 + i * 37 + k * 11}`, since: back(Math.floor(200 + r() * 2800)), until: chance(0.6) ? toIso(addDays(today, Math.floor(-20 + r() * 400))) : "", premium: Math.round(PREMIUM[product] * (0.8 + r() * 0.5)) }));
     const email = chance(0.9), whatsapp = chance(0.6), sms = chance(0.45);
     const channels = ([["email", email], ["whatsapp", whatsapp], ["sms", sms]] as [Channel, boolean][]).filter((x) => x[1]).map((x) => x[0]);
     const first = policies.map((p) => p.since).sort()[0];
@@ -57,6 +57,7 @@ export function demoDb(): DB {
       ownsCar: products.includes("Car") ? "yes" : pick(["yes", "no", "unknown", "unknown"] as const),
       housing: pick(["rent", "rent", "owner", "mortgage", "unknown", "unknown"] as const),
       children: pick(["yes", "no", "unknown", "unknown"] as const),
+      kids: [], income: pick(["", "1500to2500", "2500to4000", "over4000"] as const),
       marital: pick(["single", "married", "partner", "unknown"] as const),
       employment: years >= 66 ? "retired" : pick(["employed", "employed", "self", "unknown"] as const),
       interests: shuffle(INTERESTS).slice(0, 1 + Math.floor(r() * 3)), policies,

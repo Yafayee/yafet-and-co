@@ -20,6 +20,10 @@ export const PRODUCT_EN: Record<string, string> = {
   "Home financing": "home financing", "Child savings": "a savings plan for your child",
 };
 
+export const INCOME_LABEL: Record<Customer["income"], string> = {
+  "": "Not known", under1500: "Under €1,500", "1500to2500": "€1,500 to €2,500", "2500to4000": "€2,500 to €4,000", over4000: "Over €4,000",
+};
+
 export type Channel = "email" | "sms" | "whatsapp";
 export const CHANNELS: Channel[] = ["email", "whatsapp", "sms"];
 export const CHANNEL_LABEL: Record<Channel, string> = { email: "Email", sms: "SMS", whatsapp: "WhatsApp" };
@@ -32,6 +36,8 @@ export interface Policy {
   number: string;
   since: string; // ISO date or ""
   premium: number; // EUR per month, 0 if unknown
+  /** End or renewal date, ISO, or "" when not known. */
+  until?: string;
 }
 
 export interface Customer {
@@ -50,6 +56,10 @@ export interface Customer {
   /** rent = tenant, owner = owns without a loan, mortgage = owns with a running home loan */
   housing: "rent" | "owner" | "mortgage" | "unknown";
   children: "yes" | "no" | "unknown";
+  /** Birth years of the children, when known. */
+  kids: number[];
+  /** Net income per month in euros, as a band. "" = not known. */
+  income: "" | "under1500" | "1500to2500" | "2500to4000" | "over4000";
   marital: "single" | "partner" | "married" | "unknown";
   employment: "employed" | "self" | "student" | "retired" | "unknown";
   interests: string[];

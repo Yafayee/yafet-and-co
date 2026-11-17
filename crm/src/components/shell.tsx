@@ -55,6 +55,8 @@ export function Shell({ children }: { children: ReactNode }) {
     </button>
   );
 
+  if (path.startsWith("/customers/print")) return <>{children}</>;
+
   return (
     <div className="min-h-screen lg:flex">
       <aside className="sticky top-0 hidden h-screen w-60 shrink-0 flex-col overflow-y-auto border-r border-white/10 bg-white/[0.03] p-4 backdrop-blur-md lg:flex">

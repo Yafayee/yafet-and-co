@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowLeft, Baby, Briefcase, Cake, CalendarCheck, Car, Download, Home, Mail, MapPin, MessageSquareReply, Pencil, Phone, PhoneCall, Plus, Settings2, StickyNote, Trash2, UserRound, Users } from "lucide-react";
+import { ArrowLeft, Baby, Briefcase, Cake, CalendarCheck, Car, Download, Home, Mail, MapPin, MessageSquareReply, Pencil, Phone, PhoneCall, Plus, Settings2, StickyNote, Printer, Trash2, UserRound, Users, Wallet } from "lucide-react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState, type FormEvent } from "react";
@@ -9,11 +9,11 @@ import { CustomerForm } from "@/components/customer-form";
 import { Avatar, Card, ChannelIcon, ConfidenceChip, OppStatusChip, StatusChip, Toggle } from "@/components/ui";
 import { auditName, deleteCustomer, logEvent, setOpp } from "@/lib/actions";
 import { guideFor } from "@/lib/knowledge";
-import { addDays, age, daysToBirthday, fmtDate, toIso, todayIso } from "@/lib/dates";
+import { addDays, age, daysToBirthday, daysUntil, eur, fmtDate, toIso, todayIso } from "@/lib/dates";
 import { assess, canMarket, coverage, daysSinceMarketing, missingFacts, eventsOf, fullName, initials, lifeStage, opportunitiesFor, templateFor, productsOf } from "@/lib/rules";
 import { download, uid } from "@/lib/send";
 import { useStore } from "@/lib/store";
-import { CHANNELS, CHANNEL_LABEL, type Channel, type Consent, type CrmEvent, type Customer, type OppStatus, type Product } from "@/lib/types";
+import { CHANNELS, CHANNEL_LABEL, INCOME_LABEL, type Channel, type Consent, type CrmEvent, type Customer, type OppStatus, type Product } from "@/lib/types";
 
 const KIND_ICON = { sent: Mail, reply: MessageSquareReply, call: PhoneCall, meeting: CalendarCheck, note: StickyNote, system: Settings2 };
 
@@ -28,7 +28,7 @@ export function Profile() {
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [log, setLog] = useState<{ kind: CrmEvent["kind"]; channel: Channel; text: string; interest: string }>({ kind: "call", channel: "email", text: "", interest: "" });
   const [task, setTask] = useState({ title: "", due: toIso(addDays(new Date(), 3)) });
-  const [policy, setPolicy] = useState<{ product: Product; number: string; premium: string } | null>(null);
+  const [policy, setPolicy] = useState<{ product: Product; number: string; premium: string; until: string } | null>(null);
 
   if (!c) {
     return (
@@ -100,6 +100,7 @@ export function Profile() {
         <div className="flex flex-wrap gap-2">
           {c.email && <a className="btn" href={`mailto:${c.email}`}><Mail className="h-4 w-4" /> Email</a>}
           {c.phone && <a className="btn" href={`tel:${c.phone.replace(/\s/g, "")}`}><Phone className="h-4 w-4" /> Call</a>}
+          <Link className="btn" href={`/customers/print/?id=${c.id}`}><Printer className="h-4 w-4" /> Summary</Link>
           <button className="btn" onClick={() => setEditing(!editing)}><Pencil className="h-4 w-4" /> Edit</button>
         </div>
       </div>
@@ -118,7 +119,8 @@ export function Profile() {
               <Row icon={<Users className="h-4 w-4" />} label="Marital status">{{ single: "Single", partner: "Lives with a partner", married: "Married", unknown: "Not known" }[c.marital]}</Row>
               <Row icon={<Briefcase className="h-4 w-4" />} label="Work">{{ employed: "Employed", self: "Self-employed", student: "Student or apprentice", retired: "Retired", unknown: "Not known" }[c.employment]}{c.occupation ? ` (${c.occupation})` : ""}</Row>
               <Row icon={<Home className="h-4 w-4" />} label="Home">{{ rent: "Rents", owner: "Owns, no home loan", mortgage: "Owns, with a home loan", unknown: "Not known" }[c.housing]}</Row>
-              <Row icon={<Baby className="h-4 w-4" />} label="Children">{c.children === "yes" ? "Yes" : c.children === "no" ? "No" : "Not known"}</Row>
+              <Row icon={<Baby className="h-4 w-4" />} label="Children">{c.kids.length ? `${c.kids.length} (aged ${c.kids.map((y) => new Date().getFullYear() - y).sort((a, b) => a - b).join(", ")})` : c.children === "yes" ? "Yes, ages not known" : c.children === "no" ? "No" : "Not known"}</Row>
+              <Row icon={<Wallet className="h-4 w-4" />} label="Net income per month">{INCOME_LABEL[c.income]}</Row>
               <Row icon={<UserRound className="h-4 w-4" />} label="Interests">{c.interests.join(", ") || "None recorded"}</Row>
             </dl>
           </Card>
@@ -171,18 +173,22 @@ export function Profile() {
         </div>
 
         <div className="flex flex-col gap-4 lg:col-span-2">
-          <Card title="Policies and products" action={<span className="text-xs text-mute">{total > 0 ? `€${total} per month in total` : ""}</span>}>
+          <Card title="Policies and products" action={<span className="text-xs text-mute">{total > 0 ? `${eur(total)} per month in total` : ""}</span>}>
             {c.policies.length > 0 && (
               <div className="mt-2 overflow-x-auto">
-                <table className="w-full min-w-[460px]">
-                  <thead><tr><th className="th">Product</th><th className="th">Policy number</th><th className="th">Since</th><th className="th text-right">Premium / month</th><th className="th" /></tr></thead>
+                <table className="w-full min-w-[620px]">
+                  <thead><tr><th className="th">Product</th><th className="th">Policy number</th><th className="th">Since</th><th className="th">Ends or renews</th><th className="th text-right">Premium / month</th><th className="th" /></tr></thead>
                   <tbody>
                     {c.policies.map((p) => (
                       <tr key={p.id}>
                         <td className="td font-medium text-white">{p.product}</td>
                         <td className="td tabular-nums text-ink-2">{p.number || "–"}</td>
                         <td className="td text-ink-2">{p.since ? fmtDate(p.since) : "–"}</td>
-                        <td className="td text-right tabular-nums">{p.premium ? `€${p.premium}` : "–"}</td>
+                        <td className="td">
+                          <input type="date" className="input !w-auto !py-1 text-xs" aria-label={`End date of ${p.product} policy`} value={p.until ?? ""} onChange={(e) => mutate((x) => { const q = x.policies.find((y) => y.id === p.id); if (q) q.until = e.target.value; })} />
+                          {(() => { const d = p.until ? daysUntil(p.until) : null; return d === null ? null : d < 0 ? <span className="mt-1 block text-xs text-bad">ended {-d} days ago</span> : d <= 90 ? <span className="mt-1 block text-xs text-warn">ends in {d} days</span> : null; })()}
+                        </td>
+                        <td className="td text-right tabular-nums">{p.premium ? eur(p.premium) : "–"}</td>
                         <td className="td text-right"><button className="text-mute hover:text-bad" aria-label={`Remove ${p.product} policy`} onClick={() => mutate((x) => { x.policies = x.policies.filter((q) => q.id !== p.id); }, `Removed ${p.product} policy from ${auditName(c)}`)}><Trash2 className="h-4 w-4" /></button></td>
                       </tr>
                     ))}
@@ -192,13 +198,14 @@ export function Profile() {
             )}
             <div className="px-5 pb-5 pt-3">
               {policy ? (
-                <form className="flex flex-wrap items-end gap-2" onSubmit={(e) => { e.preventDefault(); mutate((x) => { x.policies.push({ id: uid(), product: policy.product, number: policy.number.trim(), since: todayIso(), premium: Number(policy.premium.replace(",", ".")) || 0 }); }, `Added ${policy.product} policy to ${auditName(c)}`); setPolicy(null); }}>
+                <form className="flex flex-wrap items-end gap-2" onSubmit={(e) => { e.preventDefault(); mutate((x) => { x.policies.push({ id: uid(), product: policy.product, number: policy.number.trim(), since: todayIso(), until: policy.until, premium: Number(policy.premium.replace(",", ".")) || 0 }); }, `Added ${policy.product} policy to ${auditName(c)}`); setPolicy(null); }}>
                   <label className="block"><span className="label">Product</span><select className="input mt-1" value={policy.product} onChange={(e) => setPolicy({ ...policy, product: e.target.value as Product })}>{products.map((p) => <option key={p}>{p}</option>)}</select></label>
                   <label className="block"><span className="label">Policy number</span><input className="input mt-1" value={policy.number} onChange={(e) => setPolicy({ ...policy, number: e.target.value })} /></label>
                   <label className="block"><span className="label">Premium / month (€)</span><input className="input mt-1 max-w-28" inputMode="decimal" value={policy.premium} onChange={(e) => setPolicy({ ...policy, premium: e.target.value })} /></label>
+                  <label className="block"><span className="label">Ends or renews</span><input type="date" className="input mt-1" value={policy.until} onChange={(e) => setPolicy({ ...policy, until: e.target.value })} /></label>
                   <button className="btn btn-primary">Add</button><button type="button" className="btn" onClick={() => setPolicy(null)}>Cancel</button>
                 </form>
-              ) : <button className="btn" onClick={() => setPolicy({ product: products.find((p) => !c.policies.some((q) => q.product === p)) ?? "Health", number: "", premium: "" })}><Plus className="h-4 w-4" /> Add policy</button>}
+              ) : <button className="btn" onClick={() => setPolicy({ product: products.find((p) => !c.policies.some((q) => q.product === p)) ?? "Health", number: "", premium: "", until: "" })}><Plus className="h-4 w-4" /> Add policy</button>}
             </div>
           </Card>
 

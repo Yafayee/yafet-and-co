@@ -52,6 +52,17 @@ export function daysSinceBirthday(dob: string): number | null {
   return dayDiff(t, last);
 }
 
+/** Days from today until the date (negative when it has passed), or null. */
+export function daysUntil(s: string): number | null {
+  const d = parseIso(s);
+  return d ? dayDiff(d, startOfToday()) : null;
+}
+
+/** Euro amount: whole numbers as they are, others with two decimals. */
+export function eur(n: number): string {
+  return `€${Number.isInteger(n) ? n : n.toFixed(2)}`;
+}
+
 export function fmtDate(s: string): string {
   const d = parseIso(s);
   return d ? `${d.getDate()} ${MONTHS[d.getMonth()]} ${d.getFullYear()}` : "Not known";

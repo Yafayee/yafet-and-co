@@ -7,7 +7,7 @@ import { useMemo, useState } from "react";
 import { blankCustomer, CustomerForm } from "@/components/customer-form";
 import { Avatar, ChannelIcon, ConfidenceChip, Empty, PageHeader, Pager } from "@/components/ui";
 import { logEvent } from "@/lib/actions";
-import { daysAgo, daysToBirthday, fmtDayMonth, relative } from "@/lib/dates";
+import { daysAgo, daysToBirthday, daysUntil, fmtDayMonth, relative } from "@/lib/dates";
 import { coverage, fullName, hasProduct, initials, lifeStage, opportunitiesFor, productsOf } from "@/lib/rules";
 import { useStore } from "@/lib/store";
 import { CHANNELS, CHANNEL_LABEL, type Product } from "@/lib/types";
@@ -25,7 +25,7 @@ export function CustomerList() {
   const [missing, setMissing] = useState("");
   const [consent, setConsent] = useState("");
   const [stage, setStage] = useState("");
-  const [extra, setExtra] = useState("");
+  const [extra, setExtra] = useState(params.get("view") === "renewals" ? "renewals" : params.get("view") === "opportunities" ? "opp" : "");
   const [page, setPage] = useState(1);
   const [adding, setAdding] = useState(params.get("new") === "1");
 
@@ -49,6 +49,7 @@ export function CustomerList() {
       if (extra === "opp" && !opp) return false;
       if (extra === "quiet") { const d = daysAgo(last); if (d !== null && d <= 365) return false; }
       if (extra === "nocontact" && (c.email || c.phone)) return false;
+      if (extra === "renewals" && !c.policies.some((x) => { const d = x.until ? daysUntil(x.until) : null; return d !== null && d <= 90 && d >= -60; })) return false;
       return true;
     });
   }, [all, q, product, missing, consent, stage, extra]);
@@ -100,6 +101,7 @@ export function CustomerList() {
           <option value="opp">With an open opportunity</option>
           <option value="quiet">No contact for a year</option>
           <option value="nocontact">No email and no phone</option>
+          <option value="renewals">A policy ends within 90 days</option>
         </select>
       </div>
 
