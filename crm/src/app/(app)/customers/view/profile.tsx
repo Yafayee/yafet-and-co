@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowLeft, Baby, Cake, CalendarCheck, Car, Download, Home, Mail, MapPin, MessageSquareReply, Pencil, Phone, PhoneCall, Plus, Settings2, StickyNote, Trash2, UserRound } from "lucide-react";
+import { ArrowLeft, Baby, Briefcase, Cake, CalendarCheck, Car, Download, Home, Mail, MapPin, MessageSquareReply, Pencil, Phone, PhoneCall, Plus, Settings2, StickyNote, Trash2, UserRound, Users } from "lucide-react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState, type FormEvent } from "react";
@@ -10,7 +10,7 @@ import { Avatar, Card, ChannelIcon, ConfidenceChip, OppStatusChip, StatusChip, T
 import { auditName, deleteCustomer, logEvent, setOpp } from "@/lib/actions";
 import { guideFor } from "@/lib/knowledge";
 import { addDays, age, daysToBirthday, fmtDate, toIso, todayIso } from "@/lib/dates";
-import { canMarket, coverage, daysSinceMarketing, eventsOf, fullName, initials, lifeStage, opportunitiesFor, templateFor, productsOf } from "@/lib/rules";
+import { assess, canMarket, coverage, daysSinceMarketing, missingFacts, eventsOf, fullName, initials, lifeStage, opportunitiesFor, templateFor, productsOf } from "@/lib/rules";
 import { download, uid } from "@/lib/send";
 import { useStore } from "@/lib/store";
 import { CHANNELS, CHANNEL_LABEL, type Channel, type Consent, type CrmEvent, type Customer, type OppStatus, type Product } from "@/lib/types";
@@ -40,10 +40,14 @@ export function Profile() {
   }
 
   const opps = opportunitiesFor(db, c);
+  const check = assess(db, c);
+  const offers = check.filter((a) => a.status === "offer");
+  const asks = check.filter((a) => a.status === "ask");
+  const questions = missingFacts(c);
   const timeline = eventsOf(db, c.id);
   const tasks = db.tasks.filter((t) => t.customerId === c.id);
   const total = c.policies.reduce((s, p) => s + p.premium, 0);
-  const cov = coverage(c);
+  const cov = coverage(db, c);
   const years = age(c.dob);
   const bday = daysToBirthday(c.dob);
   const sinceMarketing = daysSinceMarketing(db.events, c.id);
@@ -111,6 +115,8 @@ export function Profile() {
               <Row icon={<MapPin className="h-4 w-4" />} label="Address">{[c.street, [c.postcode, c.city].filter(Boolean).join(" ")].filter(Boolean).join(", ") || "Not known"}</Row>
               <Row icon={<Cake className="h-4 w-4" />} label="Born">{c.dob ? `${fmtDate(c.dob)} (age ${years}, birthday ${bday === 0 ? "today" : `in ${bday} days`})` : "Not known"}</Row>
               <Row icon={<Car className="h-4 w-4" />} label="Car">{c.ownsCar === "yes" ? "Owns a car" : c.ownsCar === "no" ? "No car" : "Not known"}</Row>
+              <Row icon={<Users className="h-4 w-4" />} label="Marital status">{{ single: "Single", partner: "Lives with a partner", married: "Married", unknown: "Not known" }[c.marital]}</Row>
+              <Row icon={<Briefcase className="h-4 w-4" />} label="Work">{{ employed: "Employed", self: "Self-employed", student: "Student or apprentice", retired: "Retired", unknown: "Not known" }[c.employment]}{c.occupation ? ` (${c.occupation})` : ""}</Row>
               <Row icon={<Home className="h-4 w-4" />} label="Home">{{ rent: "Rents", owner: "Owns, no home loan", mortgage: "Owns, with a home loan", unknown: "Not known" }[c.housing]}</Row>
               <Row icon={<Baby className="h-4 w-4" />} label="Children">{c.children === "yes" ? "Yes" : c.children === "no" ? "No" : "Not known"}</Row>
               <Row icon={<UserRound className="h-4 w-4" />} label="Interests">{c.interests.join(", ") || "None recorded"}</Row>
@@ -193,6 +199,36 @@ export function Profile() {
                   <button className="btn btn-primary">Add</button><button type="button" className="btn" onClick={() => setPolicy(null)}>Cancel</button>
                 </form>
               ) : <button className="btn" onClick={() => setPolicy({ product: products.find((p) => !c.policies.some((q) => q.product === p)) ?? "Health", number: "", premium: "" })}><Plus className="h-4 w-4" /> Add policy</button>}
+            </div>
+          </Card>
+
+          <Card title="Cover check" action={<span className="text-xs text-mute">{check.filter((a) => a.status === "has").length} held · {offers.length} to offer · {asks.length} to find out</span>}>
+            <div className="px-5 pb-5 pt-3">
+              {offers[0] && (
+                <p className="mb-3 rounded-md border border-primary/40 bg-primary/10 px-3 py-2 text-sm text-ink">
+                  <span className="font-semibold text-white">Best next offer: {offers[0].product}.</span> {offers[0].reason}
+                </p>
+              )}
+              <ul className="grid gap-2 sm:grid-cols-2">
+                {check.map((a) => (
+                  <li key={a.product} className={`rounded-lg border p-3 ${a.status === "offer" ? "border-line bg-night-2/50" : "border-line/50 bg-night-2/20"}`}>
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <span className={`text-sm font-medium ${a.status === "skip" ? "text-mute" : "text-white"}`}>{a.product}</span>
+                      {a.status === "has" && <StatusChip tone="good">Has it</StatusChip>}
+                      {a.status === "offer" && <ConfidenceChip level={a.confidence ?? "low"} />}
+                      {a.status === "ask" && <StatusChip tone="info">Find out</StatusChip>}
+                      {a.status === "skip" && <StatusChip tone="mute">Not needed now</StatusChip>}
+                    </div>
+                    <p className={`mt-1 text-xs ${a.status === "skip" || a.status === "has" ? "text-mute" : "text-ink-2"}`}>{a.reason}</p>
+                  </li>
+                ))}
+              </ul>
+              {questions.length > 0 && (
+                <div className="mt-4 border-t border-line/60 pt-3">
+                  <h3 className="label">Ask at the next contact, then update the profile with Edit</h3>
+                  <ul className="mt-1 list-disc space-y-1 pl-4 text-sm text-ink-2">{questions.map((q) => <li key={q}>{q}</li>)}</ul>
+                </div>
+              )}
             </div>
           </Card>
 

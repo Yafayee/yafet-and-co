@@ -118,7 +118,7 @@ export function CustomerList() {
               <tbody>
                 {shown.map(({ c, opp, last }) => {
                   const b = daysToBirthday(c.dob);
-                  const cov = coverage(c);
+                  const cov = coverage(db, c);
                   return (
                     <tr key={c.id} className="hover:bg-white/[0.03]">
                       <td className="td">

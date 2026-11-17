@@ -68,7 +68,7 @@ const CONF: Record<Confidence, string> = {
   medium: "border-warn/40 text-warn",
   low: "border-line text-mute",
 };
-const CONF_LABEL: Record<Confidence, string> = { high: "Strong fit", medium: "Possible fit", low: "Ask first" };
+const CONF_LABEL: Record<Confidence, string> = { high: "Strong fit", medium: "Possible fit", low: "Low priority" };
 
 export function ConfidenceChip({ level }: { level: Confidence }) {
   return <span className={`chip ${CONF[level]}`}>{CONF_LABEL[level]}</span>;

@@ -6,7 +6,7 @@ export type Cell = string | number | boolean | Date | null | undefined;
 
 export const FIELDS = [
   "Do not import", "First name", "Last name", "Full name", "Email", "Phone", "Date of birth",
-  "Street", "Postcode", "City", "Language", "Occupation", "Owns a car", "Housing", "Children", "Interests",
+  "Street", "Postcode", "City", "Language", "Occupation", "Owns a car", "Housing", "Children", "Marital status", "Employment", "Interests",
   "Products", "Policy number", "Policy start", "Premium per month",
   "Email consent", "SMS consent", "WhatsApp consent", "Marketing consent", "Preferred channel", "Notes",
 ] as const;
@@ -28,6 +28,8 @@ const HINTS: [RegExp, Field][] = [
   [/^ort$|city|stadt|wohnort/i, "City"],
   [/wohnsit|wohnform|wohnverh|housing|^miete|eigentum|eigenheim/i, "Housing"],
   [/kind|child/i, "Children"],
+  [/familienstand|marital|ehe|verheiratet|partner/i, "Marital status"],
+  [/besch(ä|ae)ftig|erwerb|employment|arbeitsverh|berufsstatus|t(ä|ae)tigkeit/i, "Employment"],
   [/sprache|language/i, "Language"],
   [/beruf|occupation|job/i, "Occupation"],
   [/auto|kfz.?besitz|car|fahrzeug/i, "Owns a car"],
@@ -160,6 +162,24 @@ export function parseChildren(v: Cell): Customer["children"] {
   return YES.test(s) ? "yes" : "unknown";
 }
 
+export function parseMarital(v: Cell): Customer["marital"] {
+  const s = str(v).toLowerCase();
+  if (!s) return "unknown";
+  if (/verheirat|married|ehe|verpartnert/.test(s)) return "married";
+  if (/partner|lebensgemein|liiert|cohabit/.test(s)) return "partner";
+  if (/ledig|single|alleinstehend|geschieden|divorced|verwitwet|widow/.test(s)) return "single";
+  return "unknown";
+}
+export function parseEmployment(v: Cell): Customer["employment"] {
+  const s = str(v).toLowerCase();
+  if (!s) return "unknown";
+  if (/selbst|self|freelanc|unternehmer|gewerbe/.test(s)) return "self";
+  if (/pension|rentner|retired|ruhestand/.test(s)) return "retired";
+  if (/student|sch(ü|ue)ler|lehrling|apprentice|ausbildung/.test(s)) return "student";
+  if (/angestellt|arbeiter|employed|beamt|unselbst|vollzeit|teilzeit/.test(s)) return "employed";
+  return "unknown";
+}
+
 const parseChannel = (v: Cell): Channel | null => { const s = str(v).toLowerCase(); return /whats/.test(s) ? "whatsapp" : /sms/.test(s) ? "sms" : /mail/.test(s) ? "email" : null; };
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
@@ -232,6 +252,7 @@ export function convert(rows: Cell[][], mapping: Field[], existing: Customer[], 
       street: str(get(r, "Street")), postcode: str(get(r, "Postcode")), city: str(get(r, "City")),
       language: lang, occupation: str(get(r, "Occupation")), ownsCar,
       housing: parseHousing(get(r, "Housing")), children: parseChildren(get(r, "Children")),
+      marital: parseMarital(get(r, "Marital status")), employment: parseEmployment(get(r, "Employment")),
       interests: str(get(r, "Interests")).split(/[,;/|]/).map((x) => x.trim()).filter(Boolean),
       policies, consent, consentUpdated: consentMapped ? today : "", consentSource: consentMapped ? `Import: ${source}` : "",
       preferredChannel: parseChannel(get(r, "Preferred channel")) ?? (consent.email || !consentMapped ? "email" : consent.whatsapp ? "whatsapp" : consent.sms ? "sms" : "email"),
@@ -255,6 +276,8 @@ export function convert(rows: Cell[][], mapping: Field[], existing: Customer[], 
     if (incoming.ownsCar !== "unknown") target.ownsCar = incoming.ownsCar;
     if (incoming.housing !== "unknown") target.housing = incoming.housing;
     if (incoming.children !== "unknown") target.children = incoming.children;
+    if (incoming.marital !== "unknown") target.marital = incoming.marital;
+    if (incoming.employment !== "unknown") target.employment = incoming.employment;
     for (const x of incoming.interests) if (!target.interests.includes(x)) target.interests.push(x);
     for (const p of incoming.policies) {
       const same = target.policies.find((q) => q.product === p.product && (!p.number || !q.number || q.number === p.number));
@@ -271,6 +294,6 @@ export function convert(rows: Cell[][], mapping: Field[], existing: Customer[], 
 }
 
 export const TEMPLATE_CSV =
-  "Vorname;Nachname;E-Mail;Telefon;Geburtsdatum;Straße;PLZ;Ort;Sprache;Beruf;Auto;Wohnsituation;Kinder;Produkte;Polizzennummer;Prämie;E-Mail Einwilligung;SMS Einwilligung;WhatsApp Einwilligung;Werbung Einwilligung;Notizen\r\n" +
-  "Anna;Muster;anna.muster@example.com;0660 1234567;14.03.1988;Musterweg 1;1050;Wien;de;Lehrerin;ja;Miete;2;Haushalt, Kranken;;;ja;nein;ja;ja;Beispielzeile, bitte löschen\r\n" +
-  "John;Sample;john.sample@example.com;+43 660 7654321;02.11.1979;Sample Street 2;1010;Wien;en;Engineer;;Eigentum mit Kredit;0;Leben;AT-123456;45;ja;nein;nein;nein;Example row, please delete\r\n";
+  "Vorname;Nachname;E-Mail;Telefon;Geburtsdatum;Straße;PLZ;Ort;Sprache;Beruf;Beschäftigung;Familienstand;Auto;Wohnsituation;Kinder;Produkte;Polizzennummer;Prämie;E-Mail Einwilligung;SMS Einwilligung;WhatsApp Einwilligung;Werbung Einwilligung;Notizen\r\n" +
+  "Anna;Muster;anna.muster@example.com;0660 1234567;14.03.1988;Musterweg 1;1050;Wien;de;Lehrerin;angestellt;verheiratet;ja;Miete;2;Haushalt, Kranken;;;ja;nein;ja;ja;Beispielzeile, bitte löschen\r\n" +
+  "John;Sample;john.sample@example.com;+43 660 7654321;02.11.1979;Sample Street 2;1010;Wien;en;Engineer;selbstständig;ledig;;Eigentum mit Kredit;0;Leben;AT-123456;45;ja;nein;nein;nein;Example row, please delete\r\n";

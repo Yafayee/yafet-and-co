@@ -9,7 +9,7 @@ import { Toggle } from "./ui";
 export function blankCustomer(): Customer {
   return {
     id: uid(), firstName: "", lastName: "", email: "", phone: "", dob: "", street: "", postcode: "", city: "",
-    language: "de", occupation: "", ownsCar: "unknown", housing: "unknown", children: "unknown", interests: [], policies: [],
+    language: "de", occupation: "", ownsCar: "unknown", housing: "unknown", children: "unknown", marital: "unknown", employment: "unknown", interests: [], policies: [],
     consent: { email: false, sms: false, whatsapp: false, marketing: false }, consentUpdated: "", consentSource: "",
     preferredChannel: "email", notes: "", createdAt: todayIso(),
   };
@@ -52,6 +52,12 @@ export function CustomerForm({ initial, isNew, onSave, onCancel }: { initial: Cu
         </label>
         <label className="block"><span className="label">Owns a car</span>
           <select className="input mt-1" value={c.ownsCar} onChange={(e) => set("ownsCar", e.target.value as Customer["ownsCar"])}><option value="unknown">Not known</option><option value="yes">Yes</option><option value="no">No</option></select>
+        </label>
+        <label className="block"><span className="label">Marital status</span>
+          <select className="input mt-1" value={c.marital} onChange={(e) => set("marital", e.target.value as Customer["marital"])}><option value="unknown">Not known</option><option value="single">Single</option><option value="partner">Lives with a partner</option><option value="married">Married</option></select>
+        </label>
+        <label className="block"><span className="label">Work</span>
+          <select className="input mt-1" value={c.employment} onChange={(e) => set("employment", e.target.value as Customer["employment"])}><option value="unknown">Not known</option><option value="employed">Employed</option><option value="self">Self-employed</option><option value="student">Student or apprentice</option><option value="retired">Retired</option></select>
         </label>
         <label className="block"><span className="label">Home</span>
           <select className="input mt-1" value={c.housing} onChange={(e) => set("housing", e.target.value as Customer["housing"])}><option value="unknown">Not known</option><option value="rent">Rents</option><option value="owner">Owns, no home loan</option><option value="mortgage">Owns, with a home loan</option></select>

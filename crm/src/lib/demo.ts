@@ -57,6 +57,8 @@ export function demoDb(): DB {
       ownsCar: products.includes("Car") ? "yes" : pick(["yes", "no", "unknown", "unknown"] as const),
       housing: pick(["rent", "rent", "owner", "mortgage", "unknown", "unknown"] as const),
       children: pick(["yes", "no", "unknown", "unknown"] as const),
+      marital: pick(["single", "married", "partner", "unknown"] as const),
+      employment: years >= 66 ? "retired" : pick(["employed", "employed", "self", "unknown"] as const),
       interests: shuffle(INTERESTS).slice(0, 1 + Math.floor(r() * 3)), policies,
       consent: { email, whatsapp, sms, marketing: channels.length > 0 && chance(0.7) },
       consentUpdated: first, consentSource: "First meeting", preferredChannel: channels[0] ?? "email",

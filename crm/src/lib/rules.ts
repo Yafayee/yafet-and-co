@@ -1,5 +1,5 @@
 import { age, daysAgo, daysSinceBirthday } from "./dates";
-import { PRODUCT_DE, PRODUCT_EN, PRODUCTS, type Audience, type Condition, type Channel, type Confidence, type CrmEvent, type Customer, type DB, type Opportunity, type Product, type Purpose, type TemplateText } from "./types";
+import { PRODUCT_DE, PRODUCT_EN, PRODUCTS, type Assessment, type Audience, type Condition, type Channel, type Confidence, type CrmEvent, type Customer, type DB, type Opportunity, type Product, type Purpose, type TemplateText } from "./types";
 
 export const fullName = (c: Customer) => `${c.firstName} ${c.lastName}`.trim() || "Unnamed customer";
 export const initials = (c: Customer) => `${c.firstName[0] ?? ""}${c.lastName[0] ?? ""}`.toUpperCase() || "?";
@@ -67,51 +67,115 @@ export function learned(db: DB): Map<Product, Learned> {
 const LEVELS: Confidence[] = ["low", "medium", "high"];
 const shifted = (c: Confidence, by: number): Confidence => LEVELS[Math.min(2, Math.max(0, LEVELS.indexOf(c) + by))];
 
-function rawOpportunities(db: DB, c: Customer): { product: Product; reason: string; confidence: Confidence }[] {
+/**
+ * The cover check: a verdict on every product for one customer. Plain,
+ * explainable rules; no AI and no running cost. Each verdict carries a reason
+ * the representative can read and defend. These are general needs-analysis
+ * rules, not product advice: the representative decides.
+ */
+export function assess(db: DB, c: Customer): Assessment[] {
   const has = (p: Product) => hasProduct(c, p);
   const years = age(c.dob);
-  const out: { product: Product; reason: string; confidence: Confidence }[] = [];
+  const dependants = c.marital === "married" || c.marital === "partner" || c.children === "yes";
+  const alone = c.marital === "single" && c.children !== "yes";
+  const working = c.employment === "employed" || c.employment === "self";
+  const sporty = c.interests.some((i) => /sport|ski|rad|bike|cycl|kletter|climb|motor|fu(ss|ß)ball|football|lauf|run/i.test(i));
+  const out: Assessment[] = [];
+  const offer = (product: Product, confidence: Confidence, reason: string) => out.push({ product, status: "offer", confidence, reason });
+  const ask = (product: Product, reason: string) => out.push({ product, status: "ask", reason });
+  const skip = (product: Product, reason: string) => out.push({ product, status: "skip", reason });
 
-  if (!has("Car") && c.ownsCar === "yes")
-    out.push({ product: "Car", confidence: "high", reason: "Owns a car but has no car insurance with us." });
-  if (c.housing === "mortgage" && !has("Home financing"))
-    out.push({ product: "Home financing", confidence: "high", reason: "Has a home loan that does not run through us. Offer to compare whether refinancing would lower the cost." });
-  if (has("Household") && !has("Liability"))
-    out.push({ product: "Liability", confidence: "high", reason: "Has household insurance but no personal liability cover." });
-  if (years !== null && years >= 25 && years <= 45 && !has("Pension"))
-    out.push({ product: "Pension", confidence: "medium", reason: years < 35 ? `Aged ${years} with no private pension plan. Starting early gives savings the longest time to grow.` : `Aged ${years} with no private pension plan yet.` });
-  if (c.children === "yes" && !has("Child savings"))
-    out.push({ product: "Child savings", confidence: "medium", reason: "Has children but no savings plan for them. The earlier it starts, the longer it can grow." });
-  if (c.housing === "rent" && !has("Home financing") && (years === null || (years >= 25 && years <= 50)))
-    out.push({ product: "Home financing", confidence: "medium", reason: "Rents their home. Ask whether buying or building is a goal." });
-  if ((years === null || years < 50) && !has("Disability") && has("Life"))
-    out.push({ product: "Disability", confidence: "medium", reason: "Has life insurance but income is not protected against disability." });
-  if (has("Health") && !has("Accident"))
-    out.push({ product: "Accident", confidence: "medium", reason: "Has health insurance; accident cover closes the gap for leisure accidents." });
-  if (!has("Household") && (has("Liability") || has("Legal protection")))
-    out.push({ product: "Household", confidence: "medium", reason: "Has liability or legal cover but the home contents are not insured." });
-  if (!has("Car") && c.ownsCar === "unknown")
-    out.push({ product: "Car", confidence: "low", reason: "We do not know whether they own a car. Ask first." });
-  if (c.policies.length >= 3 && !has("Legal protection"))
-    out.push({ product: "Legal protection", confidence: "low", reason: "Holds three or more policies but no legal protection." });
+  const rules: Record<string, () => void> = {
+    Liability: () => offer("Liability", "high", has("Household")
+      ? "Has household insurance but no separate liability cover. Check whether liability is included in the household policy; if not, it is the first gap to close."
+      : "No personal liability cover. Anyone can be held liable for damage they cause to others, so this is the basic cover to have."),
+    Household: () => {
+      if (c.housing === "unknown") ask("Household", "Ask whether they rent or own their home.");
+      else offer("Household", c.housing === "rent" ? "medium" : "high", c.housing === "rent" ? "Rents their home, but the contents are not insured." : "Owns their home, but it has no household cover with us.");
+    },
+    Car: () => {
+      if (c.ownsCar === "yes") offer("Car", "high", "Owns a car but has no car insurance with us.");
+      else if (c.ownsCar === "unknown") offer("Car", "low", "We do not know whether they own a car. Ask first.");
+      else skip("Car", "Does not own a car.");
+    },
+    "Legal protection": () => offer("Legal protection", has("Car") || c.ownsCar === "yes" ? "medium" : "low", has("Car") || c.ownsCar === "yes" ? "Drives a car but has no legal protection; traffic disputes are a common reason to need it." : "No legal protection yet."),
+    Accident: () => offer("Accident", sporty ? "high" : "medium", sporty ? "Active in sport, but leisure accidents are not covered." : has("Health") ? "Has health insurance; accident cover closes the gap for lasting injuries from leisure accidents." : "No accident cover. Statutory cover applies only to work and the way there."),
+    Health: () => offer("Health", c.employment === "self" ? "medium" : "low", c.employment === "self" ? "Self-employed with no private health cover." : "No private supplementary health cover."),
+    Disability: () => {
+      if (c.employment === "retired") return skip("Disability", "Retired, so there is no earned income to protect.");
+      if (years !== null && years >= 58) return skip("Disability", "Close to retirement age; new cover is rarely worthwhile.");
+      if (c.employment === "student") return offer("Disability", "medium", "Still in training. Cover is cheapest when started young and healthy.");
+      if (c.employment === "unknown") return offer("Disability", "medium", "Income is not protected against disability. Ask about their job first.");
+      if (alone) return offer("Disability", "high", "Lives on one income. If they could no longer work, nobody else would cover the bills.");
+      if (dependants) return offer("Disability", "high", "Others depend on this income, and it is not protected against disability.");
+      offer("Disability", working ? "high" : "medium", "Income is not protected against disability.");
+    },
+    Pension: () => {
+      if (c.employment === "retired" || (years !== null && years >= 63)) return skip("Pension", "Already at or near retirement.");
+      if (years === null) return ask("Pension", "Ask for the date of birth to judge how long they can still save.");
+      if (years < 35) return offer("Pension", "medium", `Aged ${years} with no private pension plan. Starting early gives savings the longest time to grow.`);
+      if (years <= 55) return offer("Pension", "medium", `Aged ${years} with no private pension plan yet.`);
+      offer("Pension", "low", `Aged ${years}: few saving years are left, but a top-up may still help.`);
+    },
+    Life: () => {
+      if (dependants || c.housing === "mortgage") return offer("Life", "high", c.housing === "mortgage" && !dependants ? "Has a home loan that would be left unpaid." : "A partner or children depend on this income and are not protected if they die.");
+      if (alone && c.housing !== "unknown") return skip("Life", "Single with no children and no home loan: little need right now. Revisit when that changes.");
+      ask("Life", c.marital === "single" ? "Single: life cover matters only if there are children or a home loan. Find that out first." : "Life cover matters when a partner, children or a home loan depend on them. Find that out first.");
+    },
+    "Home financing": () => {
+      if (c.housing === "mortgage") return offer("Home financing", "high", "Has a home loan that does not run through us. Offer to compare whether refinancing would lower the cost.");
+      if (c.housing === "rent") return years === null || (years >= 25 && years <= 50) ? offer("Home financing", "medium", "Rents their home. Ask whether buying or building is a goal.") : skip("Home financing", "Rents, and is outside the usual age for buying a first home.");
+      if (c.housing === "owner") return skip("Home financing", "Owns their home without a loan.");
+      ask("Home financing", "Ask whether they rent or own, and whether a home loan is running.");
+    },
+    "Child savings": () => {
+      if (c.children === "yes") return offer("Child savings", "medium", "Has children but no savings plan for them. The earlier it starts, the longer it can grow.");
+      if (c.children === "no") return skip("Child savings", "No children.");
+      ask("Child savings", "Ask whether they have children or grandchildren.");
+    },
+  };
 
-  // Rules taught in the app.
-  for (const r of db.knowledge.recs) {
-    if (!has(r.product) && !out.some((o) => o.product === r.product) && matches(c, r.when)) out.push({ product: r.product, confidence: r.confidence, reason: r.reason });
+  for (const product of productsOf(db)) {
+    if (has(product)) { const pol = c.policies.find((x) => x.product === product)!; out.push({ product, status: "has", reason: pol.number ? `Policy ${pol.number}` : "Held with us" }); continue; }
+    // Rules taught in the app come first; they can also cover products the built-in rules do not know.
+    const taught = db.knowledge.recs.find((r) => r.product === product && matches(c, r.when));
+    if (taught) { out.push({ product, status: "offer", confidence: taught.confidence, reason: taught.reason }); continue; }
+    if (rules[product]) rules[product]();
+    else skip(product, "No rule for this product yet. Teach one in the Product guide.");
   }
+
   // Learned from outcomes: products that are often won move up, often dismissed move down.
   const l = learned(db);
+  for (const a of out) if (a.status === "offer" && a.confidence) a.confidence = shifted(a.confidence, l.get(a.product)?.shift ?? 0);
   const rank = { high: 0, medium: 1, low: 2 };
+  const order = { offer: 0, ask: 1, has: 2, skip: 3 };
+  const taughtSet = new Set(db.knowledge.recs.map((r) => r.product));
   return out
-    .map((o, i) => ({ ...o, confidence: shifted(o.confidence, l.get(o.product)?.shift ?? 0), i }))
-    .sort((a, b) => rank[a.confidence] - rank[b.confidence] || a.i - b.i)
-    .map(({ product, reason, confidence }) => ({ product, reason, confidence }));
+    .map((a, i) => ({ a, i }))
+    .sort((x, y) => order[x.a.status] - order[y.a.status] || (rank[x.a.confidence ?? "low"] - rank[y.a.confidence ?? "low"]) || Number(taughtSet.has(y.a.product)) - Number(taughtSet.has(x.a.product)) || x.i - y.i)
+    .map((x) => x.a);
+}
+
+/** Facts missing from the profile that would sharpen the cover check, as questions to ask. */
+export function missingFacts(c: Customer): string[] {
+  const q: string[] = [];
+  if (!c.dob) q.push("What is their date of birth?");
+  if (c.marital === "unknown") q.push("Are they single, living with a partner, or married?");
+  if (c.children === "unknown") q.push("Do they have children?");
+  if (c.employment === "unknown") q.push("Are they employed, self-employed, in training, or retired?");
+  if (c.housing === "unknown") q.push("Do they rent or own their home, and is a home loan running?");
+  if (c.ownsCar === "unknown" && !hasProduct(c, "Car")) q.push("Do they own a car?");
+  return q;
+}
+
+function rawOpportunities(db: DB, c: Customer): { product: Product; reason: string; confidence: Confidence }[] {
+  return assess(db, c).filter((a) => a.status === "offer").map((a) => ({ product: a.product, reason: a.reason, confidence: a.confidence ?? "low" }));
 }
 
 export const oppKey = (customerId: string, product: Product) => `${customerId}|${product}`;
 
 export function opportunitiesFor(db: DB, c: Customer): Opportunity[] {
-  return rawOpportunities(db, c).slice(0, 4).map((o) => {
+  return rawOpportunities(db, c).slice(0, 5).map((o) => {
     const key = oppKey(c.id, o.product);
     const st = db.opp[key];
     return { ...o, key, customerId: c.id, status: st?.status ?? "open", statusDate: st?.date };
@@ -141,15 +205,12 @@ export function lifeStage(c: Customer): Stage {
   return "Retired";
 }
 
-/** Share of the covers relevant to this customer that they already hold with us. */
-export function coverage(c: Customer): { held: number; of: number; pct: number } {
-  const a = age(c.dob);
-  const relevant: Product[] = ["Health", "Household", "Liability", "Accident", "Legal protection", "Life"];
-  if (a === null || a < 60) relevant.push("Pension", "Disability");
-  if (c.ownsCar !== "no") relevant.push("Car");
-  if (c.children === "yes") relevant.push("Child savings");
-  const held = relevant.filter((p) => hasProduct(c, p)).length;
-  return { held, of: relevant.length, pct: Math.round((held / relevant.length) * 100) };
+/** How many of the covers relevant to this customer they already hold with us. */
+export function coverage(db: DB, c: Customer): { held: number; of: number; pct: number } {
+  const all = assess(db, c);
+  const held = all.filter((a) => a.status === "has").length;
+  const of = all.filter((a) => a.status !== "skip").length;
+  return { held, of, pct: of ? Math.round((held / of) * 100) : 0 };
 }
 
 export function eventsOf(db: DB, id: string): CrmEvent[] {
