@@ -4,6 +4,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useRef, use
 import { deleteEnvelope, isEnvelope, loadEnvelope, newSession, open, saveEnvelope, seal, type Envelope, type Session } from "./crypto";
 import { demoDb } from "./demo";
 import { emptyKnowledge } from "./knowledge";
+import { strength } from "./passphrase";
 import { DEFAULT_SETTINGS, DEFAULT_TEMPLATES } from "./templates";
 import type { DB } from "./types";
 
@@ -15,6 +16,10 @@ interface Store {
   mode: Mode;
   db: DB;
   saved: "saved" | "saving" | "error";
+  /** True when the passphrase used to unlock is weak. Known only for this session. */
+  weakPass: boolean;
+  /** Whether the browser promised not to clear this site's data on its own (null = not known). */
+  persisted: boolean | null;
   /** Change the data. The mutator receives a private copy; `audit` adds a line to the activity record. */
   update: (fn: (draft: DB) => void, audit?: string) => void;
   createWorkspace: (pass: string) => Promise<void>;
@@ -49,7 +54,15 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const [mode, setMode] = useState<Mode>("demo");
   const [db, setDb] = useState<DB>(emptyDb);
   const [saved, setSaved] = useState<Store["saved"]>("saved");
+  const [weakPass, setWeakPass] = useState(false);
+  const [persisted, setPersisted] = useState<boolean | null>(null);
   const session = useRef<Session | null>(null);
+  /** Ask the browser to keep the stored data even when disk space runs low. */
+  const keep = useCallback(() => {
+    const st = typeof navigator !== "undefined" ? navigator.storage : undefined;
+    if (!st?.persist) { setPersisted(null); return; }
+    st.persist().then(setPersisted).catch(() => setPersisted(null));
+  }, []);
   const dbRef = useRef(db);
   const dirty = useRef(false);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -94,14 +107,16 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   }, [flush]);
 
   const store = useMemo<Store>(() => ({
-    status, mode, db, saved, update, lock,
+    status, mode, db, saved, update, lock, weakPass, persisted,
     openDemo: () => { session.current = null; enter(demoDb(), "demo"); },
     createWorkspace: async (pass) => {
       const s = await newSession(pass);
       const fresh = emptyDb();
       fresh.audit.push({ ts: Date.now(), action: "Workspace created" });
+      fresh.settings.seenBuild = process.env.NEXT_PUBLIC_BUILD ?? "local";
       await saveEnvelope(await seal(s, fresh));
       session.current = s;
+      setWeakPass(strength(pass).level === "weak"); keep();
       enter(fresh, "workspace");
     },
     unlock: async (pass) => {
@@ -112,6 +127,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
         session.current = s;
         const next = normalise(value);
         next.audit.unshift({ ts: Date.now(), action: "Workspace unlocked" });
+        setWeakPass(strength(pass).level === "weak"); keep();
         enter(next, "workspace");
         dirty.current = true; flush();
         return true;
@@ -122,6 +138,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       if (!env) return false;
       try { await open<DB>(current, env); } catch { return false; }
       session.current = await newSession(next);
+      setWeakPass(strength(next).level === "weak");
       dbRef.current = { ...dbRef.current, audit: [{ ts: Date.now(), action: "Passphrase changed" }, ...dbRef.current.audit] };
       setDb(dbRef.current);
       dirty.current = true; await flush();
@@ -141,6 +158,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
         next.audit.unshift({ ts: Date.now(), action: "Workspace restored from backup file" });
         await saveEnvelope(await seal(s, next));
         session.current = s;
+        setWeakPass(strength(pass).level === "weak"); keep();
         enter(next, "workspace");
         return true;
       } catch { return false; }
@@ -151,7 +169,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       await deleteEnvelope();
       const blank = emptyDb(); dbRef.current = blank; setDb(blank); setStatus("setup");
     },
-  }), [status, mode, db, saved, update, lock, flush]);
+  }), [status, mode, db, saved, update, lock, flush, weakPass, persisted, keep]);
 
   // Save before the tab closes, and lock after a period without activity.
   useEffect(() => {
@@ -159,17 +177,25 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     const onHide = () => { if (document.visibilityState === "hidden") flush(); };
     document.addEventListener("visibilitychange", onHide);
     window.addEventListener("pagehide", flush);
-    let idle: ReturnType<typeof setTimeout>;
-    const minutes = Math.max(1, db.settings.autoLockMin || 15);
-    const reset = () => { clearTimeout(idle); idle = setTimeout(lock, minutes * 60_000); };
+    // Lock by the clock, not by a timer alone: a sleeping computer pauses timers,
+    // so the time since the last activity is checked again whenever the page wakes.
+    const limit = Math.max(1, db.settings.autoLockMin || 15) * 60_000;
+    let last = Date.now();
+    const check = () => { if (Date.now() - last >= limit) lock(); };
+    const reset = () => { last = Date.now(); };
+    const wake = () => { if (document.visibilityState === "visible") check(); };
+    const idle = setInterval(check, 15_000);
     const evts = ["pointerdown", "keydown", "scroll"] as const;
     evts.forEach((e) => window.addEventListener(e, reset, { passive: true }));
-    reset();
+    document.addEventListener("visibilitychange", wake);
+    window.addEventListener("focus", check);
     return () => {
       document.removeEventListener("visibilitychange", onHide);
       window.removeEventListener("pagehide", flush);
       evts.forEach((e) => window.removeEventListener(e, reset));
-      clearTimeout(idle);
+      document.removeEventListener("visibilitychange", wake);
+      window.removeEventListener("focus", check);
+      clearInterval(idle);
     };
   }, [status, mode, db.settings.autoLockMin, flush, lock]);
 

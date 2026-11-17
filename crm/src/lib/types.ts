@@ -123,6 +123,10 @@ export interface Settings {
   followUpAfterBirthday: boolean;
   /** Date of the last encrypted backup download, or "" if never. */
   lastBackup: string;
+  /** Security checklist items the user confirmed by hand. */
+  checks: Record<string, boolean>;
+  /** Version of the app last seen in this workspace, to notice updates. */
+  seenBuild: string;
   templates: Record<string, Template>;
 }
 

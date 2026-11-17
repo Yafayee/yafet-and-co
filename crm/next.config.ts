@@ -9,6 +9,11 @@ const nextConfig: NextConfig = {
   trailingSlash: true,
   basePath: process.env.BASE_PATH || undefined,
   images: { unoptimized: true },
+  // Shown in Settings so an unexpected change of the app's code can be noticed.
+  env: {
+    NEXT_PUBLIC_BUILD: (process.env.GITHUB_SHA ?? "").slice(0, 7) || "local",
+    NEXT_PUBLIC_BUILT_AT: new Date().toISOString().slice(0, 10),
+  },
   turbopack: {
     rules: {
       "*.css": {

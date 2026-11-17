@@ -33,6 +33,17 @@ Sending works without a server: each Send button opens your own email,
 WhatsApp or SMS app with the message filled in and records it in the
 customer's history. For many emails at once, export the list for a mail merge.
 
+## Security measures in the app
+
+- Content security policy in the page: code loads only from the site; data can go only to the site and, for the optional document reader, to the Anthropic API.
+- Passphrase strength check (12 characters minimum, common words and simple patterns refused), with a warning when an existing passphrase is weak.
+- Automatic lock measured by the clock, so it also applies after the computer wakes from sleep.
+- The browser is asked to keep the stored data permanently; a reminder appears when no encrypted backup was downloaded in the last seven days.
+- A warning and confirmation before any unencrypted export of all customers.
+- The app's version is shown in Settings, and a notice appears when it changes.
+- A security checklist in Settings combines what the app can verify with what only the user can.
+- The site is published with plain git commands; no third-party GitHub Action handles its files.
+
 ## How the system learns
 
 - **By hand:** on the Product guide page, add product knowledge, new products, rules for when to recommend a product, conduct rules and words to avoid. They apply at once and are stored in the encrypted workspace.

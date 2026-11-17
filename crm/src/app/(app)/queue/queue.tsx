@@ -48,7 +48,7 @@ export function Queue() {
       </PageHeader>
 
       <div className="mb-4 rounded-md border border-line bg-night-2/50 px-3 py-2 text-sm text-ink-2">
-        Each Send button opens your own email, WhatsApp or SMS app with the message filled in, and records it in the customer&apos;s history. For many emails at once, download the list and send it with a mail merge.
+        Each Send button opens your own email, WhatsApp or SMS app with the message filled in, and records it in the customer&apos;s history. For many emails at once, download the list and send it with a mail merge. That list is a plain file with names and email addresses; delete it after sending.
         {emailPending.length > 1 && (confirm
           ? <span className="mt-2 flex flex-wrap items-center gap-2">Record all {emailPending.length} emails as sent? <button className="btn btn-primary" onClick={markAll}>Yes, they were sent</button><button className="btn" onClick={() => setConfirm(false)}>Cancel</button></span>
           : <button className="ml-1 text-primary hover:underline" onClick={() => setConfirm(true)}>I sent the emails by mail merge.</button>)}

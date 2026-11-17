@@ -60,5 +60,7 @@ export const DEFAULT_SETTINGS: Settings = {
   senderName: "Ihr CP Consulting Team",
   followUpAfterBirthday: true,
   lastBackup: "",
+  checks: {},
+  seenBuild: "",
   templates: DEFAULT_TEMPLATES,
 };
