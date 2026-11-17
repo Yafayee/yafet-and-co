@@ -78,3 +78,9 @@ h1, h2, h3 { font-family: var(--font-display); }
   .th { text-align: left; font-size: 0.75rem; font-weight: 500; color: var(--color-mute); padding: 0.6rem 0.9rem; white-space: nowrap; }
   .td { padding: 0.7rem 0.9rem; font-size: 0.875rem; border-top: 1px solid rgb(51 65 85 / 0.5); vertical-align: middle; }
 }
+
+/* Printing the customer summary: white paper, no dark page background. */
+@media print {
+  html, body { background: #fff !important; color-scheme: light; }
+  @page { size: A4; margin: 14mm; }
+}

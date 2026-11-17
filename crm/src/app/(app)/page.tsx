@@ -5,8 +5,8 @@ import Link from "next/link";
 import { useMemo } from "react";
 import { Avatar, Card, ChannelChip, ChannelIcon, ConfidenceChip, Empty, PageHeader, StatTile, StatusChip } from "@/components/ui";
 import { WeeklyChart } from "@/components/weekly-chart";
-import { addDays, age, daysAgo, daysToBirthday, longToday, relative, toIso } from "@/lib/dates";
-import { allOpportunities, allowedChannels, birthdaysDue, canMarket, fullName, initials, lastContact, suggestions } from "@/lib/rules";
+import { addDays, age, daysAgo, daysToBirthday, fmtDate, longToday, relative, toIso } from "@/lib/dates";
+import { allOpportunities, allowedChannels, birthdaysDue, canMarket, fullName, initials, lastContact, renewals, suggestions } from "@/lib/rules";
 import { useStore } from "@/lib/store";
 import { CHANNELS, type Channel } from "@/lib/types";
 
@@ -29,7 +29,7 @@ export default function Dashboard() {
       if (e.kind === "sent") { weeks[Math.min(11, Math.floor((83 - d) / 7))].sent++; stats[e.channel].sent++; }
       if (e.kind === "reply") stats[e.channel].replied++;
     }
-    return { byId, birthdays, opps, strong, quiet, replies, weeks, stats, due: birthdaysDue(db).length, pending: suggestions(db).list.length };
+    return { byId, birthdays, opps, strong, quiet, replies, weeks, stats, due: birthdaysDue(db).length, pending: suggestions(db).list.length, ending: renewals(db, 90) };
   }, [db]);
 
   if (db.customers.length === 0) {
@@ -141,6 +141,26 @@ export default function Dashboard() {
           )}
         </Card>
       </div>
+
+      <Card title="Policies ending soon" className="mt-4" action={<Link href="/customers/?view=renewals" className="text-xs text-primary hover:underline">Show these customers</Link>}>
+        {v.ending.length === 0 ? <Empty>No policy with a recorded end date ends in the next 90 days. Add end dates on the customer profile to get reminders.</Empty> : (
+          <ul className="mt-2 grid grid-cols-1 gap-x-4 px-2 pb-3 md:grid-cols-2">
+            {v.ending.slice(0, 8).map((r) => (
+              <li key={`${r.customer.id}${r.product}`}>
+                <Link href={`/customers/view/?id=${r.customer.id}`} className="flex flex-wrap items-center gap-x-3 gap-y-1 rounded-md px-3 py-2 hover:bg-white/5">
+                  <Avatar text={initials(r.customer)} />
+                  <span className="min-w-0 flex-1 basis-32">
+                    <span className="block text-sm font-medium text-white">{fullName(r.customer)} · {r.product}</span>
+                    <span className="block text-xs text-mute">{fmtDate(r.until)}</span>
+                  </span>
+                  <StatusChip tone={r.days < 0 ? "bad" : r.days <= 30 ? "warn" : "info"}>{r.days < 0 ? `Ended ${-r.days} days ago` : r.days === 0 ? "Ends today" : `In ${r.days} days`}</StatusChip>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
+        {v.ending.length > 8 && <p className="px-5 pb-4 text-xs text-mute">and {v.ending.length - 8} more</p>}
+      </Card>
 
       <Card title="Channel performance" className="mt-4" action={<span className="text-xs text-mute">last 12 weeks</span>}>
         <div className="mt-2 overflow-x-auto pb-2">
