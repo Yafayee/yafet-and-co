@@ -4,6 +4,7 @@ import { BookOpen, CheckCheck, FlaskConical, Inbox, LayoutDashboard, Lock, Megap
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useMemo, useState, type ReactNode } from "react";
+import { daysAgo } from "@/lib/dates";
 import { suggestions } from "@/lib/rules";
 import { useStore } from "@/lib/store";
 
@@ -85,6 +86,12 @@ export function Shell({ children }: { children: ReactNode }) {
             <div className="mb-5 flex items-center gap-2 rounded-md border border-warn/30 bg-warn/5 px-3 py-2 text-xs text-warn">
               <FlaskConical className="h-4 w-4 shrink-0" aria-hidden />
               <span>Demo with invented customers. Changes are not saved. Leave the demo to set up your own encrypted workspace.</span>
+            </div>
+          )}
+          {mode === "workspace" && db.customers.length > 0 && !path.startsWith("/settings") && (db.settings.lastBackup === "" || (daysAgo(db.settings.lastBackup) ?? 0) > 7) && (
+            <div className="mb-5 flex flex-wrap items-center gap-x-3 gap-y-1 rounded-md border border-warn/30 bg-warn/5 px-3 py-2 text-sm text-warn">
+              <span>{db.settings.lastBackup === "" ? "You have no backup yet." : `Your last backup is ${daysAgo(db.settings.lastBackup)} days old.`} The data exists only in this browser.</span>
+              <Link href="/settings/" className="font-medium underline">Download a backup</Link>
             </div>
           )}
           {saved === "error" && mode === "workspace" && (
