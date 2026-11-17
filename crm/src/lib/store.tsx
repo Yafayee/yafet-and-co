@@ -37,7 +37,7 @@ const emptyDb = (): DB => ({ version: 1, customers: [], events: [], tasks: [], o
 /** Fill in anything a stored workspace from an older version may lack. */
 function normalise(db: DB): DB {
   const base = emptyDb();
-  const customers = (db.customers ?? []).map((c) => ({ ...c, housing: c.housing ?? "unknown", children: c.children ?? "unknown" }));
+  const customers = (db.customers ?? []).map((c) => ({ ...c, housing: c.housing ?? "unknown", children: c.children ?? "unknown", marital: c.marital ?? "unknown", employment: c.employment ?? "unknown" }));
   const out = { ...base, ...db, customers, knowledge: { ...emptyKnowledge(), ...(db.knowledge ?? {}) }, settings: { ...base.settings, ...db.settings, templates: { ...DEFAULT_TEMPLATES, ...(db.settings?.templates ?? {}) } } };
   return out;
 }

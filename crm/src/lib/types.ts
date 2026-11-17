@@ -50,6 +50,8 @@ export interface Customer {
   /** rent = tenant, owner = owns without a loan, mortgage = owns with a running home loan */
   housing: "rent" | "owner" | "mortgage" | "unknown";
   children: "yes" | "no" | "unknown";
+  marital: "single" | "partner" | "married" | "unknown";
+  employment: "employed" | "self" | "student" | "retired" | "unknown";
   interests: string[];
   policies: Policy[];
   consent: Consent;
@@ -71,6 +73,15 @@ export interface Opportunity {
   confidence: Confidence;
   status: OppStatus;
   statusDate?: string;
+}
+
+/** The verdict on one product for one customer. */
+export interface Assessment {
+  product: Product;
+  /** has = holds it; offer = worth offering; ask = a fact is missing; skip = not needed now */
+  status: "has" | "offer" | "ask" | "skip";
+  confidence?: Confidence;
+  reason: string;
 }
 
 export type Purpose = "birthday" | "holiday" | "marketing" | "service";
