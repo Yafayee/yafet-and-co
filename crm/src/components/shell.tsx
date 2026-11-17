@@ -19,7 +19,8 @@ export function Logo() {
 
 export function Shell({ children }: { children: ReactNode }) {
   const path = usePathname();
-  const { db, mode, saved, lock } = useStore();
+  const { db, mode, saved, lock, weakPass, update } = useStore();
+  const build = process.env.NEXT_PUBLIC_BUILD ?? "local";
   const [open, setOpen] = useState(false);
   const approvals = useMemo(() => suggestions(db).list.length, [db]);
   const replies = useMemo(() => db.events.filter((e) => e.kind === "reply" && !e.handled).length + db.tasks.filter((t) => !t.done).length, [db]);
@@ -92,6 +93,18 @@ export function Shell({ children }: { children: ReactNode }) {
             <div className="mb-5 flex flex-wrap items-center gap-x-3 gap-y-1 rounded-md border border-warn/30 bg-warn/5 px-3 py-2 text-sm text-warn">
               <span>{db.settings.lastBackup === "" ? "You have no backup yet." : `Your last backup is ${daysAgo(db.settings.lastBackup)} days old.`} The data exists only in this browser.</span>
               <Link href="/settings/" className="font-medium underline">Download a backup</Link>
+            </div>
+          )}
+          {mode === "workspace" && weakPass && !path.startsWith("/settings") && (
+            <div className="mb-5 flex flex-wrap items-center gap-x-3 gap-y-1 rounded-md border border-bad/40 bg-bad/10 px-3 py-2 text-sm text-bad">
+              <span>Your passphrase is weak. If this computer were stolen, the customer data could be guessed open.</span>
+              <Link href="/settings/" className="font-medium underline">Change it</Link>
+            </div>
+          )}
+          {mode === "workspace" && db.settings.seenBuild !== build && (
+            <div className="mb-5 flex flex-wrap items-center gap-x-3 gap-y-1 rounded-md border border-line bg-night-2/60 px-3 py-2 text-sm text-ink-2">
+              <span>{db.settings.seenBuild ? `The app was updated since you last used it here (version ${db.settings.seenBuild} to ${build}). If you did not expect an update, stop and check before entering data.` : `This is app version ${build}. From now on a notice appears here whenever the app's code changes.`}</span>
+              <button className="font-medium text-primary underline" onClick={() => update((d) => { d.settings.seenBuild = build; }, `Acknowledged app version ${build}`)}>OK, noted</button>
             </div>
           )}
           {saved === "error" && mode === "workspace" && (

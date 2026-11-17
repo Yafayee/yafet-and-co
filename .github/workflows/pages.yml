@@ -38,12 +38,18 @@ jobs:
           npm ci
           npm run build
           cp -r out ../_site/crm
-      - uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: gh-pages
-          publish_dir: ./_site
-          commit_message: 'Publish ${{ github.sha }}'
+      # Published with plain git so no third-party action handles the site's files.
+      - name: Publish to gh-pages
+        working-directory: _site
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git init -q -b gh-pages
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -q -m "Publish ${GITHUB_SHA}"
+          git push -q -f "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" gh-pages
       - name: Request a Pages build
         env:
           GH_TOKEN: ${{ github.token }}

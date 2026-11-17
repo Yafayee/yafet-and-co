@@ -2,6 +2,7 @@
 
 import { FlaskConical, KeyRound, Lock, ShieldCheck, Upload } from "lucide-react";
 import { useRef, useState, type FormEvent, type ReactNode } from "react";
+import { MIN_LENGTH, strength } from "@/lib/passphrase";
 import { useStore } from "@/lib/store";
 
 function Frame({ title, subtitle, children }: { title: string; subtitle: string; children: ReactNode }) {
@@ -95,14 +96,16 @@ export function Gate({ children }: { children: ReactNode }) {
   }
 
   const submit = (e: FormEvent) => { e.preventDefault(); run(async () => {
-    if (pass.length < 10) return "Use at least 10 characters.";
+    const st = strength(pass);
+    if (st.level === "weak") return st.hint;
     if (pass !== pass2) return "The two passphrases do not match.";
     await s.createWorkspace(pass);
   }); };
   return (
     <Frame title="Set up your secure workspace" subtitle="Customer data stays on this device, encrypted with your passphrase.">
       <form onSubmit={submit} className="mt-6 space-y-4">
-        <label className="block"><span className="label">Choose a passphrase (10 characters or more)</span><input type="password" className="input mt-1" value={pass} onChange={(e) => setPass(e.target.value)} autoComplete="new-password" required /></label>
+        <label className="block"><span className="label">Choose a passphrase ({MIN_LENGTH} characters or more)</span><input type="password" className="input mt-1" value={pass} onChange={(e) => setPass(e.target.value)} autoComplete="new-password" required /></label>
+        {pass && <PassMeter pass={pass} />}
         <label className="block"><span className="label">Repeat the passphrase</span><input type="password" className="input mt-1" value={pass2} onChange={(e) => setPass2(e.target.value)} autoComplete="new-password" required /></label>
         <p className="rounded-md border border-warn/30 bg-warn/5 px-3 py-2 text-xs text-warn">There is no reset. If you lose the passphrase, the data cannot be read by anyone, including us. Keep a backup file.</p>
         {error && <p className="text-sm text-bad" role="alert">{error}</p>}
@@ -113,5 +116,17 @@ export function Gate({ children }: { children: ReactNode }) {
         <button className="text-xs text-primary hover:underline" onClick={() => { setView("restore"); setError(""); }}>Restore from a backup</button>
       </div>
     </Frame>
+  );
+}
+
+export function PassMeter({ pass }: { pass: string }) {
+  const st = strength(pass);
+  const n = st.level === "weak" ? 1 : st.level === "fair" ? 2 : 3;
+  const colour = st.level === "weak" ? "bg-bad" : st.level === "fair" ? "bg-warn" : "bg-good";
+  return (
+    <div role="status">
+      <div className="flex gap-1" aria-hidden>{[1, 2, 3].map((i) => <span key={i} className={`h-1.5 flex-1 rounded-full ${i <= n ? colour : "bg-line"}`} />)}</div>
+      <p className={`mt-1 text-xs ${st.level === "weak" ? "text-bad" : st.level === "fair" ? "text-warn" : "text-good"}`}>{st.hint}</p>
+    </div>
   );
 }
