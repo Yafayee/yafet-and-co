@@ -14,6 +14,7 @@ import { assess, canMarket, coverage, daysSinceMarketing, missingFacts, eventsOf
 import { download, uid } from "@/lib/send";
 import { useStore } from "@/lib/store";
 import { CHANNELS, CHANNEL_LABEL, INCOME_LABEL, type Channel, type Consent, type CrmEvent, type Customer, type OppStatus, type Product } from "@/lib/types";
+import { t } from "@/lib/i18n";
 
 const KIND_ICON = { sent: Mail, reply: MessageSquareReply, call: PhoneCall, meeting: CalendarCheck, note: StickyNote, system: Settings2 };
 
@@ -33,8 +34,8 @@ export function Profile() {
   if (!c) {
     return (
       <div className="card p-8 text-center">
-        <p className="text-ink-2">This customer profile does not exist.</p>
-        <Link href="/customers/" className="btn btn-primary mt-4">Back to customers</Link>
+        <p className="text-ink-2">{t("This customer profile does not exist.")}</p>
+        <Link href="/customers/" className="btn btn-primary mt-4">{t("Back to customers")}</Link>
       </div>
     );
   }
@@ -84,24 +85,24 @@ export function Profile() {
 
   return (
     <>
-      <Link href="/customers/" className="mb-4 inline-flex items-center gap-1 text-sm text-primary hover:underline"><ArrowLeft className="h-4 w-4" /> All customers</Link>
+      <Link href="/customers/" className="mb-4 inline-flex items-center gap-1 text-sm text-primary hover:underline"><ArrowLeft className="h-4 w-4" /> {t("All customers")}</Link>
 
       <div className="card mb-4 flex flex-wrap items-center gap-4 p-5">
         <Avatar text={initials(c)} size="h-14 w-14 text-lg" />
         <div className="min-w-0 flex-1 basis-56">
           <h1 className="text-2xl font-bold text-white">{fullName(c)}</h1>
-          <p className="text-sm text-mute">{[c.occupation, lifeStage(c), `speaks ${c.language === "de" ? "German" : "English"}`].filter(Boolean).join(" · ")}</p>
+          <p className="text-sm text-mute">{[c.occupation, t(lifeStage(c)), t("speaks {lang}", { lang: c.language === "de" ? t("German") : t("English") })].filter(Boolean).join(" · ")}</p>
           <div className="mt-2 flex flex-wrap gap-1.5">
-            <StatusChip tone={cov.pct >= 60 ? "good" : cov.pct >= 30 ? "warn" : "mute"}>Cover {cov.held} of {cov.of}</StatusChip>
-            {!c.email && !c.phone && <StatusChip tone="bad">No contact details</StatusChip>}
-            {bday === 0 && <StatusChip tone="info">Birthday today</StatusChip>}
+            <StatusChip tone={cov.pct >= 60 ? "good" : cov.pct >= 30 ? "warn" : "mute"}>{t("Cover {a} of {b}", { a: cov.held, b: cov.of })}</StatusChip>
+            {!c.email && !c.phone && <StatusChip tone="bad">{t("No contact details")}</StatusChip>}
+            {bday === 0 && <StatusChip tone="info">{t("Birthday today")}</StatusChip>}
           </div>
         </div>
         <div className="flex flex-wrap gap-2">
-          {c.email && <a className="btn" href={`mailto:${c.email}`}><Mail className="h-4 w-4" /> Email</a>}
-          {c.phone && <a className="btn" href={`tel:${c.phone.replace(/\s/g, "")}`}><Phone className="h-4 w-4" /> Call</a>}
-          <Link className="btn" href={`/customers/print/?id=${c.id}`}><Printer className="h-4 w-4" /> Summary</Link>
-          <button className="btn" onClick={() => setEditing(!editing)}><Pencil className="h-4 w-4" /> Edit</button>
+          {c.email && <a className="btn" href={`mailto:${c.email}`}><Mail className="h-4 w-4" /> {t("Email")}</a>}
+          {c.phone && <a className="btn" href={`tel:${c.phone.replace(/\s/g, "")}`}><Phone className="h-4 w-4" /> {t("Call")}</a>}
+          <Link className="btn" href={`/customers/print/?id=${c.id}`}><Printer className="h-4 w-4" /> {t("Summary")}</Link>
+          <button className="btn" onClick={() => setEditing(!editing)}><Pencil className="h-4 w-4" /> {t("Edit")}</button>
         </div>
       </div>
 
@@ -109,87 +110,87 @@ export function Profile() {
 
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
         <div className="flex flex-col gap-4">
-          <Card title="Contact">
+          <Card title={t("Contact")}>
             <dl className="space-y-2.5 px-5 pb-5 pt-3 text-sm">
-              <Row icon={<Mail className="h-4 w-4" />} label="Email">{c.email || "Not known"}</Row>
-              <Row icon={<Phone className="h-4 w-4" />} label="Phone">{c.phone || "Not known"}</Row>
-              <Row icon={<MapPin className="h-4 w-4" />} label="Address">{[c.street, [c.postcode, c.city].filter(Boolean).join(" ")].filter(Boolean).join(", ") || "Not known"}</Row>
-              <Row icon={<Cake className="h-4 w-4" />} label="Born">{c.dob ? `${fmtDate(c.dob)} (age ${years}, birthday ${bday === 0 ? "today" : `in ${bday} days`})` : "Not known"}</Row>
-              <Row icon={<Car className="h-4 w-4" />} label="Car">{c.ownsCar === "yes" ? "Owns a car" : c.ownsCar === "no" ? "No car" : "Not known"}</Row>
-              <Row icon={<Users className="h-4 w-4" />} label="Marital status">{{ single: "Single", partner: "Lives with a partner", married: "Married", unknown: "Not known" }[c.marital]}</Row>
-              <Row icon={<Briefcase className="h-4 w-4" />} label="Work">{{ employed: "Employed", self: "Self-employed", student: "Student or apprentice", retired: "Retired", unknown: "Not known" }[c.employment]}{c.occupation ? ` (${c.occupation})` : ""}</Row>
-              <Row icon={<Home className="h-4 w-4" />} label="Home">{{ rent: "Rents", owner: "Owns, no home loan", mortgage: "Owns, with a home loan", unknown: "Not known" }[c.housing]}</Row>
-              <Row icon={<Baby className="h-4 w-4" />} label="Children">{c.kids.length ? `${c.kids.length} (aged ${c.kids.map((y) => new Date().getFullYear() - y).sort((a, b) => a - b).join(", ")})` : c.children === "yes" ? "Yes, ages not known" : c.children === "no" ? "No" : "Not known"}</Row>
-              <Row icon={<Wallet className="h-4 w-4" />} label="Net income per month">{INCOME_LABEL[c.income]}</Row>
-              <Row icon={<UserRound className="h-4 w-4" />} label="Interests">{c.interests.join(", ") || "None recorded"}</Row>
+              <Row icon={<Mail className="h-4 w-4" />} label={t("Email")}>{c.email || "Not known"}</Row>
+              <Row icon={<Phone className="h-4 w-4" />} label={t("Phone")}>{c.phone || "Not known"}</Row>
+              <Row icon={<MapPin className="h-4 w-4" />} label={t("Address")}>{[c.street, [c.postcode, c.city].filter(Boolean).join(" ")].filter(Boolean).join(", ") || "Not known"}</Row>
+              <Row icon={<Cake className="h-4 w-4" />} label={t("Born")}>{c.dob ? (bday === 0 ? t("{date} (age {n}, birthday today)", { date: fmtDate(c.dob), n: years ?? 0 }) : t("{date} (age {n}, birthday in {d} days)", { date: fmtDate(c.dob), n: years ?? 0, d: bday ?? 0 })) : t("Not known")}</Row>
+              <Row icon={<Car className="h-4 w-4" />} label={t("Car")}>{c.ownsCar === "yes" ? t("Owns a car") : c.ownsCar === "no" ? t("No car") : t("Not known")}</Row>
+              <Row icon={<Users className="h-4 w-4" />} label={t("Marital status")}>{{ single: t("Single"), partner: t("Lives with a partner"), married: t("Married"), unknown: t("Not known") }[c.marital]}</Row>
+              <Row icon={<Briefcase className="h-4 w-4" />} label={t("Work")}>{{ employed: t("Employed"), self: t("Self-employed"), student: t("Student or apprentice"), retired: t("Retired"), unknown: t("Not known") }[c.employment]}{c.occupation ? ` (${c.occupation})` : ""}</Row>
+              <Row icon={<Home className="h-4 w-4" />} label={t("Home")}>{{ rent: t("Rents"), owner: t("Owns, no home loan"), mortgage: t("Owns, with a home loan"), unknown: t("Not known") }[c.housing]}</Row>
+              <Row icon={<Baby className="h-4 w-4" />} label={t("Children")}>{c.kids.length ? t("{n} (aged {ages})", { n: c.kids.length, ages: c.kids.map((y) => new Date().getFullYear() - y).sort((a, b) => a - b).join(", ") }) : c.children === "yes" ? t("Yes, ages not known") : c.children === "no" ? "No" : t("Not known")}</Row>
+              <Row icon={<Wallet className="h-4 w-4" />} label={t("Net income per month")}>{t(INCOME_LABEL[c.income])}</Row>
+              <Row icon={<UserRound className="h-4 w-4" />} label={t("Interests")}>{c.interests.join(", ") || "None recorded"}</Row>
             </dl>
           </Card>
 
-          <Card title="Consent and preferences">
+          <Card title={t("Consent and preferences")}>
             <div className="space-y-3 px-5 pb-5 pt-3">
               {CHANNELS.map((ch) => <Toggle key={ch} checked={c.consent[ch]} onChange={() => toggle(ch)} label={<span className="flex items-center gap-2"><ChannelIcon channel={ch} /> {CHANNEL_LABEL[ch]}</span>} />)}
-              <div className="border-t border-line/60 pt-3"><Toggle checked={c.consent.marketing} onChange={() => toggle("marketing")} label="Product offers (marketing)" /></div>
+              <div className="border-t border-line/60 pt-3"><Toggle checked={c.consent.marketing} onChange={() => toggle("marketing")} label={t("Product offers (marketing)")} /></div>
               <p className="text-xs text-mute">
-                Preferred channel: {CHANNEL_LABEL[c.preferredChannel]}. {c.consentUpdated ? `Last changed ${fmtDate(c.consentUpdated)}${c.consentSource ? ` (${c.consentSource})` : ""}.` : "No consent recorded yet."} Switch on only what the customer has actually agreed to.
+                {t("Preferred channel: {ch}.", { ch: t(CHANNEL_LABEL[c.preferredChannel]) })} {c.consentUpdated ? t("Last changed {date}.", { date: fmtDate(c.consentUpdated) }) : t("No consent recorded yet.")} {t("Switch on only what the customer has actually agreed to.")}
               </p>
             </div>
           </Card>
 
-          <Card title="Notes">
+          <Card title={t("Notes")}>
             <div className="px-5 pb-5 pt-3">
-              <textarea key={c.id} className="input min-h-24" aria-label="Notes" defaultValue={c.notes} onBlur={(e) => { if (e.target.value !== c.notes) mutate((x) => { x.notes = e.target.value; }); }} placeholder="Background, preferences, family situation" />
+              <textarea key={c.id} className="input min-h-24" aria-label={t("Notes")} defaultValue={c.notes} onBlur={(e) => { if (e.target.value !== c.notes) mutate((x) => { x.notes = e.target.value; }); }} placeholder={t("Background, preferences, family situation")} />
             </div>
           </Card>
 
-          <Card title="Tasks">
+          <Card title={t("Tasks")}>
             <div className="px-5 pb-5 pt-3">
               <ul className="space-y-1">
-                {tasks.map((t) => (
-                  <li key={t.id} className="flex items-start gap-2">
-                    <input type="checkbox" aria-label={t.title} className="mt-1 h-4 w-4 accent-[#2b8cee]" checked={t.done} onChange={() => update((d) => { const x = d.tasks.find((y) => y.id === t.id); if (x) x.done = !x.done; })} />
-                    <span className={`flex-1 text-sm ${t.done ? "text-mute line-through" : "text-ink"}`}>{t.title}<span className="block text-xs text-mute">due {fmtDate(t.due)}</span></span>
+                {tasks.map((task) => (
+                  <li key={task.id} className="flex items-start gap-2">
+                    <input type="checkbox" aria-label={task.title} className="mt-1 h-4 w-4 accent-[#2b8cee]" checked={task.done} onChange={() => update((d) => { const x = d.tasks.find((y) => y.id === task.id); if (x) x.done = !x.done; })} />
+                    <span className={`flex-1 text-sm ${task.done ? "text-mute line-through" : "text-ink"}`}>{task.title}<span className="block text-xs text-mute">{t("due {date}", { date: fmtDate(task.due) })}</span></span>
                   </li>
                 ))}
               </ul>
               <form onSubmit={submitTask} className="mt-3 flex flex-wrap gap-2">
-                <input className="input min-w-0 flex-1 basis-40" aria-label="New task" placeholder="New task" value={task.title} onChange={(e) => setTask({ ...task, title: e.target.value })} />
-                <input type="date" aria-label="Due date" className="input !w-auto" value={task.due} onChange={(e) => setTask({ ...task, due: e.target.value })} />
-                <button className="btn" aria-label="Add task"><Plus className="h-4 w-4" /></button>
+                <input className="input min-w-0 flex-1 basis-40" aria-label={t("New task")} placeholder={t("New task")} value={task.title} onChange={(e) => setTask({ ...task, title: e.target.value })} />
+                <input type="date" aria-label={t("Due date")} className="input !w-auto" value={task.due} onChange={(e) => setTask({ ...task, due: e.target.value })} />
+                <button className="btn" aria-label={t("Add task")}><Plus className="h-4 w-4" /></button>
               </form>
             </div>
           </Card>
 
-          <Card title="Data protection">
+          <Card title={t("Data protection")}>
             <div className="space-y-2 px-5 pb-5 pt-3">
-              <button className="btn w-full" onClick={exportData}><Download className="h-4 w-4" /> Export this customer&apos;s data</button>
+              <button className="btn w-full" onClick={exportData}><Download className="h-4 w-4" /> {t("Export this customer's data")}</button>
               {confirmDelete ? (
                 <div className="rounded-md border border-bad/40 bg-bad/10 p-3 text-sm text-ink">
-                  Delete this profile with its policies, history and tasks? This cannot be undone.
-                  <div className="mt-2 flex gap-2"><button className="btn btn-danger" onClick={remove}>Yes, delete</button><button className="btn" onClick={() => setConfirmDelete(false)}>Cancel</button></div>
+                  {t("Delete this profile with its policies, history and tasks? This cannot be undone.")}
+                  <div className="mt-2 flex gap-2"><button className="btn btn-danger" onClick={remove}>{t("Yes, delete")}</button><button className="btn" onClick={() => setConfirmDelete(false)}>{t("Cancel")}</button></div>
                 </div>
-              ) : <button className="btn btn-danger w-full" onClick={() => setConfirmDelete(true)}><Trash2 className="h-4 w-4" /> Delete profile</button>}
+              ) : <button className="btn btn-danger w-full" onClick={() => setConfirmDelete(true)}><Trash2 className="h-4 w-4" /> {t("Delete profile")}</button>}
             </div>
           </Card>
         </div>
 
         <div className="flex flex-col gap-4 lg:col-span-2">
-          <Card title="Policies and products" action={<span className="text-xs text-mute">{total > 0 ? `${eur(total)} per month in total` : ""}</span>}>
+          <Card title={t("Policies and products")} action={<span className="text-xs text-mute">{total > 0 ? t("{amount} per month in total", { amount: eur(total) }) : ""}</span>}>
             {c.policies.length > 0 && (
               <div className="mt-2 overflow-x-auto">
                 <table className="w-full min-w-[620px]">
-                  <thead><tr><th className="th">Product</th><th className="th">Policy number</th><th className="th">Since</th><th className="th">Ends or renews</th><th className="th text-right">Premium / month</th><th className="th" /></tr></thead>
+                  <thead><tr><th className="th">{t("Product")}</th><th className="th">{t("Policy number")}</th><th className="th">{t("Since")}</th><th className="th">{t("Ends or renews")}</th><th className="th text-right">{t("Premium / month")}</th><th className="th" /></tr></thead>
                   <tbody>
                     {c.policies.map((p) => (
                       <tr key={p.id}>
-                        <td className="td font-medium text-white">{p.product}</td>
+                        <td className="td font-medium text-white">{t(p.product)}</td>
                         <td className="td tabular-nums text-ink-2">{p.number || "–"}</td>
                         <td className="td text-ink-2">{p.since ? fmtDate(p.since) : "–"}</td>
                         <td className="td">
-                          <input type="date" className="input !w-auto !py-1 text-xs" aria-label={`End date of ${p.product} policy`} value={p.until ?? ""} onChange={(e) => mutate((x) => { const q = x.policies.find((y) => y.id === p.id); if (q) q.until = e.target.value; })} />
-                          {(() => { const d = p.until ? daysUntil(p.until) : null; return d === null ? null : d < 0 ? <span className="mt-1 block text-xs text-bad">ended {-d} days ago</span> : d <= 90 ? <span className="mt-1 block text-xs text-warn">ends in {d} days</span> : null; })()}
+                          <input type="date" className="input !w-auto !py-1 text-xs" aria-label={t(`End date of ${p.product} policy`)} value={p.until ?? ""} onChange={(e) => mutate((x) => { const q = x.policies.find((y) => y.id === p.id); if (q) q.until = e.target.value; })} />
+                          {(() => { const d = p.until ? daysUntil(p.until) : null; return d === null ? null : d < 0 ? <span className="mt-1 block text-xs text-bad">{t("ended {n} days ago", { n: -d })}</span> : d <= 90 ? <span className="mt-1 block text-xs text-warn">{t("ends in {n} days", { n: d })}</span> : null; })()}
                         </td>
                         <td className="td text-right tabular-nums">{p.premium ? eur(p.premium) : "–"}</td>
-                        <td className="td text-right"><button className="text-mute hover:text-bad" aria-label={`Remove ${p.product} policy`} onClick={() => mutate((x) => { x.policies = x.policies.filter((q) => q.id !== p.id); }, `Removed ${p.product} policy from ${auditName(c)}`)}><Trash2 className="h-4 w-4" /></button></td>
+                        <td className="td text-right"><button className="text-mute hover:text-bad" aria-label={t(`Remove ${p.product} policy`)} onClick={() => mutate((x) => { x.policies = x.policies.filter((q) => q.id !== p.id); }, `Removed ${p.product} policy from ${auditName(c)}`)}><Trash2 className="h-4 w-4" /></button></td>
                       </tr>
                     ))}
                   </tbody>
@@ -199,81 +200,81 @@ export function Profile() {
             <div className="px-5 pb-5 pt-3">
               {policy ? (
                 <form className="flex flex-wrap items-end gap-2" onSubmit={(e) => { e.preventDefault(); mutate((x) => { x.policies.push({ id: uid(), product: policy.product, number: policy.number.trim(), since: todayIso(), until: policy.until, premium: Number(policy.premium.replace(",", ".")) || 0 }); }, `Added ${policy.product} policy to ${auditName(c)}`); setPolicy(null); }}>
-                  <label className="block"><span className="label">Product</span><select className="input mt-1" value={policy.product} onChange={(e) => setPolicy({ ...policy, product: e.target.value as Product })}>{products.map((p) => <option key={p}>{p}</option>)}</select></label>
-                  <label className="block"><span className="label">Policy number</span><input className="input mt-1" value={policy.number} onChange={(e) => setPolicy({ ...policy, number: e.target.value })} /></label>
-                  <label className="block"><span className="label">Premium / month (€)</span><input className="input mt-1 max-w-28" inputMode="decimal" value={policy.premium} onChange={(e) => setPolicy({ ...policy, premium: e.target.value })} /></label>
-                  <label className="block"><span className="label">Ends or renews</span><input type="date" className="input mt-1" value={policy.until} onChange={(e) => setPolicy({ ...policy, until: e.target.value })} /></label>
-                  <button className="btn btn-primary">Add</button><button type="button" className="btn" onClick={() => setPolicy(null)}>Cancel</button>
+                  <label className="block"><span className="label">{t("Product")}</span><select className="input mt-1" value={policy.product} onChange={(e) => setPolicy({ ...policy, product: e.target.value as Product })}>{products.map((p) => <option key={p} value={p}>{t(p)}</option>)}</select></label>
+                  <label className="block"><span className="label">{t("Policy number")}</span><input className="input mt-1" value={policy.number} onChange={(e) => setPolicy({ ...policy, number: e.target.value })} /></label>
+                  <label className="block"><span className="label">{t("Premium / month (€)")}</span><input className="input mt-1 max-w-28" inputMode="decimal" value={policy.premium} onChange={(e) => setPolicy({ ...policy, premium: e.target.value })} /></label>
+                  <label className="block"><span className="label">{t("Ends or renews")}</span><input type="date" className="input mt-1" value={policy.until} onChange={(e) => setPolicy({ ...policy, until: e.target.value })} /></label>
+                  <button className="btn btn-primary">{t("Add")}</button><button type="button" className="btn" onClick={() => setPolicy(null)}>{t("Cancel")}</button>
                 </form>
-              ) : <button className="btn" onClick={() => setPolicy({ product: products.find((p) => !c.policies.some((q) => q.product === p)) ?? "Health", number: "", premium: "", until: "" })}><Plus className="h-4 w-4" /> Add policy</button>}
+              ) : <button className="btn" onClick={() => setPolicy({ product: products.find((p) => !c.policies.some((q) => q.product === p)) ?? "Health", number: "", premium: "", until: "" })}><Plus className="h-4 w-4" /> {t("Add policy")}</button>}
             </div>
           </Card>
 
-          <Card title="Cover check" action={<span className="text-xs text-mute">{check.filter((a) => a.status === "has").length} held · {offers.length} to offer · {asks.length} to find out</span>}>
+          <Card title={t("Cover check")} action={<span className="text-xs text-mute">{t("{h} held · {o} to offer · {q} to find out", { h: check.filter((a) => a.status === "has").length, o: offers.length, q: asks.length })}</span>}>
             <div className="px-5 pb-5 pt-3">
               {offers[0] && (
                 <p className="mb-3 rounded-md border border-primary/40 bg-primary/10 px-3 py-2 text-sm text-ink">
-                  <span className="font-semibold text-white">Best next offer: {offers[0].product}.</span> {offers[0].reason}
+                  <span className="font-semibold text-white">{t("Best next offer: {p}.", { p: t(offers[0].product) })}</span> {t(offers[0].reason)}
                 </p>
               )}
               <ul className="grid gap-2 sm:grid-cols-2">
                 {check.map((a) => (
                   <li key={a.product} className={`rounded-lg border p-3 ${a.status === "offer" ? "border-line bg-night-2/50" : "border-line/50 bg-night-2/20"}`}>
                     <div className="flex flex-wrap items-center justify-between gap-2">
-                      <span className={`text-sm font-medium ${a.status === "skip" ? "text-mute" : "text-white"}`}>{a.product}</span>
-                      {a.status === "has" && <StatusChip tone="good">Has it</StatusChip>}
+                      <span className={`text-sm font-medium ${a.status === "skip" ? "text-mute" : "text-white"}`}>{t(a.product)}</span>
+                      {a.status === "has" && <StatusChip tone="good">{t("Has it")}</StatusChip>}
                       {a.status === "offer" && <ConfidenceChip level={a.confidence ?? "low"} />}
-                      {a.status === "ask" && <StatusChip tone="info">Find out</StatusChip>}
-                      {a.status === "skip" && <StatusChip tone="mute">Not needed now</StatusChip>}
+                      {a.status === "ask" && <StatusChip tone="info">{t("Find out")}</StatusChip>}
+                      {a.status === "skip" && <StatusChip tone="mute">{t("Not needed now")}</StatusChip>}
                     </div>
-                    <p className={`mt-1 text-xs ${a.status === "skip" || a.status === "has" ? "text-mute" : "text-ink-2"}`}>{a.reason}</p>
+                    <p className={`mt-1 text-xs ${a.status === "skip" || a.status === "has" ? "text-mute" : "text-ink-2"}`}>{t(a.reason)}</p>
                   </li>
                 ))}
               </ul>
               {questions.length > 0 && (
                 <div className="mt-4 border-t border-line/60 pt-3">
-                  <h3 className="label">Ask at the next contact, then update the profile with Edit</h3>
-                  <ul className="mt-1 list-disc space-y-1 pl-4 text-sm text-ink-2">{questions.map((q) => <li key={q}>{q}</li>)}</ul>
+                  <h3 className="label">{t("Ask at the next contact, then update the profile with Edit")}</h3>
+                  <ul className="mt-1 list-disc space-y-1 pl-4 text-sm text-ink-2">{questions.map((q) => <li key={q}>{t(q)}</li>)}</ul>
                 </div>
               )}
             </div>
           </Card>
 
-          <Card title="Recommended next steps">
+          <Card title={t("Recommended next steps")}>
             <div className="space-y-3 px-5 pb-5 pt-3">
-              {opps.length === 0 && <p className="text-sm text-mute">No recommendation. Nothing in this profile points to a missing cover.</p>}
+              {opps.length === 0 && <p className="text-sm text-mute">{t("No recommendation. Nothing in this profile points to a missing cover.")}</p>}
               {opps.map((o) => {
                 const allowed = canMarket(c);
                 const asking = o.product === "Car" && c.ownsCar === "unknown";
                 return (
                   <div key={o.key} className="rounded-lg border border-line/70 bg-night-2/40 p-4">
                     <div className="flex flex-wrap items-center gap-2">
-                      <span className="font-medium text-white">{o.product}</span>
+                      <span className="font-medium text-white">{t(o.product)}</span>
                       <ConfidenceChip level={o.confidence} />
                       <OppStatusChip status={o.status} />
                       <span className="flex-1" />
-                      <select className="input !w-auto !py-1 text-xs" aria-label={`Status of ${o.product} opportunity`} value={o.status} onChange={(e) => update((d) => setOpp(d, c.id, o.product, e.target.value as OppStatus), `${o.product} opportunity set to ${e.target.value}: ${auditName(c)}`)}>
-                        <option value="open">Open</option><option value="contacted">Contacted</option><option value="won">Won: policy signed</option><option value="dismissed">Dismissed</option>
+                      <select className="input !w-auto !py-1 text-xs" aria-label={t(`Status of ${o.product} opportunity`)} value={o.status} onChange={(e) => update((d) => setOpp(d, c.id, o.product, e.target.value as OppStatus), `${o.product} opportunity set to ${e.target.value}: ${auditName(c)}`)}>
+                        <option value="open">{t("Open")}</option><option value="contacted">{t("Contacted")}</option><option value="won">{t("Won: policy signed")}</option><option value="dismissed">{t("Dismissed")}</option>
                       </select>
                     </div>
-                    <p className="mt-1 text-sm text-ink-2">{o.reason}</p>
+                    <p className="mt-1 text-sm text-ink-2">{t(o.reason)}</p>
                     {guideFor(db, o.product) && (
                       <details className="mt-2 text-sm">
-                        <summary className="cursor-pointer text-primary hover:underline">Talking points</summary>
+                        <summary className="cursor-pointer text-primary hover:underline">{t("Talking points")}</summary>
                         <div className="mt-2 grid gap-3 sm:grid-cols-2">
-                          <div><span className="label">Ask</span><ul className="mt-1 list-disc space-y-1 pl-4 text-ink-2">{guideFor(db, o.product)!.ask.map((x) => <li key={x}>{x}</li>)}</ul></div>
-                          <div><span className="label">Do not say</span><ul className="mt-1 list-disc space-y-1 pl-4 text-ink-2">{guideFor(db, o.product)!.never.map((x) => <li key={x}>{x}</li>)}</ul></div>
+                          <div><span className="label">{t("Ask")}</span><ul className="mt-1 list-disc space-y-1 pl-4 text-ink-2">{guideFor(db, o.product)!.ask.map((x) => <li key={x}>{x}</li>)}</ul></div>
+                          <div><span className="label">{t("Do not say")}</span><ul className="mt-1 list-disc space-y-1 pl-4 text-ink-2">{guideFor(db, o.product)!.never.map((x) => <li key={x}>{x}</li>)}</ul></div>
                         </div>
                       </details>
                     )}
-                    {o.status === "open" && !allowed && <p className="mt-2 text-xs text-mute">No consent for product offers, or no agreed channel. Raise this in person or by phone.</p>}
-                    {o.status === "open" && allowed && capped && <p className="mt-2 text-xs text-warn">A product message went out {sinceMarketing} days ago. The limit is one every {db.settings.capDays} days.</p>}
+                    {o.status === "open" && !allowed && <p className="mt-2 text-xs text-mute">{t("No consent for product offers, or no agreed channel. Raise this in person or by phone.")}</p>}
+                    {o.status === "open" && allowed && capped && <p className="mt-2 text-xs text-warn">{t("A product message went out {n} days ago. The limit is one every {cap} days.", { n: sinceMarketing ?? 0, cap: db.settings.capDays })}</p>}
                     {o.status === "open" && allowed && (
-                      <button className="btn btn-outline mt-3" onClick={() => setOpenDraft(openDraft === o.key ? null : o.key)}>{openDraft === o.key ? "Hide message" : "Write message"}</button>
+                      <button className="btn btn-outline mt-3" onClick={() => setOpenDraft(openDraft === o.key ? null : o.key)}>{openDraft === o.key ? t("Hide message") : t("Write message")}</button>
                     )}
                     {allowed && openDraft === o.key && (
                       <div className="mt-3 rounded-md border border-line/70 bg-night/70 p-3">
-                        <Composer key={o.key} customer={c} text={templateFor(db, asking ? "carQuestion" : "offer", c, o.product)} purpose="marketing" product={o.product} label={asking ? "Car question sent" : `Product offer sent: ${o.product}`} />
+                        <Composer key={o.key} customer={c} text={templateFor(db, asking ? "carQuestion" : "offer", c, o.product)} purpose="marketing" product={o.product} label={asking ? t("Car question sent") : `Product offer sent: ${o.product}`} />
                       </div>
                     )}
                   </div>
@@ -282,23 +283,23 @@ export function Profile() {
             </div>
           </Card>
 
-          <Card title="Communication history">
+          <Card title={t("Communication history")}>
             <form onSubmit={submitLog} className="flex flex-wrap items-end gap-2 px-5 pt-3">
-              <label className="block"><span className="label">Log</span>
+              <label className="block"><span className="label">{t("Log")}</span>
                 <select className="input mt-1" value={log.kind} onChange={(e) => setLog({ ...log, kind: e.target.value as CrmEvent["kind"] })}>
-                  <option value="call">Phone call</option><option value="meeting">Meeting</option><option value="reply">Customer reply</option><option value="note">Note</option>
+                  <option value="call">{t("Phone call")}</option><option value="meeting">{t("Meeting")}</option><option value="reply">{t("Customer reply")}</option><option value="note">{t("Note")}</option>
                 </select>
               </label>
               {log.kind === "reply" && (
                 <>
-                  <label className="block"><span className="label">Via</span><select className="input mt-1" value={log.channel} onChange={(e) => setLog({ ...log, channel: e.target.value as Channel })}>{CHANNELS.map((ch) => <option key={ch} value={ch}>{CHANNEL_LABEL[ch]}</option>)}</select></label>
-                  <label className="block"><span className="label">Interested in</span><select className="input mt-1" value={log.interest} onChange={(e) => setLog({ ...log, interest: e.target.value })}><option value="">Nothing specific</option>{products.map((p) => <option key={p}>{p}</option>)}</select></label>
+                  <label className="block"><span className="label">{t("Via")}</span><select className="input mt-1" value={log.channel} onChange={(e) => setLog({ ...log, channel: e.target.value as Channel })}>{CHANNELS.map((ch) => <option key={ch} value={ch}>{CHANNEL_LABEL[ch]}</option>)}</select></label>
+                  <label className="block"><span className="label">{t("Interested in")}</span><select className="input mt-1" value={log.interest} onChange={(e) => setLog({ ...log, interest: e.target.value })}><option value="">{t("Nothing specific")}</option>{products.map((p) => <option key={p} value={p}>{t(p)}</option>)}</select></label>
                 </>
               )}
-              <input className="input min-w-0 flex-1 basis-56" aria-label="What happened" placeholder={log.kind === "reply" ? "What the customer wrote" : "What was discussed"} value={log.text} onChange={(e) => setLog({ ...log, text: e.target.value })} />
-              <button className="btn btn-primary">Add</button>
+              <input className="input min-w-0 flex-1 basis-56" aria-label={t("What happened")} placeholder={log.kind === "reply" ? t("What the customer wrote") : t("What was discussed")} value={log.text} onChange={(e) => setLog({ ...log, text: e.target.value })} />
+              <button className="btn btn-primary">{t("Add")}</button>
             </form>
-            {timeline.length === 0 ? <p className="px-5 pb-5 pt-4 text-sm text-mute">No history yet.</p> : (
+            {timeline.length === 0 ? <p className="px-5 pb-5 pt-4 text-sm text-mute">{t("No history yet.")}</p> : (
               <ol className="px-5 pb-5 pt-4">
                 {timeline.map((e, i) => {
                   const I = KIND_ICON[e.kind];
@@ -309,11 +310,11 @@ export function Profile() {
                         {e.channel ? <ChannelIcon channel={e.channel} /> : <I className="h-4 w-4" />}
                       </span>
                       <span className="min-w-0 flex-1 pt-1">
-                        <span className="block text-sm text-ink">{e.text}{e.interest ? ` (interested in ${e.interest})` : ""}</span>
+                        <span className="block text-sm text-ink">{e.text}{e.interest ? ` ${t("(interested in {p})", { p: t(e.interest) })}` : ""}</span>
                         <span className="block text-xs text-mute">{fmtDate(e.date)}{e.channel ? ` · ${CHANNEL_LABEL[e.channel]}` : ""}</span>
-                        {e.body && <details className="mt-1 text-xs text-mute"><summary className="cursor-pointer hover:text-ink">Show message</summary><p className="mt-1 whitespace-pre-line text-ink-2">{e.body}</p></details>}
+                        {e.body && <details className="mt-1 text-xs text-mute"><summary className="cursor-pointer hover:text-ink">{t("Show message")}</summary><p className="mt-1 whitespace-pre-line text-ink-2">{e.body}</p></details>}
                       </span>
-                      {e.kind !== "system" && <button className="self-start pt-1 text-mute opacity-60 hover:text-bad hover:opacity-100" aria-label="Remove this entry" onClick={() => update((d) => { d.events = d.events.filter((x) => x.id !== e.id); }, `Removed a history entry of ${auditName(c)}`)}><Trash2 className="h-4 w-4" /></button>}
+                      {e.kind !== "system" && <button className="self-start pt-1 text-mute opacity-60 hover:text-bad hover:opacity-100" aria-label={t("Remove this entry")} onClick={() => update((d) => { d.events = d.events.filter((x) => x.id !== e.id); }, `Removed a history entry of ${auditName(c)}`)}><Trash2 className="h-4 w-4" /></button>}
                     </li>
                   );
                 })}

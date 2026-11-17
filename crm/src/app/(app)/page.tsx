@@ -9,6 +9,7 @@ import { addDays, age, daysAgo, daysToBirthday, fmtDate, longToday, relative, to
 import { allOpportunities, allowedChannels, birthdaysDue, canMarket, fullName, initials, lastContact, renewals, suggestions } from "@/lib/rules";
 import { useStore } from "@/lib/store";
 import { CHANNELS, type Channel } from "@/lib/types";
+import { t } from "@/lib/i18n";
 
 export default function Dashboard() {
   const { db } = useStore();
@@ -35,14 +36,14 @@ export default function Dashboard() {
   if (db.customers.length === 0) {
     return (
       <>
-        <PageHeader title="Dashboard" subtitle={longToday()} />
+        <PageHeader title={t("Dashboard")} subtitle={longToday()} />
         <div className="card p-8 text-center">
           <Users className="mx-auto h-10 w-10 text-primary" aria-hidden />
-          <h2 className="mt-4 text-xl font-bold text-white">Your workspace is ready</h2>
-          <p className="mx-auto mt-2 max-w-md text-sm text-ink-2">Import your customer list from Excel or CSV. Each row becomes a profile, and the system starts finding birthdays, opportunities and messages to send.</p>
+          <h2 className="mt-4 text-xl font-bold text-white">{t("Your workspace is ready")}</h2>
+          <p className="mx-auto mt-2 max-w-md text-sm text-ink-2">{t("Import your customer list from Excel or CSV. Each row becomes a profile, and the system starts finding birthdays, opportunities and messages to send.")}</p>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
-            <Link href="/import/" className="btn btn-primary"><Upload className="h-4 w-4" /> Import customers</Link>
-            <Link href="/customers/?new=1" className="btn"><UserPlus className="h-4 w-4" /> Add one by hand</Link>
+            <Link href="/import/" className="btn btn-primary"><Upload className="h-4 w-4" /> {t("Import customers")}</Link>
+            <Link href="/customers/?new=1" className="btn"><UserPlus className="h-4 w-4" /> {t("Add one by hand")}</Link>
           </div>
         </div>
       </>
@@ -52,26 +53,26 @@ export default function Dashboard() {
   const sentTotal = CHANNELS.reduce((s, ch) => s + v.stats[ch].sent, 0);
   return (
     <>
-      <PageHeader title="Dashboard" subtitle={longToday()}>
-        {v.due > 0 && <Link href="/queue/?c=birthday" className="btn btn-accent"><Cake className="h-4 w-4" /> Send {v.due} birthday {v.due === 1 ? "greeting" : "greetings"}</Link>}
-        {v.pending > 0 && <Link href="/approvals/" className="btn btn-primary"><CheckCheck className="h-4 w-4" /> Review {v.pending} {v.pending === 1 ? "message" : "messages"}</Link>}
+      <PageHeader title={t("Dashboard")} subtitle={longToday()}>
+        {v.due > 0 && <Link href="/queue/?c=birthday" className="btn btn-accent"><Cake className="h-4 w-4" /> {v.due === 1 ? t("Send 1 birthday greeting") : t("Send {n} birthday greetings", { n: v.due })}</Link>}
+        {v.pending > 0 && <Link href="/approvals/" className="btn btn-primary"><CheckCheck className="h-4 w-4" /> {v.pending === 1 ? t("Review 1 message") : t("Review {n} messages", { n: v.pending })}</Link>}
       </PageHeader>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-5">
-        <StatTile label="Customers" value={db.customers.length} note={`${db.customers.filter(canMarket).length} agreed to offers`} icon={<Users className="h-5 w-5" />} />
-        <StatTile label="Open opportunities" value={v.opps.length} note={`${v.strong.length} strong fits`} icon={<Target className="h-5 w-5" />} />
-        <StatTile label="Awaiting approval" value={v.pending} note="drafted messages" icon={<CheckCheck className="h-5 w-5" />} />
-        <StatTile label="Birthdays, next 30 days" value={v.birthdays.length} note={`${v.birthdays.filter((b) => b.in <= 7).length} this week`} icon={<Cake className="h-5 w-5" />} />
-        <StatTile label="No contact for a year" value={v.quiet} note="none recorded here" icon={<Clock className="h-5 w-5" />} />
+        <StatTile label={t("Customers")} value={db.customers.length} note={t(`${db.customers.filter(canMarket).length} agreed to offers`)} icon={<Users className="h-5 w-5" />} />
+        <StatTile label={t("Open opportunities")} value={v.opps.length} note={t(`${v.strong.length} strong fits`)} icon={<Target className="h-5 w-5" />} />
+        <StatTile label={t("Awaiting approval")} value={v.pending} note={t("drafted messages")} icon={<CheckCheck className="h-5 w-5" />} />
+        <StatTile label={t("Birthdays, next 30 days")} value={v.birthdays.length} note={t(`${v.birthdays.filter((b) => b.in <= 7).length} this week`)} icon={<Cake className="h-5 w-5" />} />
+        <StatTile label={t("No contact for a year")} value={v.quiet} note={t("none recorded here")} icon={<Clock className="h-5 w-5" />} />
       </div>
 
       <div className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-3">
-        <Card title="Messages sent per week" className="lg:col-span-2" action={<span className="text-xs text-mute">{sentTotal} in 12 weeks</span>}>
+        <Card title={t("Messages sent per week")} className="lg:col-span-2" action={<span className="text-xs text-mute">{t("{n} in 12 weeks", { n: sentTotal })}</span>}>
           <WeeklyChart data={v.weeks} />
         </Card>
 
-        <Card title="Upcoming birthdays" action={<span className="text-xs text-mute">next 30 days</span>}>
-          {v.birthdays.length === 0 ? <Empty>No birthdays in the next 30 days.</Empty> : (
+        <Card title={t("Upcoming birthdays")} action={<span className="text-xs text-mute">{t("next 30 days")}</span>}>
+          {v.birthdays.length === 0 ? <Empty>{t("No birthdays in the next 30 days.")}</Empty> : (
             <ul className="mt-2 max-h-64 overflow-y-auto px-2 pb-3">
               {v.birthdays.map(({ c, in: d }) => {
                 const ch = allowedChannels(c)[0];
@@ -82,9 +83,9 @@ export default function Dashboard() {
                       <Avatar text={initials(c)} />
                       <span className="min-w-0 flex-1">
                         <span className="block truncate text-sm font-medium text-white">{fullName(c)}</span>
-                        <span className="block text-xs text-mute">{d === 0 ? "Today" : d === 1 ? "Tomorrow" : `In ${d} days`}{a !== null ? ` · turns ${d === 0 ? a : a + 1}` : ""}</span>
+                        <span className="block text-xs text-mute">{d === 0 ? t("Today") : d === 1 ? t("Tomorrow") : t("In {n} days", { n: d })}{a !== null ? ` · ${t("turns {n}", { n: d === 0 ? a : a + 1 })}` : ""}</span>
                       </span>
-                      {ch ? <StatusChip tone="good"><ChannelIcon channel={ch} className="h-3 w-3" /> Can greet</StatusChip> : <StatusChip tone="mute">No consent</StatusChip>}
+                      {ch ? <StatusChip tone="good"><ChannelIcon channel={ch} className="h-3 w-3" /> {t("Can greet")}</StatusChip> : <StatusChip tone="mute">{t("No consent")}</StatusChip>}
                     </Link>
                   </li>
                 );
@@ -95,8 +96,8 @@ export default function Dashboard() {
       </div>
 
       <div className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-3">
-        <Card title="Strongest opportunities" className="lg:col-span-2" action={<Link href="/opportunities/" className="text-xs text-primary hover:underline">All opportunities</Link>}>
-          {v.strong.length === 0 ? <Empty>No strong opportunities right now.</Empty> : (
+        <Card title={t("Strongest opportunities")} className="lg:col-span-2" action={<Link href="/opportunities/" className="text-xs text-primary hover:underline">{t("All opportunities")}</Link>}>
+          {v.strong.length === 0 ? <Empty>{t("No strong opportunities right now.")}</Empty> : (
             <ul className="mt-2 px-2 pb-3">
               {v.strong.slice(0, 7).map((o) => {
                 const c = v.byId.get(o.customerId)!;
@@ -105,11 +106,11 @@ export default function Dashboard() {
                     <Link href={`/customers/view/?id=${c.id}`} className="flex flex-wrap items-center gap-x-3 gap-y-1 rounded-md px-3 py-2 hover:bg-white/5">
                       <Avatar text={initials(c)} />
                       <span className="min-w-0 flex-1 basis-48">
-                        <span className="block text-sm font-medium text-white">{fullName(c)} · {o.product}</span>
-                        <span className="block text-xs text-mute">{o.reason}</span>
+                        <span className="block text-sm font-medium text-white">{fullName(c)} · {t(o.product)}</span>
+                        <span className="block text-xs text-mute">{t(o.reason)}</span>
                       </span>
                       <ConfidenceChip level={o.confidence} />
-                      {!canMarket(c) && <StatusChip tone="mute">Raise in person</StatusChip>}
+                      {!canMarket(c) && <StatusChip tone="mute">{t("Raise in person")}</StatusChip>}
                     </Link>
                   </li>
                 );
@@ -118,8 +119,8 @@ export default function Dashboard() {
           )}
         </Card>
 
-        <Card title="New replies" action={<Link href="/inbox/" className="text-xs text-primary hover:underline">Open inbox</Link>}>
-          {v.replies.length === 0 ? <Empty>No unanswered replies.</Empty> : (
+        <Card title={t("New replies")} action={<Link href="/inbox/" className="text-xs text-primary hover:underline">{t("Open inbox")}</Link>}>
+          {v.replies.length === 0 ? <Empty>{t("No unanswered replies.")}</Empty> : (
             <ul className="mt-2 px-2 pb-3">
               {v.replies.slice(0, 5).map((x) => {
                 const c = v.byId.get(x.customerId);
@@ -132,7 +133,7 @@ export default function Dashboard() {
                         <span className="shrink-0 text-xs text-mute">{relative(x.date)}</span>
                       </span>
                       <span className="mt-0.5 line-clamp-2 text-xs text-ink-2">{x.text}</span>
-                      {x.interest && <span className="mt-1.5 inline-block"><StatusChip tone="info">Interested: {x.interest}</StatusChip></span>}
+                      {x.interest && <span className="mt-1.5 inline-block"><StatusChip tone="info">{t("Interested: {p}", { p: t(x.interest) })}</StatusChip></span>}
                     </Link>
                   </li>
                 );
@@ -142,30 +143,30 @@ export default function Dashboard() {
         </Card>
       </div>
 
-      <Card title="Policies ending soon" className="mt-4" action={<Link href="/customers/?view=renewals" className="text-xs text-primary hover:underline">Show these customers</Link>}>
-        {v.ending.length === 0 ? <Empty>No policy with a recorded end date ends in the next 90 days. Add end dates on the customer profile to get reminders.</Empty> : (
+      <Card title={t("Policies ending soon")} className="mt-4" action={<Link href="/customers/?view=renewals" className="text-xs text-primary hover:underline">{t("Show these customers")}</Link>}>
+        {v.ending.length === 0 ? <Empty>{t("No policy with a recorded end date ends in the next 90 days. Add end dates on the customer profile to get reminders.")}</Empty> : (
           <ul className="mt-2 grid grid-cols-1 gap-x-4 px-2 pb-3 md:grid-cols-2">
             {v.ending.slice(0, 8).map((r) => (
               <li key={`${r.customer.id}${r.product}`}>
                 <Link href={`/customers/view/?id=${r.customer.id}`} className="flex flex-wrap items-center gap-x-3 gap-y-1 rounded-md px-3 py-2 hover:bg-white/5">
                   <Avatar text={initials(r.customer)} />
                   <span className="min-w-0 flex-1 basis-32">
-                    <span className="block text-sm font-medium text-white">{fullName(r.customer)} · {r.product}</span>
+                    <span className="block text-sm font-medium text-white">{fullName(r.customer)} · {t(r.product)}</span>
                     <span className="block text-xs text-mute">{fmtDate(r.until)}</span>
                   </span>
-                  <StatusChip tone={r.days < 0 ? "bad" : r.days <= 30 ? "warn" : "info"}>{r.days < 0 ? `Ended ${-r.days} days ago` : r.days === 0 ? "Ends today" : `In ${r.days} days`}</StatusChip>
+                  <StatusChip tone={r.days < 0 ? "bad" : r.days <= 30 ? "warn" : "info"}>{r.days < 0 ? t("Ended {n} days ago", { n: -r.days }) : r.days === 0 ? t("Ends today") : t("In {n} days", { n: r.days })}</StatusChip>
                 </Link>
               </li>
             ))}
           </ul>
         )}
-        {v.ending.length > 8 && <p className="px-5 pb-4 text-xs text-mute">and {v.ending.length - 8} more</p>}
+        {v.ending.length > 8 && <p className="px-5 pb-4 text-xs text-mute">{t("and {n} more", { n: v.ending.length - 8 })}</p>}
       </Card>
 
-      <Card title="Channel performance" className="mt-4" action={<span className="text-xs text-mute">last 12 weeks</span>}>
+      <Card title={t("Channel performance")} className="mt-4" action={<span className="text-xs text-mute">{t("last 12 weeks")}</span>}>
         <div className="mt-2 overflow-x-auto pb-2">
           <table className="w-full">
-            <thead><tr><th className="th">Channel</th><th className="th text-right">Sent</th><th className="th text-right">Replies logged</th><th className="th text-right">Reply rate</th></tr></thead>
+            <thead><tr><th className="th">{t("Channel")}</th><th className="th text-right">{t("Sent")}</th><th className="th text-right">{t("Replies logged")}</th><th className="th text-right">{t("Reply rate")}</th></tr></thead>
             <tbody>
               {CHANNELS.map((ch) => (
                 <tr key={ch}>

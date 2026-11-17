@@ -10,6 +10,7 @@ import { recordSent } from "@/lib/actions";
 import { audienceLabel, audienceMembers, bestChannel, birthdaysDue, fullName, initials, templateFor } from "@/lib/rules";
 import { download, toCsv } from "@/lib/send";
 import { useStore } from "@/lib/store";
+import { t } from "@/lib/i18n";
 
 export function Queue() {
   const { db, update } = useStore();
@@ -20,14 +21,14 @@ export function Queue() {
   const isBirthday = key === "birthday";
 
   const q = useMemo(() => {
-    if (isBirthday) return { title: "Birthday greetings", subtitle: "Customers whose birthday is today or was in the last three days.", template: "birthday", purpose: "birthday" as const, channels: undefined, product: undefined, total: 0, pending: birthdaysDue(db), label: "Birthday greeting sent" };
+    if (isBirthday) return { title: t("Birthday greetings"), subtitle: t("Customers whose birthday is today or was in the last three days."), template: "birthday", purpose: "birthday" as const, channels: undefined, product: undefined, total: 0, pending: birthdaysDue(db), label: t("Birthday greeting sent") };
     if (!campaign) return null;
     const purpose = db.settings.templates[campaign.templateKey]?.purpose ?? "holiday";
     const members = audienceMembers(db, campaign.audience, campaign.channels, purpose);
     return { title: campaign.name, subtitle: audienceLabel(campaign.audience), template: campaign.templateKey, purpose, channels: campaign.channels, product: campaign.product, total: members.length, pending: members.filter((c) => !campaign.sentTo.includes(c.id)), label: `${campaign.name} sent` };
   }, [db, campaign, isBirthday]);
 
-  if (!q) return <div className="card p-8 text-center"><p className="text-ink-2">This campaign does not exist.</p><Link href="/campaigns/" className="btn btn-primary mt-4">Back to campaigns</Link></div>;
+  if (!q) return <div className="card p-8 text-center"><p className="text-ink-2">{t("This campaign does not exist.")}</p><Link href="/campaigns/" className="btn btn-primary mt-4">{t("Back to campaigns")}</Link></div>;
 
   const emailPending = q.pending.filter((c) => bestChannel(c, q.channels) === "email");
   const exportMerge = () => {
@@ -42,7 +43,7 @@ export function Queue() {
 
   return (
     <>
-      <Link href={isBirthday ? "/" : "/campaigns/"} className="mb-4 inline-flex items-center gap-1 text-sm text-primary hover:underline"><ArrowLeft className="h-4 w-4" /> {isBirthday ? "Dashboard" : "All campaigns"}</Link>
+      <Link href={isBirthday ? "/" : "/campaigns/"} className="mb-4 inline-flex items-center gap-1 text-sm text-primary hover:underline"><ArrowLeft className="h-4 w-4" /> {isBirthday ? t("Dashboard") : t("All campaigns")}</Link>
       <PageHeader title={q.title} subtitle={`${q.subtitle.replace(/\.$/, "")}. ${q.pending.length} still to send${q.total ? ` of ${q.total}` : ""}.`}>
         {emailPending.length > 1 && <button className="btn" onClick={exportMerge}><Download className="h-4 w-4" /> Email list for mail merge ({emailPending.length})</button>}
       </PageHeader>
@@ -50,11 +51,11 @@ export function Queue() {
       <div className="mb-4 rounded-md border border-line bg-night-2/50 px-3 py-2 text-sm text-ink-2">
         Each Send button opens your own email, WhatsApp or SMS app with the message filled in, and records it in the customer&apos;s history. For many emails at once, download the list and send it with a mail merge. That list is a plain file with names and email addresses; delete it after sending.
         {emailPending.length > 1 && (confirm
-          ? <span className="mt-2 flex flex-wrap items-center gap-2">Record all {emailPending.length} emails as sent? <button className="btn btn-primary" onClick={markAll}>Yes, they were sent</button><button className="btn" onClick={() => setConfirm(false)}>Cancel</button></span>
-          : <button className="ml-1 text-primary hover:underline" onClick={() => setConfirm(true)}>I sent the emails by mail merge.</button>)}
+          ? <span className="mt-2 flex flex-wrap items-center gap-2">Record all {emailPending.length} emails as sent? <button className="btn btn-primary" onClick={markAll}>{t("Yes, they were sent")}</button><button className="btn" onClick={() => setConfirm(false)}>{t("Cancel")}</button></span>
+          : <button className="ml-1 text-primary hover:underline" onClick={() => setConfirm(true)}>{t("I sent the emails by mail merge.")}</button>)}
       </div>
 
-      {q.pending.length === 0 ? <div className="card"><Empty>Everyone in this list has been sent their message.</Empty></div> : (
+      {q.pending.length === 0 ? <div className="card"><Empty>{t("Everyone in this list has been sent their message.")}</Empty></div> : (
         <div className="space-y-3">
           {q.pending.slice(0, show).map((c) => (
             <article key={c.id} className="card p-4">
@@ -65,7 +66,7 @@ export function Queue() {
               <Composer key={c.id} collapsed customer={c} text={templateFor(db, q.template, c, q.product)} purpose={q.purpose} product={q.product} campaignId={campaign?.id} channels={q.channels} label={q.label} />
             </article>
           ))}
-          {q.pending.length > show && <button className="btn w-full" onClick={() => setShow(show + 25)}>Show more ({q.pending.length - show} remaining)</button>}
+          {q.pending.length > show && <button className="btn w-full" onClick={() => setShow(show + 25)}>{t("Show more ({n} remaining)", { n: q.pending.length - show })}</button>}
         </div>
       )}
     </>

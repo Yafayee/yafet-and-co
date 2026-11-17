@@ -7,11 +7,11 @@ import { Card, PageHeader, StatusChip, Toggle } from "@/components/ui";
 import { fmtDate, fmtDateTime, todayIso } from "@/lib/dates";
 import { daysAgo } from "@/lib/dates";
 import { strength } from "@/lib/passphrase";
-import { fullName } from "@/lib/rules";
 import { download, toCsv } from "@/lib/send";
 import { useStore } from "@/lib/store";
 import { DEFAULT_TEMPLATES } from "@/lib/templates";
 import { CHANNEL_LABEL } from "@/lib/types";
+import { t } from "@/lib/i18n";
 
 export default function SettingsPage() {
   const s = useStore();
@@ -23,7 +23,7 @@ export default function SettingsPage() {
   const [erase, setErase] = useState("");
   const [shown, setShown] = useState(30);
   const [confirmExport, setConfirmExport] = useState(false);
-  const t = db.settings.templates[tKey];
+  const tpl = db.settings.templates[tKey];
   const real = mode === "workspace";
 
   const setTemplate = (field: "subject" | "body", value: string) => update((d) => { d.settings.templates[tKey][lang][field] = value; });
@@ -31,9 +31,9 @@ export default function SettingsPage() {
     e.preventDefault();
     const st = strength(pw.next);
     if (st.level === "weak") return setPwMsg({ ok: false, text: st.hint });
-    if (pw.next !== pw.again) return setPwMsg({ ok: false, text: "The two new passphrases do not match." });
+    if (pw.next !== pw.again) return setPwMsg({ ok: false, text: t("The two new passphrases do not match.") });
     const ok = await s.changePassphrase(pw.current, pw.next);
-    setPwMsg(ok ? { ok: true, text: "Passphrase changed. Older backup files still open with the old passphrase." } : { ok: false, text: "The current passphrase is not right." });
+    setPwMsg(ok ? { ok: true, text: t("Passphrase changed. Older backup files still open with the old passphrase.") } : { ok: false, text: t("The current passphrase is not right.") });
     if (ok) setPw({ current: "", next: "", again: "" });
   };
   const backup = async () => { download(`cp-crm-backup-${todayIso()}.crmbackup`, await s.backup(), "application/json"); update((d) => { d.settings.lastBackup = todayIso(); }, "Encrypted backup file downloaded"); };
@@ -46,73 +46,73 @@ export default function SettingsPage() {
 
   return (
     <>
-      <PageHeader title="Settings" subtitle="Sending rules, message texts, security and the activity record." />
+      <PageHeader title={t("Settings")} subtitle={t("Sending rules, message texts, security and the activity record.")} />
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-        <Card title="Sending rules">
+        <Card title={t("Sending rules")}>
           <div className="space-y-4 px-5 pb-5 pt-3">
-            <label className="block"><span className="label">Signature used in messages</span>
+            <label className="block"><span className="label">{t("Signature used in messages")}</span>
               <input className="input mt-1" value={db.settings.senderName} onChange={(e) => update((d) => { d.settings.senderName = e.target.value; })} />
             </label>
-            <label className="block"><span className="label">Minimum days between product messages to one customer</span>
+            <label className="block"><span className="label">{t("Minimum days between product messages to one customer")}</span>
               <input type="number" min={7} max={365} className="input mt-1 max-w-32" value={db.settings.capDays} onChange={(e) => update((d) => { d.settings.capDays = Math.min(365, Math.max(7, Number(e.target.value) || 30)); })} />
             </label>
-            <Toggle checked={db.settings.followUpAfterBirthday} onChange={() => update((d) => { d.settings.followUpAfterBirthday = !d.settings.followUpAfterBirthday; })} label="Suggest a product follow-up one week after a birthday greeting" />
-            <p className="text-xs text-mute">Product messages are only ever suggested for customers who agreed to offers. Greetings need an agreed channel. These two rules cannot be switched off.</p>
+            <Toggle checked={db.settings.followUpAfterBirthday} onChange={() => update((d) => { d.settings.followUpAfterBirthday = !d.settings.followUpAfterBirthday; })} label={t("Suggest a product follow-up one week after a birthday greeting")} />
+            <p className="text-xs text-mute">{t("Product messages are only ever suggested for customers who agreed to offers. Greetings need an agreed channel. These two rules cannot be switched off.")}</p>
           </div>
         </Card>
 
-        <Card title="Message texts">
+        <Card title={t("Message texts")}>
           <div className="space-y-3 px-5 pb-5 pt-3">
             <div className="flex flex-wrap gap-2">
-              <select className="input !w-auto flex-1" aria-label="Message" value={tKey} onChange={(e) => setTKey(e.target.value)}>{Object.entries(db.settings.templates).map(([k, v]) => <option key={k} value={k}>{v.label}</option>)}</select>
-              <select className="input !w-auto" aria-label="Language" value={lang} onChange={(e) => setLang(e.target.value as "de" | "en")}><option value="de">German</option><option value="en">English</option></select>
+              <select className="input !w-auto flex-1" aria-label={t("Message")} value={tKey} onChange={(e) => setTKey(e.target.value)}>{Object.entries(db.settings.templates).map(([k, v]) => <option key={k} value={k}>{t(v.label)}</option>)}</select>
+              <select className="input !w-auto" aria-label={t("Language")} value={lang} onChange={(e) => setLang(e.target.value as "de" | "en")}><option value="de">{t("German")}</option><option value="en">{t("English")}</option></select>
             </div>
-            <label className="block"><span className="label">Subject (email only)</span><input className="input mt-1" value={t[lang].subject} onChange={(e) => setTemplate("subject", e.target.value)} /></label>
-            <label className="block"><span className="label">Text</span><textarea className="input mt-1 min-h-44 leading-relaxed" value={t[lang].body} onChange={(e) => setTemplate("body", e.target.value)} /></label>
+            <label className="block"><span className="label">{t("Subject (email only)")}</span><input className="input mt-1" value={tpl[lang].subject} onChange={(e) => setTemplate("subject", e.target.value)} /></label>
+            <label className="block"><span className="label">{t("Text")}</span><textarea className="input mt-1 min-h-44 leading-relaxed" value={tpl[lang].body} onChange={(e) => setTemplate("body", e.target.value)} /></label>
             <div className="flex flex-wrap items-center justify-between gap-2">
               <p className="text-xs text-mute">Placeholders: {"{firstName} {lastName} {product} {sender}"}</p>
-              {DEFAULT_TEMPLATES[tKey] && <button className="text-xs text-primary hover:underline" onClick={() => update((d) => { d.settings.templates[tKey][lang] = { ...DEFAULT_TEMPLATES[tKey][lang] }; })}>Reset this text</button>}
+              {DEFAULT_TEMPLATES[tKey] && <button className="text-xs text-primary hover:underline" onClick={() => update((d) => { d.settings.templates[tKey][lang] = { ...DEFAULT_TEMPLATES[tKey][lang] }; })}>{t("Reset this text")}</button>}
             </div>
           </div>
         </Card>
 
-        <Card title="Security and backup">
+        <Card title={t("Security and backup")}>
           <div className="space-y-4 px-5 pb-5 pt-3">
             <div className="flex flex-wrap gap-2">
-              <StatusChip tone={real ? "good" : "warn"}>{real ? "Encrypted on this device (AES-256)" : "Demo: nothing is stored"}</StatusChip>
-              <StatusChip tone="good">No customer data leaves this browser</StatusChip>
+              <StatusChip tone={real ? "good" : "warn"}>{real ? t("Encrypted on this device (AES-256)") : t("Demo: nothing is stored")}</StatusChip>
+              <StatusChip tone="good">{t("No customer data leaves this browser")}</StatusChip>
             </div>
-            <label className="block"><span className="label">Lock automatically after minutes without activity</span>
+            <label className="block"><span className="label">{t("Lock automatically after minutes without activity")}</span>
               <input type="number" min={1} max={240} className="input mt-1 max-w-32" value={db.settings.autoLockMin} onChange={(e) => update((d) => { d.settings.autoLockMin = Math.min(240, Math.max(1, Number(e.target.value) || 15)); })} />
             </label>
             <div className="flex flex-wrap gap-2">
-              <button className="btn btn-primary" disabled={!real} onClick={backup}><Download className="h-4 w-4" /> Download encrypted backup</button>
-              <button className="btn" disabled={db.customers.length === 0} onClick={() => setConfirmExport(true)}><Download className="h-4 w-4" /> Export customers (CSV, not encrypted)</button>
+              <button className="btn btn-primary" disabled={!real} onClick={backup}><Download className="h-4 w-4" /> {t("Download encrypted backup")}</button>
+              <button className="btn" disabled={db.customers.length === 0} onClick={() => setConfirmExport(true)}><Download className="h-4 w-4" /> {t("Export customers (CSV, not encrypted)")}</button>
             </div>
             {confirmExport && (
               <div className="rounded-md border border-warn/40 bg-warn/5 p-3 text-sm text-ink" role="alert">
                 This file will hold all {db.customers.length} customers in plain text. Anyone who gets the file can read it. Use it only when another program needs it, and delete it afterwards. For safekeeping, use the encrypted backup instead.
-                <div className="mt-2 flex flex-wrap gap-2"><button className="btn btn-danger" onClick={() => { exportCsv(); setConfirmExport(false); }}>Download the plain file anyway</button><button className="btn" onClick={() => setConfirmExport(false)}>Cancel</button></div>
+                <div className="mt-2 flex flex-wrap gap-2"><button className="btn btn-danger" onClick={() => { exportCsv(); setConfirmExport(false); }}>{t("Download the plain file anyway")}</button><button className="btn" onClick={() => setConfirmExport(false)}>{t("Cancel")}</button></div>
               </div>
             )}
-            <p className={`text-sm ${db.settings.lastBackup ? "text-ink-2" : "text-warn"}`}>{db.settings.lastBackup ? `Last backup downloaded: ${fmtDate(db.settings.lastBackup)}.` : "No backup downloaded yet."}</p>
-            <p className="text-xs text-mute">The data lives only in this browser on this device. Download a backup regularly and keep it somewhere safe; to move to another computer, restore the backup there.</p>
+            <p className={`text-sm ${db.settings.lastBackup ? "text-ink-2" : "text-warn"}`}>{db.settings.lastBackup ? `Last backup downloaded: ${fmtDate(db.settings.lastBackup)}.` : t("No backup downloaded yet.")}</p>
+            <p className="text-xs text-mute">{t("The data lives only in this browser on this device. Download a backup regularly and keep it somewhere safe; to move to another computer, restore the backup there.")}</p>
             {real && (
               <>
                 <form onSubmit={changePw} className="space-y-2 border-t border-line/60 pt-4">
-                  <span className="label">Change passphrase</span>
-                  <input type="password" className="input" aria-label="Current passphrase" placeholder="Current passphrase" autoComplete="current-password" value={pw.current} onChange={(e) => setPw({ ...pw, current: e.target.value })} required />
-                  <input type="password" className="input" aria-label="New passphrase" placeholder="New passphrase (12 characters or more)" autoComplete="new-password" value={pw.next} onChange={(e) => setPw({ ...pw, next: e.target.value })} required />
+                  <span className="label">{t("Change passphrase")}</span>
+                  <input type="password" className="input" aria-label={t("Current passphrase")} placeholder={t("Current passphrase")} autoComplete="current-password" value={pw.current} onChange={(e) => setPw({ ...pw, current: e.target.value })} required />
+                  <input type="password" className="input" aria-label={t("New passphrase")} placeholder={t("New passphrase (12 characters or more)")} autoComplete="new-password" value={pw.next} onChange={(e) => setPw({ ...pw, next: e.target.value })} required />
                   {pw.next && <PassMeter pass={pw.next} />}
-                  <input type="password" className="input" aria-label="Repeat new passphrase" placeholder="Repeat new passphrase" autoComplete="new-password" value={pw.again} onChange={(e) => setPw({ ...pw, again: e.target.value })} required />
+                  <input type="password" className="input" aria-label={t("Repeat new passphrase")} placeholder={t("Repeat new passphrase")} autoComplete="new-password" value={pw.again} onChange={(e) => setPw({ ...pw, again: e.target.value })} required />
                   {pwMsg && <p className={`text-sm ${pwMsg.ok ? "text-good" : "text-bad"}`} role="status">{pwMsg.text}</p>}
-                  <button className="btn"><KeyRound className="h-4 w-4" /> Change passphrase</button>
+                  <button className="btn"><KeyRound className="h-4 w-4" /> {t("Change passphrase")}</button>
                 </form>
                 <div className="space-y-2 border-t border-line/60 pt-4">
-                  <span className="label">Erase everything stored in this browser</span>
+                  <span className="label">{t("Erase everything stored in this browser")}</span>
                   <div className="flex flex-wrap gap-2">
-                    <input className="input max-w-44" aria-label="Type ERASE to confirm" placeholder="Type ERASE" value={erase} onChange={(e) => setErase(e.target.value)} />
-                    <button className="btn btn-danger" disabled={erase !== "ERASE"} onClick={() => s.erase()}><Trash2 className="h-4 w-4" /> Erase workspace</button>
+                    <input className="input max-w-44" aria-label={t("Type ERASE to confirm")} placeholder={t("Type ERASE")} value={erase} onChange={(e) => setErase(e.target.value)} />
+                    <button className="btn btn-danger" disabled={erase !== "ERASE"} onClick={() => s.erase()}><Trash2 className="h-4 w-4" /> {t("Erase workspace")}</button>
                   </div>
                 </div>
               </>
@@ -122,8 +122,8 @@ export default function SettingsPage() {
 
         <SecurityChecklist />
 
-        <Card title="Activity record" action={<span className="text-xs text-mute">{db.audit.length} entries</span>}>
-          {db.audit.length === 0 ? <p className="px-5 pb-5 pt-3 text-sm text-mute">Nothing recorded yet.</p> : (
+        <Card title={t("Activity record")} action={<span className="text-xs text-mute">{db.audit.length} entries</span>}>
+          {db.audit.length === 0 ? <p className="px-5 pb-5 pt-3 text-sm text-mute">{t("Nothing recorded yet.")}</p> : (
             <ul className="px-5 pb-5 pt-3">
               {db.audit.slice(0, shown).map((a, i) => (
                 <li key={i} className="flex flex-wrap gap-x-3 border-t border-line/50 py-2 text-sm first:border-t-0">
@@ -131,12 +131,12 @@ export default function SettingsPage() {
                   <span className="min-w-0 flex-1 basis-48 text-ink-2">{a.action}</span>
                 </li>
               ))}
-              {db.audit.length > shown && <li className="pt-2"><button className="text-xs text-primary hover:underline" onClick={() => setShown(shown + 50)}>Show more</button></li>}
+              {db.audit.length > shown && <li className="pt-2"><button className="text-xs text-primary hover:underline" onClick={() => setShown(shown + 50)}>{t("Show more")}</button></li>}
             </ul>
           )}
         </Card>
       </div>
-      <p className="mt-3 text-xs text-mute">{db.customers.length} customers · {db.events.length} history entries · signature preview: {db.customers[0] ? fullName(db.customers[0]) : "no customers yet"}</p>
+      <p className="mt-3 text-xs text-mute">{t("{c} customers · {e} history entries", { c: db.customers.length, e: db.events.length })}</p>
     </>
   );
 }
@@ -156,38 +156,38 @@ function SecurityChecklist() {
   const https = typeof window !== "undefined" && (window.location.protocol === "https:" || window.location.hostname === "localhost");
   const backupAge = db.settings.lastBackup ? daysAgo(db.settings.lastBackup) : null;
   const auto: { ok: boolean; label: string; detail: string }[] = [
-    { ok: https, label: "Secure connection", detail: https ? "The page is loaded over HTTPS." : "The page is not loaded over HTTPS. Do not enter data." },
-    { ok: real, label: "Encrypted workspace", detail: real ? "Data is stored encrypted with AES-256." : "This is the demo; nothing is stored." },
-    { ok: real && !weakPass, label: "Passphrase strength", detail: !real ? "Not applicable in the demo." : weakPass ? "Weak. Change it below." : "Passed the strength check." },
-    { ok: backupAge !== null && backupAge <= 7, label: "Recent backup", detail: backupAge === null ? "No backup downloaded yet." : `Last backup ${backupAge === 0 ? "today" : `${backupAge} days ago`}.` },
-    { ok: db.settings.autoLockMin <= 15, label: "Automatic lock", detail: `Locks after ${db.settings.autoLockMin} minutes without activity, also after the computer wakes from sleep.` },
-    { ok: persisted === true, label: "Browser keeps the data", detail: persisted === true ? "The browser will not clear this site's data on its own." : persisted === false ? "The browser may clear this data if disk space runs low. Keep backups current; using the app regularly usually changes this." : "This browser does not report it. Keep backups current." },
+    { ok: https, label: t("Secure connection"), detail: https ? t("The page is loaded over HTTPS.") : t("The page is not loaded over HTTPS. Do not enter data.") },
+    { ok: real, label: t("Encrypted workspace"), detail: real ? t("Data is stored encrypted with AES-256.") : t("This is the demo; nothing is stored.") },
+    { ok: real && !weakPass, label: t("Passphrase strength"), detail: !real ? t("Not applicable in the demo.") : weakPass ? t("Weak. Change it below.") : t("Passed the strength check.") },
+    { ok: backupAge !== null && backupAge <= 7, label: t("Recent backup"), detail: backupAge === null ? t("No backup downloaded yet.") : `Last backup ${backupAge === 0 ? "today" : `${backupAge} days ago`}.` },
+    { ok: db.settings.autoLockMin <= 15, label: t("Automatic lock"), detail: t("Locks after {n} minutes without activity, also after the computer wakes from sleep.", { n: db.settings.autoLockMin }) },
+    { ok: persisted === true, label: t("Browser keeps the data"), detail: persisted === true ? t("The browser will not clear this site's data on its own.") : persisted === false ? t("The browser may clear this data if disk space runs low. Keep backups current; using the app regularly usually changes this.") : t("This browser does not report it. Keep backups current.") },
   ];
   const done = auto.filter((a) => a.ok).length + MANUAL.filter((m) => db.settings.checks[m.key]).length;
   const total = auto.length + MANUAL.length;
   return (
-    <Card title="Security checklist" className="lg:col-span-2" action={<StatusChip tone={done === total ? "good" : "warn"}>{done} of {total} done</StatusChip>}>
+    <Card title={t("Security checklist")} className="lg:col-span-2" action={<StatusChip tone={done === total ? "good" : "warn"}>{t("{a} of {b} done", { a: done, b: total })}</StatusChip>}>
       <div className="grid gap-x-8 gap-y-1 px-5 pb-5 pt-3 md:grid-cols-2">
         <div>
-          <h3 className="label mb-2">Checked by the app</h3>
+          <h3 className="label mb-2">{t("Checked by the app")}</h3>
           <ul className="space-y-2">
             {auto.map((a) => (
               <li key={a.label} className="flex gap-2 text-sm">
-                {a.ok ? <CircleCheck className="mt-0.5 h-4 w-4 shrink-0 text-good" aria-label="OK" /> : <CircleAlert className="mt-0.5 h-4 w-4 shrink-0 text-warn" aria-label="Needs attention" />}
+                {a.ok ? <CircleCheck className="mt-0.5 h-4 w-4 shrink-0 text-good" aria-label={t("OK")} /> : <CircleAlert className="mt-0.5 h-4 w-4 shrink-0 text-warn" aria-label={t("Needs attention")} />}
                 <span><span className="text-white">{a.label}</span><span className="block text-xs text-mute">{a.detail}</span></span>
               </li>
             ))}
           </ul>
-          <p className="mt-3 text-xs text-mute">App version {process.env.NEXT_PUBLIC_BUILD ?? "local"}, built {process.env.NEXT_PUBLIC_BUILT_AT ?? ""}. A notice appears whenever the version changes.</p>
+          <p className="mt-3 text-xs text-mute">{t("App version {v}, built {d}. A notice appears whenever the version changes.", { v: process.env.NEXT_PUBLIC_BUILD ?? "local", d: process.env.NEXT_PUBLIC_BUILT_AT ?? "" })}</p>
         </div>
         <div>
-          <h3 className="label mb-2">Only you can check these</h3>
+          <h3 className="label mb-2">{t("Only you can check these")}</h3>
           <ul className="space-y-2">
             {MANUAL.map((m) => (
               <li key={m.key}>
                 <label className="flex cursor-pointer gap-2 text-sm">
                   <input type="checkbox" className="mt-0.5 h-4 w-4 shrink-0 accent-[#2b8cee]" checked={Boolean(db.settings.checks[m.key])} onChange={() => update((d) => { d.settings.checks[m.key] = !d.settings.checks[m.key]; }, `Security checklist: ${db.settings.checks[m.key] ? "unticked" : "ticked"} "${m.label}"`)} />
-                  <span><span className="text-white">{m.label}</span><span className="block text-xs text-mute">{m.how}</span></span>
+                  <span><span className="text-white">{t(m.label)}</span><span className="block text-xs text-mute">{t(m.how)}</span></span>
                 </label>
               </li>
             ))}

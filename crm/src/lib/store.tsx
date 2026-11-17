@@ -4,9 +4,11 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useRef, use
 import { deleteEnvelope, isEnvelope, loadEnvelope, newSession, open, saveEnvelope, seal, type Envelope, type Session } from "./crypto";
 import { demoDb } from "./demo";
 import { emptyKnowledge } from "./knowledge";
+import { setLang, storedLang, type Lang } from "./i18n";
 import { strength } from "./passphrase";
 import { DEFAULT_SETTINGS, DEFAULT_TEMPLATES } from "./templates";
 import type { DB } from "./types";
+import { t } from "@/lib/i18n";
 
 type Status = "loading" | "setup" | "locked" | "open";
 type Mode = "demo" | "workspace";
@@ -16,6 +18,8 @@ interface Store {
   mode: Mode;
   db: DB;
   saved: "saved" | "saving" | "error";
+  lang: Lang;
+  setLanguage: (l: Lang) => void;
   /** True when the passphrase used to unlock is weak. Known only for this session. */
   weakPass: boolean;
   /** Whether the browser promised not to clear this site's data on its own (null = not known). */
@@ -54,6 +58,9 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const [mode, setMode] = useState<Mode>("demo");
   const [db, setDb] = useState<DB>(emptyDb);
   const [saved, setSaved] = useState<Store["saved"]>("saved");
+  // The server renders English; the stored language is applied right after the page loads.
+  const [lang, setLangState] = useState<Lang>("en");
+  const setLanguage = useCallback((l: Lang) => { setLang(l); setLangState(l); }, []);
   const [weakPass, setWeakPass] = useState(false);
   const [persisted, setPersisted] = useState<boolean | null>(null);
   const session = useRef<Session | null>(null);
@@ -68,8 +75,9 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    loadEnvelope().then((e) => setStatus(e ? "locked" : "setup")).catch(() => setStatus("setup"));
-  }, []);
+    const start = (s: Status) => { const l = storedLang(); if (l !== "en") setLanguage(l); setStatus(s); };
+    loadEnvelope().then((e) => start(e ? "locked" : "setup")).catch(() => start("setup"));
+  }, [setLanguage]);
 
   const flush = useCallback(async () => {
     if (!session.current || !dirty.current) return;
@@ -107,12 +115,12 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   }, [flush]);
 
   const store = useMemo<Store>(() => ({
-    status, mode, db, saved, update, lock, weakPass, persisted,
+    status, mode, db, saved, update, lock, weakPass, persisted, lang, setLanguage,
     openDemo: () => { session.current = null; enter(demoDb(), "demo"); },
     createWorkspace: async (pass) => {
       const s = await newSession(pass);
       const fresh = emptyDb();
-      fresh.audit.push({ ts: Date.now(), action: "Workspace created" });
+      fresh.audit.push({ ts: Date.now(), action: t("Workspace created") });
       fresh.settings.seenBuild = process.env.NEXT_PUBLIC_BUILD ?? "local";
       await saveEnvelope(await seal(s, fresh));
       session.current = s;
@@ -126,7 +134,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
         const { session: s, value } = await open<DB>(pass, env);
         session.current = s;
         const next = normalise(value);
-        next.audit.unshift({ ts: Date.now(), action: "Workspace unlocked" });
+        next.audit.unshift({ ts: Date.now(), action: t("Workspace unlocked") });
         setWeakPass(strength(pass).level === "weak"); keep();
         enter(next, "workspace");
         dirty.current = true; flush();
@@ -139,7 +147,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       try { await open<DB>(current, env); } catch { return false; }
       session.current = await newSession(next);
       setWeakPass(strength(next).level === "weak");
-      dbRef.current = { ...dbRef.current, audit: [{ ts: Date.now(), action: "Passphrase changed" }, ...dbRef.current.audit] };
+      dbRef.current = { ...dbRef.current, audit: [{ ts: Date.now(), action: t("Passphrase changed") }, ...dbRef.current.audit] };
       setDb(dbRef.current);
       dirty.current = true; await flush();
       return true;
@@ -155,7 +163,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       try {
         const { session: s, value } = await open<DB>(pass, env);
         const next = normalise(value);
-        next.audit.unshift({ ts: Date.now(), action: "Workspace restored from backup file" });
+        next.audit.unshift({ ts: Date.now(), action: t("Workspace restored from backup file") });
         await saveEnvelope(await seal(s, next));
         session.current = s;
         setWeakPass(strength(pass).level === "weak"); keep();
@@ -169,7 +177,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       await deleteEnvelope();
       const blank = emptyDb(); dbRef.current = blank; setDb(blank); setStatus("setup");
     },
-  }), [status, mode, db, saved, update, lock, flush, weakPass, persisted, keep]);
+  }), [status, mode, db, saved, update, lock, flush, weakPass, persisted, keep, lang, setLanguage]);
 
   // Save before the tab closes, and lock after a period without activity.
   useEffect(() => {
@@ -199,5 +207,6 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     };
   }, [status, mode, db.settings.autoLockMin, flush, lock]);
 
-  return <Ctx.Provider value={store}>{children}</Ctx.Provider>;
+  // The key makes every screen render again when the language changes.
+  return <Ctx.Provider value={store}><div key={lang} className="contents">{children}</div></Ctx.Provider>;
 }

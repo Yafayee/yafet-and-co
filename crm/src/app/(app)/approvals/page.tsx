@@ -9,6 +9,7 @@ import { auditName, setOpp } from "@/lib/actions";
 import { daysAgo } from "@/lib/dates";
 import { fullName, initials, lastContact, suggestions } from "@/lib/rules";
 import { useStore } from "@/lib/store";
+import { t } from "@/lib/i18n";
 
 export default function Approvals() {
   const { db, update } = useStore();
@@ -17,7 +18,7 @@ export default function Approvals() {
 
   return (
     <>
-      <PageHeader title="Approvals" subtitle="Product messages the system suggests. Nothing goes out until you send it." />
+      <PageHeader title={t("Approvals")} subtitle={t("Product messages the system suggests. Nothing goes out until you send it.")} />
 
       {heldBack > 0 && (
         <div className="mb-4 rounded-md border border-line bg-night-2/50 px-3 py-2 text-sm text-ink-2">
@@ -26,7 +27,7 @@ export default function Approvals() {
       )}
 
       {list.length === 0 ? (
-        <div className="card"><Empty>Nothing is waiting. Suggestions appear for customers who agreed to product offers and have an open opportunity.</Empty></div>
+        <div className="card"><Empty>{t("Nothing is waiting. Suggestions appear for customers who agreed to product offers and have an open opportunity.")}</Empty></div>
       ) : (
         <div className="space-y-4">
           {list.slice(0, show).map((s) => {
@@ -38,23 +39,23 @@ export default function Approvals() {
                   <Avatar text={initials(c)} />
                   <div className="min-w-0 flex-1 basis-48">
                     <Link href={`/customers/view/?id=${c.id}`} className="font-medium text-white hover:underline">{fullName(c)}</Link>
-                    <p className="text-xs text-mute">{s.kind} · {s.opportunity.product}</p>
+                    <p className="text-xs text-mute">{t(s.kind)} · {t(s.opportunity.product)}</p>
                   </div>
                   <ConfidenceChip level={s.opportunity.confidence} />
-                  <button className="btn btn-danger" onClick={() => update((d) => setOpp(d, c.id, s.opportunity.product, "dismissed"), `Dismissed ${s.opportunity.product} suggestion for ${auditName(c)}`)}><X className="h-4 w-4" /> Dismiss</button>
+                  <button className="btn btn-danger" onClick={() => update((d) => setOpp(d, c.id, s.opportunity.product, "dismissed"), `Dismissed ${s.opportunity.product} suggestion for ${auditName(c)}`)}><X className="h-4 w-4" /> {t("Dismiss")}</button>
                 </div>
-                <p className="mt-3 text-sm text-ink-2"><span className="text-mute">Why: </span>{s.opportunity.reason}</p>
+                <p className="mt-3 text-sm text-ink-2"><span className="text-mute">{t("Why:")} </span>{t(s.opportunity.reason)}</p>
                 <div className="mt-2 flex flex-wrap gap-2">
-                  <StatusChip tone="good"><ShieldCheck className="h-3 w-3" /> Agreed to product offers</StatusChip>
-                  <StatusChip tone="mute">{gap === null ? "No contact recorded" : `Last contact ${gap} days ago`}</StatusChip>
+                  <StatusChip tone="good"><ShieldCheck className="h-3 w-3" /> {t("Agreed to product offers")}</StatusChip>
+                  <StatusChip tone="mute">{gap === null ? t("No contact recorded") : t("Last contact {n} days ago", { n: gap })}</StatusChip>
                 </div>
                 <div className="mt-3">
-                  <Composer key={s.id} customer={c} text={s.text} purpose="marketing" product={s.opportunity.product} label={s.kind === "Question" ? "Car question sent" : `${s.kind} sent: ${s.opportunity.product}`} />
+                  <Composer key={s.id} customer={c} text={s.text} purpose="marketing" product={s.opportunity.product} label={s.kind === "Question" ? t("Car question sent") : `${s.kind} sent: ${s.opportunity.product}`} />
                 </div>
               </article>
             );
           })}
-          {list.length > show && <button className="btn w-full" onClick={() => setShow(show + 15)}>Show more ({list.length - show} remaining)</button>}
+          {list.length > show && <button className="btn w-full" onClick={() => setShow(show + 15)}>{t("Show more ({n} remaining)", { n: list.length - show })}</button>}
         </div>
       )}
     </>
