@@ -59,5 +59,6 @@ export const DEFAULT_SETTINGS: Settings = {
   autoLockMin: 15,
   senderName: "Ihr CP Consulting Team",
   followUpAfterBirthday: true,
+  lastBackup: "",
   templates: DEFAULT_TEMPLATES,
 };

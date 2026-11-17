@@ -121,6 +121,8 @@ export interface Settings {
   autoLockMin: number;
   senderName: string;
   followUpAfterBirthday: boolean;
+  /** Date of the last encrypted backup download, or "" if never. */
+  lastBackup: string;
   templates: Record<string, Template>;
 }
 

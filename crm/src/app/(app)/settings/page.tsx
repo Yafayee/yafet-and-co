@@ -3,7 +3,7 @@
 import { Download, KeyRound, Trash2 } from "lucide-react";
 import { useState, type FormEvent } from "react";
 import { Card, PageHeader, StatusChip, Toggle } from "@/components/ui";
-import { fmtDateTime, todayIso } from "@/lib/dates";
+import { fmtDate, fmtDateTime, todayIso } from "@/lib/dates";
 import { fullName } from "@/lib/rules";
 import { download, toCsv } from "@/lib/send";
 import { useStore } from "@/lib/store";
@@ -31,7 +31,7 @@ export default function SettingsPage() {
     setPwMsg(ok ? { ok: true, text: "Passphrase changed. Older backup files still open with the old passphrase." } : { ok: false, text: "The current passphrase is not right." });
     if (ok) setPw({ current: "", next: "", again: "" });
   };
-  const backup = async () => { download(`cp-crm-backup-${todayIso()}.crmbackup`, await s.backup(), "application/json"); update(() => {}, "Encrypted backup file downloaded"); };
+  const backup = async () => { download(`cp-crm-backup-${todayIso()}.crmbackup`, await s.backup(), "application/json"); update((d) => { d.settings.lastBackup = todayIso(); }, "Encrypted backup file downloaded"); };
   const exportCsv = () => {
     const rows = [["First name", "Last name", "Email", "Phone", "Date of birth", "Street", "Postcode", "City", "Language", "Occupation", "Owns a car", "Housing", "Children", "Products", "Email consent", "SMS consent", "WhatsApp consent", "Marketing consent", "Preferred channel", "Notes"],
       ...db.customers.map((c) => [c.firstName, c.lastName, c.email, c.phone, c.dob, c.street, c.postcode, c.city, c.language, c.occupation, c.ownsCar === "unknown" ? "" : c.ownsCar === "yes" ? "ja" : "nein", { rent: "Miete", owner: "Eigentum", mortgage: "Eigentum mit Kredit", unknown: "" }[c.housing], c.children === "unknown" ? "" : c.children === "yes" ? "ja" : "nein", c.policies.map((p) => p.product).join(", "), c.consent.email ? "ja" : "nein", c.consent.sms ? "ja" : "nein", c.consent.whatsapp ? "ja" : "nein", c.consent.marketing ? "ja" : "nein", CHANNEL_LABEL[c.preferredChannel], c.notes])];
@@ -84,6 +84,7 @@ export default function SettingsPage() {
               <button className="btn btn-primary" disabled={!real} onClick={backup}><Download className="h-4 w-4" /> Download encrypted backup</button>
               <button className="btn" disabled={db.customers.length === 0} onClick={exportCsv}><Download className="h-4 w-4" /> Export customers (CSV, not encrypted)</button>
             </div>
+            <p className={`text-sm ${db.settings.lastBackup ? "text-ink-2" : "text-warn"}`}>{db.settings.lastBackup ? `Last backup downloaded: ${fmtDate(db.settings.lastBackup)}.` : "No backup downloaded yet."}</p>
             <p className="text-xs text-mute">The data lives only in this browser on this device. Download a backup regularly and keep it somewhere safe; to move to another computer, restore the backup there.</p>
             {real && (
               <>
