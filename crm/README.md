@@ -33,6 +33,10 @@ Sending works without a server: each Send button opens your own email,
 WhatsApp or SMS app with the message filled in and records it in the
 customer's history. For many emails at once, export the list for a mail merge.
 
+## Languages
+
+The interface is available in German and English, switched with the DE/EN control. English text in the code is the key; German lives in `src/lib/de.ts`, including patterns for texts that contain numbers or names. Anything missing there stays English. Not translated: the built-in product guide content, the activity record, and anything the user typed.
+
 ## Security measures in the app
 
 - Content security policy in the page: code loads only from the site; data can go only to the site and, for the optional document reader, to the Anthropic API.

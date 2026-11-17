@@ -11,6 +11,7 @@ import { daysAgo, daysToBirthday, daysUntil, fmtDayMonth, relative } from "@/lib
 import { coverage, fullName, hasProduct, initials, lifeStage, opportunitiesFor, productsOf } from "@/lib/rules";
 import { useStore } from "@/lib/store";
 import { CHANNELS, CHANNEL_LABEL, type Product } from "@/lib/types";
+import { t } from "@/lib/i18n";
 
 const PER_PAGE = 50;
 const STAGES = ["Starting out", "Building", "Pre-retirement", "Retired", "Age not known"];
@@ -61,60 +62,60 @@ export function CustomerList() {
 
   return (
     <>
-      <PageHeader title="Customers" subtitle={`${rows.length} of ${db.customers.length} profiles`}>
-        <button className="btn btn-primary" onClick={() => setAdding(true)}><UserPlus className="h-4 w-4" /> Add customer</button>
-        <Link href="/import/" className="btn btn-outline"><Upload className="h-4 w-4" /> Import</Link>
+      <PageHeader title={t("Customers")} subtitle={t(`${rows.length} of ${db.customers.length} profiles`)}>
+        <button className="btn btn-primary" onClick={() => setAdding(true)}><UserPlus className="h-4 w-4" /> {t("Add customer")}</button>
+        <Link href="/import/" className="btn btn-outline"><Upload className="h-4 w-4" /> {t("Import")}</Link>
       </PageHeader>
 
       {adding && (
         <CustomerForm initial={blankCustomer()} isNew onCancel={() => setAdding(false)} onSave={(c) => {
-          update((d) => { d.customers.push(c); logEvent(d, { customerId: c.id, kind: "system", text: "Profile created by hand." }); }, `Created profile ${fullName(c)}`);
+          update((d) => { d.customers.push(c); logEvent(d, { customerId: c.id, kind: "system", text: t("Profile created by hand.") }); }, `Created profile ${fullName(c)}`);
           router.push(`/customers/view/?id=${c.id}`);
         }} />
       )}
 
       <div className="card mb-4 grid grid-cols-1 gap-3 p-4 sm:grid-cols-2 lg:grid-cols-3">
         <label className="relative block">
-          <span className="sr-only">Search</span>
+          <span className="sr-only">{t("Search")}</span>
           <Search className="pointer-events-none absolute left-3 top-2.5 h-4 w-4 text-mute" aria-hidden />
-          <input className="input !pl-9" placeholder="Search name, email, phone, city, policy number" value={q} onChange={(e) => filter(setQ)(e.target.value)} />
+          <input className="input !pl-9" placeholder={t("Search name, email, phone, city, policy number")} value={q} onChange={(e) => filter(setQ)(e.target.value)} />
         </label>
-        <select className="input" aria-label="Has product" value={product} onChange={(e) => filter(setProduct)(e.target.value)}>
-          <option value="">Has any product</option>
-          {products.map((p) => <option key={p} value={p}>Has {p}</option>)}
+        <select className="input" aria-label={t("Has product")} value={product} onChange={(e) => filter(setProduct)(e.target.value)}>
+          <option value="">{t("Has any product")}</option>
+          {products.map((p) => <option key={p} value={p}>{t("Has {p}", { p: t(p) })}</option>)}
         </select>
-        <select className="input" aria-label="Missing product" value={missing} onChange={(e) => filter(setMissing)(e.target.value)}>
-          <option value="">Missing: no filter</option>
-          {products.map((p) => <option key={p} value={p}>Without {p}</option>)}
+        <select className="input" aria-label={t("Missing product")} value={missing} onChange={(e) => filter(setMissing)(e.target.value)}>
+          <option value="">{t("Missing: no filter")}</option>
+          {products.map((p) => <option key={p} value={p}>{t("Without {p}", { p: t(p) })}</option>)}
         </select>
-        <select className="input" aria-label="Marketing consent" value={consent} onChange={(e) => filter(setConsent)(e.target.value)}>
-          <option value="">Any consent</option>
-          <option value="marketing">Agreed to product offers</option>
-          <option value="none">Not agreed to product offers</option>
+        <select className="input" aria-label={t("Marketing consent")} value={consent} onChange={(e) => filter(setConsent)(e.target.value)}>
+          <option value="">{t("Any consent")}</option>
+          <option value="marketing">{t("Agreed to product offers")}</option>
+          <option value="none">{t("Not agreed to product offers")}</option>
         </select>
-        <select className="input" aria-label="Life stage" value={stage} onChange={(e) => filter(setStage)(e.target.value)}>
-          <option value="">Any life stage</option>
-          {STAGES.map((s) => <option key={s}>{s}</option>)}
+        <select className="input" aria-label={t("Life stage")} value={stage} onChange={(e) => filter(setStage)(e.target.value)}>
+          <option value="">{t("Any life stage")}</option>
+          {STAGES.map((s) => <option key={s} value={s}>{t(s)}</option>)}
         </select>
-        <select className="input" aria-label="More filters" value={extra} onChange={(e) => filter(setExtra)(e.target.value)}>
-          <option value="">More: no filter</option>
-          <option value="opp">With an open opportunity</option>
-          <option value="quiet">No contact for a year</option>
-          <option value="nocontact">No email and no phone</option>
-          <option value="renewals">A policy ends within 90 days</option>
+        <select className="input" aria-label={t("More filters")} value={extra} onChange={(e) => filter(setExtra)(e.target.value)}>
+          <option value="">{t("More: no filter")}</option>
+          <option value="opp">{t("With an open opportunity")}</option>
+          <option value="quiet">{t("No contact for a year")}</option>
+          <option value="nocontact">{t("No email and no phone")}</option>
+          <option value="renewals">{t("A policy ends within 90 days")}</option>
         </select>
       </div>
 
       <div className="card overflow-hidden">
         {rows.length === 0 ? (
-          <Empty>{db.customers.length === 0 ? "No customers yet. Import a list or add one by hand." : "No customers match these filters."}</Empty>
+          <Empty>{db.customers.length === 0 ? t("No customers yet. Import a list or add one by hand.") : t("No customers match these filters.")}</Empty>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full min-w-[900px]">
               <thead>
                 <tr>
-                  <th className="th">Customer</th><th className="th">Products</th><th className="th">Cover</th><th className="th">Consent</th>
-                  <th className="th">Birthday</th><th className="th">Opportunity</th><th className="th">Last contact</th>
+                  <th className="th">{t("Customer")}</th><th className="th">{t("Products")}</th><th className="th">{t("Cover")}</th><th className="th">{t("Consent")}</th>
+                  <th className="th">{t("Birthday")}</th><th className="th">{t("Opportunity")}</th><th className="th">{t("Last contact")}</th>
                 </tr>
               </thead>
               <tbody>
@@ -132,20 +133,20 @@ export function CustomerList() {
                           </span>
                         </Link>
                       </td>
-                      <td className="td"><div className="flex max-w-[220px] flex-wrap gap-1">{c.policies.length ? c.policies.map((p) => <span key={p.id} className="chip">{p.product}</span>) : <span className="text-mute">None</span>}</div></td>
-                      <td className="td whitespace-nowrap tabular-nums text-ink-2">{cov.held} of {cov.of}</td>
+                      <td className="td"><div className="flex max-w-[220px] flex-wrap gap-1">{c.policies.length ? c.policies.map((p) => <span key={p.id} className="chip">{t(p.product)}</span>) : <span className="text-mute">{t("None")}</span>}</div></td>
+                      <td className="td whitespace-nowrap tabular-nums text-ink-2">{t("{a} of {b}", { a: cov.held, b: cov.of })}</td>
                       <td className="td">
                         <div className="flex items-center gap-2">
                           {CHANNELS.map((ch) => (
-                            <span key={ch} title={`${CHANNEL_LABEL[ch]}: ${c.consent[ch] ? "agreed" : "not agreed"}`} className={c.consent[ch] ? "text-good" : "text-line"}>
+                            <span key={ch} title={t(`${CHANNEL_LABEL[ch]}: ${c.consent[ch] ? "agreed" : "not agreed"}`)} className={c.consent[ch] ? "text-good" : "text-line"}>
                               <ChannelIcon channel={ch} /><span className="sr-only">{CHANNEL_LABEL[ch]} {c.consent[ch] ? "agreed" : "not agreed"}</span>
                             </span>
                           ))}
-                          <span className={`text-xs ${c.consent.marketing ? "text-good" : "text-mute"}`}>{c.consent.marketing ? "Offers" : "Service only"}</span>
+                          <span className={`text-xs ${c.consent.marketing ? "text-good" : "text-mute"}`}>{c.consent.marketing ? t("Offers") : t("Service only")}</span>
                         </div>
                       </td>
-                      <td className="td whitespace-nowrap">{b === null ? <span className="text-mute">Not known</span> : <>{fmtDayMonth(c.dob)}<span className="block text-xs text-mute">{b === 0 ? "today" : `in ${b} days`}</span></>}</td>
-                      <td className="td">{opp ? <span className="flex flex-col items-start gap-1"><span className="text-sm">{opp.product}</span><ConfidenceChip level={opp.confidence} /></span> : <span className="text-mute">None</span>}</td>
+                      <td className="td whitespace-nowrap">{b === null ? <span className="text-mute">{t("Not known")}</span> : <>{fmtDayMonth(c.dob)}<span className="block text-xs text-mute">{b === 0 ? t("today") : t("in {n} days", { n: b })}</span></>}</td>
+                      <td className="td">{opp ? <span className="flex flex-col items-start gap-1"><span className="text-sm">{t(opp.product)}</span><ConfidenceChip level={opp.confidence} /></span> : <span className="text-mute">{t("None")}</span>}</td>
                       <td className="td whitespace-nowrap text-ink-2">{relative(last)}</td>
                     </tr>
                   );

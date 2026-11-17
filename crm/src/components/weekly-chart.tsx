@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { fmtDayMonth } from "@/lib/dates";
+import { t } from "@/lib/i18n";
 
 /** Single-series column chart with a hover/focus tooltip. */
 export function WeeklyChart({ data }: { data: { week: string; sent: number }[] }) {
@@ -18,7 +19,7 @@ export function WeeklyChart({ data }: { data: { week: string; sent: number }[] }
           <div className="pointer-events-none absolute inset-0 flex flex-col justify-between" aria-hidden>
             {ticks.map((t) => <div key={t} className="border-t border-line/50" />)}
           </div>
-          <div className="absolute inset-0 flex items-end gap-[2px]" role="img" aria-label="Messages sent per week over the last 12 weeks">
+          <div className="absolute inset-0 flex items-end gap-[2px]" role="img" aria-label={t("Messages sent per week over the last 12 weeks")}>
             {data.map((d, i) => (
               <button
                 key={d.week}
@@ -28,7 +29,7 @@ export function WeeklyChart({ data }: { data: { week: string; sent: number }[] }
                 onMouseLeave={() => setHover(null)}
                 onFocus={() => setHover(i)}
                 onBlur={() => setHover(null)}
-                aria-label={`Week of ${fmtDayMonth(d.week)}: ${d.sent} messages`}
+                aria-label={t(`Week of ${fmtDayMonth(d.week)}: ${d.sent} messages`)}
               >
                 <span
                   className={`w-full max-w-7 rounded-t-[4px] transition-colors ${hover === i ? "bg-[#5aa9f5]" : "bg-primary"} group-focus-visible:ring-2 group-focus-visible:ring-white/60`}

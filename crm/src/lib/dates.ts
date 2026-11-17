@@ -1,6 +1,11 @@
 // All dates are handled as local calendar dates ("YYYY-MM-DD") to avoid
 // time-zone shifts around midnight.
-const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+import { getLang, t } from "./i18n";
+
+const MONTHS_EN = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const MONTHS_DE = ["Jän.", "Feb.", "März", "Apr.", "Mai", "Juni", "Juli", "Aug.", "Sep.", "Okt.", "Nov.", "Dez."];
+const month = (i: number) => (getLang() === "de" ? MONTHS_DE : MONTHS_EN)[i];
+const dot = () => (getLang() === "de" ? "." : "");
 const pad = (n: number) => String(n).padStart(2, "0");
 
 export function toIso(d: Date): string {
@@ -65,15 +70,15 @@ export function eur(n: number): string {
 
 export function fmtDate(s: string): string {
   const d = parseIso(s);
-  return d ? `${d.getDate()} ${MONTHS[d.getMonth()]} ${d.getFullYear()}` : "Not known";
+  return d ? `${d.getDate()}${dot()} ${month(d.getMonth())} ${d.getFullYear()}` : t("Not known");
 }
 export function fmtDayMonth(s: string): string {
   const d = parseIso(s);
-  return d ? `${d.getDate()} ${MONTHS[d.getMonth()]}` : "Not known";
+  return d ? `${d.getDate()}${dot()} ${month(d.getMonth())}` : t("Not known");
 }
 export function fmtDateTime(ts: number): string {
   const d = new Date(ts);
-  return `${d.getDate()} ${MONTHS[d.getMonth()]} ${d.getFullYear()} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+  return `${d.getDate()}${dot()} ${month(d.getMonth())} ${d.getFullYear()} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
 }
 export function daysAgo(s: string): number | null {
   const d = parseIso(s);
@@ -81,17 +86,14 @@ export function daysAgo(s: string): number | null {
 }
 export function relative(s: string): string {
   const n = daysAgo(s);
-  if (n === null) return "never";
-  if (n === 0) return "today";
-  if (n === 1) return "yesterday";
-  if (n < 60) return `${n} days ago`;
-  if (n < 365) return `${Math.round(n / 30)} months ago`;
+  if (n === null) return t("never");
+  if (n === 0) return t("today");
+  if (n === 1) return t("yesterday");
+  if (n < 60) return t("{n} days ago", { n });
+  if (n < 365) return t("{n} months ago", { n: Math.round(n / 30) });
   const y = Math.round(n / 365);
-  return y === 1 ? "1 year ago" : `${y} years ago`;
+  return y === 1 ? t("1 year ago") : t("{n} years ago", { n: y });
 }
 export function longToday(): string {
-  const d = new Date();
-  const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-  const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-  return `${days[d.getDay()]}, ${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
+  return new Date().toLocaleDateString(getLang() === "de" ? "de-AT" : "en-GB", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
 }

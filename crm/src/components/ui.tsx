@@ -1,6 +1,7 @@
 import { Mail, MessageCircle, MessageSquareText } from "lucide-react";
 import type { ReactNode } from "react";
 import { CHANNEL_LABEL, type Channel, type Confidence, type OppStatus } from "@/lib/types";
+import { t } from "@/lib/i18n";
 
 export function PageHeader({ title, subtitle, children }: { title: string; subtitle?: string; children?: ReactNode }) {
   return (
@@ -71,7 +72,7 @@ const CONF: Record<Confidence, string> = {
 const CONF_LABEL: Record<Confidence, string> = { high: "Strong fit", medium: "Possible fit", low: "Low priority" };
 
 export function ConfidenceChip({ level }: { level: Confidence }) {
-  return <span className={`chip ${CONF[level]}`}>{CONF_LABEL[level]}</span>;
+  return <span className={`chip ${CONF[level]}`}>{t(CONF_LABEL[level])}</span>;
 }
 
 export function StatusChip({ tone, children }: { tone: "good" | "warn" | "bad" | "info" | "mute"; children: ReactNode }) {
@@ -99,16 +100,26 @@ export function Toggle({ checked, onChange, label }: { checked: boolean; onChang
 const OPP_TONE: Record<OppStatus, "info" | "warn" | "good" | "mute"> = { open: "info", contacted: "warn", won: "good", dismissed: "mute" };
 const OPP_LABEL: Record<OppStatus, string> = { open: "Open", contacted: "Contacted", won: "Won", dismissed: "Dismissed" };
 export function OppStatusChip({ status }: { status: OppStatus }) {
-  return <StatusChip tone={OPP_TONE[status]}>{OPP_LABEL[status]}</StatusChip>;
+  return <StatusChip tone={OPP_TONE[status]}>{t(OPP_LABEL[status])}</StatusChip>;
 }
 
 export function Pager({ page, pages, onPage }: { page: number; pages: number; onPage: (p: number) => void }) {
   if (pages <= 1) return null;
   return (
     <div className="flex items-center justify-between gap-3 border-t border-line/60 px-4 py-3 text-sm text-ink-2">
-      <button className="btn" disabled={page <= 1} onClick={() => onPage(page - 1)}>Previous</button>
-      <span>Page {page} of {pages}</span>
-      <button className="btn" disabled={page >= pages} onClick={() => onPage(page + 1)}>Next</button>
+      <button className="btn" disabled={page <= 1} onClick={() => onPage(page - 1)}>{t("Previous")}</button>
+      <span>{t("Page {a} of {b}", { a: page, b: pages })}</span>
+      <button className="btn" disabled={page >= pages} onClick={() => onPage(page + 1)}>{t("Next")}</button>
+    </div>
+  );
+}
+
+export function LangSwitch({ lang, onChange }: { lang: "en" | "de"; onChange: (l: "en" | "de") => void }) {
+  return (
+    <div className="inline-flex rounded-md border border-line bg-night-2/60 p-0.5" role="group" aria-label="Language">
+      {(["de", "en"] as const).map((l) => (
+        <button key={l} type="button" aria-pressed={lang === l} onClick={() => onChange(l)} className={`rounded px-2 py-0.5 text-xs font-medium ${lang === l ? "bg-teal text-white" : "text-ink-2 hover:text-white"}`}>{l.toUpperCase()}</button>
+      ))}
     </div>
   );
 }
