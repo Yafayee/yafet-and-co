@@ -1,5 +1,5 @@
-import { age, daysAgo, daysSinceBirthday } from "./dates";
-import { PRODUCT_DE, PRODUCT_EN, PRODUCTS, type Assessment, type Audience, type Condition, type Channel, type Confidence, type CrmEvent, type Customer, type DB, type Opportunity, type Product, type Purpose, type TemplateText } from "./types";
+import { age, daysAgo, daysSinceBirthday, daysUntil, fmtDate } from "./dates";
+import { INCOME_LABEL, PRODUCT_DE, PRODUCT_EN, PRODUCTS, type Assessment, type Audience, type Condition, type Channel, type Confidence, type CrmEvent, type Customer, type DB, type Opportunity, type Product, type Purpose, type TemplateText } from "./types";
 
 export const fullName = (c: Customer) => `${c.firstName} ${c.lastName}`.trim() || "Unnamed customer";
 export const initials = (c: Customer) => `${c.firstName[0] ?? ""}${c.lastName[0] ?? ""}`.toUpperCase() || "?";
@@ -76,8 +76,14 @@ const shifted = (c: Confidence, by: number): Confidence => LEVELS[Math.min(2, Ma
 export function assess(db: DB, c: Customer): Assessment[] {
   const has = (p: Product) => hasProduct(c, p);
   const years = age(c.dob);
-  const dependants = c.marital === "married" || c.marital === "partner" || c.children === "yes";
-  const alone = c.marital === "single" && c.children !== "yes";
+  const thisYear = new Date().getFullYear();
+  const kidAges = c.kids.map((y) => thisYear - y);
+  const youngest = kidAges.length ? Math.min(...kidAges) : null;
+  // With birth years known, only children under 21 count as depending on this income.
+  const hasChildren = c.children === "yes" && (youngest === null || youngest < 21);
+  const dependants = c.marital === "married" || c.marital === "partner" || hasChildren;
+  const sized = c.income ? ` Net income is ${INCOME_LABEL[c.income].toLowerCase()} a month; size the cover to that.` : "";
+  const alone = c.marital === "single" && !hasChildren;
   const working = c.employment === "employed" || c.employment === "self";
   const sporty = c.interests.some((i) => /sport|ski|rad|bike|cycl|kletter|climb|motor|fu(ss|ß)ball|football|lauf|run/i.test(i));
   const out: Assessment[] = [];
@@ -106,9 +112,9 @@ export function assess(db: DB, c: Customer): Assessment[] {
       if (years !== null && years >= 58) return skip("Disability", "Close to retirement age; new cover is rarely worthwhile.");
       if (c.employment === "student") return offer("Disability", "medium", "Still in training. Cover is cheapest when started young and healthy.");
       if (c.employment === "unknown") return offer("Disability", "medium", "Income is not protected against disability. Ask about their job first.");
-      if (alone) return offer("Disability", "high", "Lives on one income. If they could no longer work, nobody else would cover the bills.");
-      if (dependants) return offer("Disability", "high", "Others depend on this income, and it is not protected against disability.");
-      offer("Disability", working ? "high" : "medium", "Income is not protected against disability.");
+      if (alone) return offer("Disability", "high", "Lives on one income. If they could no longer work, nobody else would cover the bills." + sized);
+      if (dependants) return offer("Disability", "high", "Others depend on this income, and it is not protected against disability." + sized);
+      offer("Disability", working ? "high" : "medium", "Income is not protected against disability." + sized);
     },
     Pension: () => {
       if (c.employment === "retired" || (years !== null && years >= 63)) return skip("Pension", "Already at or near retirement.");
@@ -129,6 +135,8 @@ export function assess(db: DB, c: Customer): Assessment[] {
       ask("Home financing", "Ask whether they rent or own, and whether a home loan is running.");
     },
     "Child savings": () => {
+      if (youngest !== null && youngest >= 18) return skip("Child savings", "The children are adults.");
+      if (youngest !== null) return offer("Child savings", youngest <= 6 ? "high" : "medium", `Youngest child is ${youngest === 0 ? "under one" : youngest}. ${youngest <= 6 ? "A plan started now has the longest time to grow." : "A plan can still grow for some years before they are adults."}`);
       if (c.children === "yes") return offer("Child savings", "medium", "Has children but no savings plan for them. The earlier it starts, the longer it can grow.");
       if (c.children === "no") return skip("Child savings", "No children.");
       ask("Child savings", "Ask whether they have children or grandchildren.");
@@ -136,7 +144,13 @@ export function assess(db: DB, c: Customer): Assessment[] {
   };
 
   for (const product of productsOf(db)) {
-    if (has(product)) { const pol = c.policies.find((x) => x.product === product)!; out.push({ product, status: "has", reason: pol.number ? `Policy ${pol.number}` : "Held with us" }); continue; }
+    if (has(product)) {
+      const pol = c.policies.find((x) => x.product === product)!;
+      const left = pol.until ? daysUntil(pol.until) : null;
+      const end = left === null ? "" : left < 0 ? " Ended " + fmtDate(pol.until!) + ": check whether it was renewed." : left <= 90 ? ` Ends in ${left} days: talk about renewal.` : ` Runs until ${fmtDate(pol.until!)}.`;
+      out.push({ product, status: "has", reason: (pol.number ? `Policy ${pol.number}.` : "Held with us.") + end });
+      continue;
+    }
     // Rules taught in the app come first; they can also cover products the built-in rules do not know.
     const taught = db.knowledge.recs.find((r) => r.product === product && matches(c, r.when));
     if (taught) { out.push({ product, status: "offer", confidence: taught.confidence, reason: taught.reason }); continue; }
@@ -162,6 +176,9 @@ export function missingFacts(c: Customer): string[] {
   if (!c.dob) q.push("What is their date of birth?");
   if (c.marital === "unknown") q.push("Are they single, living with a partner, or married?");
   if (c.children === "unknown") q.push("Do they have children?");
+  if (c.children === "yes" && c.kids.length === 0) q.push("How old are the children?");
+  if (!c.income && c.employment !== "retired") q.push("Roughly what is their net income per month?");
+  if (c.policies.some((p) => !p.until)) q.push("When do the existing policies end or renew?");
   if (c.employment === "unknown") q.push("Are they employed, self-employed, in training, or retired?");
   if (c.housing === "unknown") q.push("Do they rent or own their home, and is a home loan running?");
   if (c.ownsCar === "unknown" && !hasProduct(c, "Car")) q.push("Do they own a car?");
@@ -307,4 +324,16 @@ export function audienceMembers(db: DB, a: Audience, channels: Channel[], purpos
 export function birthdaysDue(db: DB): Customer[] {
   const greeted = new Set(db.events.filter((e) => e.kind === "sent" && e.purpose === "birthday" && (daysAgo(e.date) ?? 99) <= 10).map((e) => e.customerId));
   return db.customers.filter((c) => { const d = daysSinceBirthday(c.dob); return d !== null && d <= 3 && !greeted.has(c.id) && allowedChannels(c).length > 0; });
+}
+
+export interface Renewal { customer: Customer; product: Product; until: string; days: number }
+/** Policies that end within the given number of days, or ended up to 60 days ago, soonest first. */
+export function renewals(db: DB, within = 90): Renewal[] {
+  const out: Renewal[] = [];
+  for (const customer of db.customers) for (const p of customer.policies) {
+    if (!p.until) continue;
+    const days = daysUntil(p.until);
+    if (days !== null && days <= within && days >= -60) out.push({ customer, product: p.product, until: p.until, days });
+  }
+  return out.sort((a, b) => a.days - b.days);
 }

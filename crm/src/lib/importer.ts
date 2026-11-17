@@ -6,8 +6,8 @@ export type Cell = string | number | boolean | Date | null | undefined;
 
 export const FIELDS = [
   "Do not import", "First name", "Last name", "Full name", "Email", "Phone", "Date of birth",
-  "Street", "Postcode", "City", "Language", "Occupation", "Owns a car", "Housing", "Children", "Marital status", "Employment", "Interests",
-  "Products", "Policy number", "Policy start", "Premium per month",
+  "Street", "Postcode", "City", "Language", "Occupation", "Owns a car", "Housing", "Children", "Marital status", "Employment", "Children birth years", "Net income per month", "Interests",
+  "Products", "Policy number", "Policy start", "Policy end", "Premium per month",
   "Email consent", "SMS consent", "WhatsApp consent", "Marketing consent", "Preferred channel", "Notes",
 ] as const;
 export type Field = (typeof FIELDS)[number];
@@ -27,7 +27,9 @@ const HINTS: [RegExp, Field][] = [
   [/plz|post.?(code|leitzahl)|zip/i, "Postcode"],
   [/^ort$|city|stadt|wohnort/i, "City"],
   [/wohnsit|wohnform|wohnverh|housing|^miete|eigentum|eigenheim/i, "Housing"],
+  [/(kind|child).*(geb|jahr|birth|year)|(geb|jahr|birth|year).*(kind|child)/i, "Children birth years"],
   [/kind|child/i, "Children"],
+  [/einkommen|income|gehalt|netto|verdienst|salary/i, "Net income per month"],
   [/familienstand|marital|ehe|verheiratet|partner/i, "Marital status"],
   [/besch(ä|ae)ftig|erwerb|employment|arbeitsverh|berufsstatus|t(ä|ae)tigkeit/i, "Employment"],
   [/sprache|language/i, "Language"],
@@ -35,6 +37,7 @@ const HINTS: [RegExp, Field][] = [
   [/auto|kfz.?besitz|car|fahrzeug/i, "Owns a car"],
   [/interess/i, "Interests"],
   [/(polizz|police|policy|vertrag).*(n(umme)?r|no|number)|vertragsnummer|polizzennummer/i, "Policy number"],
+  [/ablauf|laufzeitende|vertragsende|\bende\b|\bbis\b|expir|\bend\b|renewal|verl(ä|ae)nger|f(ä|ae)llig/i, "Policy end"],
   [/(beginn|start|seit|since|abschluss)/i, "Policy start"],
   [/pr(ä|ae|a)mie|premium|beitrag/i, "Premium per month"],
   [/produ|sparte|vertr(a|ä)g|polic|polizz|versicherung/i, "Products"],
@@ -180,6 +183,16 @@ export function parseEmployment(v: Cell): Customer["employment"] {
   return "unknown";
 }
 
+export function parseKids(v: Cell): number[] {
+  const now = new Date().getFullYear();
+  return [...new Set(str(v).split(/[,;/\s]+/).map(Number).filter((y) => Number.isInteger(y) && y >= 1940 && y <= now))].sort((a, b) => a - b);
+}
+export function parseIncome(v: Cell): Customer["income"] {
+  const n = Number(str(v).replace(/[^\d,.]/g, "").replace(/\.(?=\d{3})/g, "").replace(",", "."));
+  if (!n) return "";
+  return n < 1500 ? "under1500" : n < 2500 ? "1500to2500" : n <= 4000 ? "2500to4000" : "over4000";
+}
+
 const parseChannel = (v: Cell): Channel | null => { const s = str(v).toLowerCase(); return /whats/.test(s) ? "whatsapp" : /sms/.test(s) ? "sms" : /mail/.test(s) ? "email" : null; };
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
@@ -240,6 +253,7 @@ export function convert(rows: Cell[][], mapping: Field[], existing: Customer[], 
       id: uid(), product,
       number: products.length === 1 ? str(get(r, "Policy number")) : "",
       since: products.length === 1 ? parseDate(get(r, "Policy start")) : "",
+      until: products.length === 1 ? parseDate(get(r, "Policy end")) : "",
       premium: products.length === 1 ? premium : 0,
     }));
 
@@ -253,11 +267,13 @@ export function convert(rows: Cell[][], mapping: Field[], existing: Customer[], 
       language: lang, occupation: str(get(r, "Occupation")), ownsCar,
       housing: parseHousing(get(r, "Housing")), children: parseChildren(get(r, "Children")),
       marital: parseMarital(get(r, "Marital status")), employment: parseEmployment(get(r, "Employment")),
+      kids: parseKids(get(r, "Children birth years")), income: parseIncome(get(r, "Net income per month")),
       interests: str(get(r, "Interests")).split(/[,;/|]/).map((x) => x.trim()).filter(Boolean),
       policies, consent, consentUpdated: consentMapped ? today : "", consentSource: consentMapped ? `Import: ${source}` : "",
       preferredChannel: parseChannel(get(r, "Preferred channel")) ?? (consent.email || !consentMapped ? "email" : consent.whatsapp ? "whatsapp" : consent.sms ? "sms" : "email"),
       notes: str(get(r, "Notes")), createdAt: today,
     };
+    if (incoming.kids.length) incoming.children = "yes";
 
     const key = personKey(incoming);
     let target = byKey.get(key);
@@ -278,11 +294,13 @@ export function convert(rows: Cell[][], mapping: Field[], existing: Customer[], 
     if (incoming.children !== "unknown") target.children = incoming.children;
     if (incoming.marital !== "unknown") target.marital = incoming.marital;
     if (incoming.employment !== "unknown") target.employment = incoming.employment;
+    if (incoming.kids.length) { target.kids = incoming.kids; target.children = "yes"; }
+    if (incoming.income) target.income = incoming.income;
     for (const x of incoming.interests) if (!target.interests.includes(x)) target.interests.push(x);
     for (const p of incoming.policies) {
       const same = target.policies.find((q) => q.product === p.product && (!p.number || !q.number || q.number === p.number));
       if (!same) target.policies.push(p);
-      else { same.number ||= p.number; same.since ||= p.since; same.premium ||= p.premium; }
+      else { same.number ||= p.number; same.since ||= p.since; same.premium ||= p.premium; if (p.until) same.until = p.until; }
     }
     if (incoming.notes && !target.notes.includes(incoming.notes)) target.notes = [target.notes, incoming.notes].filter(Boolean).join("\n");
     if (consentMapped) {
