@@ -68,26 +68,29 @@ export function Shell({ children }: { children: ReactNode }) {
           <div className="px-3 pb-2 text-xs text-mute">
             {mode === "demo" ? t("Demo data") : <>{t("Encrypted on this device")}<br /><span className={saved === "error" ? "text-bad" : "text-ink"}>{saved === "saved" ? t("All changes saved") : saved === "saving" ? t("Saving") : t("Could not save")}</span></>}
           </div>
-          <div className="px-3 pb-2"><LangSwitch lang={lang} onChange={setLanguage} /></div>
           {lockButton}
         </div>
       </aside>
 
       <header className="sticky top-0 z-30 flex items-center justify-between border-b border-white/10 bg-night/85 px-4 py-3 backdrop-blur-md lg:hidden">
         <Logo />
-        <button className="btn !p-2" onClick={() => setOpen(!open)} aria-label={open ? t("Close menu") : t("Open menu")} aria-expanded={open}>
-          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
+        <div className="flex items-center gap-2">
+          <LangSwitch lang={lang} onChange={setLanguage} />
+          <button className="btn !p-2" onClick={() => setOpen(!open)} aria-label={open ? t("Close menu") : t("Open menu")} aria-expanded={open}>
+            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
       </header>
       {open && (
         <div className="fixed inset-x-0 top-[57px] z-20 max-h-[calc(100vh-57px)] overflow-y-auto border-b border-white/10 bg-night/95 p-4 backdrop-blur-md lg:hidden">
           {nav}
-          <div className="mt-2 border-t border-white/10 pt-2"><div className="px-3 pb-2"><LangSwitch lang={lang} onChange={setLanguage} /></div>{lockButton}</div>
+          <div className="mt-2 border-t border-white/10 pt-2">{lockButton}</div>
         </div>
       )}
 
       <main className="min-w-0 flex-1 px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
         <div className="mx-auto max-w-6xl">
+          <div className="mb-4 hidden justify-end lg:flex"><LangSwitch full lang={lang} onChange={setLanguage} /></div>
           {mode === "demo" && (
             <div className="mb-5 flex items-center gap-2 rounded-md border border-warn/30 bg-warn/5 px-3 py-2 text-xs text-warn">
               <FlaskConical className="h-4 w-4 shrink-0" aria-hidden />
