@@ -1,4 +1,4 @@
-import { Mail, MessageCircle, MessageSquareText } from "lucide-react";
+import { Globe, Mail, MessageCircle, MessageSquareText } from "lucide-react";
 import type { ReactNode } from "react";
 import { CHANNEL_LABEL, type Channel, type Confidence, type OppStatus } from "@/lib/types";
 import { t } from "@/lib/i18n";
@@ -114,11 +114,17 @@ export function Pager({ page, pages, onPage }: { page: number; pages: number; on
   );
 }
 
-export function LangSwitch({ lang, onChange }: { lang: "en" | "de"; onChange: (l: "en" | "de") => void }) {
+/** Language switch. `full` shows the language names; otherwise the short codes. */
+export function LangSwitch({ lang, onChange, full = false }: { lang: "en" | "de"; onChange: (l: "en" | "de") => void; full?: boolean }) {
+  const names = { de: "Deutsch", en: "English" } as const;
   return (
-    <div className="inline-flex rounded-md border border-line bg-night-2/60 p-0.5" role="group" aria-label="Language">
+    <div className="inline-flex items-center gap-1 rounded-lg border border-line bg-night-2/70 p-1" role="group" aria-label="Sprache / Language">
+      <Globe className="ml-1 h-4 w-4 text-mute" aria-hidden />
       {(["de", "en"] as const).map((l) => (
-        <button key={l} type="button" aria-pressed={lang === l} onClick={() => onChange(l)} className={`rounded px-2 py-0.5 text-xs font-medium ${lang === l ? "bg-teal text-white" : "text-ink-2 hover:text-white"}`}>{l.toUpperCase()}</button>
+        <button key={l} type="button" lang={l} aria-pressed={lang === l} title={names[l]} onClick={() => onChange(l)}
+          className={`min-h-8 rounded-md px-2.5 text-sm font-semibold transition-colors ${lang === l ? "bg-teal text-white shadow" : "text-ink-2 hover:bg-white/10 hover:text-white"}`}>
+          {full ? names[l] : l.toUpperCase()}
+        </button>
       ))}
     </div>
   );
