@@ -121,6 +121,18 @@ export async function checkPass(s: Session, pass: string, prf?: Bytes): Promise<
 export async function setPassphrase(s: Session, pass: string, passkey?: PasskeySecret): Promise<void> {
   s.pass = await passSlot(s.dek, pass, passkey);
 }
+/**
+ * Starts a fresh data key, locked by this passphrase (and passkey) only.
+ * Used whenever a way of opening is withdrawn or strengthened: a changed
+ * passphrase, a replaced or removed recovery code, a newly required passkey.
+ * Without this, a lock copied from an older backup file would still fit the
+ * data saved afterwards. Any recovery code is dropped; create a new one.
+ */
+export async function rotate(s: Session, pass: string, passkey?: PasskeySecret): Promise<void> {
+  s.dek = await crypto.subtle.generateKey(AES, true, ["encrypt", "decrypt"]);
+  s.pass = await passSlot(s.dek, pass, passkey);
+  delete s.recovery;
+}
 /** Creates (or replaces) the recovery code and returns it for the user to write down. It is not stored. */
 export async function addRecovery(s: Session): Promise<string> {
   const raw = random(30);

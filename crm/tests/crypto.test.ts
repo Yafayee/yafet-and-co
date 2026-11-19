@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { addRecovery, b64, checkPass, isEnvelope, ITERATIONS, looksLikeCode, newSession, open, openWithRecovery, passkeyOf, random, removeRecovery, seal, setPassphrase, unb64, type EnvelopeV1, type EnvelopeV2 } from "@/lib/crypto";
+import { addRecovery, b64, checkPass, isEnvelope, ITERATIONS, looksLikeCode, newSession, open, openWithRecovery, passkeyOf, random, removeRecovery, rotate, seal, setPassphrase, unb64, type EnvelopeV1, type EnvelopeV2 } from "@/lib/crypto";
 
 const PASS = "blauer Tisch Wolke 47 Fenster";
 const secret = { name: "Müller", n: 42 };
@@ -117,3 +117,25 @@ describe("recognising files", () => {
     expect(isEnvelope("text")).toBe(false);
   });
 });
+
+describe("renewing the data key", () => {
+  it("makes locks copied from an older backup useless for data saved afterwards", async () => {
+    const s = await newSession(PASS);
+    const oldCode = await addRecovery(s);
+    const oldBackup = await seal(s, secret);
+    // The passphrase is changed and a passkey is required: the data moves to a fresh key.
+    const passkey = { id: "cred", salt: b64(random(32)), prf: random(32) };
+    await rotate(s, "neues Wort Lampe 93 Garten", passkey);
+    const newCode = await addRecovery(s);
+    const now = await seal(s, { name: "new customer" });
+    // An attacker holding the old backup, the old passphrase and the old code grafts the old locks onto the new data.
+    await expect(open(PASS, { ...now, pass: oldBackup.pass })).rejects.toBeTruthy();
+    await expect(openWithRecovery(oldCode, { ...now, recovery: oldBackup.recovery })).rejects.toBeTruthy();
+    await expect(openWithRecovery(oldCode, now)).rejects.toBeTruthy();
+    // The legitimate ways still work, and the old backup still opens with its own credentials.
+    expect((await open("neues Wort Lampe 93 Garten", now, passkey.prf)).value).toEqual({ name: "new customer" });
+    expect((await openWithRecovery(newCode, now)).value).toEqual({ name: "new customer" });
+    expect((await open(PASS, oldBackup)).value).toEqual(secret);
+  });
+});
+

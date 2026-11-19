@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
-import { addRecovery, checkPass, deleteEnvelope, isEnvelope, loadEnvelope, newSession, open, openWithRecovery, passkeyOf, removeRecovery, saveEnvelope, seal, setPassphrase, type Envelope, type Session } from "./crypto";
+import { addRecovery, checkPass, rotate, deleteEnvelope, isEnvelope, loadEnvelope, newSession, open, openWithRecovery, passkeyOf, saveEnvelope, seal, setPassphrase, type Envelope, type Session } from "./crypto";
 import { askPasskey, createPasskey } from "./passkey";
 import { recordFail, recordOk, waitMs } from "./throttle";
 import { demoDb } from "./demo";
@@ -18,6 +18,7 @@ type Mode = "demo" | "workspace";
  * "busy": already open in another tab. "passkey": the passkey was not given
  * (cancelled, or not available on this device). "wait": too many wrong attempts.
  */
+export type LockChange = { status: "ok"; code?: string } | { status: "wrong" | "passkey" | "failed" };
 export type OpenResult = "ok" | "wrong" | "busy" | "passkey" | "wait";
 
 interface Store {
@@ -44,14 +45,21 @@ interface Store {
    * A passkey requirement is removed, because the code is used when it is lost.
    */
   recover: (code: string, newPass: string, fileText?: string) => Promise<OpenResult>;
-  /** Creates or replaces the recovery code. It is shown once and never stored. */
-  createRecoveryCode: () => Promise<string>;
-  removeRecoveryCode: () => Promise<void>;
-  enablePasskey: (pass: string) => Promise<"ok" | "wrong" | "unsupported" | "cancelled" | "norecovery">;
-  disablePasskey: (pass: string) => Promise<"ok" | "wrong" | "passkey">;
+  /**
+   * The changes below need the current passphrase. Whenever a way of opening is
+   * withdrawn or strengthened, the data is re-encrypted under a fresh key, so a
+   * lock copied from an older backup no longer fits. That also ends the old
+   * recovery code; where one existed, a new one comes back in `code`. It is
+   * shown once and never stored. "failed" means the change could not be saved
+   * and nothing was changed.
+   */
+  createRecoveryCode: (pass: string) => Promise<LockChange>;
+  removeRecoveryCode: (pass: string) => Promise<LockChange>;
+  enablePasskey: (pass: string) => Promise<LockChange | { status: "unsupported" | "cancelled" | "norecovery" }>;
+  disablePasskey: (pass: string) => Promise<LockChange>;
   openDemo: () => void;
   lock: () => void;
-  changePassphrase: (current: string, next: string) => Promise<"ok" | "wrong" | "passkey">;
+  changePassphrase: (current: string, next: string) => Promise<LockChange>;
   backup: () => Promise<string>;
   restore: (fileText: string, pass: string) => Promise<OpenResult>;
   erase: () => Promise<void>;
@@ -142,13 +150,35 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     }
   }, [flush]);
 
-  /** Adds a line to the activity record and saves at once; used after the locks on the data key change. */
-  const saveNow = useCallback(async (action: string) => {
-    dbRef.current = { ...dbRef.current, audit: [{ ts: Date.now(), action }, ...dbRef.current.audit].slice(0, 500) };
-    setDb(dbRef.current);
-    if (session.current) setSecurity({ passkey: Boolean(session.current.pass.passkey), recovery: Boolean(session.current.recovery) });
-    dirty.current = true; await flush();
-  }, [flush]);
+  /**
+   * Changes the locks on the data key. The change is made on a copy of the
+   * session and only kept once it is safely stored; if storing fails, the
+   * previous locks stay in force and the caller learns about it.
+   */
+  const relock = useCallback(async <T,>(action: string, change: (s: Session) => Promise<T>): Promise<T> => {
+    const before = session.current;
+    if (!before) throw new Error("No workspace open");
+    const next: Session = { ...before };
+    const result = await change(next);
+    const audited = { ...dbRef.current, audit: [{ ts: Date.now(), action }, ...dbRef.current.audit].slice(0, 500) };
+    if (timer.current) clearTimeout(timer.current);
+    try { await saveEnvelope(await seal(next, audited)); }
+    catch { setSaved("error"); throw new Error("not saved"); }
+    session.current = next; dbRef.current = audited; setDb(audited);
+    dirty.current = false; setSaved("saved");
+    setSecurity({ passkey: Boolean(next.pass.passkey), recovery: Boolean(next.recovery) });
+    return result;
+  }, []);
+  /** Checks the current passphrase (asking the passkey when one is required). */
+  const verify = useCallback(async (pass: string): Promise<{ ok: true; passkey?: { id: string; salt: string; prf: Uint8Array<ArrayBuffer> } } | { ok: false; status: "wrong" | "passkey" }> => {
+    const s = session.current;
+    if (!s) return { ok: false, status: "wrong" };
+    const pk = s.pass.passkey;
+    const prf = pk ? await askPasskey(pk.id, pk.salt) : null;
+    if (pk && !prf) return { ok: false, status: "passkey" };
+    if (!(await checkPass(s, pass, prf ?? undefined))) return { ok: false, status: "wrong" };
+    return { ok: true, passkey: pk && prf ? { ...pk, prf } : undefined };
+  }, []);
 
   const enter = (next: DB, m: Mode) => { dbRef.current = next; setDb(next); setMode(m); setStatus("open"); };
 
@@ -212,9 +242,9 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       try { opened = await openWithRecovery<DB>(code, env); } catch { recordFail(); return "wrong"; }
       if (!(await claim())) return "busy";
       recordOk();
-      // The code is single use: a new passphrase replaces the old lock (and any passkey), and the code is withdrawn.
-      await setPassphrase(opened.session, newPass);
-      removeRecovery(opened.session);
+      // The code is single use: the data moves to a fresh key locked by the new passphrase only.
+      // The old passphrase, any passkey and the code itself no longer open anything saved from now on.
+      await rotate(opened.session, newPass);
       const next = normalise(opened.value);
       next.audit.unshift({ ts: Date.now(), action: fileText === undefined ? "Workspace opened with the recovery code; new passphrase set" : "Backup file opened with the recovery code; new passphrase set" });
       await saveEnvelope(await seal(opened.session, next));
@@ -224,50 +254,50 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       return "ok";
     },
     changePassphrase: async (current, next) => {
-      const s = session.current;
-      if (!s) return "wrong";
-      const pk = s.pass.passkey;
-      const prf = pk ? await askPasskey(pk.id, pk.salt) : undefined;
-      if (pk && !prf) return "passkey";
-      if (!(await checkPass(s, current, prf ?? undefined))) return "wrong";
-      await setPassphrase(s, next, pk && prf ? { ...pk, prf } : undefined);
-      setWeakPass(strength(next).level === "weak");
-      await saveNow("Passphrase changed");
-      return "ok";
+      const v = await verify(current);
+      if (!v.ok) return { status: v.status };
+      try {
+        const code = await relock("Passphrase changed", async (n) => { const had = Boolean(n.recovery); await rotate(n, next, v.passkey); return had ? addRecovery(n) : undefined; });
+        setWeakPass(strength(next).level === "weak");
+        return { status: "ok", code };
+      } catch { return { status: "failed" }; }
     },
-    createRecoveryCode: async () => {
-      if (!session.current) throw new Error("No workspace open");
-      const had = Boolean(session.current.recovery);
-      const code = await addRecovery(session.current);
-      await saveNow(had ? "Recovery code replaced" : "Recovery code created");
-      return code;
+    createRecoveryCode: async (pass) => {
+      const v = await verify(pass);
+      if (!v.ok) return { status: v.status };
+      const had = Boolean(session.current?.recovery);
+      try {
+        // Replacing a code withdraws the old one, so the data key is renewed as well.
+        const code = await relock(had ? "Recovery code replaced" : "Recovery code created", async (n) => { if (had) await rotate(n, pass, v.passkey); return addRecovery(n); });
+        return { status: "ok", code };
+      } catch { return { status: "failed" }; }
     },
-    removeRecoveryCode: async () => {
-      if (!session.current || session.current.pass.passkey) return; // with a passkey the code is the only way back in
-      removeRecovery(session.current);
-      await saveNow("Recovery code removed");
+    removeRecoveryCode: async (pass) => {
+      if (session.current?.pass.passkey) return { status: "wrong" }; // with a passkey the code is the only way back in
+      const v = await verify(pass);
+      if (!v.ok) return { status: v.status };
+      try { await relock("Recovery code removed", (n) => rotate(n, pass)); return { status: "ok" }; }
+      catch { return { status: "failed" }; }
     },
     enablePasskey: async (pass) => {
       const s = session.current;
-      if (!s || s.pass.passkey) return "wrong";
-      if (!s.recovery) return "norecovery";
-      if (!(await checkPass(s, pass))) return "wrong";
+      if (!s || s.pass.passkey) return { status: "wrong" };
+      if (!s.recovery) return { status: "norecovery" };
+      if (!(await checkPass(s, pass))) return { status: "wrong" };
       const made = await createPasskey("CRM workspace");
-      if (typeof made === "string") return made;
-      await setPassphrase(s, pass, made);
-      await saveNow("Passkey switched on as a second factor");
-      return "ok";
+      if (typeof made === "string") return { status: made };
+      try {
+        // A fresh key, so that a backup from before the passkey cannot be used to get around it.
+        const code = await relock("Passkey switched on as a second factor", async (n) => { await rotate(n, pass, made); return addRecovery(n); });
+        return { status: "ok", code };
+      } catch { return { status: "failed" }; }
     },
     disablePasskey: async (pass) => {
-      const s = session.current;
-      const pk = s?.pass.passkey;
-      if (!s || !pk) return "wrong";
-      const prf = await askPasskey(pk.id, pk.salt);
-      if (!prf) return "passkey";
-      if (!(await checkPass(s, pass, prf))) return "wrong";
-      await setPassphrase(s, pass);
-      await saveNow("Passkey switched off");
-      return "ok";
+      if (!session.current?.pass.passkey) return { status: "wrong" };
+      const v = await verify(pass);
+      if (!v.ok) return { status: v.status };
+      try { await relock("Passkey switched off", (n) => setPassphrase(n, pass)); return { status: "ok" }; }
+      catch { return { status: "failed" }; }
     },
     backup: async () => {
       if (!session.current) throw new Error("No workspace open");
@@ -300,7 +330,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       await deleteEnvelope();
       const blank = emptyDb(); dbRef.current = blank; setDb(blank); setStatus("setup");
     },
-  }), [status, mode, db, saved, update, lock, flush, weakPass, persisted, keep, lang, setLanguage, claim, security, saveNow]);
+  }), [status, mode, db, saved, update, lock, flush, weakPass, persisted, keep, lang, setLanguage, claim, security, relock, verify]);
 
   // Save before the tab closes, and lock after a period without activity.
   useEffect(() => {

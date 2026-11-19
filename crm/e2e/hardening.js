@@ -46,7 +46,10 @@ const stored = (p) => p.evaluate(() => new Promise((res) => { const r = indexedD
 
   // 3. recovery code
   await settings();
-  await p.click('button:has-text("Create a recovery code")');
+  log('recovery button without the passphrase, disabled:', await p.locator('button:has-text("Create a recovery code")').isDisabled());
+  await p.locator('[data-testid=security-pass]').fill('falsch falsch falsch'); await p.click('button:has-text("Create a recovery code")'); await p.waitForSelector('[data-testid=security-msg]');
+  log('recovery code with a wrong passphrase:', await p.locator('[data-testid=security-msg]').innerText());
+  await p.locator('[data-testid=security-pass]').fill(PASS); await p.click('button:has-text("Create a recovery code")');
   const code = await p.locator('[data-testid=recovery-code]').innerText();
   log('recovery code shape ok:', /^([0-9A-Z]{5}-){5}[0-9A-Z]{5}$/.test(code));
   await p.click('button:has-text("I have written it down")');
@@ -82,14 +85,30 @@ const stored = (p) => p.evaluate(() => new Promise((res) => { const r = indexedD
 
   // 6. passkey as a second factor
   log('passkey button before a recovery code exists, disabled:', await p.locator('button:has-text("Switch passkey on")').isDisabled());
-  await p.click('button:has-text("Create a recovery code")');
-  const code2 = await p.locator('[data-testid=recovery-code]').innerText();
-  await p.click('button:has-text("I have written it down")');
-  await p.locator('section:has-text("Passkey as a second factor") input[type=password]').fill('falsch falsch falsch'); await p.click('button:has-text("Switch passkey on")'); await p.waitForSelector('section:has-text("Passkey as a second factor") p[role=status]');
-  log('passkey with wrong passphrase:', await p.locator('section:has-text("Passkey as a second factor") p[role=status]').innerText());
-  await p.locator('section:has-text("Passkey as a second factor") input[type=password]').fill(PASS2); await p.click('button:has-text("Switch passkey on")');
+  await p.locator('[data-testid=security-pass]').fill(PASS2); await p.click('button:has-text("Create a recovery code")');
+  const code1b = await p.locator('[data-testid=recovery-code]').innerText();
+  await p.click('button:has-text("I have written it down")'); await p.waitForTimeout(500);
+  const before = await stored(p);
+  await p.locator('[data-testid=security-pass]').fill('falsch falsch falsch'); await p.click('button:has-text("Switch passkey on")'); await p.waitForSelector('[data-testid=security-msg]');
+  log('passkey with wrong passphrase:', await p.locator('[data-testid=security-msg]').innerText());
+  await p.locator('[data-testid=security-pass]').fill(PASS2); await p.click('button:has-text("Switch passkey on")');
   await p.waitForSelector('button:has-text("Switch passkey off")');
-  log('passkey on:', await p.locator('section:has-text("Passkey as a second factor") p[role=status]').innerText());
+  log('passkey on:', await p.locator('[data-testid=security-msg]').innerText());
+  const code2 = await p.locator('[data-testid=recovery-code]').innerText();
+  log('a new recovery code came with the passkey:', code2 !== code1b);
+  await p.click('button:has-text("I have written it down")');
+  // an attacker who kept the stored data from before the passkey grafts its old lock onto today's data
+  await p.waitForTimeout(500);
+  const graft = await p.evaluate(async ({ old, pass }) => {
+    const env = await new Promise((res) => { const r = indexedDB.open('cp-crm', 1); r.onsuccess = () => { const g = r.result.transaction('vault').objectStore('vault').get('workspace'); g.onsuccess = () => res(g.result); }; });
+    const u = (s) => Uint8Array.from(atob(s), (c) => c.charCodeAt(0)); const e = (s) => new TextEncoder().encode(s);
+    const base = await crypto.subtle.importKey('raw', e(pass), 'PBKDF2', false, ['deriveBits']);
+    const bits = await crypto.subtle.deriveBits({ name: 'PBKDF2', salt: u(old.pass.salt), iterations: old.pass.iter, hash: 'SHA-256' }, base, 256);
+    const k = await crypto.subtle.deriveKey({ name: 'HKDF', hash: 'SHA-256', salt: u(old.pass.salt), info: e('cp-crm:2:passphrase') }, await crypto.subtle.importKey('raw', bits, 'HKDF', false, ['deriveKey']), { name: 'AES-GCM', length: 256 }, false, ['unwrapKey']);
+    const dek = await crypto.subtle.unwrapKey('raw', u(old.pass.key), k, { name: 'AES-GCM', iv: u(old.pass.iv), additionalData: e('cp-crm:2:pass') }, { name: 'AES-GCM', length: 256 }, true, ['decrypt']);
+    try { await crypto.subtle.decrypt({ name: 'AES-GCM', iv: u(env.iv), additionalData: e('cp-crm:2:data') }, dek, u(env.data)); return 'OPENED'; } catch { return 'old key does not fit'; }
+  }, { old: before, pass: PASS2 });
+  log('old lock from before the passkey against today\'s data:', graft); if (graft !== 'old key does not fit') fail('data key not renewed');
   await p.waitForTimeout(600);
   const env2 = await stored(p);
   log('stored lock names a passkey:', Boolean(env2.pass.passkey), '| recovery kept:', Boolean(env2.recovery));
