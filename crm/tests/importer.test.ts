@@ -133,5 +133,10 @@ describe("defects found in the audit", () => {
     ], map, [], "f.csv");
     expect(r.create[0].consent).toMatchObject({ email: true, marketing: false });
   });
+  it("treats an empty consent cell as no answer, in either row order", () => {
+    const blank = ["Anna", "Muster", "anna@example.com", "", "14.03.1988", "Kfz", "", "", ""];
+    const yes = ["Anna", "Muster", "anna@example.com", "", "14.03.1988", "Haushalt", "", "ja", "ja"];
+    expect(convert([blank, yes], map, [], "f.csv").create[0].consent).toMatchObject({ email: true, marketing: true });
+    expect(convert([yes, blank], map, [], "f.csv").create[0].consent).toMatchObject({ email: true, marketing: true });
+  });
 });
-

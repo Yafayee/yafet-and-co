@@ -253,6 +253,7 @@ export function convert(rows: Cell[][], mapping: Field[], existing: Customer[], 
   const res: ImportResult = { create: [], update: [], issues: [], merged: 0, skipped: 0, consentMapped };
   const byKey = new Map<string, Customer>();
   const isNew = new Set<string>();
+  const answered = new Map<string, Set<"email" | "sms" | "whatsapp" | "marketing">>();
   const existingByKey = new Map<string, Customer>();
   for (const c of existing) for (const k of personKeys(c)) if (!existingByKey.has(k)) existingByKey.set(k, c);
   const CONSENT = [["email", "Email consent"], ["sms", "SMS consent"], ["whatsapp", "WhatsApp consent"], ["marketing", "Marketing consent"]] as const;
@@ -315,7 +316,8 @@ export function convert(rows: Cell[][], mapping: Field[], existing: Customer[], 
       target = old ? structuredClone(old) : undefined;
       if (target) res.update.push(target);
     }
-    if (!target) { remember(incoming); isNew.add(incoming.id); res.create.push(incoming); return; }
+    const said = CONSENT.filter(([, f]) => has(f) && str(get(r, f)) !== "").map(([k]) => k);
+    if (!target) { remember(incoming); isNew.add(incoming.id); answered.set(incoming.id, new Set(said)); res.create.push(incoming); return; }
 
     // Merge into the existing record: fill blanks, add policies, apply consent only when the file carries it.
     const fill = <K extends keyof Customer>(k: K) => { if (!target![k] && incoming[k]) target![k] = incoming[k]; };
@@ -338,7 +340,11 @@ export function convert(rows: Cell[][], mapping: Field[], existing: Customer[], 
     remember(target);
     if (consentMapped) {
       // Several rows for one new person: a filled-in "no" in any row wins, so consent is never assumed.
-      if (isNew.has(target.id)) { for (const [k, f] of CONSENT) if (has(f) && str(get(r, f)) !== "") target.consent[k] = target.consent[k] && incoming.consent[k]; }
+      // An empty cell says nothing; only filled-in answers count.
+      if (isNew.has(target.id)) {
+        const seen = answered.get(target.id)!;
+        for (const k of said) { target.consent[k] = seen.has(k) ? target.consent[k] && incoming.consent[k] : incoming.consent[k]; seen.add(k); }
+      }
       else if (overwriteConsent) { target.consent = incoming.consent; target.consentUpdated = today; target.consentSource = `Import: ${source}`; }
     }
   });

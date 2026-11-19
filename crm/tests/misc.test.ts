@@ -88,3 +88,13 @@ describe("German", () => {
     expect(untranslated).toEqual([]);
   });
 });
+
+describe("deleting a customer", () => {
+  it("also removes them from the undo copy of the last import", async () => {
+    const { deleteCustomer } = await import("@/lib/actions");
+    const a = customer(), b = customer();
+    const d = db([a, b], { lastImport: { ts: Date.now(), file: "f.csv", created: [b.id], before: [structuredClone(a)] } });
+    deleteCustomer(d, a.id); deleteCustomer(d, b.id);
+    expect(d.lastImport).toMatchObject({ before: [], created: [] });
+  });
+});

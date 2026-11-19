@@ -44,6 +44,8 @@ function normalise(db: DB): DB {
   const base = emptyDb();
   const customers = (db.customers ?? []).map((c) => ({ ...c, housing: c.housing ?? "unknown", children: c.children ?? "unknown", marital: c.marital ?? "unknown", employment: c.employment ?? "unknown", kids: c.kids ?? [], income: c.income ?? "" }));
   const out = { ...base, ...db, customers, knowledge: { ...emptyKnowledge(), ...(db.knowledge ?? {}) }, settings: { ...base.settings, ...db.settings, templates: { ...DEFAULT_TEMPLATES, ...(db.settings?.templates ?? {}) } } };
+  // Old profile copies kept for "undo import" are dropped once the seven days are over.
+  if (out.lastImport && Date.now() - out.lastImport.ts > 7 * 86_400_000) out.lastImport = null;
   return out;
 }
 

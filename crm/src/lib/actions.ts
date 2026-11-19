@@ -40,6 +40,11 @@ export function deleteCustomer(d: DB, id: string) {
   d.tasks = d.tasks.filter((t) => t.customerId !== id);
   for (const k of Object.keys(d.opp)) if (k.startsWith(`${id}|`)) delete d.opp[k];
   for (const k of d.campaigns) k.sentTo = k.sentTo.filter((x) => x !== id);
+  // The undo copy of the last import must not keep a deleted person's data.
+  if (d.lastImport) {
+    d.lastImport.before = d.lastImport.before.filter((c) => c.id !== id);
+    d.lastImport.created = d.lastImport.created.filter((x) => x !== id);
+  }
 }
 
 export const auditName = (c: Customer) => `${fullName(c)} (${c.id})`;
