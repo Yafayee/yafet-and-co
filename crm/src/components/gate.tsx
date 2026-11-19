@@ -1,10 +1,11 @@
 "use client";
 
 import { FlaskConical, KeyRound, Lock, ShieldCheck, Upload } from "lucide-react";
-import { useRef, useState, type FormEvent, type ReactNode } from "react";
+import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 import { LangSwitch } from "@/components/ui";
 import { MIN_LENGTH, strength } from "@/lib/passphrase";
-import { useStore } from "@/lib/store";
+import { useStore, type OpenResult } from "@/lib/store";
+import { waitMs } from "@/lib/throttle";
 import { t } from "@/lib/i18n";
 
 function Frame({ title, subtitle, children }: { title: string; subtitle: string; children: ReactNode }) {
@@ -31,19 +32,43 @@ export function Gate({ children }: { children: ReactNode }) {
   const [pass2, setPass2] = useState("");
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
-  const [view, setView] = useState<"main" | "restore" | "erase">("main");
+  const [view, setView] = useState<"main" | "restore" | "erase" | "recover">("main");
+  const [code, setCode] = useState("");
+  const [fromFile, setFromFile] = useState(false);
+  // Seconds left before the next attempt is allowed after several wrong ones.
+  const [wait, setWait] = useState(0);
+  useEffect(() => {
+    const tick = () => setWait(Math.ceil(waitMs() / 1000));
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, []);
+  // A page shown inside another site's frame could be used to trick clicks; refuse to run there.
+  const [framed, setFramed] = useState(false);
+  useEffect(() => {
+    const check = () => { let inside = true; try { inside = window.top !== window.self; } catch { /* another site's frame */ } setFramed(inside); };
+    check();
+  }, []);
   const [confirmText, setConfirmText] = useState("");
   const file = useRef<HTMLInputElement>(null);
 
+  if (framed) return <main className="flex min-h-screen items-center justify-center p-6 text-center text-sm text-ink-2">{t("For your protection this application does not run inside another website. Open it directly in its own tab.")}</main>;
   if (s.status === "open") return <>{children}</>;
   if (s.status === "loading") return <Frame title={t("Opening")} subtitle={t("One moment.")}><div className="h-10" /></Frame>;
 
   const run = async (fn: () => Promise<string | void>) => {
     setBusy(true); setError("");
-    try { const msg = await fn(); if (msg) setError(msg); else { setPass(""); setPass2(""); setView("main"); } }
+    try { const msg = await fn(); if (msg) setError(msg); else { setPass(""); setPass2(""); setCode(""); setView("main"); } }
     catch { setError("That did not work. Check that this browser allows site storage, then try again."); }
-    setBusy(false);
+    setBusy(false); setWait(Math.ceil(waitMs() / 1000));
   };
+  const explain = (r: OpenResult, wrong: string): string | undefined =>
+    r === "ok" ? undefined
+    : r === "busy" ? "The workspace is already open in another tab or window. Close or lock it there first, so that changes are not lost."
+    : r === "passkey" ? "The passkey was not confirmed. Try again, or use your recovery code if the passkey is lost."
+    : r === "wait" ? "Too many wrong attempts. Wait a moment before trying again."
+    : wrong;
+  const waiting = wait > 0 && <p className="text-sm text-warn" role="status">{t("Too many wrong attempts. Next try possible in {n} seconds.", { n: wait })}</p>;
   const demoButton = (
     <button type="button" className="btn w-full" onClick={s.openDemo}><FlaskConical className="h-4 w-4" /> {t("Open the demo with invented customers")}</button>
   );
@@ -52,7 +77,7 @@ export function Gate({ children }: { children: ReactNode }) {
     const submit = (e: FormEvent) => { e.preventDefault(); run(async () => {
       const f = file.current?.files?.[0];
       if (!f) return "Choose your backup file first.";
-      return (await s.restore(await f.text(), pass)) ? undefined : t("The file or the passphrase is not right.");
+      return explain(await s.restore(await f.text(), pass), "The file or the passphrase is not right.");
     }); };
     return (
       <Frame title={t("Restore from a backup")} subtitle={t("This replaces the workspace stored in this browser.")}>
@@ -60,8 +85,37 @@ export function Gate({ children }: { children: ReactNode }) {
           <label className="block"><span className="label">{t("Backup file")}</span><input ref={file} type="file" accept=".crmbackup,application/json" className="input mt-1" /></label>
           <label className="block"><span className="label">{t("Passphrase of that backup")}</span><input type="password" className="input mt-1" value={pass} onChange={(e) => setPass(e.target.value)} autoComplete="current-password" required /></label>
           {error && <p className="text-sm text-bad" role="alert">{t(error)}</p>}
-          <button className="btn btn-primary w-full" disabled={busy}><Upload className="h-4 w-4" /> {busy ? t("Restoring") : t("Restore")}</button>
+          {waiting}
+          <button className="btn btn-primary w-full" disabled={busy || wait > 0}><Upload className="h-4 w-4" /> {busy ? t("Restoring") : t("Restore")}</button>
+          <button type="button" className="text-xs text-primary hover:underline" onClick={() => { setFromFile(true); setView("recover"); setError(""); }}>{t("Open the backup with a recovery code instead")}</button>
           <button type="button" className="btn w-full" onClick={() => { setView("main"); setError(""); }}>{t("Back")}</button>
+        </form>
+      </Frame>
+    );
+  }
+
+  if (view === "recover") {
+    const submit = (e: FormEvent) => { e.preventDefault(); run(async () => {
+      const st = strength(pass);
+      if (st.level === "weak") return st.hint;
+      if (pass !== pass2) return "The two passphrases do not match.";
+      let text: string | undefined;
+      if (fromFile) { const f = file.current?.files?.[0]; if (!f) return "Choose your backup file first."; text = await f.text(); }
+      return explain(await s.recover(code, pass, text), "That recovery code is not right, or no recovery code was set up.");
+    }); };
+    return (
+      <Frame title={t("Use your recovery code")} subtitle={t("For a forgotten passphrase or a lost passkey. You then choose a new passphrase.")}>
+        <form onSubmit={submit} className="mt-6 space-y-4">
+          {fromFile && <label className="block"><span className="label">{t("Backup file")}</span><input ref={file} type="file" accept=".crmbackup,application/json" className="input mt-1" /></label>}
+          <label className="block"><span className="label">{t("Recovery code")}</span><input className="input mt-1 font-mono tracking-wider" value={code} onChange={(e) => setCode(e.target.value)} placeholder="XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX" autoComplete="off" spellCheck={false} required /></label>
+          <label className="block"><span className="label">{t("New passphrase ({n} characters or more)", { n: MIN_LENGTH })}</span><input type="password" className="input mt-1" value={pass} onChange={(e) => setPass(e.target.value)} autoComplete="new-password" required /></label>
+          {pass && <PassMeter pass={pass} />}
+          <label className="block"><span className="label">{t("Repeat the passphrase")}</span><input type="password" className="input mt-1" value={pass2} onChange={(e) => setPass2(e.target.value)} autoComplete="new-password" required /></label>
+          <p className="text-xs text-mute">{t("The code works once. Afterwards the passkey requirement is off and the code is withdrawn; create a new one in Settings.")}</p>
+          {error && <p className="text-sm text-bad" role="alert">{t(error)}</p>}
+          {waiting}
+          <button className="btn btn-primary w-full" disabled={busy || wait > 0}><KeyRound className="h-4 w-4" /> {busy ? t("Opening") : t("Open and set new passphrase")}</button>
+          <button type="button" className="btn w-full" onClick={() => { setView("main"); setError(""); setFromFile(false); }}>{t("Back")}</button>
         </form>
       </Frame>
     );
@@ -80,20 +134,22 @@ export function Gate({ children }: { children: ReactNode }) {
   }
 
   if (s.status === "locked") {
-    const submit = (e: FormEvent) => { e.preventDefault(); run(async () => { const r = await s.unlock(pass); return r === "ok" ? undefined : r === "busy" ? "The workspace is already open in another tab or window. Close or lock it there first, so that changes are not lost." : "That passphrase is not right."; }); };
+    const submit = (e: FormEvent) => { e.preventDefault(); run(async () => explain(await s.unlock(pass), "That passphrase is not right.")); };
     return (
       <Frame title={t("Unlock your workspace")} subtitle={t("Your customer data is encrypted in this browser.")}>
         <form onSubmit={submit} className="mt-6 space-y-4">
           <label className="block"><span className="label">{t("Passphrase")}</span><input type="password" className="input mt-1" value={pass} onChange={(e) => setPass(e.target.value)} autoComplete="current-password" autoFocus required /></label>
           {error && <p className="text-sm text-bad" role="alert">{t(error)}</p>}
-          <button className="btn btn-primary w-full" disabled={busy}><Lock className="h-4 w-4" /> {busy ? t("Unlocking") : t("Unlock")}</button>
+          {waiting}
+          <button className="btn btn-primary w-full" disabled={busy || wait > 0}><Lock className="h-4 w-4" /> {busy ? t("Unlocking") : t("Unlock")}</button>
         </form>
         <div className="mt-4 space-y-2 border-t border-line/60 pt-4">
           {demoButton}
           <div className="flex justify-between text-xs">
             <button className="text-primary hover:underline" onClick={() => { setView("restore"); setError(""); }}>{t("Restore from a backup")}</button>
-            <button className="text-mute hover:underline" onClick={() => { setView("erase"); setError(""); }}>{t("Forgot passphrase")}</button>
+            <button className="text-primary hover:underline" onClick={() => { setFromFile(false); setView("recover"); setError(""); }}>{t("Use recovery code")}</button>
           </div>
+          <div className="text-right text-xs"><button className="text-mute hover:underline" onClick={() => { setView("erase"); setError(""); }}>{t("Erase this workspace")}</button></div>
         </div>
       </Frame>
     );
@@ -111,7 +167,7 @@ export function Gate({ children }: { children: ReactNode }) {
         <label className="block"><span className="label">{t("Choose a passphrase ({n} characters or more)", { n: MIN_LENGTH })}</span><input type="password" className="input mt-1" value={pass} onChange={(e) => setPass(e.target.value)} autoComplete="new-password" required /></label>
         {pass && <PassMeter pass={pass} />}
         <label className="block"><span className="label">{t("Repeat the passphrase")}</span><input type="password" className="input mt-1" value={pass2} onChange={(e) => setPass2(e.target.value)} autoComplete="new-password" required /></label>
-        <p className="rounded-md border border-warn/30 bg-warn/5 px-3 py-2 text-xs text-warn">{t("There is no reset. If you lose the passphrase, the data cannot be read by anyone, including us. Keep a backup file.")}</p>
+        <p className="rounded-md border border-warn/30 bg-warn/5 px-3 py-2 text-xs text-warn">{t("There is no reset by us. If you lose the passphrase, the data cannot be read by anyone. Create a recovery code in Settings afterwards and keep a backup file.")}</p>
         {error && <p className="text-sm text-bad" role="alert">{t(error)}</p>}
         <button className="btn btn-primary w-full" disabled={busy}><KeyRound className="h-4 w-4" /> {busy ? t("Creating") : t("Create workspace")}</button>
       </form>

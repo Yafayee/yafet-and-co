@@ -7,6 +7,7 @@ import { Card, PageHeader, StatusChip, Toggle } from "@/components/ui";
 import { fmtDate, fmtDateTime, todayIso } from "@/lib/dates";
 import { daysAgo } from "@/lib/dates";
 import { strength } from "@/lib/passphrase";
+import { CodeBox, SecurityPanel } from "@/components/security-panel";
 import { download, toCsv } from "@/lib/send";
 import { useStore } from "@/lib/store";
 import { DEFAULT_TEMPLATES } from "@/lib/templates";
@@ -20,6 +21,7 @@ export default function SettingsPage() {
   const [lang, setLang] = useState<"de" | "en">("de");
   const [pw, setPw] = useState({ current: "", next: "", again: "" });
   const [pwMsg, setPwMsg] = useState<{ ok: boolean; text: string } | null>(null);
+  const [newCode, setNewCode] = useState("");
   const [erase, setErase] = useState("");
   const [shown, setShown] = useState(30);
   const [confirmExport, setConfirmExport] = useState(false);
@@ -32,8 +34,11 @@ export default function SettingsPage() {
     const st = strength(pw.next);
     if (st.level === "weak") return setPwMsg({ ok: false, text: st.hint });
     if (pw.next !== pw.again) return setPwMsg({ ok: false, text: t("The two new passphrases do not match.") });
-    const ok = await s.changePassphrase(pw.current, pw.next);
-    setPwMsg(ok ? { ok: true, text: t("Passphrase changed. Older backup files still open with the old passphrase.") } : { ok: false, text: t("The current passphrase is not right.") });
+    const r = await s.changePassphrase(pw.current, pw.next);
+    const ok = r.status === "ok";
+    setPwMsg(ok ? { ok: true, text: t("Passphrase changed. Backup files made before this still need the old passphrase; download a new backup.") }
+      : { ok: false, text: r.status === "passkey" ? t("The passkey was not confirmed.") : r.status === "failed" ? t("The change could not be saved, so nothing was changed. Check that the browser has free storage and try again.") : t("The current passphrase is not right.") });
+    if (r.status === "ok" && r.code) setNewCode(r.code);
     if (ok) setPw({ current: "", next: "", again: "" });
   };
   const backup = async () => { download(`cp-crm-backup-${todayIso()}.crmbackup`, await s.backup(), "application/json"); update((d) => { d.settings.lastBackup = todayIso(); }, "Encrypted backup file downloaded"); };
@@ -106,6 +111,7 @@ export default function SettingsPage() {
                   {pw.next && <PassMeter pass={pw.next} />}
                   <input type="password" className="input" aria-label={t("Repeat new passphrase")} placeholder={t("Repeat new passphrase")} autoComplete="new-password" value={pw.again} onChange={(e) => setPw({ ...pw, again: e.target.value })} required />
                   {pwMsg && <p className={`text-sm ${pwMsg.ok ? "text-good" : "text-bad"}`} role="status">{pwMsg.text}</p>}
+                  {newCode && <CodeBox code={newCode} note={t("Your recovery code was renewed together with the passphrase. The previous code no longer works.")} onDone={() => setNewCode("")} />}
                   <button className="btn"><KeyRound className="h-4 w-4" /> {t("Change passphrase")}</button>
                 </form>
                 <div className="space-y-2 border-t border-line/60 pt-4">
@@ -120,6 +126,7 @@ export default function SettingsPage() {
           </div>
         </Card>
 
+        {real && <SecurityPanel />}
         <SecurityChecklist />
 
         <Card title={t("Activity record")} action={<span className="text-xs text-mute">{db.audit.length} entries</span>}>
@@ -128,7 +135,7 @@ export default function SettingsPage() {
               {db.audit.slice(0, shown).map((a, i) => (
                 <li key={i} className="flex flex-wrap gap-x-3 border-t border-line/50 py-2 text-sm first:border-t-0">
                   <span className="w-36 shrink-0 text-xs tabular-nums text-mute">{fmtDateTime(a.ts)}</span>
-                  <span className="min-w-0 flex-1 basis-48 text-ink-2">{a.action}</span>
+                  <span className="min-w-0 flex-1 basis-48 text-ink-2">{t(a.action)}</span>
                 </li>
               ))}
               {db.audit.length > shown && <li className="pt-2"><button className="text-xs text-primary hover:underline" onClick={() => setShown(shown + 50)}>{t("Show more")}</button></li>}
@@ -151,7 +158,7 @@ const MANUAL: { key: string; label: string; how: string }[] = [
 ];
 
 function SecurityChecklist() {
-  const { db, update, mode, weakPass, persisted } = useStore();
+  const { db, update, mode, weakPass, persisted, security } = useStore();
   const real = mode === "workspace";
   const https = typeof window !== "undefined" && (window.location.protocol === "https:" || window.location.hostname === "localhost");
   const backupAge = db.settings.lastBackup ? daysAgo(db.settings.lastBackup) : null;
@@ -159,6 +166,8 @@ function SecurityChecklist() {
     { ok: https, label: t("Secure connection"), detail: https ? t("The page is loaded over HTTPS.") : t("The page is not loaded over HTTPS. Do not enter data.") },
     { ok: real, label: t("Encrypted workspace"), detail: real ? t("Data is stored encrypted with AES-256.") : t("This is the demo; nothing is stored.") },
     { ok: real && !weakPass, label: t("Passphrase strength"), detail: !real ? t("Not applicable in the demo.") : weakPass ? t("Weak. Change it below.") : t("Passed the strength check.") },
+    { ok: real && security.recovery, label: t("Recovery code"), detail: security.recovery ? t("A recovery code exists for a forgotten passphrase.") : t("Not set up. Without it a forgotten passphrase means the data is lost.") },
+    { ok: real && security.passkey, label: t("Second factor"), detail: security.passkey ? t("Unlocking needs the passphrase and the passkey.") : t("Off. Switch on a passkey above so that the passphrase alone is not enough.") },
     { ok: backupAge !== null && backupAge <= 7, label: t("Recent backup"), detail: backupAge === null ? t("No backup downloaded yet.") : `Last backup ${backupAge === 0 ? "today" : `${backupAge} days ago`}.` },
     { ok: db.settings.autoLockMin <= 15, label: t("Automatic lock"), detail: t("Locks after {n} minutes without activity, also after the computer wakes from sleep.", { n: db.settings.autoLockMin }) },
     { ok: persisted === true, label: t("Browser keeps the data"), detail: persisted === true ? t("The browser will not clear this site's data on its own.") : persisted === false ? t("The browser may clear this data if disk space runs low. Keep backups current; using the app regularly usually changes this.") : t("This browser does not report it. Keep backups current.") },

@@ -1,6 +1,7 @@
 name: CRM checks
 
-# Runs on every pull request and on main: lint, type check, unit tests and a production build.
+# Runs on every pull request and on main: no data files, no known vulnerable packages,
+# lint, type check, unit tests and a production build with the tightened page policy.
 on:
   pull_request:
     paths: ['crm/**', '.github/workflows/crm-tests.yml']
@@ -24,7 +25,15 @@ jobs:
           node-version: 22
           cache: npm
           cache-dependency-path: crm/package-lock.json
+      # Customer files must never be committed: this repository is public.
+      - name: No data files in the repository
+        working-directory: .
+        run: |
+          found=$(git ls-files | grep -iE '\.(csv|xlsx?|ods|crmbackup|vcf|sql|sqlite|db)$' || true)
+          if [ -n "$found" ]; then echo "Data files are tracked in this public repository:"; echo "$found"; exit 1; fi
       - run: npm ci
+      - name: Known vulnerabilities in the packages the app ships
+        run: npm audit --omit=dev --audit-level=high
       - run: npm run lint
       - run: npm run typecheck
       - run: npm test

@@ -3,7 +3,7 @@
 import { BookOpen, CheckCheck, FlaskConical, Inbox, LayoutDashboard, Lock, Megaphone, Menu, Settings, ShieldCheck, Target, Upload, Users, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useMemo, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { QuickSearch } from "@/components/quick-search";
 import { LangSwitch } from "@/components/ui";
 import { daysAgo } from "@/lib/dates";
@@ -25,6 +25,15 @@ export function Shell({ children }: { children: ReactNode }) {
   const { db, mode, saved, lock, weakPass, update, lang, setLanguage } = useStore();
   const build = process.env.NEXT_PUBLIC_BUILD ?? "local";
   const [open, setOpen] = useState(false);
+  // Privacy screen: cover everything while the window is not the active one.
+  const [away, setAway] = useState(false);
+  const privacy = Boolean(db.settings.privacyScreen) && mode === "workspace";
+  useEffect(() => {
+    if (!privacy) return;
+    const off = () => setAway(true), on = () => setAway(false);
+    window.addEventListener("blur", off); window.addEventListener("focus", on);
+    return () => { window.removeEventListener("blur", off); window.removeEventListener("focus", on); };
+  }, [privacy]);
   const approvals = useMemo(() => suggestions(db).list.length, [db]);
   const replies = useMemo(() => db.events.filter((e) => e.kind === "reply" && !e.handled).length + db.tasks.filter((t) => !t.done).length, [db]);
   const NAV = [
@@ -62,6 +71,12 @@ export function Shell({ children }: { children: ReactNode }) {
 
   return (
     <div className="min-h-screen lg:flex">
+      {privacy && away && (
+        <div className="fixed inset-0 z-[100] flex flex-col items-center justify-center gap-3 bg-night text-center" data-testid="privacy-screen">
+          <ShieldCheck className="h-10 w-10 text-primary" aria-hidden />
+          <p className="text-sm text-ink-2">{t("Hidden while you are in another window. Click here to continue.")}</p>
+        </div>
+      )}
       <aside className="sticky top-0 hidden h-screen w-60 shrink-0 flex-col overflow-y-auto border-r border-white/10 bg-white/[0.03] p-4 backdrop-blur-md lg:flex">
         <div className="px-2 pb-6 pt-2"><Logo /></div>
         {nav}

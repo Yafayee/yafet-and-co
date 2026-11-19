@@ -1,7 +1,9 @@
 "use client";
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
-import { deleteEnvelope, isEnvelope, loadEnvelope, newSession, open, saveEnvelope, seal, type Envelope, type Session } from "./crypto";
+import { addRecovery, checkPass, rotate, deleteEnvelope, isEnvelope, loadEnvelope, newSession, open, openWithRecovery, passkeyOf, saveEnvelope, seal, setPassphrase, type Envelope, type Session } from "./crypto";
+import { askPasskey, createPasskey } from "./passkey";
+import { recordFail, recordOk, waitMs } from "./throttle";
 import { demoDb } from "./demo";
 import { emptyKnowledge } from "./knowledge";
 import { setLang, storedLang, type Lang } from "./i18n";
@@ -12,6 +14,12 @@ import { t } from "@/lib/i18n";
 
 type Status = "loading" | "setup" | "locked" | "open";
 type Mode = "demo" | "workspace";
+/**
+ * "busy": already open in another tab. "passkey": the passkey was not given
+ * (cancelled, or not available on this device). "wait": too many wrong attempts.
+ */
+export type LockChange = { status: "ok"; code?: string } | { status: "wrong" | "passkey" | "failed" };
+export type OpenResult = "ok" | "wrong" | "busy" | "passkey" | "wait";
 
 interface Store {
   status: Status;
@@ -28,12 +36,32 @@ interface Store {
   update: (fn: (draft: DB) => void, audit?: string) => void;
   createWorkspace: (pass: string) => Promise<void>;
   /** "busy" means the workspace is already open in another tab or window of this browser. */
-  unlock: (pass: string) => Promise<"ok" | "wrong" | "busy">;
+  unlock: (pass: string) => Promise<OpenResult>;
+  /** Which extra protections the open workspace has. */
+  security: { passkey: boolean; recovery: boolean };
+  /**
+   * Opens with the recovery code and sets a new passphrase. With `fileText` a
+   * backup file is recovered instead of the workspace stored in this browser.
+   * A passkey requirement is removed, because the code is used when it is lost.
+   */
+  recover: (code: string, newPass: string, fileText?: string) => Promise<OpenResult>;
+  /**
+   * The changes below need the current passphrase. Whenever a way of opening is
+   * withdrawn or strengthened, the data is re-encrypted under a fresh key, so a
+   * lock copied from an older backup no longer fits. That also ends the old
+   * recovery code; where one existed, a new one comes back in `code`. It is
+   * shown once and never stored. "failed" means the change could not be saved
+   * and nothing was changed.
+   */
+  createRecoveryCode: (pass: string) => Promise<LockChange>;
+  removeRecoveryCode: (pass: string) => Promise<LockChange>;
+  enablePasskey: (pass: string) => Promise<LockChange | { status: "unsupported" | "cancelled" | "norecovery" }>;
+  disablePasskey: (pass: string) => Promise<LockChange>;
   openDemo: () => void;
   lock: () => void;
-  changePassphrase: (current: string, next: string) => Promise<boolean>;
+  changePassphrase: (current: string, next: string) => Promise<LockChange>;
   backup: () => Promise<string>;
-  restore: (fileText: string, pass: string) => Promise<boolean>;
+  restore: (fileText: string, pass: string) => Promise<OpenResult>;
   erase: () => Promise<void>;
 }
 
@@ -67,6 +95,8 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const [weakPass, setWeakPass] = useState(false);
   const [persisted, setPersisted] = useState<boolean | null>(null);
   const session = useRef<Session | null>(null);
+  const [security, setSecurity] = useState({ passkey: false, recovery: false });
+  const started = (s: Session) => { session.current = s; setSecurity({ passkey: Boolean(s.pass.passkey), recovery: Boolean(s.recovery) }); };
   const release = useRef<(() => void) | null>(null);
   /**
    * Only one tab may have the workspace open, because two tabs would each save
@@ -120,6 +150,36 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     }
   }, [flush]);
 
+  /**
+   * Changes the locks on the data key. The change is made on a copy of the
+   * session and only kept once it is safely stored; if storing fails, the
+   * previous locks stay in force and the caller learns about it.
+   */
+  const relock = useCallback(async <T,>(action: string, change: (s: Session) => Promise<T>): Promise<T> => {
+    const before = session.current;
+    if (!before) throw new Error("No workspace open");
+    const next: Session = { ...before };
+    const result = await change(next);
+    const audited = { ...dbRef.current, audit: [{ ts: Date.now(), action }, ...dbRef.current.audit].slice(0, 500) };
+    if (timer.current) clearTimeout(timer.current);
+    try { await saveEnvelope(await seal(next, audited)); }
+    catch { setSaved("error"); throw new Error("not saved"); }
+    session.current = next; dbRef.current = audited; setDb(audited);
+    dirty.current = false; setSaved("saved");
+    setSecurity({ passkey: Boolean(next.pass.passkey), recovery: Boolean(next.recovery) });
+    return result;
+  }, []);
+  /** Checks the current passphrase (asking the passkey when one is required). */
+  const verify = useCallback(async (pass: string): Promise<{ ok: true; passkey?: { id: string; salt: string; prf: Uint8Array<ArrayBuffer> } } | { ok: false; status: "wrong" | "passkey" }> => {
+    const s = session.current;
+    if (!s) return { ok: false, status: "wrong" };
+    const pk = s.pass.passkey;
+    const prf = pk ? await askPasskey(pk.id, pk.salt) : null;
+    if (pk && !prf) return { ok: false, status: "passkey" };
+    if (!(await checkPass(s, pass, prf ?? undefined))) return { ok: false, status: "wrong" };
+    return { ok: true, passkey: pk && prf ? { ...pk, prf } : undefined };
+  }, []);
+
   const enter = (next: DB, m: Mode) => { dbRef.current = next; setDb(next); setMode(m); setStatus("open"); };
 
   const lock = useCallback(() => {
@@ -137,8 +197,8 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   }, [flush]);
 
   const store = useMemo<Store>(() => ({
-    status, mode, db, saved, update, lock, weakPass, persisted, lang, setLanguage,
-    openDemo: () => { session.current = null; enter(demoDb(), "demo"); },
+    status, mode, db, saved, update, lock, weakPass, persisted, lang, setLanguage, security,
+    openDemo: () => { session.current = null; setSecurity({ passkey: false, recovery: false }); enter(demoDb(), "demo"); },
     createWorkspace: async (pass) => {
       if (!(await claim())) throw new Error("busy");
       const s = await newSession(pass);
@@ -146,20 +206,25 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       fresh.audit.push({ ts: Date.now(), action: t("Workspace created") });
       fresh.settings.seenBuild = process.env.NEXT_PUBLIC_BUILD ?? "local";
       await saveEnvelope(await seal(s, fresh));
-      session.current = s;
+      started(s);
       setWeakPass(strength(pass).level === "weak"); keep();
       enter(fresh, "workspace");
     },
     unlock: async (pass) => {
+      if (waitMs() > 0) return "wait";
       const env = await loadEnvelope();
       if (!env) return "wrong";
+      const pk = passkeyOf(env);
+      const prf = pk ? await askPasskey(pk.id, pk.salt) : undefined;
+      if (pk && !prf) return "passkey";
       let opened: { session: Session; value: DB };
-      try { opened = await open<DB>(pass, env); } catch { return "wrong"; }
+      try { opened = await open<DB>(pass, env, prf ?? undefined); } catch { recordFail(); return "wrong"; }
       if (!(await claim())) return "busy";
       // Read again after claiming: another tab may have saved while the passphrase was being checked.
       const fresh = await loadEnvelope();
-      if (fresh && fresh.savedAt !== env.savedAt) { try { opened = await open<DB>(pass, fresh); } catch { release.current?.(); return "wrong"; } }
-      session.current = opened.session;
+      if (fresh && fresh.savedAt !== env.savedAt) { try { opened = await open<DB>(pass, fresh, prf ?? undefined); } catch { release.current?.(); return "wrong"; } }
+      recordOk();
+      started(opened.session);
       const next = normalise(opened.value);
       next.audit.unshift({ ts: Date.now(), action: "Workspace unlocked" });
       setWeakPass(strength(pass).level === "weak"); keep();
@@ -167,36 +232,96 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       dirty.current = true; flush();
       return "ok";
     },
+    recover: async (code, newPass, fileText) => {
+      if (waitMs() > 0) return "wait";
+      let env: Envelope | null;
+      if (fileText === undefined) env = await loadEnvelope();
+      else { try { const parsed: unknown = JSON.parse(fileText); env = isEnvelope(parsed) ? parsed : null; } catch { env = null; } }
+      if (!env) return "wrong";
+      let opened: { session: Session; value: DB };
+      try { opened = await openWithRecovery<DB>(code, env); } catch { recordFail(); return "wrong"; }
+      if (!(await claim())) return "busy";
+      recordOk();
+      // The code is single use: the data moves to a fresh key locked by the new passphrase only.
+      // The old passphrase, any passkey and the code itself no longer open anything saved from now on.
+      await rotate(opened.session, newPass);
+      const next = normalise(opened.value);
+      next.audit.unshift({ ts: Date.now(), action: fileText === undefined ? "Workspace opened with the recovery code; new passphrase set" : "Backup file opened with the recovery code; new passphrase set" });
+      await saveEnvelope(await seal(opened.session, next));
+      started(opened.session);
+      setWeakPass(strength(newPass).level === "weak"); keep();
+      enter(next, "workspace");
+      return "ok";
+    },
     changePassphrase: async (current, next) => {
-      const env = await loadEnvelope();
-      if (!env) return false;
-      try { await open<DB>(current, env); } catch { return false; }
-      session.current = await newSession(next);
-      setWeakPass(strength(next).level === "weak");
-      dbRef.current = { ...dbRef.current, audit: [{ ts: Date.now(), action: t("Passphrase changed") }, ...dbRef.current.audit] };
-      setDb(dbRef.current);
-      dirty.current = true; await flush();
-      return true;
+      const v = await verify(current);
+      if (!v.ok) return { status: v.status };
+      try {
+        const code = await relock("Passphrase changed", async (n) => { const had = Boolean(n.recovery); await rotate(n, next, v.passkey); return had ? addRecovery(n) : undefined; });
+        setWeakPass(strength(next).level === "weak");
+        return { status: "ok", code };
+      } catch { return { status: "failed" }; }
+    },
+    createRecoveryCode: async (pass) => {
+      const v = await verify(pass);
+      if (!v.ok) return { status: v.status };
+      const had = Boolean(session.current?.recovery);
+      try {
+        // Replacing a code withdraws the old one, so the data key is renewed as well.
+        const code = await relock(had ? "Recovery code replaced" : "Recovery code created", async (n) => { if (had) await rotate(n, pass, v.passkey); return addRecovery(n); });
+        return { status: "ok", code };
+      } catch { return { status: "failed" }; }
+    },
+    removeRecoveryCode: async (pass) => {
+      if (session.current?.pass.passkey) return { status: "wrong" }; // with a passkey the code is the only way back in
+      const v = await verify(pass);
+      if (!v.ok) return { status: v.status };
+      try { await relock("Recovery code removed", (n) => rotate(n, pass)); return { status: "ok" }; }
+      catch { return { status: "failed" }; }
+    },
+    enablePasskey: async (pass) => {
+      const s = session.current;
+      if (!s || s.pass.passkey) return { status: "wrong" };
+      if (!s.recovery) return { status: "norecovery" };
+      if (!(await checkPass(s, pass))) return { status: "wrong" };
+      const made = await createPasskey("CRM workspace");
+      if (typeof made === "string") return { status: made };
+      try {
+        // A fresh key, so that a backup from before the passkey cannot be used to get around it.
+        const code = await relock("Passkey switched on as a second factor", async (n) => { await rotate(n, pass, made); return addRecovery(n); });
+        return { status: "ok", code };
+      } catch { return { status: "failed" }; }
+    },
+    disablePasskey: async (pass) => {
+      if (!session.current?.pass.passkey) return { status: "wrong" };
+      const v = await verify(pass);
+      if (!v.ok) return { status: v.status };
+      try { await relock("Passkey switched off", (n) => setPassphrase(n, pass)); return { status: "ok" }; }
+      catch { return { status: "failed" }; }
     },
     backup: async () => {
       if (!session.current) throw new Error("No workspace open");
       return JSON.stringify(await seal(session.current, dbRef.current));
     },
     restore: async (fileText, pass) => {
-      let env: Envelope;
-      try { env = JSON.parse(fileText); } catch { return false; }
-      if (!isEnvelope(env)) return false;
-      try {
-        const { session: s, value } = await open<DB>(pass, env);
-        if (!(await claim())) return false;
-        const next = normalise(value);
-        next.audit.unshift({ ts: Date.now(), action: t("Workspace restored from backup file") });
-        await saveEnvelope(await seal(s, next));
-        session.current = s;
-        setWeakPass(strength(pass).level === "weak"); keep();
-        enter(next, "workspace");
-        return true;
-      } catch { return false; }
+      if (waitMs() > 0) return "wait";
+      let env: unknown;
+      try { env = JSON.parse(fileText); } catch { return "wrong"; }
+      if (!isEnvelope(env)) return "wrong";
+      const pk = passkeyOf(env);
+      const prf = pk ? await askPasskey(pk.id, pk.salt) : undefined;
+      if (pk && !prf) return "passkey";
+      let opened: { session: Session; value: DB };
+      try { opened = await open<DB>(pass, env, prf ?? undefined); } catch { recordFail(); return "wrong"; }
+      if (!(await claim())) return "busy";
+      recordOk();
+      const next = normalise(opened.value);
+      next.audit.unshift({ ts: Date.now(), action: "Workspace restored from backup file" });
+      await saveEnvelope(await seal(opened.session, next));
+      started(opened.session);
+      setWeakPass(strength(pass).level === "weak"); keep();
+      enter(next, "workspace");
+      return "ok";
     },
     erase: async () => {
       if (timer.current) clearTimeout(timer.current);
@@ -205,7 +330,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       await deleteEnvelope();
       const blank = emptyDb(); dbRef.current = blank; setDb(blank); setStatus("setup");
     },
-  }), [status, mode, db, saved, update, lock, flush, weakPass, persisted, keep, lang, setLanguage, claim]);
+  }), [status, mode, db, saved, update, lock, flush, weakPass, persisted, keep, lang, setLanguage, claim, security, relock, verify]);
 
   // Save before the tab closes, and lock after a period without activity.
   useEffect(() => {

@@ -98,3 +98,28 @@ describe("deleting a customer", () => {
     expect(d.lastImport).toMatchObject({ before: [], created: [] });
   });
 });
+
+describe("slowing down guesses at the unlock screen", () => {
+  const box = () => { const m = new Map<string, string>(); return { getItem: (k: string) => m.get(k) ?? null, setItem: (k: string, v: string) => { m.set(k, v); }, removeItem: (k: string) => { m.delete(k); } }; };
+  it("allows a few mistakes, then makes each further try wait longer", async () => {
+    const { recordFail, recordOk, waitMs } = await import("@/lib/throttle");
+    const b = box(); const now = 1_000_000;
+    for (let i = 0; i < 4; i++) expect(recordFail(now, b)).toBe(0);
+    expect(recordFail(now, b)).toBe(30_000);
+    expect(waitMs(now + 10_000, b)).toBe(20_000);
+    expect(waitMs(now + 31_000, b)).toBe(0);
+    expect(recordFail(now, b)).toBe(60_000);
+    for (let i = 0; i < 10; i++) recordFail(now, b);
+    expect(waitMs(now, b)).toBe(900_000);
+    // A clock set back does not lock the user out for longer than the longest step.
+    expect(waitMs(now - 10 * 86_400_000, b)).toBe(900_000);
+    recordOk(b);
+    expect(waitMs(now, b)).toBe(0);
+    expect(recordFail(now, b)).toBe(0);
+  });
+  it("copes with unreadable stored state", async () => {
+    const { waitMs } = await import("@/lib/throttle");
+    const b = box(); b.setItem("cp-crm-attempts", "{broken");
+    expect(waitMs(1, b)).toBe(0);
+  });
+});
