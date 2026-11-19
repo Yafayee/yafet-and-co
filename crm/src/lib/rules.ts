@@ -83,9 +83,10 @@ export function assess(db: DB, c: Customer): Assessment[] {
   const hasChildren = c.children === "yes" && (youngest === null || youngest < 21);
   const dependants = c.marital === "married" || c.marital === "partner" || hasChildren;
   const sized = c.income ? ` Net income is ${INCOME_LABEL[c.income].toLowerCase()} a month; size the cover to that.` : "";
-  const alone = c.marital === "single" && !hasChildren;
+  // "Alone" needs to be known: single, and either no children or only grown-up ones.
+  const alone = c.marital === "single" && (c.children === "no" || (youngest !== null && youngest >= 21));
   const working = c.employment === "employed" || c.employment === "self";
-  const sporty = c.interests.some((i) => /sport|ski|rad|bike|cycl|kletter|climb|motor|fu(ss|ß)ball|football|lauf|run/i.test(i));
+  const sporty = c.interests.some((i) => /\b(sport\w*|ski\w*|snowboard\w*|rad(fahren|sport|eln)?|mountainbike\w*|bike\w*|biking|cycling|klettern|climbing|motorrad\w*|fu(ss|ß)ball|football|laufen|running|reiten|tauchen)\b/i.test(i));
   const out: Assessment[] = [];
   const offer = (product: Product, confidence: Confidence, reason: string) => out.push({ product, status: "offer", confidence, reason });
   const ask = (product: Product, reason: string) => out.push({ product, status: "ask", reason });
@@ -309,10 +310,13 @@ export function audienceLabel(a: Audience): string {
   return kind === "missing" ? `Agreed to offers, without ${p}` : `Agreed to offers, with ${p}`;
 }
 
-export function audienceMembers(db: DB, a: Audience, channels: Channel[], purpose: Purpose): Customer[] {
+/** `skipCap` lists everyone eligible, ignoring the frequency limit; used only to count who is being held back. */
+export function audienceMembers(db: DB, a: Audience, channels: Channel[], purpose: Purpose, skipCap = false): Customer[] {
   return db.customers.filter((c) => {
     if (!bestChannel(c, channels)) return false;
     if (purpose === "marketing" && !c.consent.marketing) return false;
+    // The frequency limit applies to campaigns as well as to single suggestions.
+    if (purpose === "marketing" && !skipCap) { const since = daysSinceMarketing(db.events, c.id); if (since !== null && since < db.settings.capDays) return false; }
     if (a === "all") return true;
     if (a === "marketing") return c.consent.marketing;
     const kind = a.slice(0, a.indexOf(":")), p = a.slice(a.indexOf(":") + 1);

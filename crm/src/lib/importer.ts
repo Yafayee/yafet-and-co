@@ -19,10 +19,10 @@ const HINTS: [RegExp, Field][] = [
   [/whats/i, "WhatsApp consent"],
   [/sms/i, "SMS consent"],
   [/(mail).*(einwill|consent|opt|erlaub|zustimm)|(einwill|consent|opt|erlaub|zustimm).*(mail)/i, "Email consent"],
-  [/market|werb|newsletter|angebot.*(einwill|consent)/i, "Marketing consent"],
+  [/market|(^|[^r])werb|newsletter|angebot.*(einwill|consent)/i, "Marketing consent"],
   [/mail/i, "Email"],
-  [/tel|phone|mobil|handy/i, "Phone"],
-  [/geb|birth|dob/i, "Date of birth"],
+  [/^tel|telefon|phone|mobil|handy/i, "Phone"],
+  [/geburt|^geb|birth|dob/i, "Date of birth"],
   [/stra(ß|ss)e|street|adresse|address|anschrift/i, "Street"],
   [/plz|post.?(code|leitzahl)|zip/i, "Postcode"],
   [/^ort$|city|stadt|wohnort/i, "City"],
@@ -93,7 +93,11 @@ export async function readFile(file: File): Promise<Cell[][]> {
 
 const str = (v: Cell) => (v instanceof Date ? toIso(v) : v === null || v === undefined ? "" : String(v).trim());
 
-export function parseDate(v: Cell): string {
+/**
+ * Reads a date. Dates of birth must lie in the past; pass `future` for policy
+ * dates, which may run decades ahead (a two-digit year then means 20xx).
+ */
+export function parseDate(v: Cell, future = false): string {
   if (v instanceof Date) return isNaN(v.getTime()) ? "" : `${v.getUTCFullYear()}-${String(v.getUTCMonth() + 1).padStart(2, "0")}-${String(v.getUTCDate()).padStart(2, "0")}`;
   const s = str(v);
   if (!s) return "";
@@ -102,24 +106,31 @@ export function parseDate(v: Cell): string {
   if (r) { y = +r[1]; m = +r[2]; d = +r[3]; }
   else if ((r = /^(\d{1,2})[./-](\d{1,2})[./-](\d{2}|\d{4})$/.exec(s))) {
     d = +r[1]; m = +r[2]; y = +r[3];
-    if (y < 100) y += y > new Date().getFullYear() % 100 ? 1900 : 2000;
+    if (y < 100) y += !future && y > new Date().getFullYear() % 100 ? 1900 : 2000;
+  } else if (/^\d{4}$/.test(s) && +s >= 1900 && +s <= 2100) {
+    return ""; // a bare year is not a date; guessing a day would produce wrong birthdays
   } else if (/^\d{4,5}$/.test(s)) {
     // Excel serial date number
     const dt = new Date(Date.UTC(1899, 11, 30) + +s * 86_400_000);
     y = dt.getUTCFullYear(); m = dt.getUTCMonth() + 1; d = dt.getUTCDate();
   } else return "";
   const check = new Date(y, m - 1, d);
-  if (check.getFullYear() !== y || check.getMonth() !== m - 1 || check.getDate() !== d || y < 1900 || y > new Date().getFullYear() + 1) return "";
+  if (check.getFullYear() !== y || check.getMonth() !== m - 1 || check.getDate() !== d || y < 1900 || y > new Date().getFullYear() + (future ? 80 : 0)) return "";
   return `${y}-${String(m).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
 }
 
 export function parsePhone(v: Cell): string {
-  let s = str(v).replace(/[^\d+]/g, "");
-  if (!s) return "";
-  if (s.startsWith("00")) s = "+" + s.slice(2);
+  // "+43 (0) 660 …": the bracketed zero is only dialled inside the country.
+  const raw = str(v).replace(/\(\s*0\s*\)/g, "");
+  const digits = raw.replace(/\D/g, "");
+  if (!digits) return "";
+  let s = raw.startsWith("+") ? "+" + digits : digits;
+  if (s.startsWith("+")) s = "+" + s.slice(1).replace(/^(43|49|41)0/, "$1");
+  else if (s.startsWith("00")) s = "+" + s.slice(2);
   else if (s.startsWith("0")) s = "+43" + s.slice(1);
-  else if (!s.startsWith("+")) s = "+" + s;
-  return s.length >= 8 ? s : "";
+  else if (/^(43|49|41)\d{8,}$/.test(s)) s = "+" + s;
+  else s = "+43" + s; // written without the leading zero
+  return s.length >= 9 && s.length <= 16 ? s : "";
 }
 
 const YES = /^(ja|j|yes|y|1|true|wahr|x|ok|✓|✔)$/i;
@@ -152,6 +163,7 @@ export function parseProducts(v: Cell, known: Product[] = PRODUCTS): { products:
 export function parseHousing(v: Cell): Customer["housing"] {
   const s = str(v).toLowerCase();
   if (!s) return "unknown";
+  if (/(ohne|kein\w*|no|without)\s+(kredit|hypothek|darlehen|finanzierung|mortgage|loan)|schuldenfrei|abbezahlt|lastenfrei|paid off/.test(s)) return "owner";
   if (/kredit|hypothek|finanz|darlehen|mortgage|loan/.test(s)) return "mortgage";
   if (/miet|rent|tenant/.test(s)) return "rent";
   if (/eigent|eigenheim|own|besitz|haus/.test(s)) return "owner";
@@ -168,7 +180,8 @@ export function parseChildren(v: Cell): Customer["children"] {
 export function parseMarital(v: Cell): Customer["marital"] {
   const s = str(v).toLowerCase();
   if (!s) return "unknown";
-  if (/verheirat|married|ehe|verpartnert/.test(s)) return "married";
+  if (/unverheirat|nicht verheirat|not married|unmarried/.test(s)) return "single";
+  if (/verheirat|married|\behe|verpartnert/.test(s)) return "married";
   if (/partner|lebensgemein|liiert|cohabit/.test(s)) return "partner";
   if (/ledig|single|alleinstehend|geschieden|divorced|verwitwet|widow/.test(s)) return "single";
   return "unknown";
@@ -176,6 +189,7 @@ export function parseMarital(v: Cell): Customer["marital"] {
 export function parseEmployment(v: Cell): Customer["employment"] {
   const s = str(v).toLowerCase();
   if (!s) return "unknown";
+  if (/unselbst|nicht selbst/.test(s)) return "employed";
   if (/selbst|self|freelanc|unternehmer|gewerbe/.test(s)) return "self";
   if (/pension|rentner|retired|ruhestand/.test(s)) return "retired";
   if (/student|sch(ü|ue)ler|lehrling|apprentice|ausbildung/.test(s)) return "student";
@@ -188,8 +202,12 @@ export function parseKids(v: Cell): number[] {
   return [...new Set(str(v).split(/[,;/\s]+/).map(Number).filter((y) => Number.isInteger(y) && y >= 1940 && y <= now))].sort((a, b) => a - b);
 }
 export function parseIncome(v: Cell): Customer["income"] {
-  const n = Number(str(v).replace(/[^\d,.]/g, "").replace(/\.(?=\d{3})/g, "").replace(",", "."));
-  if (!n) return "";
+  // Accepts "2.800", "2800,50", "€ 2,800" and ranges such as "1500-2500" (the middle is used).
+  const nums = (str(v).match(/\d[\d.,]*/g) ?? [])
+    .map((x) => Number(x.replace(/[.,](?=\d{3}(\D|$))/g, "").replace(",", ".")))
+    .filter((x) => x > 0);
+  if (!nums.length) return "";
+  const n = nums.length >= 2 ? (nums[0] + nums[1]) / 2 : nums[0];
   return n < 1500 ? "under1500" : n < 2500 ? "1500to2500" : n <= 4000 ? "2500to4000" : "over4000";
 }
 
@@ -205,12 +223,23 @@ export interface ImportResult {
   consentMapped: boolean;
 }
 
-const personKey = (c: { email: string; firstName: string; lastName: string; dob: string }) =>
-  c.email ? `e:${c.email}` : `n:${c.firstName}|${c.lastName}|${c.dob}`.toLowerCase();
+/**
+ * Keys under which a person can be recognised. An email address alone is not
+ * enough: couples and families often share one, and merging them would mix
+ * two people's policies and consent.
+ */
+function personKeys(c: { email: string; firstName: string; lastName: string; dob: string }): string[] {
+  const name = `${c.firstName.trim()}|${c.lastName.trim()}`.toLowerCase();
+  const keys: string[] = [];
+  if (c.email) keys.push(`e:${c.email.toLowerCase()}|${name}`);
+  if (c.dob) keys.push(`d:${name}|${c.dob}`);
+  if (!c.email && !c.dob) keys.push(`n:${name}`);
+  return keys;
+}
 
 /**
  * Turns spreadsheet rows into customer profiles. Rows for the same person
- * (same email, or same name and date of birth) are merged, so an export with
+ * (same name with the same email or date of birth) are merged, so an export with
  * one row per policy works. Existing profiles are updated, never duplicated.
  * Consent already recorded on an existing profile is kept unless
  * `overwriteConsent` is set, so an old file cannot undo an opt-out.
@@ -224,7 +253,9 @@ export function convert(rows: Cell[][], mapping: Field[], existing: Customer[], 
   const res: ImportResult = { create: [], update: [], issues: [], merged: 0, skipped: 0, consentMapped };
   const byKey = new Map<string, Customer>();
   const isNew = new Set<string>();
-  const existingByKey = new Map(existing.map((c) => [personKey(c), c] as const));
+  const existingByKey = new Map<string, Customer>();
+  for (const c of existing) for (const k of personKeys(c)) if (!existingByKey.has(k)) existingByKey.set(k, c);
+  const CONSENT = [["email", "Email consent"], ["sms", "SMS consent"], ["whatsapp", "WhatsApp consent"], ["marketing", "Marketing consent"]] as const;
 
   rows.forEach((r, i) => {
     const rowNo = i + 2; // header is row 1
@@ -252,8 +283,8 @@ export function convert(rows: Cell[][], mapping: Field[], existing: Customer[], 
     const policies: Policy[] = products.map((product) => ({
       id: uid(), product,
       number: products.length === 1 ? str(get(r, "Policy number")) : "",
-      since: products.length === 1 ? parseDate(get(r, "Policy start")) : "",
-      until: products.length === 1 ? parseDate(get(r, "Policy end")) : "",
+      since: products.length === 1 ? parseDate(get(r, "Policy start"), true) : "",
+      until: products.length === 1 ? parseDate(get(r, "Policy end"), true) : "",
       premium: products.length === 1 ? premium : 0,
     }));
 
@@ -275,15 +306,16 @@ export function convert(rows: Cell[][], mapping: Field[], existing: Customer[], 
     };
     if (incoming.kids.length) incoming.children = "yes";
 
-    const key = personKey(incoming);
-    let target = byKey.get(key);
+    const keys = personKeys(incoming);
+    const remember = (c: Customer) => { for (const k of [...keys, ...personKeys(c)]) if (!byKey.has(k)) byKey.set(k, c); };
+    let target = keys.map((k) => byKey.get(k)).find(Boolean);
     if (target) res.merged++;
     else {
-      const old = existingByKey.get(key);
+      const old = keys.map((k) => existingByKey.get(k)).find(Boolean);
       target = old ? structuredClone(old) : undefined;
-      if (target) { byKey.set(key, target); res.update.push(target); }
+      if (target) res.update.push(target);
     }
-    if (!target) { byKey.set(key, incoming); isNew.add(incoming.id); res.create.push(incoming); return; }
+    if (!target) { remember(incoming); isNew.add(incoming.id); res.create.push(incoming); return; }
 
     // Merge into the existing record: fill blanks, add policies, apply consent only when the file carries it.
     const fill = <K extends keyof Customer>(k: K) => { if (!target![k] && incoming[k]) target![k] = incoming[k]; };
@@ -303,8 +335,10 @@ export function convert(rows: Cell[][], mapping: Field[], existing: Customer[], 
       else { same.number ||= p.number; same.since ||= p.since; same.premium ||= p.premium; if (p.until) same.until = p.until; }
     }
     if (incoming.notes && !target.notes.includes(incoming.notes)) target.notes = [target.notes, incoming.notes].filter(Boolean).join("\n");
+    remember(target);
     if (consentMapped) {
-      if (isNew.has(target.id)) { (["email", "sms", "whatsapp", "marketing"] as const).forEach((k) => { target!.consent[k] = target!.consent[k] || incoming.consent[k]; }); }
+      // Several rows for one new person: a filled-in "no" in any row wins, so consent is never assumed.
+      if (isNew.has(target.id)) { for (const [k, f] of CONSENT) if (has(f) && str(get(r, f)) !== "") target.consent[k] = target.consent[k] && incoming.consent[k]; }
       else if (overwriteConsent) { target.consent = incoming.consent; target.consentUpdated = today; target.consentSource = `Import: ${source}`; }
     }
   });

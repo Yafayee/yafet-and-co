@@ -66,6 +66,25 @@ npm run dev
 Then open http://localhost:3000. The address only works on the computer where
 these commands are running.
 
+## Tests
+
+```bash
+npm run lint        # code style and React rules
+npm run typecheck   # TypeScript
+npm test            # unit tests for the offer rules, the importer and the consent checks
+bash e2e/run.sh     # browser tests against a fresh build (needs Playwright and Python 3)
+```
+
+The first three and the build run automatically on every pull request
+(`.github/workflows/crm-tests.yml`). All test data is invented.
+
+Safeguards worth knowing about:
+
+- The workspace opens in one browser tab at a time, so two tabs cannot overwrite each other.
+- An import can be undone for seven days. Undoing never switches a consent back on.
+- People are matched by name together with email or date of birth, so family members who share an email address stay separate.
+- Campaigns and the profile respect the frequency limit; customers inside it are shown as held back.
+
 ## Put it on a web domain
 
 ```bash

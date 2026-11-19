@@ -4,6 +4,7 @@ import { BookOpen, CheckCheck, FlaskConical, Inbox, LayoutDashboard, Lock, Megap
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useMemo, useState, type ReactNode } from "react";
+import { QuickSearch } from "@/components/quick-search";
 import { LangSwitch } from "@/components/ui";
 import { daysAgo } from "@/lib/dates";
 import { suggestions } from "@/lib/rules";
@@ -83,6 +84,7 @@ export function Shell({ children }: { children: ReactNode }) {
       </header>
       {open && (
         <div className="fixed inset-x-0 top-[57px] z-20 max-h-[calc(100vh-57px)] overflow-y-auto border-b border-white/10 bg-night/95 p-4 backdrop-blur-md lg:hidden">
+          <div className="mb-3"><QuickSearch onPick={() => setOpen(false)} /></div>
           {nav}
           <div className="mt-2 border-t border-white/10 pt-2">{lockButton}</div>
         </div>
@@ -90,7 +92,7 @@ export function Shell({ children }: { children: ReactNode }) {
 
       <main className="min-w-0 flex-1 px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
         <div className="mx-auto max-w-6xl">
-          <div className="mb-4 hidden justify-end lg:flex"><LangSwitch full lang={lang} onChange={setLanguage} /></div>
+          <div className="mb-4 hidden items-center justify-between gap-4 lg:flex"><QuickSearch /><LangSwitch full lang={lang} onChange={setLanguage} /></div>
           {mode === "demo" && (
             <div className="mb-5 flex items-center gap-2 rounded-md border border-warn/30 bg-warn/5 px-3 py-2 text-xs text-warn">
               <FlaskConical className="h-4 w-4 shrink-0" aria-hidden />

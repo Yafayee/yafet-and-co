@@ -57,7 +57,7 @@ export function Composer({ customer, text, purpose, label, product, campaignId, 
         {collapsed && <button className="btn" onClick={() => setEditing(!editing)}><Pencil className="h-4 w-4" /> {editing ? t("Hide") : t("Edit")}</button>}
         <span className="flex-1" />
         <a className="btn btn-primary" href={href} target={channel === "whatsapp" ? "_blank" : undefined} rel="noopener noreferrer" onClick={onSend}>
-          <ExternalLink className="h-4 w-4" /> Send via {CHANNEL_LABEL[channel]}
+          <ExternalLink className="h-4 w-4" /> {t("Send via {ch}", { ch: t(CHANNEL_LABEL[channel]) })}
         </a>
       </div>
     </div>

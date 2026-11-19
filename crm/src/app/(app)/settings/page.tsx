@@ -51,10 +51,10 @@ export default function SettingsPage() {
         <Card title={t("Sending rules")}>
           <div className="space-y-4 px-5 pb-5 pt-3">
             <label className="block"><span className="label">{t("Signature used in messages")}</span>
-              <input className="input mt-1" value={db.settings.senderName} onChange={(e) => update((d) => { d.settings.senderName = e.target.value; })} />
+              <input className="input mt-1" defaultValue={db.settings.senderName} onBlur={(e) => { const v = e.target.value; if (v !== db.settings.senderName) update((d) => { d.settings.senderName = v; }); }} />
             </label>
             <label className="block"><span className="label">{t("Minimum days between product messages to one customer")}</span>
-              <input type="number" min={7} max={365} className="input mt-1 max-w-32" value={db.settings.capDays} onChange={(e) => update((d) => { d.settings.capDays = Math.min(365, Math.max(7, Number(e.target.value) || 30)); })} />
+              <input type="number" min={7} max={365} className="input mt-1 max-w-32" defaultValue={db.settings.capDays} onBlur={(e) => { const v = Math.min(365, Math.max(7, Math.round(Number(e.target.value)) || 30)); e.target.value = String(v); if (v !== db.settings.capDays) update((d) => { d.settings.capDays = v; }, `Frequency limit set to ${v} days`); }} />
             </label>
             <Toggle checked={db.settings.followUpAfterBirthday} onChange={() => update((d) => { d.settings.followUpAfterBirthday = !d.settings.followUpAfterBirthday; })} label={t("Suggest a product follow-up one week after a birthday greeting")} />
             <p className="text-xs text-mute">{t("Product messages are only ever suggested for customers who agreed to offers. Greetings need an agreed channel. These two rules cannot be switched off.")}</p>
@@ -67,8 +67,8 @@ export default function SettingsPage() {
               <select className="input !w-auto flex-1" aria-label={t("Message")} value={tKey} onChange={(e) => setTKey(e.target.value)}>{Object.entries(db.settings.templates).map(([k, v]) => <option key={k} value={k}>{t(v.label)}</option>)}</select>
               <select className="input !w-auto" aria-label={t("Language")} value={lang} onChange={(e) => setLang(e.target.value as "de" | "en")}><option value="de">{t("German")}</option><option value="en">{t("English")}</option></select>
             </div>
-            <label className="block"><span className="label">{t("Subject (email only)")}</span><input className="input mt-1" value={tpl[lang].subject} onChange={(e) => setTemplate("subject", e.target.value)} /></label>
-            <label className="block"><span className="label">{t("Text")}</span><textarea className="input mt-1 min-h-44 leading-relaxed" value={tpl[lang].body} onChange={(e) => setTemplate("body", e.target.value)} /></label>
+            <label className="block"><span className="label">{t("Subject (email only)")}</span><input key={`s${tKey}${lang}${tpl[lang].subject}`} className="input mt-1" defaultValue={tpl[lang].subject} onBlur={(e) => { if (e.target.value !== tpl[lang].subject) setTemplate("subject", e.target.value); }} /></label>
+            <label className="block"><span className="label">{t("Text")}</span><textarea key={`b${tKey}${lang}${tpl[lang].body.length}`} className="input mt-1 min-h-44 leading-relaxed" defaultValue={tpl[lang].body} onBlur={(e) => { if (e.target.value !== tpl[lang].body) setTemplate("body", e.target.value); }} /></label>
             <div className="flex flex-wrap items-center justify-between gap-2">
               <p className="text-xs text-mute">Placeholders: {"{firstName} {lastName} {product} {sender}"}</p>
               {DEFAULT_TEMPLATES[tKey] && <button className="text-xs text-primary hover:underline" onClick={() => update((d) => { d.settings.templates[tKey][lang] = { ...DEFAULT_TEMPLATES[tKey][lang] }; })}>{t("Reset this text")}</button>}
@@ -83,7 +83,7 @@ export default function SettingsPage() {
               <StatusChip tone="good">{t("No customer data leaves this browser")}</StatusChip>
             </div>
             <label className="block"><span className="label">{t("Lock automatically after minutes without activity")}</span>
-              <input type="number" min={1} max={240} className="input mt-1 max-w-32" value={db.settings.autoLockMin} onChange={(e) => update((d) => { d.settings.autoLockMin = Math.min(240, Math.max(1, Number(e.target.value) || 15)); })} />
+              <input type="number" min={1} max={240} className="input mt-1 max-w-32" defaultValue={db.settings.autoLockMin} onBlur={(e) => { const v = Math.min(240, Math.max(1, Math.round(Number(e.target.value)) || 15)); e.target.value = String(v); if (v !== db.settings.autoLockMin) update((d) => { d.settings.autoLockMin = v; }, `Automatic lock set to ${v} minutes`); }} />
             </label>
             <div className="flex flex-wrap gap-2">
               <button className="btn btn-primary" disabled={!real} onClick={backup}><Download className="h-4 w-4" /> {t("Download encrypted backup")}</button>

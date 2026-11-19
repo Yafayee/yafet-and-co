@@ -27,7 +27,8 @@ interface Store {
   /** Change the data. The mutator receives a private copy; `audit` adds a line to the activity record. */
   update: (fn: (draft: DB) => void, audit?: string) => void;
   createWorkspace: (pass: string) => Promise<void>;
-  unlock: (pass: string) => Promise<boolean>;
+  /** "busy" means the workspace is already open in another tab or window of this browser. */
+  unlock: (pass: string) => Promise<"ok" | "wrong" | "busy">;
   openDemo: () => void;
   lock: () => void;
   changePassphrase: (current: string, next: string) => Promise<boolean>;
@@ -64,6 +65,21 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const [weakPass, setWeakPass] = useState(false);
   const [persisted, setPersisted] = useState<boolean | null>(null);
   const session = useRef<Session | null>(null);
+  const release = useRef<(() => void) | null>(null);
+  /**
+   * Only one tab may have the workspace open, because two tabs would each save
+   * their own copy and the later save would silently undo the other's changes.
+   */
+  const claim = useCallback((): Promise<boolean> => new Promise((done) => {
+    if (release.current) return done(true);
+    const locks = typeof navigator !== "undefined" ? navigator.locks : undefined;
+    if (!locks) return done(true);
+    locks.request("cp-crm-workspace", { ifAvailable: true }, (lock) => {
+      if (!lock) { done(false); return undefined; }
+      done(true);
+      return new Promise<void>((free) => { release.current = () => { release.current = null; free(); }; });
+    }).catch(() => done(true));
+  }), []);
   /** Ask the browser to keep the stored data even when disk space runs low. */
   const keep = useCallback(() => {
     const st = typeof navigator !== "undefined" ? navigator.storage : undefined;
@@ -108,16 +124,21 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     const wasWorkspace = Boolean(session.current);
     const done = () => {
       session.current = null;
+      release.current?.();
       const blank = emptyDb(); dbRef.current = blank; setDb(blank);
       loadEnvelope().then((e) => setStatus(e ? "locked" : "setup")).catch(() => setStatus("setup"));
     };
-    if (wasWorkspace) { if (timer.current) clearTimeout(timer.current); flush().finally(done); } else done();
+    if (!wasWorkspace) return done();
+    if (timer.current) clearTimeout(timer.current);
+    // If the last save failed, stay open: locking would throw the unsaved changes away.
+    flush().finally(() => { if (dirty.current) setSaved("error"); else done(); });
   }, [flush]);
 
   const store = useMemo<Store>(() => ({
     status, mode, db, saved, update, lock, weakPass, persisted, lang, setLanguage,
     openDemo: () => { session.current = null; enter(demoDb(), "demo"); },
     createWorkspace: async (pass) => {
+      if (!(await claim())) throw new Error("busy");
       const s = await newSession(pass);
       const fresh = emptyDb();
       fresh.audit.push({ ts: Date.now(), action: t("Workspace created") });
@@ -129,17 +150,20 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     },
     unlock: async (pass) => {
       const env = await loadEnvelope();
-      if (!env) return false;
-      try {
-        const { session: s, value } = await open<DB>(pass, env);
-        session.current = s;
-        const next = normalise(value);
-        next.audit.unshift({ ts: Date.now(), action: t("Workspace unlocked") });
-        setWeakPass(strength(pass).level === "weak"); keep();
-        enter(next, "workspace");
-        dirty.current = true; flush();
-        return true;
-      } catch { return false; }
+      if (!env) return "wrong";
+      let opened: { session: Session; value: DB };
+      try { opened = await open<DB>(pass, env); } catch { return "wrong"; }
+      if (!(await claim())) return "busy";
+      // Read again after claiming: another tab may have saved while the passphrase was being checked.
+      const fresh = await loadEnvelope();
+      if (fresh && fresh.savedAt !== env.savedAt) { try { opened = await open<DB>(pass, fresh); } catch { release.current?.(); return "wrong"; } }
+      session.current = opened.session;
+      const next = normalise(opened.value);
+      next.audit.unshift({ ts: Date.now(), action: "Workspace unlocked" });
+      setWeakPass(strength(pass).level === "weak"); keep();
+      enter(next, "workspace");
+      dirty.current = true; flush();
+      return "ok";
     },
     changePassphrase: async (current, next) => {
       const env = await loadEnvelope();
@@ -162,6 +186,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       if (!isEnvelope(env)) return false;
       try {
         const { session: s, value } = await open<DB>(pass, env);
+        if (!(await claim())) return false;
         const next = normalise(value);
         next.audit.unshift({ ts: Date.now(), action: t("Workspace restored from backup file") });
         await saveEnvelope(await seal(s, next));
@@ -174,10 +199,11 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     erase: async () => {
       if (timer.current) clearTimeout(timer.current);
       dirty.current = false; session.current = null;
+      release.current?.();
       await deleteEnvelope();
       const blank = emptyDb(); dbRef.current = blank; setDb(blank); setStatus("setup");
     },
-  }), [status, mode, db, saved, update, lock, flush, weakPass, persisted, keep, lang, setLanguage]);
+  }), [status, mode, db, saved, update, lock, flush, weakPass, persisted, keep, lang, setLanguage, claim]);
 
   // Save before the tab closes, and lock after a period without activity.
   useEffect(() => {

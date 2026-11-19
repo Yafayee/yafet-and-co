@@ -80,7 +80,7 @@ export function Gate({ children }: { children: ReactNode }) {
   }
 
   if (s.status === "locked") {
-    const submit = (e: FormEvent) => { e.preventDefault(); run(async () => ((await s.unlock(pass)) ? undefined : t("That passphrase is not right."))); };
+    const submit = (e: FormEvent) => { e.preventDefault(); run(async () => { const r = await s.unlock(pass); return r === "ok" ? undefined : r === "busy" ? "The workspace is already open in another tab or window. Close or lock it there first, so that changes are not lost." : "That passphrase is not right."; }); };
     return (
       <Frame title={t("Unlock your workspace")} subtitle={t("Your customer data is encrypted in this browser.")}>
         <form onSubmit={submit} className="mt-6 space-y-4">
