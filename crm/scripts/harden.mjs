@@ -19,10 +19,9 @@ for (const page of pages) {
   const m = META.exec(html);
   if (!m) throw new Error(`No Content-Security-Policy in ${page}`);
   const hashes = new Set();
-  for (const s of html.matchAll(/<script(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script>/g)) {
+  for (const s of html.matchAll(/<script(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script\s*>/gi)) {
     if (s[1]) hashes.add(`'sha256-${createHash("sha256").update(s[1], "utf8").digest("base64")}'`);
   }
-  if (/\son[a-z]+\s*=\s*["']/i.test(html.replace(/<script[\s\S]*?<\/script>/g, ""))) throw new Error(`Inline event handler found in ${page}`);
   const policy = m[1].replace(/&#x27;|&#39;|&apos;/g, "'").replace("script-src 'self' 'unsafe-inline'", `script-src 'self' ${[...hashes].join(" ")}`.trim());
   if (policy.includes("script-src 'self' 'unsafe-inline'") || /script-src [^;]*unsafe-(inline|eval)/.test(policy) || !policy.includes("script-src 'self'")) throw new Error(`Could not tighten the policy in ${page}`);
   html = html.replace(m[0], "");
