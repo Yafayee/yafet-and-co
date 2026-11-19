@@ -28,6 +28,7 @@ export function CustomerList() {
   const [stage, setStage] = useState("");
   const [extra, setExtra] = useState(params.get("view") === "renewals" ? "renewals" : params.get("view") === "opportunities" ? "opp" : "");
   const [page, setPage] = useState(1);
+  const [sort, setSort] = useState("name");
   const [adding, setAdding] = useState(params.get("new") === "1");
 
   const all = useMemo(() => {
@@ -55,9 +56,19 @@ export function CustomerList() {
     });
   }, [all, q, product, missing, consent, stage, extra]);
 
+  const sorted = useMemo(() => {
+    if (sort === "name") return rows;
+    const far = 99999;
+    const key = (r: (typeof rows)[number]) =>
+      sort === "birthday" ? daysToBirthday(r.c.dob) ?? far
+      : sort === "contact" ? -(daysAgo(r.last) ?? far) // longest without contact first
+      : sort === "cover" ? coverage(db, r.c).pct
+      : r.c.policies.length ? Math.min(...r.c.policies.map((p) => { const d = p.until ? daysUntil(p.until) : null; return d === null || d < -60 ? far : d; })) : far;
+    return [...rows].map((r) => ({ r, k: key(r) })).sort((a, b) => a.k - b.k).map((x) => x.r);
+  }, [rows, sort, db]);
   const pages = Math.max(1, Math.ceil(rows.length / PER_PAGE));
   const current = Math.min(page, pages);
-  const shown = rows.slice((current - 1) * PER_PAGE, current * PER_PAGE);
+  const shown = sorted.slice((current - 1) * PER_PAGE, current * PER_PAGE);
   const filter = <T,>(set: (v: T) => void) => (v: T) => { set(v); setPage(1); };
 
   return (
@@ -68,7 +79,7 @@ export function CustomerList() {
       </PageHeader>
 
       {adding && (
-        <CustomerForm initial={blankCustomer()} isNew onCancel={() => setAdding(false)} onSave={(c) => {
+        <CustomerForm initial={blankCustomer()} isNew existing={db.customers} onCancel={() => setAdding(false)} onSave={(c) => {
           update((d) => { d.customers.push(c); logEvent(d, { customerId: c.id, kind: "system", text: t("Profile created by hand.") }); }, `Created profile ${fullName(c)}`);
           router.push(`/customers/view/?id=${c.id}`);
         }} />
@@ -103,6 +114,13 @@ export function CustomerList() {
           <option value="quiet">{t("No contact for a year")}</option>
           <option value="nocontact">{t("No email and no phone")}</option>
           <option value="renewals">{t("A policy ends within 90 days")}</option>
+        </select>
+        <select className="input" aria-label={t("Sort by")} value={sort} onChange={(e) => filter(setSort)(e.target.value)}>
+          <option value="name">{t("Sort: name")}</option>
+          <option value="birthday">{t("Sort: next birthday")}</option>
+          <option value="contact">{t("Sort: longest without contact")}</option>
+          <option value="cover">{t("Sort: lowest cover first")}</option>
+          <option value="ending">{t("Sort: policy ending soonest")}</option>
         </select>
       </div>
 

@@ -1,10 +1,11 @@
 "use client";
 
-import { CheckCircle2, Download, FileSpreadsheet, ShieldCheck, Upload } from "lucide-react";
+import { CheckCircle2, Download, FileSpreadsheet, ShieldCheck, Undo2, Upload } from "lucide-react";
 import Link from "next/link";
 import { useMemo, useState, type ChangeEvent } from "react";
 import { Card, PageHeader, StatusChip } from "@/components/ui";
-import { logEvent } from "@/lib/actions";
+import { deleteCustomer, logEvent } from "@/lib/actions";
+import { fmtDateTime } from "@/lib/dates";
 import { convert, FIELDS, guessMapping, readFile, TEMPLATE_CSV, type Cell, type Field } from "@/lib/importer";
 import { productsOf } from "@/lib/rules";
 import { download, toCsv } from "@/lib/send";
@@ -22,6 +23,7 @@ export default function ImportPage() {
   const [busy, setBusy] = useState(false);
   const [done, setDone] = useState<{ created: number; updated: number } | null>(null);
   const [overwrite, setOverwrite] = useState(false);
+  const [confirmUndo, setConfirmUndo] = useState(false);
 
   const onFile = async (e: ChangeEvent<HTMLInputElement>) => {
     const f = e.target.files?.[0];
@@ -45,11 +47,29 @@ export default function ImportPage() {
   const apply = () => {
     if (!result) return;
     update((d) => {
+      d.lastImport = { ts: Date.now(), file, created: result.create.map((c) => c.id), before: d.customers.filter((x) => result.update.some((u) => u.id === x.id)) };
       for (const c of result.create) { d.customers.push(c); logEvent(d, { customerId: c.id, kind: "system", text: `Profile created from import (${file}).` }); }
       for (const u of result.update) { const i = d.customers.findIndex((x) => x.id === u.id); if (i >= 0) { d.customers[i] = u; logEvent(d, { customerId: u.id, kind: "system", text: `Profile updated from import (${file}).` }); } }
     }, `Imported ${file}: ${result.create.length} created, ${result.update.length} updated`);
     setDone({ created: result.create.length, updated: result.update.length });
     setRows([]); setFile("");
+  };
+
+  // An import can be undone for seven days; after that too much may have changed on the profiles.
+  const [openedAt] = useState(() => Date.now());
+  const last = db.lastImport && openedAt - db.lastImport.ts < 7 * 86_400_000 ? db.lastImport : null;
+  const undo = () => {
+    if (!last) return;
+    update((d) => {
+      for (const id of last.created) deleteCustomer(d, id);
+      for (const old of last.before) {
+        const i = d.customers.findIndex((x) => x.id === old.id);
+        // Consent is never taken from the old copy: a withdrawal recorded since the import must stand.
+        if (i >= 0) d.customers[i] = { ...old, consent: d.customers[i].consent, consentUpdated: d.customers[i].consentUpdated, consentSource: d.customers[i].consentSource };
+      }
+      d.lastImport = null;
+    }, `Undid import ${last.file}: ${last.created.length} profiles removed, ${last.before.length} restored`);
+    setDone(null); setConfirmUndo(false);
   };
 
   return (
@@ -74,6 +94,19 @@ export default function ImportPage() {
             <p className="text-sm text-ink-2">{done.created} {done.created === 1 ? "profile" : "profiles"} created, {done.updated} updated.{mode === "demo" ? " This is the demo, so they are not saved." : ""}</p>
           </div>
           <Link href="/customers/" className="btn btn-primary">{t("View customers")}</Link>
+        </div>
+      )}
+
+      {last && (
+        <div className="card mb-4 flex flex-wrap items-center gap-3 p-4 text-sm text-ink-2">
+          <span className="min-w-0 flex-1 basis-64">{t("Last import: {file} on {date}. {c} profiles created, {u} updated.", { file: last.file, date: fmtDateTime(last.ts), c: last.created.length, u: last.before.length })}</span>
+          {confirmUndo ? (
+            <span className="flex flex-wrap items-center gap-2">
+              <span className="text-warn">{t("This removes the created profiles with everything recorded on them since, and puts the updated profiles back as they were.")}</span>
+              <button className="btn btn-danger" onClick={undo}>{t("Yes, undo the import")}</button>
+              <button className="btn" onClick={() => setConfirmUndo(false)}>{t("Cancel")}</button>
+            </span>
+          ) : <button className="btn" onClick={() => setConfirmUndo(true)}><Undo2 className="h-4 w-4" /> {t("Undo this import")}</button>}
         </div>
       )}
 

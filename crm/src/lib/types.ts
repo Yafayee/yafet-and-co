@@ -193,5 +193,7 @@ export interface DB {
   campaigns: Campaign[];
   settings: Settings;
   knowledge: Knowledge;
+  /** What the most recent import did, kept so that it can be undone. */
+  lastImport?: { ts: number; file: string; created: string[]; before: Customer[] } | null;
   audit: { ts: number; action: string }[];
 }

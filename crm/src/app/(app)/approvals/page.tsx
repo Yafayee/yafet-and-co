@@ -13,8 +13,14 @@ import { t } from "@/lib/i18n";
 
 export default function Approvals() {
   const { db, update } = useStore();
-  const { list, heldBack } = useMemo(() => suggestions(db), [db]);
+  const { list: everything, heldBack } = useMemo(() => suggestions(db), [db]);
+  const list0 = everything;
   const [show, setShow] = useState(15);
+  const [product, setProduct] = useState("");
+  const [fit, setFit] = useState("");
+  const all = list0;
+  const offered = [...new Set(all.map((x) => x.opportunity.product))];
+  const list = all.filter((x) => (!product || x.opportunity.product === product) && (!fit || x.opportunity.confidence === fit));
 
   return (
     <>
@@ -23,6 +29,19 @@ export default function Approvals() {
       {heldBack > 0 && (
         <div className="mb-4 rounded-md border border-line bg-night-2/50 px-3 py-2 text-sm text-ink-2">
           {heldBack} more {heldBack === 1 ? "customer is" : "customers are"} held back: they received a product message in the last {db.settings.capDays} days.
+        </div>
+      )}
+
+      {all.length > 0 && (
+        <div className="mb-4 flex flex-wrap items-center gap-2">
+          <select className="input !w-auto" aria-label={t("Product")} value={product} onChange={(e) => { setProduct(e.target.value); setShow(15); }}>
+            <option value="">{t("All products")} ({all.length})</option>
+            {offered.map((p) => <option key={p} value={p}>{t(p)} ({all.filter((x) => x.opportunity.product === p).length})</option>)}
+          </select>
+          <select className="input !w-auto" aria-label={t("Fit")} value={fit} onChange={(e) => { setFit(e.target.value); setShow(15); }}>
+            <option value="">{t("Any fit")}</option><option value="high">{t("Strong fit")}</option><option value="medium">{t("Possible fit")}</option><option value="low">{t("Low priority")}</option>
+          </select>
+          <span className="text-sm text-mute">{t("{n} shown", { n: list.length })}</span>
         </div>
       )}
 

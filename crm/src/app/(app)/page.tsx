@@ -146,8 +146,8 @@ export default function Dashboard() {
       <Card title={t("Policies ending soon")} className="mt-4" action={<Link href="/customers/?view=renewals" className="text-xs text-primary hover:underline">{t("Show these customers")}</Link>}>
         {v.ending.length === 0 ? <Empty>{t("No policy with a recorded end date ends in the next 90 days. Add end dates on the customer profile to get reminders.")}</Empty> : (
           <ul className="mt-2 grid grid-cols-1 gap-x-4 px-2 pb-3 md:grid-cols-2">
-            {v.ending.slice(0, 8).map((r) => (
-              <li key={`${r.customer.id}${r.product}`}>
+            {v.ending.slice(0, 8).map((r, i) => (
+              <li key={`${r.customer.id}|${r.product}|${i}`}>
                 <Link href={`/customers/view/?id=${r.customer.id}`} className="flex flex-wrap items-center gap-x-3 gap-y-1 rounded-md px-3 py-2 hover:bg-white/5">
                   <Avatar text={initials(r.customer)} />
                   <span className="min-w-0 flex-1 basis-32">

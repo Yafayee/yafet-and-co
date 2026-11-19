@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, Plus } from "lucide-react";
+import { Check, Plus, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { useMemo, useState, type FormEvent } from "react";
 import { Avatar, Card, ChannelChip, Empty, PageHeader, StatusChip } from "@/components/ui";
@@ -99,18 +99,19 @@ export default function InboxPage() {
           </form>
           {tasks.length === 0 ? <Empty>{t("No tasks.")}</Empty> : (
             <ul className="space-y-1 px-3 pb-4 pt-3">
-              {tasks.map((t) => {
-                const c = byId.get(t.customerId)!;
-                const late = !t.done && t.due < todayIso();
+              {tasks.map((task) => {
+                const c = byId.get(task.customerId)!;
+                const late = !task.done && task.due < todayIso();
                 return (
-                  <li key={t.id}>
-                    <label className="flex cursor-pointer items-start gap-3 rounded-md px-2 py-2 hover:bg-white/5">
-                      <input type="checkbox" className="mt-1 h-4 w-4 accent-[#2b8cee]" checked={t.done} onChange={() => update((d) => { const x = d.tasks.find((y) => y.id === t.id); if (x) x.done = !x.done; })} />
+                  <li key={task.id} className="flex items-start">
+                    <label className="flex min-w-0 flex-1 cursor-pointer items-start gap-3 rounded-md px-2 py-2 hover:bg-white/5">
+                      <input type="checkbox" className="mt-1 h-4 w-4 accent-[#2b8cee]" checked={task.done} onChange={() => update((d) => { const x = d.tasks.find((y) => y.id === task.id); if (x) x.done = !x.done; })} />
                       <span className="min-w-0 flex-1">
-                        <span className={`block text-sm ${t.done ? "text-mute line-through" : "text-white"}`}>{t.title}</span>
-                        <span className={`block text-xs ${late ? "text-bad" : "text-mute"}`}>{fullName(c)} · due {fmtDayMonth(t.due)}{late ? " · overdue" : ""}</span>
+                        <span className={`block text-sm ${task.done ? "text-mute line-through" : "text-white"}`}>{task.title}</span>
+                        <span className={`block text-xs ${late ? "text-bad" : "text-mute"}`}>{fullName(c)} · {t("due {date}", { date: fmtDayMonth(task.due) })}{late ? ` · ${t("overdue")}` : ""}</span>
                       </span>
                     </label>
+                    <button className="px-2 py-2 text-mute hover:text-bad" aria-label={t("Delete task")} onClick={() => update((d) => { d.tasks = d.tasks.filter((y) => y.id !== task.id); })}><Trash2 className="h-4 w-4" /></button>
                   </li>
                 );
               })}

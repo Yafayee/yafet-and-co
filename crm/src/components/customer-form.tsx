@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { todayIso } from "@/lib/dates";
+import { parsePhone } from "@/lib/importer";
 import { uid } from "@/lib/send";
 import { CHANNELS, CHANNEL_LABEL, INCOME_LABEL, type Customer } from "@/lib/types";
 import { Toggle } from "./ui";
@@ -16,11 +17,12 @@ export function blankCustomer(): Customer {
   };
 }
 
-export function CustomerForm({ initial, isNew, onSave, onCancel }: { initial: Customer; isNew: boolean; onSave: (c: Customer) => void; onCancel: () => void }) {
+export function CustomerForm({ initial, isNew, existing = [], onSave, onCancel }: { initial: Customer; isNew: boolean; existing?: Customer[]; onSave: (c: Customer) => void; onCancel: () => void }) {
   const [c, setC] = useState<Customer>(initial);
   const [interests, setInterests] = useState(initial.interests.join(", "));
   const [kids, setKids] = useState(initial.kids.join(", "));
   const [error, setError] = useState("");
+  const [warned, setWarned] = useState("");
   const set = <K extends keyof Customer>(k: K, v: Customer[K]) => setC((x) => ({ ...x, [k]: v }));
   const text = (k: "firstName" | "lastName" | "email" | "phone" | "street" | "postcode" | "city" | "occupation", label: string, type = "text", span = "") => (
     <label className={`block ${span}`}><span className="label">{label}</span><input type={type} className="input mt-1" value={c[k]} onChange={(e) => set(k, e.target.value)} /></label>
@@ -29,12 +31,20 @@ export function CustomerForm({ initial, isNew, onSave, onCancel }: { initial: Cu
     e.preventDefault();
     if (!c.firstName.trim() && !c.lastName.trim()) { setError("Enter a first or last name."); return; }
     if (c.email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(c.email.trim())) { setError("That email address is not valid."); return; }
+    // Store phone numbers with the country code, so WhatsApp and SMS links work.
+    const phone = c.phone.trim() ? parsePhone(c.phone) : "";
+    if (c.phone.trim() && !phone) { setError("That phone number is not valid. Enter it with the area code, for example 0660 1234567."); return; }
+    const email = c.email.trim().toLowerCase();
+    const first = c.firstName.trim().toLowerCase(), last = c.lastName.trim().toLowerCase();
+    const twin = existing.find((x) => x.id !== c.id && ((email && x.email === email) || (x.firstName.toLowerCase() === first && x.lastName.toLowerCase() === last && (!c.dob || !x.dob || x.dob === c.dob))));
+    const twinKey = twin ? `${twin.id}|${email}|${first}|${last}` : "";
+    if (twin && warned !== twinKey) { setWarned(twinKey); setError(t("A profile for {name} already exists. Save again to keep both.", { name: `${twin.firstName} ${twin.lastName}`.trim() })); return; }
     const thisYear = new Date().getFullYear();
     const years = [...new Set(kids.split(/[,;\s]+/).map(Number).filter((y) => Number.isInteger(y) && y >= 1940 && y <= thisYear))].sort((a, b) => a - b);
     if (kids.trim() && years.length === 0) { setError("Enter the children's birth years as four-digit years, separated by commas."); return; }
     const consentChanged = isNew || JSON.stringify(c.consent) !== JSON.stringify(initial.consent);
     onSave({
-      ...c, firstName: c.firstName.trim(), lastName: c.lastName.trim(), email: c.email.trim().toLowerCase(), phone: c.phone.trim(),
+      ...c, firstName: c.firstName.trim(), lastName: c.lastName.trim(), email, phone,
       interests: interests.split(",").map((x) => x.trim()).filter(Boolean),
       kids: years, children: years.length ? "yes" : c.children,
       consentUpdated: consentChanged ? todayIso() : c.consentUpdated, consentSource: consentChanged ? t("Entered by hand") : c.consentSource,

@@ -86,7 +86,8 @@ export default function CampaignsPage() {
             const p = db.settings.templates[k.templateKey]?.purpose ?? "holiday";
             const members = audienceMembers(db, k.audience, k.channels, p);
             const pending = members.filter((c) => !k.sentTo.includes(c.id)).length;
-            const status = pending === 0 && k.sentTo.length > 0 ? "Completed" : k.sentTo.length > 0 ? "In progress" : k.date > todayIso() ? "Scheduled" : "Ready to send";
+            const held = audienceMembers(db, k.audience, k.channels, p, true).filter((c) => !k.sentTo.includes(c.id)).length - pending;
+            const status = pending === 0 && held === 0 && k.sentTo.length > 0 ? "Completed" : k.sentTo.length > 0 ? "In progress" : k.date > todayIso() ? "Scheduled" : "Ready to send";
             const tone = { Completed: "mute", "In progress": "good", Scheduled: "info", "Ready to send": "warn" } as const;
             return (
               <article key={k.id} className="card flex flex-col p-5">
@@ -102,6 +103,9 @@ export default function CampaignsPage() {
                 <dl className="mt-4 grid grid-cols-2 gap-2 border-t border-line/60 pt-3 text-center">
                   <div><dt className="label">{t("Sent")}</dt><dd className="text-lg font-semibold tabular-nums text-white">{k.sentTo.length}</dd></div>
                   <div><dt className="label">{t("Still to send")}</dt><dd className="text-lg font-semibold tabular-nums text-white">{pending}</dd></div>
+                </dl>
+                {held > 0 && <p className="mt-2 text-xs text-mute">{t("{n} held back by the frequency limit", { n: held })}</p>}
+                <dl className="hidden">
                 </dl>
                 <div className="mt-4 flex gap-2">
                   <Link href={`/queue/?c=${k.id}`} className={`btn flex-1 ${pending ? "btn-primary" : ""}`}><Send className="h-4 w-4" /> {pending ? t("Open send list") : t("View")}</Link>

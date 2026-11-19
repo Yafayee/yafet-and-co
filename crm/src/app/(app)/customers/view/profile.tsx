@@ -16,6 +16,9 @@ import { useStore } from "@/lib/store";
 import { CHANNELS, CHANNEL_LABEL, INCOME_LABEL, type Channel, type Consent, type CrmEvent, type Customer, type OppStatus, type Product } from "@/lib/types";
 import { t } from "@/lib/i18n";
 
+/** The fields the edit form owns. Consent, policies and notes are edited elsewhere and must not be overwritten by it. */
+const FORM_FIELDS = ["firstName", "lastName", "email", "phone", "dob", "street", "postcode", "city", "language", "occupation", "ownsCar", "housing", "children", "kids", "income", "marital", "employment", "interests", "preferredChannel"] as const;
+
 const KIND_ICON = { sent: Mail, reply: MessageSquareReply, call: PhoneCall, meeting: CalendarCheck, note: StickyNote, system: Settings2 };
 
 export function Profile() {
@@ -106,7 +109,7 @@ export function Profile() {
         </div>
       </div>
 
-      {editing && <CustomerForm initial={c} isNew={false} onCancel={() => setEditing(false)} onSave={(next) => { mutate((x) => Object.assign(x, next), `Edited profile ${auditName(c)}`); setEditing(false); }} />}
+      {editing && <CustomerForm initial={c} isNew={false} existing={db.customers} onCancel={() => setEditing(false)} onSave={(next) => { mutate((x) => { for (const k of FORM_FIELDS) (x as unknown as Record<string, unknown>)[k] = next[k]; }, `Edited profile ${auditName(c)}`); setEditing(false); }} />}
 
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
         <div className="flex flex-col gap-4">
@@ -149,6 +152,7 @@ export function Profile() {
                   <li key={task.id} className="flex items-start gap-2">
                     <input type="checkbox" aria-label={task.title} className="mt-1 h-4 w-4 accent-[#2b8cee]" checked={task.done} onChange={() => update((d) => { const x = d.tasks.find((y) => y.id === task.id); if (x) x.done = !x.done; })} />
                     <span className={`flex-1 text-sm ${task.done ? "text-mute line-through" : "text-ink"}`}>{task.title}<span className="block text-xs text-mute">{t("due {date}", { date: fmtDate(task.due) })}</span></span>
+                    <button className="pt-0.5 text-mute hover:text-bad" aria-label={t("Delete task")} onClick={() => update((d) => { d.tasks = d.tasks.filter((y) => y.id !== task.id); })}><Trash2 className="h-4 w-4" /></button>
                   </li>
                 ))}
               </ul>
@@ -269,10 +273,10 @@ export function Profile() {
                     )}
                     {o.status === "open" && !allowed && <p className="mt-2 text-xs text-mute">{t("No consent for product offers, or no agreed channel. Raise this in person or by phone.")}</p>}
                     {o.status === "open" && allowed && capped && <p className="mt-2 text-xs text-warn">{t("A product message went out {n} days ago. The limit is one every {cap} days.", { n: sinceMarketing ?? 0, cap: db.settings.capDays })}</p>}
-                    {o.status === "open" && allowed && (
+                    {o.status === "open" && allowed && !capped && (
                       <button className="btn btn-outline mt-3" onClick={() => setOpenDraft(openDraft === o.key ? null : o.key)}>{openDraft === o.key ? t("Hide message") : t("Write message")}</button>
                     )}
-                    {allowed && openDraft === o.key && (
+                    {allowed && !capped && openDraft === o.key && (
                       <div className="mt-3 rounded-md border border-line/70 bg-night/70 p-3">
                         <Composer key={o.key} customer={c} text={templateFor(db, asking ? "carQuestion" : "offer", c, o.product)} purpose="marketing" product={o.product} label={asking ? t("Car question sent") : `Product offer sent: ${o.product}`} />
                       </div>
