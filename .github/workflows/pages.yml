@@ -19,7 +19,7 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Collect site files
         run: rsync -a --exclude '.git' --exclude '.github' --exclude '_site' --exclude 'crm' ./ _site/
       # The CRM preview (sample data only) is built and published under /crm/.
