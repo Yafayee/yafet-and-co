@@ -39,7 +39,13 @@ The interface is available in German and English, switched with the DE/EN contro
 
 ## Security measures in the app
 
-- Content security policy in the page: code loads only from the site; data can go only to the site and, for the optional document reader, to the Anthropic API.
+- **Encryption with key locks.** The data is encrypted with AES-256-GCM under a random data key. That key is stored only in locked form: locked by the passphrase (PBKDF2-SHA256, 1,000,000 rounds, then HKDF), and optionally by a recovery code. Any change to the stored data is detected. Workspaces and backups in the older format still open and are upgraded on the next save.
+- **Passkey as a second factor (optional).** A passkey (fingerprint, face, device PIN or hardware security key) contributes a secret through the WebAuthn PRF extension, and that secret is mixed into the key. A copied database or backup file then cannot be opened with the passphrase alone. Nothing is sent to a server.
+- **Recovery code (optional, required for the passkey).** 150 random bits, shown once, stored nowhere. It opens the workspace or a backup file when the passphrase is forgotten or the passkey is lost; it works once and then a new passphrase is set.
+- **Guess throttling.** After four wrong attempts each further try has to wait, from 30 seconds up to 15 minutes, also across page reloads.
+- **Strict content security policy.** Code loads only from the site; data can go only to the site and, for the optional document reader, to the Anthropic API. After the build, `scripts/harden.mjs` pins each page's inline scripts by SHA-256 fingerprint, so an injected script does not run; `eval` is not allowed.
+- **No framing.** The app refuses to run inside another website's frame (protection against click tricks on hosts that cannot send headers).
+- **Privacy screen (optional).** Covers the data while the window is not the active one.
 - Passphrase strength check (12 characters minimum, common words and simple patterns refused), with a warning when an existing passphrase is weak.
 - Automatic lock measured by the clock, so it also applies after the computer wakes from sleep.
 - The browser is asked to keep the stored data permanently; a reminder appears when no encrypted backup was downloaded in the last seven days.
@@ -71,12 +77,16 @@ these commands are running.
 ```bash
 npm run lint        # code style and React rules
 npm run typecheck   # TypeScript
-npm test            # unit tests for the offer rules, the importer and the consent checks
-bash e2e/run.sh     # browser tests against a fresh build (needs Playwright and Python 3)
+npm test            # unit tests for the offer rules, the importer, the consent checks and the encryption
+bash e2e/run.sh     # browser tests against a fresh build (needs Playwright and Python 3),
+                    # including e2e/hardening.js: passkey, recovery code, throttling, script policy
 ```
 
 The first three and the build run automatically on every pull request
-(`.github/workflows/crm-tests.yml`). All test data is invented.
+(`.github/workflows/crm-tests.yml`), together with a scan for known vulnerable
+packages and a guard against committed data files. GitHub code scanning
+(`.github/workflows/codeql.yml`) and weekly dependency updates
+(`.github/dependabot.yml`) run alongside. All test data is invented.
 
 Safeguards worth knowing about:
 

@@ -1,4 +1,7 @@
 import { z } from "zod";
+
+// zod would otherwise probe whether it may generate code at run time; the page's security policy forbids that.
+z.config({ jitless: true });
 import type { Condition, Confidence, Guide, Product } from "./types";
 
 /**

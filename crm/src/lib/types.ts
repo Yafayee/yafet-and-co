@@ -148,6 +148,8 @@ export interface Settings {
   checks: Record<string, boolean>;
   /** Version of the app last seen in this workspace, to notice updates. */
   seenBuild: string;
+  /** Hide the screen while the window is not in focus. */
+  privacyScreen?: boolean;
   templates: Record<string, Template>;
 }
 
