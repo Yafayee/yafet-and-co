@@ -56,7 +56,8 @@ export function guessMapping(header: string[]): Field[] {
   const taken = new Set<Field>();
   const out = header.map((h) => { const f = guessField(h, taken); if (f !== "Do not import") taken.add(f); return f; });
   // Next to a "Vorname" column, a column called just "Name" holds the family name.
-  if (out.includes("First name") && !out.includes("Last name")) { const i = out.indexOf("Full name"); if (i >= 0) out[i] = "Last name"; }
+  // A column that says "full name" or "customer name" keeps its meaning.
+  if (out.includes("First name") && !out.includes("Last name")) { const i = out.indexOf("Full name"); if (i >= 0 && /^name$/i.test(header[i].trim())) out[i] = "Last name"; }
   return out;
 }
 
@@ -321,10 +322,14 @@ export function convert(rows: Cell[][], mapping: Field[], existing: Customer[], 
 
     const keys = personKeys(incoming);
     const remember = (c: Customer) => { for (const k of [...keys, ...personKeys(c)]) if (!byKey.has(k)) byKey.set(k, c); };
-    let target = keys.map((k) => byKey.get(k)).find(Boolean);
+    // The customer number decides first, in this file and among the stored profiles. Only then do
+    // name, email and date of birth count, and never across two different customer numbers.
+    const numbered = (m: Map<string, Customer>) => (incoming.customerNo ? m.get(`k:${incoming.customerNo}`) : undefined);
+    const alike = (m: Map<string, Customer>) => keys.filter((k) => !k.startsWith("k:")).map((k) => m.get(k)).find((c) => c && (!incoming.customerNo || !c.customerNo || c.customerNo === incoming.customerNo));
+    let target = numbered(byKey) ?? (numbered(existingByKey) ? undefined : alike(byKey));
     if (target) res.merged++;
     else {
-      const old = keys.map((k) => existingByKey.get(k)).find(Boolean);
+      const old = numbered(existingByKey) ?? alike(existingByKey);
       target = old ? structuredClone(old) : undefined;
       if (target) res.update.push(target);
     }

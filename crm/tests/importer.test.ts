@@ -163,4 +163,20 @@ describe("a customer list exported from the company's own system", () => {
     expect(later.create).toHaveLength(0);
     expect(later.update[0].id).toBe(r.create[0].id);
   });
+  it("lets the customer number decide before a look-alike name", () => {
+    const a = customer({ firstName: "Anna", lastName: "Muster", email: "", dob: "", customerNo: "A1" });
+    const b = customer({ firstName: "Ben", lastName: "Test", email: "", dob: "", customerNo: "B2" });
+    const row = (first: string, last: string, no: string) => ["Kunde", "", last, first, "", "", "", "", "", "", "", no, "", "", "", ""];
+    // A was renamed to "Ben Test" in the source system; it must still update A, not be folded into B.
+    const r = convert([row("Ben", "Test", "B2"), row("Ben", "Test", "A1")], m, [a, b], "f.csv");
+    expect(r.merged).toBe(0);
+    expect(r.update.map((c) => c.id).sort()).toEqual([a.id, b.id].sort());
+    // Two new people with the same name but different numbers stay two people.
+    expect(convert([row("Eva", "Gleich", "N1"), row("Eva", "Gleich", "N2")], m, [], "f.csv").create).toHaveLength(2);
+  });
+  it("keeps a column that is explicitly a full name", () => {
+    const mm = guessMapping(["First name", "Full name"]);
+    expect(mm).toEqual(["First name", "Full name"]);
+    expect(convert([["Anna", "Anna Muster"]], mm, [], "f.csv").create[0]).toMatchObject({ firstName: "Anna", lastName: "Muster" });
+  });
 });
