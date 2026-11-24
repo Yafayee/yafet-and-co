@@ -143,6 +143,12 @@ export const DE: Record<string, string> = {
   "House number": "Hausnummer",
   "Customer type": "Kundentyp",
   "Customer since": "Kunde seit",
+  "Send emails with": "E-Mails senden mit",
+  "The mail program of this computer": "Dem Mailprogramm dieses Computers",
+  "Gmail in the browser": "Gmail im Browser",
+  "Your Gmail address (the sender)": "Ihre Gmail-Adresse (der Absender)",
+  "Each email opens as a new message in this Gmail account, already filled in. You check it and press Send in Gmail. You must be signed in to this account in this browser.": "Jede E-Mail öffnet sich als neue Nachricht in diesem Gmail-Konto, bereits ausgefüllt. Sie prüfen sie und klicken in Gmail auf Senden. Sie müssen in diesem Browser bei diesem Konto angemeldet sein.",
+  "Gmail sender address changed": "Gmail-Absenderadresse geändert",
   // ---- general words
   Cancel: "Abbrechen", Add: "Hinzufügen", Edit: "Bearbeiten", Hide: "Ausblenden", Name: "Name", Message: "Nachricht", Product: "Produkt", Products: "Produkte",
   Yes: "Ja", No: "Nein", Any: "Beliebig", None: "Keine", "None.": "Keine.", "Not known": "Nicht bekannt", Status: "Status", Why: "Warum", "Why:": "Warum:",

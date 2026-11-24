@@ -8,7 +8,13 @@ const waNumber = (phone: string) => phone.replace(/[^\d]/g, "");
  * WhatsApp or SMS app with the message filled in. No message passes through
  * any third-party service of ours and there is no per-message fee.
  */
-export function sendLink(c: Customer, channel: Channel, t: TemplateText): string {
+export function sendLink(c: Customer, channel: Channel, t: TemplateText, via?: { emailVia?: "default" | "gmail"; gmailAddress?: string }): string {
+  if (channel === "email" && via?.emailVia === "gmail") {
+    // Opens Gmail's own "new message" window with everything filled in. Naming the
+    // address makes Gmail use that account when several are signed in.
+    const from = via.gmailAddress?.trim();
+    return `https://mail.google.com/mail/?${from ? `authuser=${encodeURIComponent(from)}&` : ""}view=cm&fs=1&to=${encodeURIComponent(c.email)}&su=${encodeURIComponent(t.subject)}&body=${encodeURIComponent(t.body)}`;
+  }
   if (channel === "email") return `mailto:${encodeURIComponent(c.email)}?subject=${encodeURIComponent(t.subject)}&body=${encodeURIComponent(t.body)}`;
   if (channel === "whatsapp") return `https://wa.me/${waNumber(c.phone)}?text=${encodeURIComponent(t.body)}`;
   return `sms:${c.phone.replace(/\s/g, "")}?&body=${encodeURIComponent(t.body)}`;

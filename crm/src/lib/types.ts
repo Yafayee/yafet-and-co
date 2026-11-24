@@ -156,6 +156,10 @@ export interface Settings {
   seenBuild: string;
   /** Hide the screen while the window is not in focus. */
   privacyScreen?: boolean;
+  /** How email links open: the computer's mail program, or Gmail in the browser. */
+  emailVia?: "default" | "gmail";
+  /** The Gmail address to send from, so the right account opens when several are signed in. */
+  gmailAddress?: string;
   templates: Record<string, Template>;
 }
 

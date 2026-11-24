@@ -29,7 +29,8 @@ export function Composer({ customer, text, purpose, label, product, campaignId, 
   const [editing, setEditing] = useState(!collapsed);
 
   if (!channel) return <p className="text-sm text-mute">{t("No agreed channel with contact details for this customer.")}</p>;
-  const href = sendLink(customer, channel, { subject, body });
+  const href = sendLink(customer, channel, { subject, body }, db.settings);
+  const newTab = channel === "whatsapp" || (channel === "email" && db.settings.emailVia === "gmail");
   const warnings = checkMessage(`${channel === "email" ? subject : ""}\n${body}`, db.knowledge.avoid);
   const onSend = () => update((d) => { recordSent(d, { customer, channel, purpose, label, body, product, campaignId }); also?.(d); }, `${label} to ${fullName(customer)} via ${CHANNEL_LABEL[channel]}`);
 
@@ -56,7 +57,7 @@ export function Composer({ customer, text, purpose, label, product, campaignId, 
         ) : <span className="chip"><ChannelIcon channel={channel} className="h-3 w-3" /> {CHANNEL_LABEL[channel]}</span>}
         {collapsed && <button className="btn" onClick={() => setEditing(!editing)}><Pencil className="h-4 w-4" /> {editing ? t("Hide") : t("Edit")}</button>}
         <span className="flex-1" />
-        <a className="btn btn-primary" href={href} target={channel === "whatsapp" ? "_blank" : undefined} rel="noopener noreferrer" onClick={onSend}>
+        <a className="btn btn-primary" href={href} target={newTab ? "_blank" : undefined} rel="noopener noreferrer" onClick={onSend}>
           <ExternalLink className="h-4 w-4" /> {t("Send via {ch}", { ch: t(CHANNEL_LABEL[channel]) })}
         </a>
       </div>
