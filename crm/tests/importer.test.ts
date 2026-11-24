@@ -140,3 +140,27 @@ describe("defects found in the audit", () => {
     expect(convert([yes, blank], map, [], "f.csv").create[0].consent).toMatchObject({ email: true, marketing: true });
   });
 });
+
+describe("a customer list exported from the company's own system", () => {
+  const head = ["Kundentyp", "Status", "Name", "Vorname", "E-Mail", "Mobil/Telefon", "Geb.datum", "Straße", "Haus-Nr./Stiege", "PLZ", "Ort", "Kunden-Nr.", "Betreuerstatus", "Kunde seit", "Aktueller Betreuer", "Vorheriger Betreuer"];
+  const m = guessMapping(head);
+  it("recognises its columns", () => {
+    expect(m).toEqual(["Customer type", "Do not import", "Last name", "First name", "Email", "Phone", "Date of birth", "Street", "House number", "Postcode", "City", "Customer number", "Do not import", "Customer since", "Do not import", "Do not import"]);
+  });
+  it("builds customers and prospects from it and matches them again by customer number", () => {
+    const rows = [
+      ["Kunde", "Aktiv", "Muster", "Anna", "anna@example.com", "00436601111111", "14.03.1988", "Musterweg", "2-4/15", "1040", "Wien", "041100000001", "Betreut", "29.08.2025", "Berater, Bernd", ""],
+      ["Interessent", "Aktiv", "van der Beispiel", "Paul Maria", "paul@example.com", "00436601111111", "02.02.1985", "Probegasse", "6/1a", "1020", "Wien", "041100000002", "Betreut", "", "Berater, Bernd", ""],
+    ];
+    const r = convert(rows, m, [], "f.csv");
+    expect(r.issues).toEqual([]);
+    expect(r.create.map((c) => [c.firstName, c.lastName, c.kind, c.customerNo, c.since ?? "", c.street, c.phone])).toEqual([
+      ["Anna", "Muster", "customer", "041100000001", "2025-08-29", "Musterweg 2-4/15", "+436601111111"],
+      ["Paul Maria", "van der Beispiel", "prospect", "041100000002", "", "Probegasse 6/1a", "+436601111111"],
+    ]);
+    // A later export with a changed name and email still updates the same person.
+    const later = convert([["Kunde", "Aktiv", "Muster-Neu", "Anna", "neu@example.com", "", "", "", "", "", "", "041100000001", "", "", "", ""]], m, r.create, "g.csv");
+    expect(later.create).toHaveLength(0);
+    expect(later.update[0].id).toBe(r.create[0].id);
+  });
+});

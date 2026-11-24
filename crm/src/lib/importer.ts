@@ -6,13 +6,17 @@ export type Cell = string | number | boolean | Date | null | undefined;
 
 export const FIELDS = [
   "Do not import", "First name", "Last name", "Full name", "Email", "Phone", "Date of birth",
-  "Street", "Postcode", "City", "Language", "Occupation", "Owns a car", "Housing", "Children", "Marital status", "Employment", "Children birth years", "Net income per month", "Interests",
+  "Street", "House number", "Postcode", "City", "Customer number", "Customer type", "Customer since", "Language", "Occupation", "Owns a car", "Housing", "Children", "Marital status", "Employment", "Children birth years", "Net income per month", "Interests",
   "Products", "Policy number", "Policy start", "Policy end", "Premium per month",
   "Email consent", "SMS consent", "WhatsApp consent", "Marketing consent", "Preferred channel", "Notes",
 ] as const;
 export type Field = (typeof FIELDS)[number];
 
 const HINTS: [RegExp, Field][] = [
+  [/kunden.?(nr|nummer|no\b)|customer.?(no\b|number|id)/i, "Customer number"],
+  [/kundentyp|kundenart|customer.?type/i, "Customer type"],
+  [/kunde.?seit|customer.?since/i, "Customer since"],
+  [/haus.?(nr|nummer)|house.?(no\b|number)/i, "House number"],
   [/^(vor|first|given)|vorname/i, "First name"],
   [/^(nach|last|sur|family)|nachname|familienname/i, "Last name"],
   [/^(name|kunde|kundenname|full.?name|customer)$/i, "Full name"],
@@ -50,7 +54,10 @@ export function guessField(header: string, taken: Set<Field>): Field {
 }
 export function guessMapping(header: string[]): Field[] {
   const taken = new Set<Field>();
-  return header.map((h) => { const f = guessField(h, taken); if (f !== "Do not import") taken.add(f); return f; });
+  const out = header.map((h) => { const f = guessField(h, taken); if (f !== "Do not import") taken.add(f); return f; });
+  // Next to a "Vorname" column, a column called just "Name" holds the family name.
+  if (out.includes("First name") && !out.includes("Last name")) { const i = out.indexOf("Full name"); if (i >= 0) out[i] = "Last name"; }
+  return out;
 }
 
 /** CSV parser that handles quotes, embedded line breaks, and comma, semicolon or tab separators. */
@@ -228,9 +235,10 @@ export interface ImportResult {
  * enough: couples and families often share one, and merging them would mix
  * two people's policies and consent.
  */
-function personKeys(c: { email: string; firstName: string; lastName: string; dob: string }): string[] {
+function personKeys(c: { email: string; firstName: string; lastName: string; dob: string; customerNo?: string }): string[] {
   const name = `${c.firstName.trim()}|${c.lastName.trim()}`.toLowerCase();
   const keys: string[] = [];
+  if (c.customerNo) keys.push(`k:${c.customerNo}`);
   if (c.email) keys.push(`e:${c.email.toLowerCase()}|${name}`);
   if (c.dob) keys.push(`d:${name}|${c.dob}`);
   if (!c.email && !c.dob) keys.push(`n:${name}`);
@@ -295,7 +303,7 @@ export function convert(rows: Cell[][], mapping: Field[], existing: Customer[], 
     const lang = /^(en|eng)/i.test(str(get(r, "Language"))) ? "en" : "de";
     const incoming: Customer = {
       id: uid(), firstName, lastName, email, phone, dob,
-      street: str(get(r, "Street")), postcode: str(get(r, "Postcode")), city: str(get(r, "City")),
+      street: [str(get(r, "Street")), str(get(r, "House number"))].filter(Boolean).join(" "), postcode: str(get(r, "Postcode")), city: str(get(r, "City")),
       language: lang, occupation: str(get(r, "Occupation")), ownsCar,
       housing: parseHousing(get(r, "Housing")), children: parseChildren(get(r, "Children")),
       marital: parseMarital(get(r, "Marital status")), employment: parseEmployment(get(r, "Employment")),
@@ -306,6 +314,10 @@ export function convert(rows: Cell[][], mapping: Field[], existing: Customer[], 
       notes: str(get(r, "Notes")), createdAt: today,
     };
     if (incoming.kids.length) incoming.children = "yes";
+    const no = str(get(r, "Customer number")), type = str(get(r, "Customer type")).toLowerCase(), since = parseDate(get(r, "Customer since"));
+    if (no) incoming.customerNo = no;
+    if (/interess|prospect|lead/.test(type)) incoming.kind = "prospect"; else if (/kund|customer|client/.test(type)) incoming.kind = "customer";
+    if (since) incoming.since = since;
 
     const keys = personKeys(incoming);
     const remember = (c: Customer) => { for (const k of [...keys, ...personKeys(c)]) if (!byKey.has(k)) byKey.set(k, c); };
@@ -322,6 +334,9 @@ export function convert(rows: Cell[][], mapping: Field[], existing: Customer[], 
     // Merge into the existing record: fill blanks, add policies, apply consent only when the file carries it.
     const fill = <K extends keyof Customer>(k: K) => { if (!target![k] && incoming[k]) target![k] = incoming[k]; };
     (["firstName", "lastName", "email", "phone", "dob", "street", "postcode", "city", "occupation"] as const).forEach(fill);
+    if (incoming.customerNo && !target.customerNo) target.customerNo = incoming.customerNo;
+    if (incoming.kind) target.kind = incoming.kind;
+    if (incoming.since && !target.since) target.since = incoming.since;
     if (has("Language")) target.language = incoming.language;
     if (incoming.ownsCar !== "unknown") target.ownsCar = incoming.ownsCar;
     if (incoming.housing !== "unknown") target.housing = incoming.housing;
