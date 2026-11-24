@@ -59,6 +59,11 @@ describe("send links", () => {
     const text = { subject: "Frage & Antwort", body: "Hallo,\nwie geht's? 100%" };
     expect(sendLink(c, "whatsapp", text)).toBe("https://wa.me/436601234567?text=Hallo%2C%0Awie%20geht's%3F%20100%25");
     expect(sendLink(c, "email", text)).toContain("subject=Frage%20%26%20Antwort");
+    // With Gmail chosen, the link opens Gmail's new-message window in the named account.
+    const g = new URL(sendLink(c, "email", text, { emailVia: "gmail", gmailAddress: "berater@example.com" }));
+    expect(g.origin + g.pathname).toBe("https://mail.google.com/mail/");
+    expect(Object.fromEntries(g.searchParams)).toMatchObject({ authuser: "berater@example.com", view: "cm", to: c.email, su: text.subject, body: text.body });
+    expect(sendLink(c, "whatsapp", text, { emailVia: "gmail" })).toContain("https://wa.me/");
   });
 });
 

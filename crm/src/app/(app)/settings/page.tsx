@@ -61,6 +61,18 @@ export default function SettingsPage() {
             <label className="block"><span className="label">{t("Minimum days between product messages to one customer")}</span>
               <input type="number" min={7} max={365} className="input mt-1 max-w-32" defaultValue={db.settings.capDays} onBlur={(e) => { const v = Math.min(365, Math.max(7, Math.round(Number(e.target.value)) || 30)); e.target.value = String(v); if (v !== db.settings.capDays) update((d) => { d.settings.capDays = v; }, `Frequency limit set to ${v} days`); }} />
             </label>
+            <label className="block"><span className="label">{t("Send emails with")}</span>
+              <select className="input mt-1" value={db.settings.emailVia ?? "default"} onChange={(e) => { const v = e.target.value as "default" | "gmail"; update((d) => { d.settings.emailVia = v; }, `Emails are sent with ${v === "gmail" ? "Gmail in the browser" : "the computer's mail program"}`); }}>
+                <option value="default">{t("The mail program of this computer")}</option>
+                <option value="gmail">{t("Gmail in the browser")}</option>
+              </select>
+            </label>
+            {db.settings.emailVia === "gmail" && (
+              <label className="block"><span className="label">{t("Your Gmail address (the sender)")}</span>
+                <input type="email" className="input mt-1" placeholder="name@gmail.com" defaultValue={db.settings.gmailAddress ?? ""} onBlur={(e) => { const v = e.target.value.trim(); if (v !== (db.settings.gmailAddress ?? "")) update((d) => { d.settings.gmailAddress = v; }, "Gmail sender address changed"); }} />
+                <span className="mt-1 block text-xs text-mute">{t("Each email opens as a new message in this Gmail account, already filled in. You check it and press Send in Gmail. You must be signed in to this account in this browser.")}</span>
+              </label>
+            )}
             <Toggle checked={db.settings.followUpAfterBirthday} onChange={() => update((d) => { d.settings.followUpAfterBirthday = !d.settings.followUpAfterBirthday; })} label={t("Suggest a product follow-up one week after a birthday greeting")} />
             <p className="text-xs text-mute">{t("Product messages are only ever suggested for customers who agreed to offers. Greetings need an agreed channel. These two rules cannot be switched off.")}</p>
           </div>
