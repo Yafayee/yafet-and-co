@@ -70,6 +70,12 @@ export interface Customer {
   preferredChannel: Channel;
   notes: string;
   createdAt: string;
+  /** The number the customer has in the company's own system. */
+  customerNo?: string;
+  /** A prospect ("Interessent") has no contract yet. */
+  kind?: "customer" | "prospect";
+  /** Customer since (ISO date). */
+  since?: string;
 }
 
 export type Confidence = "high" | "medium" | "low";

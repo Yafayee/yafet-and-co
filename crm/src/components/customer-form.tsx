@@ -24,8 +24,8 @@ export function CustomerForm({ initial, isNew, existing = [], onSave, onCancel }
   const [error, setError] = useState("");
   const [warned, setWarned] = useState("");
   const set = <K extends keyof Customer>(k: K, v: Customer[K]) => setC((x) => ({ ...x, [k]: v }));
-  const text = (k: "firstName" | "lastName" | "email" | "phone" | "street" | "postcode" | "city" | "occupation", label: string, type = "text", span = "") => (
-    <label className={`block ${span}`}><span className="label">{label}</span><input type={type} className="input mt-1" value={c[k]} onChange={(e) => set(k, e.target.value)} /></label>
+  const text = (k: "firstName" | "lastName" | "email" | "phone" | "street" | "postcode" | "city" | "occupation" | "customerNo", label: string, type = "text", span = "") => (
+    <label className={`block ${span}`}><span className="label">{label}</span><input type={type} className="input mt-1" value={c[k] ?? ""} onChange={(e) => set(k, e.target.value)} /></label>
   );
   const submit = (e: FormEvent) => {
     e.preventDefault();
@@ -63,6 +63,10 @@ export function CustomerForm({ initial, isNew, existing = [], onSave, onCancel }
         {text("street", "Street and number")}
         {text("postcode", "Postcode")}
         {text("city", "City")}
+        {text("customerNo", "Customer number")}
+        <label className="block"><span className="label">{t("Customer or prospect")}</span>
+          <select className="input mt-1" value={c.kind ?? ""} onChange={(e) => set("kind", (e.target.value || undefined) as Customer["kind"])}><option value="">{t("Not known")}</option><option value="customer">{t("Customer")}</option><option value="prospect">{t("Prospect (no contract yet)")}</option></select>
+        </label>
         <label className="block"><span className="label">{t("Language for messages")}</span>
           <select className="input mt-1" value={c.language} onChange={(e) => set("language", e.target.value as Customer["language"])}><option value="de">{t("German")}</option><option value="en">{t("English")}</option></select>
         </label>

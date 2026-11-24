@@ -35,7 +35,7 @@ export function CustomerList() {
     const last = new Map<string, string>();
     for (const e of db.events) if (e.kind !== "system" && e.date > (last.get(e.customerId) ?? "")) last.set(e.customerId, e.date);
     return db.customers
-      .map((c) => ({ c, opp: opportunitiesFor(db, c).find((o) => o.status === "open"), last: last.get(c.id) ?? "", text: `${fullName(c)} ${c.email} ${c.phone} ${c.city} ${c.postcode} ${c.interests.join(" ")} ${c.policies.map((p) => p.number).join(" ")}`.toLowerCase() }))
+      .map((c) => ({ c, opp: opportunitiesFor(db, c).find((o) => o.status === "open"), last: last.get(c.id) ?? "", text: `${fullName(c)} ${c.email} ${c.phone} ${c.city} ${c.postcode} ${c.customerNo ?? ""} ${c.interests.join(" ")} ${c.policies.map((p) => p.number).join(" ")}`.toLowerCase() }))
       .sort((a, b) => a.c.lastName.localeCompare(b.c.lastName) || a.c.firstName.localeCompare(b.c.firstName));
   }, [db]);
 

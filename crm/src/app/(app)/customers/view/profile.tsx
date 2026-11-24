@@ -17,7 +17,7 @@ import { CHANNELS, CHANNEL_LABEL, INCOME_LABEL, type Channel, type Consent, type
 import { t } from "@/lib/i18n";
 
 /** The fields the edit form owns. Consent, policies and notes are edited elsewhere and must not be overwritten by it. */
-const FORM_FIELDS = ["firstName", "lastName", "email", "phone", "dob", "street", "postcode", "city", "language", "occupation", "ownsCar", "housing", "children", "kids", "income", "marital", "employment", "interests", "preferredChannel"] as const;
+const FORM_FIELDS = ["firstName", "lastName", "email", "phone", "dob", "street", "postcode", "city", "language", "occupation", "ownsCar", "housing", "children", "kids", "income", "marital", "employment", "interests", "preferredChannel", "customerNo", "kind"] as const;
 
 const KIND_ICON = { sent: Mail, reply: MessageSquareReply, call: PhoneCall, meeting: CalendarCheck, note: StickyNote, system: Settings2 };
 
@@ -97,6 +97,7 @@ export function Profile() {
           <p className="text-sm text-mute">{[c.occupation, t(lifeStage(c)), t("speaks {lang}", { lang: c.language === "de" ? t("German") : t("English") })].filter(Boolean).join(" · ")}</p>
           <div className="mt-2 flex flex-wrap gap-1.5">
             <StatusChip tone={cov.pct >= 60 ? "good" : cov.pct >= 30 ? "warn" : "mute"}>{t("Cover {a} of {b}", { a: cov.held, b: cov.of })}</StatusChip>
+            {c.kind === "prospect" && <StatusChip tone="info">{t("Prospect")}</StatusChip>}
             {!c.email && !c.phone && <StatusChip tone="bad">{t("No contact details")}</StatusChip>}
             {bday === 0 && <StatusChip tone="info">{t("Birthday today")}</StatusChip>}
           </div>
@@ -118,6 +119,7 @@ export function Profile() {
               <Row icon={<Mail className="h-4 w-4" />} label={t("Email")}>{c.email || "Not known"}</Row>
               <Row icon={<Phone className="h-4 w-4" />} label={t("Phone")}>{c.phone || "Not known"}</Row>
               <Row icon={<MapPin className="h-4 w-4" />} label={t("Address")}>{[c.street, [c.postcode, c.city].filter(Boolean).join(" ")].filter(Boolean).join(", ") || "Not known"}</Row>
+              {(c.customerNo || c.since) && <Row icon={<Users className="h-4 w-4" />} label={t("Customer number")}>{[c.customerNo, c.since ? t("since {date}", { date: fmtDate(c.since) }) : ""].filter(Boolean).join(", ")}</Row>}
               <Row icon={<Cake className="h-4 w-4" />} label={t("Born")}>{c.dob ? (bday === 0 ? t("{date} (age {n}, birthday today)", { date: fmtDate(c.dob), n: years ?? 0 }) : t("{date} (age {n}, birthday in {d} days)", { date: fmtDate(c.dob), n: years ?? 0, d: bday ?? 0 })) : t("Not known")}</Row>
               <Row icon={<Car className="h-4 w-4" />} label={t("Car")}>{c.ownsCar === "yes" ? t("Owns a car") : c.ownsCar === "no" ? t("No car") : t("Not known")}</Row>
               <Row icon={<Users className="h-4 w-4" />} label={t("Marital status")}>{{ single: t("Single"), partner: t("Lives with a partner"), married: t("Married"), unknown: t("Not known") }[c.marital]}</Row>

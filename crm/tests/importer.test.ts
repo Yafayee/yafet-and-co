@@ -140,3 +140,43 @@ describe("defects found in the audit", () => {
     expect(convert([yes, blank], map, [], "f.csv").create[0].consent).toMatchObject({ email: true, marketing: true });
   });
 });
+
+describe("a customer list exported from the company's own system", () => {
+  const head = ["Kundentyp", "Status", "Name", "Vorname", "E-Mail", "Mobil/Telefon", "Geb.datum", "Straße", "Haus-Nr./Stiege", "PLZ", "Ort", "Kunden-Nr.", "Betreuerstatus", "Kunde seit", "Aktueller Betreuer", "Vorheriger Betreuer"];
+  const m = guessMapping(head);
+  it("recognises its columns", () => {
+    expect(m).toEqual(["Customer type", "Do not import", "Last name", "First name", "Email", "Phone", "Date of birth", "Street", "House number", "Postcode", "City", "Customer number", "Do not import", "Customer since", "Do not import", "Do not import"]);
+  });
+  it("builds customers and prospects from it and matches them again by customer number", () => {
+    const rows = [
+      ["Kunde", "Aktiv", "Muster", "Anna", "anna@example.com", "00436601111111", "14.03.1988", "Musterweg", "2-4/15", "1040", "Wien", "041100000001", "Betreut", "29.08.2025", "Berater, Bernd", ""],
+      ["Interessent", "Aktiv", "van der Beispiel", "Paul Maria", "paul@example.com", "00436601111111", "02.02.1985", "Probegasse", "6/1a", "1020", "Wien", "041100000002", "Betreut", "", "Berater, Bernd", ""],
+    ];
+    const r = convert(rows, m, [], "f.csv");
+    expect(r.issues).toEqual([]);
+    expect(r.create.map((c) => [c.firstName, c.lastName, c.kind, c.customerNo, c.since ?? "", c.street, c.phone])).toEqual([
+      ["Anna", "Muster", "customer", "041100000001", "2025-08-29", "Musterweg 2-4/15", "+436601111111"],
+      ["Paul Maria", "van der Beispiel", "prospect", "041100000002", "", "Probegasse 6/1a", "+436601111111"],
+    ]);
+    // A later export with a changed name and email still updates the same person.
+    const later = convert([["Kunde", "Aktiv", "Muster-Neu", "Anna", "neu@example.com", "", "", "", "", "", "", "041100000001", "", "", "", ""]], m, r.create, "g.csv");
+    expect(later.create).toHaveLength(0);
+    expect(later.update[0].id).toBe(r.create[0].id);
+  });
+  it("lets the customer number decide before a look-alike name", () => {
+    const a = customer({ firstName: "Anna", lastName: "Muster", email: "", dob: "", customerNo: "A1" });
+    const b = customer({ firstName: "Ben", lastName: "Test", email: "", dob: "", customerNo: "B2" });
+    const row = (first: string, last: string, no: string) => ["Kunde", "", last, first, "", "", "", "", "", "", "", no, "", "", "", ""];
+    // A was renamed to "Ben Test" in the source system; it must still update A, not be folded into B.
+    const r = convert([row("Ben", "Test", "B2"), row("Ben", "Test", "A1")], m, [a, b], "f.csv");
+    expect(r.merged).toBe(0);
+    expect(r.update.map((c) => c.id).sort()).toEqual([a.id, b.id].sort());
+    // Two new people with the same name but different numbers stay two people.
+    expect(convert([row("Eva", "Gleich", "N1"), row("Eva", "Gleich", "N2")], m, [], "f.csv").create).toHaveLength(2);
+  });
+  it("keeps a column that is explicitly a full name", () => {
+    const mm = guessMapping(["First name", "Full name"]);
+    expect(mm).toEqual(["First name", "Full name"]);
+    expect(convert([["Anna", "Anna Muster"]], mm, [], "f.csv").create[0]).toMatchObject({ firstName: "Anna", lastName: "Muster" });
+  });
+});
