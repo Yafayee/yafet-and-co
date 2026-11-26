@@ -1,0 +1,44 @@
+// Browser test of appointments: plan a call and a meeting on a profile, see them on the
+// dashboard, download a calendar file, tick one off.
+const { chromium } = require('playwright');
+const fs = require('fs');
+const [,, base, data, shots] = process.argv;
+const log = (...a) => console.log(...a);
+(async () => {
+  const b = await chromium.launch();
+  const ctx = await b.newContext({ viewport: { width: 1366, height: 900 }, acceptDownloads: true });
+  const p = await ctx.newPage();
+  p.on('pageerror', e => log('PAGEERROR', e.message.slice(0, 300)));
+  await p.addInitScript(() => { window.__csp = []; document.addEventListener('securitypolicyviolation', (e) => window.__csp.push(e.violatedDirective)); });
+  await p.goto(base + '/', { waitUntil: 'networkidle' });
+  const pw = p.locator('input[type=password]'); await pw.nth(0).fill('blauer Tisch Wolke 47 Fenster'); await pw.nth(1).fill('blauer Tisch Wolke 47 Fenster'); await p.click('button:has-text("Create workspace")');
+  await p.waitForSelector('text=Your workspace is ready');
+  await p.click('nav a:has-text("Import")'); await p.setInputFiles('input[type=file]', data + '/wohn.csv'); await p.click('button:has-text("Create 3")'); await p.waitForSelector('text=Import finished');
+  await p.click('nav a:has-text("Customers")'); await p.click('text=Karl Kreditnehmer'); await p.waitForSelector('text=Appointments and tasks');
+  const form = p.locator('[data-testid=agenda-form]');
+  const today = new Date(); const iso = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+  await form.locator('input[aria-label=What]').fill('Unfallversicherung besprechen');
+  await form.locator('input[type=date]').fill(iso(today)); await form.locator('input[type=time]').fill('14:30');
+  await form.locator('button:has-text("Plan")').click();
+  await form.locator('select[aria-label=Type]').selectOption('meeting');
+  await form.locator('input[aria-label=What]').fill('Beratungstermin');
+  const in3 = new Date(today); in3.setDate(in3.getDate() + 3);
+  await form.locator('input[type=date]').fill(iso(in3)); await form.locator('input[type=time]').fill('09:00'); await form.locator('input[aria-label=Place]').fill('Büro Wien');
+  await form.locator('button:has-text("Plan")').click(); await p.waitForTimeout(400);
+  log('on profile:', (await p.locator('[data-testid=agenda-item]').allInnerTexts()).map((x) => x.replace(/\s+/g, ' ').trim()).join(' | '));
+  const [dl] = await Promise.all([p.waitForEvent('download'), p.locator('[data-testid=agenda-item] button[aria-label="Add to calendar"]').first().click()]);
+  const f = fs.readFileSync(await dl.path(), 'utf8');
+  log('calendar file:', dl.suggestedFilename(), '| has event:', /BEGIN:VEVENT[\s\S]*DTSTART:\d{8}T143000[\s\S]*Karl Kreditnehmer/.test(f));
+  await p.click('nav a:has-text("Dashboard")'); await p.waitForSelector('[data-testid=dashboard-agenda]');
+  log('dashboard agenda:', (await p.locator('[data-testid=dashboard-agenda] [data-testid=agenda-item]').allInnerTexts()).map((x) => x.replace(/\s+/g, ' ').trim()).join(' | '));
+  await p.screenshot({ path: shots + '/k_dashboard.png' });
+  await p.locator('[data-testid=dashboard-agenda] input[type=checkbox]').first().click(); await p.waitForTimeout(400);
+  log('after ticking off, items:', await p.locator('[data-testid=dashboard-agenda] [data-testid=agenda-item]').count());
+  await p.click('nav a:has-text("Replies & tasks")'); await p.waitForTimeout(400);
+  const [dl2] = await Promise.all([p.waitForEvent('download'), p.click('button:has-text("All open to calendar")')]);
+  log('all open export events:', (fs.readFileSync(await dl2.path(), 'utf8').match(/BEGIN:VEVENT/g) || []).length);
+  log('policy violations:', JSON.stringify(await p.evaluate(() => window.__csp)));
+  await p.setViewportSize({ width: 390, height: 800 }); await p.click('nav a:has-text("Dashboard")').catch(() => {}); await p.waitForTimeout(300);
+  log('mobile overflow:', await p.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth));
+  await b.close(); log('done');
+})().catch(e => { log('FAILED', e.message.slice(0, 500)); process.exit(1); });

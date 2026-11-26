@@ -45,7 +45,7 @@ const log = (...a) => console.log(...a);
   await p.fill('input[aria-label="Find a customer"]', 'kredit'); await p.waitForSelector('#quick-search-list button');
   log('quick search:', (await p.locator('#quick-search-list button').allInnerTexts()).map(x => x.split('\n')[0]).join(', '));
   await p.keyboard.press('Enter'); await p.waitForSelector('h1:has-text("Karl Kreditnehmer")'); log('enter opens:', await p.locator('h1').innerText());
-  await p.fill('input[placeholder="New task"]', 'Rückruf'); await p.click('button[aria-label="Add task"]'); await p.click('button[aria-label="Delete task"]');
+  await p.fill('[data-testid=agenda-form] input[aria-label=What]', 'Rückruf'); await p.click('[data-testid=agenda-form] button:has-text("Plan")'); await p.click('button[aria-label="Delete task"]');
   log('tasks after delete:', await p.locator('button[aria-label="Delete task"]').count());
   await p.click('nav a:has-text("Import")'); await p.waitForSelector('text=Last import');
   await p.click('button:has-text("Undo this import")'); await p.click('button:has-text("Yes, undo the import")');
