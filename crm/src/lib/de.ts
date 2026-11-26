@@ -160,6 +160,7 @@ export const DE: Record<string, string> = {
   "Has these products with us": "Hat diese Produkte bei uns",
   "This policy has details. Remove it on the profile.": "Diese Polizze hat Details. Entfernen Sie sie im Profil.",
   "Agreed to be contacted by": "Hat der Kontaktaufnahme zugestimmt per",
+  "Birth years of children are recorded. Change this on the profile.": "Geburtsjahre von Kindern sind erfasst. Ändern Sie dies im Profil.",
   // ---- general words
   Cancel: "Abbrechen", Add: "Hinzufügen", Edit: "Bearbeiten", Hide: "Ausblenden", Name: "Name", Message: "Nachricht", Product: "Produkt", Products: "Produkte",
   Yes: "Ja", No: "Nein", Any: "Beliebig", None: "Keine", "None.": "Keine.", "Not known": "Nicht bekannt", Status: "Status", Why: "Warum", "Why:": "Warum:",

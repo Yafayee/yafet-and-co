@@ -72,7 +72,8 @@ export function FillIn() {
 
   const pick = <K extends "ownsCar" | "housing" | "children" | "marital" | "employment" | "kind">(c: Customer, k: K, label: string, options: [string, string][]) => (
     <label className="block min-w-36 flex-1"><span className="label">{t(label)}</span>
-      <select className="input mt-1" value={(c[k] as string | undefined) ?? ""} onChange={(e) => edit(c.id, (x) => { (x as unknown as Record<string, unknown>)[k] = e.target.value || undefined; })}>
+      {/* Recorded birth years mean there are children; that answer is changed on the profile, together with the years. */}
+      <select className="input mt-1" disabled={k === "children" && c.kids.length > 0} title={k === "children" && c.kids.length > 0 ? t("Birth years of children are recorded. Change this on the profile.") : undefined} value={k === "children" && c.kids.length > 0 ? "yes" : (c[k] as string | undefined) ?? ""} onChange={(e) => edit(c.id, (x) => { (x as unknown as Record<string, unknown>)[k] = e.target.value || undefined; })}>
         {options.map(([v, l]) => <option key={v} value={v}>{t(l)}</option>)}
       </select>
     </label>
