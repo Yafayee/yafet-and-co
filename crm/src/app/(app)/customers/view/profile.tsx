@@ -9,9 +9,10 @@ import { CustomerForm } from "@/components/customer-form";
 import { Avatar, Card, ChannelIcon, ConfidenceChip, OppStatusChip, StatusChip, Toggle } from "@/components/ui";
 import { auditName, deleteCustomer, logEvent, setOpp } from "@/lib/actions";
 import { guideFor } from "@/lib/knowledge";
-import { addDays, age, daysToBirthday, daysUntil, eur, fmtDate, toIso, todayIso } from "@/lib/dates";
+import { age, daysToBirthday, daysUntil, eur, fmtDate, todayIso } from "@/lib/dates";
 import { assess, canMarket, coverage, daysSinceMarketing, missingFacts, eventsOf, fullName, initials, lifeStage, opportunitiesFor, templateFor, productsOf } from "@/lib/rules";
 import { download, sendLink, uid, webmailCompose } from "@/lib/send";
+import { AgendaForm, AgendaItem, byWhen } from "@/components/agenda";
 import { useStore } from "@/lib/store";
 import { CHANNELS, CHANNEL_LABEL, INCOME_LABEL, type Channel, type Consent, type CrmEvent, type Customer, type OppStatus, type Product } from "@/lib/types";
 import { t } from "@/lib/i18n";
@@ -31,7 +32,6 @@ export function Profile() {
   const [openDraft, setOpenDraft] = useState<string | null>(null);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [log, setLog] = useState<{ kind: CrmEvent["kind"]; channel: Channel; text: string; interest: string }>({ kind: "call", channel: "email", text: "", interest: "" });
-  const [task, setTask] = useState({ title: "", due: toIso(addDays(new Date(), 3)) });
   const [policy, setPolicy] = useState<{ product: Product; number: string; premium: string; until: string } | null>(null);
 
   if (!c) {
@@ -73,12 +73,6 @@ export function Profile() {
     const isReply = log.kind === "reply";
     update((d) => logEvent(d, { customerId: c.id, kind: log.kind, text: log.text.trim(), channel: isReply ? log.channel : undefined, interest: isReply && log.interest ? (log.interest as Product) : undefined, handled: isReply ? false : undefined }), `Logged ${log.kind} for ${auditName(c)}`);
     setLog({ ...log, text: "", interest: "" });
-  };
-  const submitTask = (e: FormEvent) => {
-    e.preventDefault();
-    if (!task.title.trim()) return;
-    update((d) => { d.tasks.unshift({ id: uid(), customerId: c.id, title: task.title.trim(), due: task.due, done: false }); });
-    setTask({ ...task, title: "" });
   };
   const exportData = () => {
     download(`customer-${c.lastName || c.id}.json`, JSON.stringify({ exportedAt: new Date().toISOString(), profile: c, history: timeline, tasks }, null, 2), "application/json");
@@ -147,22 +141,10 @@ export function Profile() {
             </div>
           </Card>
 
-          <Card title={t("Tasks")}>
-            <div className="px-5 pb-5 pt-3">
-              <ul className="space-y-1">
-                {tasks.map((task) => (
-                  <li key={task.id} className="flex items-start gap-2">
-                    <input type="checkbox" aria-label={task.title} className="mt-1 h-4 w-4 accent-[#2b8cee]" checked={task.done} onChange={() => update((d) => { const x = d.tasks.find((y) => y.id === task.id); if (x) x.done = !x.done; })} />
-                    <span className={`flex-1 text-sm ${task.done ? "text-mute line-through" : "text-ink"}`}>{task.title}<span className="block text-xs text-mute">{t("due {date}", { date: fmtDate(task.due) })}</span></span>
-                    <button className="pt-0.5 text-mute hover:text-bad" aria-label={t("Delete task")} onClick={() => update((d) => { d.tasks = d.tasks.filter((y) => y.id !== task.id); })}><Trash2 className="h-4 w-4" /></button>
-                  </li>
-                ))}
-              </ul>
-              <form onSubmit={submitTask} className="mt-3 flex flex-wrap gap-2">
-                <input className="input min-w-0 flex-1 basis-40" aria-label={t("New task")} placeholder={t("New task")} value={task.title} onChange={(e) => setTask({ ...task, title: e.target.value })} />
-                <input type="date" aria-label={t("Due date")} className="input !w-auto" value={task.due} onChange={(e) => setTask({ ...task, due: e.target.value })} />
-                <button className="btn" aria-label={t("Add task")}><Plus className="h-4 w-4" /></button>
-              </form>
+          <Card title={t("Appointments and tasks")}>
+            <div className="px-3 pb-5 pt-3">
+              {tasks.length > 0 && <ul className="space-y-0.5">{[...tasks].sort((x, y) => Number(x.done) - Number(y.done) || byWhen(x, y)).map((task) => <AgendaItem key={task.id} task={task} customer={c} showCustomer={false} />)}</ul>}
+              <div className="mt-3 px-2"><AgendaForm customerId={c.id} /></div>
             </div>
           </Card>
 

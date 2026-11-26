@@ -1,16 +1,17 @@
 "use client";
 
-import { Check, Plus, Trash2 } from "lucide-react";
+import { Check, Plus } from "lucide-react";
 import Link from "next/link";
 import { useMemo, useState, type FormEvent } from "react";
 import { Avatar, Card, ChannelChip, Empty, PageHeader, StatusChip } from "@/components/ui";
 import { logEvent } from "@/lib/actions";
-import { addDays, fmtDayMonth, relative, toIso, todayIso } from "@/lib/dates";
+import { addDays, relative, toIso } from "@/lib/dates";
 import { fullName, initials, productsOf } from "@/lib/rules";
 import { uid } from "@/lib/send";
 import { useStore } from "@/lib/store";
 import { CHANNELS, CHANNEL_LABEL, type Channel, type Product } from "@/lib/types";
 import { t } from "@/lib/i18n";
+import { AgendaForm, AgendaItem, byWhen, exportAgenda } from "@/components/agenda";
 
 export default function InboxPage() {
   const { db, update } = useStore();
@@ -19,9 +20,8 @@ export default function InboxPage() {
   const sorted = useMemo(() => [...db.customers].sort((a, b) => fullName(a).localeCompare(fullName(b))), [db]);
   const replies = db.events.filter((e) => e.kind === "reply" && byId.has(e.customerId)).sort((a, b) => b.ts - a.ts);
   const open = replies.filter((r) => !r.handled);
-  const tasks = [...db.tasks].filter((t) => byId.has(t.customerId)).sort((a, b) => Number(a.done) - Number(b.done) || a.due.localeCompare(b.due));
+  const tasks = [...db.tasks].filter((x) => byId.has(x.customerId)).sort((a, b) => Number(a.done) - Number(b.done) || byWhen(a, b));
   const [form, setForm] = useState({ customerId: "", channel: "email" as Channel, text: "", interest: "" });
-  const [task, setTask] = useState({ customerId: "", title: "", due: toIso(addDays(new Date(), 3)) });
 
   const handle = (id: string) => update((d) => { const e = d.events.find((x) => x.id === id); if (e) e.handled = true; });
   const makeTask = (id: string) => update((d) => {
@@ -34,12 +34,6 @@ export default function InboxPage() {
     if (!form.customerId || !form.text.trim()) return;
     update((d) => logEvent(d, { customerId: form.customerId, kind: "reply", channel: form.channel, text: form.text.trim(), interest: (form.interest || undefined) as Product | undefined, handled: false }), `Logged a reply from ${fullName(byId.get(form.customerId)!)}`);
     setForm({ ...form, text: "", interest: "" });
-  };
-  const submitTask = (e: FormEvent) => {
-    e.preventDefault();
-    if (!task.customerId || !task.title.trim()) return;
-    update((d) => { d.tasks.unshift({ id: uid(), customerId: task.customerId, title: task.title.trim(), due: task.due, done: false }); });
-    setTask({ ...task, title: "" });
   };
   const picker = (value: string, onChange: (v: string) => void) => (
     <select className="input" aria-label={t("Customer")} value={value} onChange={(e) => onChange(e.target.value)} required>
@@ -88,33 +82,12 @@ export default function InboxPage() {
           )}
         </Card>
 
-        <Card title={t(`Tasks (${tasks.filter((t) => !t.done).length} open)`)} className="lg:col-span-2">
-          <form onSubmit={submitTask} className="grid grid-cols-1 gap-2 px-5 pt-3">
-            {picker(task.customerId, (v) => setTask({ ...task, customerId: v }))}
-            <div className="flex gap-2">
-              <input className="input min-w-0 flex-1" aria-label={t("Task")} placeholder={t("New task")} value={task.title} onChange={(e) => setTask({ ...task, title: e.target.value })} required />
-              <input type="date" aria-label={t("Due date")} className="input !w-auto" value={task.due} onChange={(e) => setTask({ ...task, due: e.target.value })} />
-            </div>
-            <button className="btn"><Plus className="h-4 w-4" /> {t("Add task")}</button>
-          </form>
+        <Card title={t("Appointments and tasks ({n} open)", { n: tasks.filter((x) => !x.done).length })} className="lg:col-span-2"
+          action={tasks.some((x) => !x.done) ? <button className="text-xs text-primary hover:underline" onClick={() => exportAgenda(tasks.filter((x) => !x.done).map((task) => ({ task, customer: byId.get(task.customerId) })))}>{t("All open to calendar")}</button> : undefined}>
+          <div className="px-5 pt-3"><AgendaForm customers={sorted} /></div>
           {tasks.length === 0 ? <Empty>{t("No tasks.")}</Empty> : (
-            <ul className="space-y-1 px-3 pb-4 pt-3">
-              {tasks.map((task) => {
-                const c = byId.get(task.customerId)!;
-                const late = !task.done && task.due < todayIso();
-                return (
-                  <li key={task.id} className="flex items-start">
-                    <label className="flex min-w-0 flex-1 cursor-pointer items-start gap-3 rounded-md px-2 py-2 hover:bg-white/5">
-                      <input type="checkbox" className="mt-1 h-4 w-4 accent-[#2b8cee]" checked={task.done} onChange={() => update((d) => { const x = d.tasks.find((y) => y.id === task.id); if (x) x.done = !x.done; })} />
-                      <span className="min-w-0 flex-1">
-                        <span className={`block text-sm ${task.done ? "text-mute line-through" : "text-white"}`}>{task.title}</span>
-                        <span className={`block text-xs ${late ? "text-bad" : "text-mute"}`}>{fullName(c)} · {t("due {date}", { date: fmtDayMonth(task.due) })}{late ? ` · ${t("overdue")}` : ""}</span>
-                      </span>
-                    </label>
-                    <button className="px-2 py-2 text-mute hover:text-bad" aria-label={t("Delete task")} onClick={() => update((d) => { d.tasks = d.tasks.filter((y) => y.id !== task.id); })}><Trash2 className="h-4 w-4" /></button>
-                  </li>
-                );
-              })}
+            <ul className="space-y-0.5 px-3 pb-4 pt-3">
+              {tasks.map((task) => <AgendaItem key={task.id} task={task} customer={byId.get(task.customerId)} />)}
             </ul>
           )}
         </Card>

@@ -124,6 +124,14 @@ export interface Task {
   title: string;
   due: string;
   done: boolean;
+  /** A plain to-do, a phone call or a meeting. Missing means a to-do. */
+  kind?: "task" | "call" | "meeting";
+  /** Start time "HH:MM" for calls and meetings. */
+  time?: string;
+  /** Length in minutes. */
+  minutes?: number;
+  /** Where a meeting takes place. */
+  place?: string;
 }
 
 export type Audience = string; // "all" | "marketing" | "missing:<product>" | "has:<product>"

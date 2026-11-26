@@ -21,4 +21,5 @@ run daily-use.js "$BASE" "$OUT/data" "$OUT/shots"
 run hardening.js "$BASE" "$OUT/data" "$OUT/shots"
 run fill-in.js "$BASE" "$OUT/data" "$OUT/shots"
 run webmail.js "$BASE" "$OUT/data" "$OUT/shots"
+run agenda.js "$BASE" "$OUT/data" "$OUT/shots"
 [ "$FAIL" = 0 ] && echo "ALL BROWSER TESTS PASSED" || { echo "SOME BROWSER TESTS FAILED, see $OUT"; exit 1; }

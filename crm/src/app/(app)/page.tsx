@@ -10,6 +10,7 @@ import { allOpportunities, allowedChannels, birthdaysDue, canMarket, fullName, i
 import { useStore } from "@/lib/store";
 import { CHANNELS, type Channel } from "@/lib/types";
 import { t } from "@/lib/i18n";
+import { AgendaItem, byWhen } from "@/components/agenda";
 
 export default function Dashboard() {
   const { db } = useStore();
@@ -30,7 +31,10 @@ export default function Dashboard() {
       if (e.kind === "sent") { weeks[Math.min(11, Math.floor((83 - d) / 7))].sent++; stats[e.channel].sent++; }
       if (e.kind === "reply") stats[e.channel].replied++;
     }
-    return { byId, birthdays, opps, strong, quiet, replies, weeks, stats, due: birthdaysDue(db).length, pending: suggestions(db).list.length, ending: renewals(db, 90) };
+    // Open to-dos, calls and meetings that are overdue or due within a week.
+    const week = toIso(addDays(new Date(), 7));
+    const agenda = db.tasks.filter((x) => !x.done && x.due <= week && byId.has(x.customerId)).sort(byWhen);
+    return { agenda, byId, birthdays, opps, strong, quiet, replies, weeks, stats, due: birthdaysDue(db).length, pending: suggestions(db).list.length, ending: renewals(db, 90) };
   }, [db]);
 
   if (db.customers.length === 0) {
@@ -65,6 +69,15 @@ export default function Dashboard() {
         <StatTile label={t("Birthdays, next 30 days")} value={v.birthdays.length} note={t(`${v.birthdays.filter((b) => b.in <= 7).length} this week`)} icon={<Cake className="h-5 w-5" />} />
         <StatTile label={t("No contact for a year")} value={v.quiet} note={t("none recorded here")} icon={<Clock className="h-5 w-5" />} />
       </div>
+
+      <Card title={t("Today and this week")} className="mt-4" action={<Link href="/inbox/" className="text-xs text-primary hover:underline">{t("Plan a call or meeting")}</Link>}>
+        {v.agenda.length === 0 ? <Empty>{t("Nothing planned for the next 7 days. Plan calls and meetings on a customer's profile.")}</Empty> : (
+          <ul className="grid grid-cols-1 gap-x-4 px-3 pb-3 pt-2 md:grid-cols-2" data-testid="dashboard-agenda">
+            {v.agenda.slice(0, 10).map((task) => <AgendaItem key={task.id} task={task} customer={v.byId.get(task.customerId)} />)}
+          </ul>
+        )}
+        {v.agenda.length > 10 && <p className="px-5 pb-4 text-xs text-mute">{t("and {n} more", { n: v.agenda.length - 10 })}</p>}
+      </Card>
 
       <div className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-3">
         <Card title={t("Messages sent per week")} className="lg:col-span-2" action={<span className="text-xs text-mute">{t("{n} in 12 weeks", { n: sentTotal })}</span>}>
