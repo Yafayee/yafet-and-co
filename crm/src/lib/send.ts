@@ -12,6 +12,17 @@ export const DEFAULT_WEBMAIL = "https://webmail.ovb.at/webmail/";
 /** The webmail address to open; only https addresses are accepted. */
 export const webmailUrl = (s?: { webmailUrl?: string }) => { const u = s?.webmailUrl?.trim(); return u && /^https:\/\/[^\s"'<>]+$/i.test(u) ? u : DEFAULT_WEBMAIL; };
 
+/**
+ * The webmail address with the message attached the way IceWarp accepts mail
+ * links ("?mailto=" followed by a standard mail link). A webmail that does not
+ * understand it simply opens as usual, and the copy buttons remain.
+ */
+export function webmailCompose(s: { webmailUrl?: string } | undefined, to: string, t: TemplateText): string {
+  const base = webmailUrl(s);
+  const link = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(t.subject)}&body=${encodeURIComponent(t.body)}`;
+  return `${base}${base.includes("?") ? "&" : "?"}mailto=${encodeURIComponent(link)}`;
+}
+
 export function sendLink(c: Customer, channel: Channel, t: TemplateText, via?: { emailVia?: "default" | "gmail" | "webmail"; gmailAddress?: string }): string {
   if (channel === "email" && via?.emailVia === "gmail") {
     // Opens Gmail's own "new message" window with everything filled in. Naming the

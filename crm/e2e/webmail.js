@@ -22,7 +22,7 @@ const log = (...a) => console.log(...a);
   await panel.waitFor();
   const clip = () => p.evaluate(() => navigator.clipboard.readText());
   log('copied on open:', /@/.test(await clip()) ? 'an email address' : 'NOTHING');
-  log('open link:', await panel.locator('a:has-text("Open company webmail")').getAttribute('href'), await panel.locator('a:has-text("Open company webmail")').getAttribute('target'));
+  log('open link:', (await panel.locator('a:has-text("Open company webmail")').getAttribute('href')).slice(0, 70), await panel.locator('a:has-text("Open company webmail")').getAttribute('target'));
   await panel.locator('button:has-text("Copy subject")').click(); log('subject copied:', (await clip()).slice(0, 40));
   await panel.locator('button:has-text("Copy text")').click(); log('text copied starts:', (await clip()).slice(0, 25).replace(/\n/g, ' '));
   await p.screenshot({ path: shots + '/j_webmail.png' });
