@@ -11,7 +11,7 @@ import { auditName, deleteCustomer, logEvent, setOpp } from "@/lib/actions";
 import { guideFor } from "@/lib/knowledge";
 import { addDays, age, daysToBirthday, daysUntil, eur, fmtDate, toIso, todayIso } from "@/lib/dates";
 import { assess, canMarket, coverage, daysSinceMarketing, missingFacts, eventsOf, fullName, initials, lifeStage, opportunitiesFor, templateFor, productsOf } from "@/lib/rules";
-import { download, sendLink, uid, webmailUrl } from "@/lib/send";
+import { download, sendLink, uid, webmailCompose } from "@/lib/send";
 import { useStore } from "@/lib/store";
 import { CHANNELS, CHANNEL_LABEL, INCOME_LABEL, type Channel, type Consent, type CrmEvent, type Customer, type OppStatus, type Product } from "@/lib/types";
 import { t } from "@/lib/i18n";
@@ -103,7 +103,7 @@ export function Profile() {
           </div>
         </div>
         <div className="flex flex-wrap gap-2">
-          {c.email && <a className="btn" href={db.settings.emailVia === "webmail" ? webmailUrl(db.settings) : db.settings.emailVia === "gmail" ? sendLink(c, "email", { subject: "", body: "" }, db.settings) : `mailto:${c.email}`} target={db.settings.emailVia && db.settings.emailVia !== "default" ? "_blank" : undefined} rel="noopener noreferrer" onClick={() => { if (db.settings.emailVia === "webmail") navigator.clipboard?.writeText(c.email).catch(() => undefined); }} title={db.settings.emailVia === "webmail" ? t("Opens the company webmail; the address is copied") : undefined}><Mail className="h-4 w-4" /> {t("Email")}</a>}
+          {c.email && <a className="btn" href={db.settings.emailVia === "webmail" ? webmailCompose(db.settings, c.email, { subject: "", body: "" }) : db.settings.emailVia === "gmail" ? sendLink(c, "email", { subject: "", body: "" }, db.settings) : `mailto:${c.email}`} target={db.settings.emailVia && db.settings.emailVia !== "default" ? "_blank" : undefined} rel="noopener noreferrer" onClick={() => { if (db.settings.emailVia === "webmail") navigator.clipboard?.writeText(c.email).catch(() => undefined); }} title={db.settings.emailVia === "webmail" ? t("Opens the company webmail; the address is copied") : undefined}><Mail className="h-4 w-4" /> {t("Email")}</a>}
           {c.phone && <a className="btn" href={`tel:${c.phone.replace(/\s/g, "")}`}><Phone className="h-4 w-4" /> {t("Call")}</a>}
           <Link className="btn" href={`/customers/print/?id=${c.id}`}><Printer className="h-4 w-4" /> {t("Summary")}</Link>
           <button className="btn" onClick={() => setEditing(!editing)}><Pencil className="h-4 w-4" /> {t("Edit")}</button>

@@ -5,7 +5,7 @@ import { useState } from "react";
 import { recordSent } from "@/lib/actions";
 import { checkMessage } from "@/lib/compliance";
 import { allowedChannels, fullName } from "@/lib/rules";
-import { sendLink, webmailUrl } from "@/lib/send";
+import { sendLink, webmailCompose } from "@/lib/send";
 import { useStore } from "@/lib/store";
 import { CHANNEL_LABEL, type Channel, type Customer, type DB, type Product, type Purpose, type TemplateText } from "@/lib/types";
 import { ChannelIcon } from "./ui";
@@ -74,9 +74,9 @@ export function Composer({ customer, text, purpose, label, product, campaignId, 
       {viaWebmail && webmail && (
         // The company webmail cannot be filled in from outside, so the three parts are copied one by one.
         <div className="mt-3 rounded-md border border-primary/40 bg-night-2/60 p-3 text-sm" data-testid="webmail-panel">
-          <p className="text-ink-2">{t("Open your company webmail, click New message, then paste these three parts. The address is already copied.")}</p>
+          <p className="text-ink-2">{t("Open your company webmail. If the new message is not filled in by itself, click New message there and paste these three parts. The address is already copied.")}</p>
           <div className="mt-2 flex flex-wrap gap-2">
-            <a className="btn btn-primary" href={webmailUrl(db.settings)} target="_blank" rel="noopener noreferrer"><ExternalLink className="h-4 w-4" /> {t("Open company webmail")}</a>
+            <a className="btn btn-primary" href={webmailCompose(db.settings, customer.email, { subject, body })} target="_blank" rel="noopener noreferrer"><ExternalLink className="h-4 w-4" /> {t("Open company webmail")}</a>
             {([["to", "Copy address", customer.email], ["subject", "Copy subject", subject], ["body", "Copy text", body]] as const).map(([k, l, v]) => (
               <button key={k} type="button" className="btn" onClick={() => copy(k, v)}>{copied === k ? <Check className="h-4 w-4 text-good" /> : <Copy className="h-4 w-4" />} {t(l)}</button>
             ))}

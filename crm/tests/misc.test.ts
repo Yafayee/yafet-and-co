@@ -5,7 +5,7 @@ import { age, daysToBirthday, daysUntil, parseIso } from "@/lib/dates";
 import { setLang, t } from "@/lib/i18n";
 import { strength } from "@/lib/passphrase";
 import { assess } from "@/lib/rules";
-import { DEFAULT_WEBMAIL, sendLink, webmailUrl } from "@/lib/send";
+import { DEFAULT_WEBMAIL, sendLink, webmailCompose, webmailUrl } from "@/lib/send";
 import { customer, daysFromNow, db, policy } from "./helpers";
 
 describe("dates", () => {
@@ -136,5 +136,18 @@ describe("company webmail address", () => {
     expect(webmailUrl({ webmailUrl: "javascript:alert(1)" })).toBe(DEFAULT_WEBMAIL);
     expect(webmailUrl({ webmailUrl: "http://mail.example.at/" })).toBe(DEFAULT_WEBMAIL);
   });
+  it("attaches the message as a mail link for the webmail to pick up", () => {
+    const u = new URL(webmailCompose({}, "kunde@example.com", { subject: "Frage & Antwort", body: "Hallo,\nwie geht's?" }));
+    expect(u.origin + u.pathname).toBe(DEFAULT_WEBMAIL);
+    const inner = new URL(u.searchParams.get("mailto")!);
+    expect(inner.protocol).toBe("mailto:");
+    expect(decodeURIComponent(inner.pathname)).toBe("kunde@example.com");
+    expect(inner.searchParams.get("subject")).toBe("Frage & Antwort");
+    expect(inner.searchParams.get("body")).toBe("Hallo,\nwie geht's?");
+    // An address that already has a query and a fragment keeps both.
+    const f = new URL(webmailCompose({ webmailUrl: "https://mail.example.at/webmail/?lang=de#inbox" }, "kunde@example.com", { subject: "A", body: "B" }));
+    expect(f.searchParams.get("lang")).toBe("de");
+    expect(f.searchParams.get("mailto")).toContain("mailto:kunde%40example.com");
+    expect(f.hash).toBe("#inbox");
+  });
 });
-

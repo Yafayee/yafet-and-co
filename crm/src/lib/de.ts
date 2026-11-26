@@ -174,6 +174,7 @@ export const DE: Record<string, string> = {
   "Emails go out from your company address. The CRM opens the webmail and copies the address, subject and text for you to paste into a new message.": "E-Mails gehen von Ihrer Firmenadresse aus. Das CRM öffnet das Webmail und kopiert Adresse, Betreff und Text, damit Sie sie in eine neue Nachricht einfügen.",
   "Opens the company webmail; the address is copied": "Öffnet das Firmen-Webmail; die Adresse wird kopiert",
   "Company webmail address changed": "Adresse des Firmen-Webmails geändert",
+  "Open your company webmail. If the new message is not filled in by itself, click New message there and paste these three parts. The address is already copied.": "Öffnen Sie Ihr Firmen-Webmail. Falls die neue Nachricht nicht von selbst ausgefüllt ist, klicken Sie dort auf Neue Nachricht und fügen Sie diese drei Teile ein. Die Adresse ist bereits kopiert.",
   // ---- general words
   Cancel: "Abbrechen", Add: "Hinzufügen", Edit: "Bearbeiten", Hide: "Ausblenden", Name: "Name", Message: "Nachricht", Product: "Produkt", Products: "Produkte",
   Yes: "Ja", No: "Nein", Any: "Beliebig", None: "Keine", "None.": "Keine.", "Not known": "Nicht bekannt", Status: "Status", Why: "Warum", "Why:": "Warum:",
