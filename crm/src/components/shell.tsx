@@ -25,6 +25,24 @@ export function Shell({ children }: { children: ReactNode }) {
   const { db, mode, saved, lock, weakPass, update, lang, setLanguage } = useStore();
   const build = process.env.NEXT_PUBLIC_BUILD ?? "local";
   const [open, setOpen] = useState(false);
+  // A browser can keep showing an old copy of the app. Ask the site which version is current
+  // (when the page opens and when the window gets focus again) and offer to reload.
+  const [newer, setNewer] = useState(false);
+  useEffect(() => {
+    if (build === "local") return;
+    let last = 0;
+    const check = () => {
+      if (Date.now() - last < 120_000) return;
+      last = Date.now();
+      fetch(`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/version.json?t=${last}`, { cache: "no-store" })
+        .then((r) => (r.ok ? r.json() : null))
+        .then((v: { build?: string } | null) => { if (v?.build && v.build !== "local" && v.build !== build) setNewer(true); })
+        .catch(() => undefined);
+    };
+    check();
+    window.addEventListener("focus", check);
+    return () => window.removeEventListener("focus", check);
+  }, [build]);
   // Privacy screen: cover everything while the window is not the active one.
   const [away, setAway] = useState(false);
   const privacy = Boolean(db.settings.privacyScreen) && mode === "workspace";
@@ -124,6 +142,13 @@ export function Shell({ children }: { children: ReactNode }) {
             <div className="mb-5 flex flex-wrap items-center gap-x-3 gap-y-1 rounded-md border border-bad/40 bg-bad/10 px-3 py-2 text-sm text-bad">
               <span>{t("Your passphrase is weak. If this computer were stolen, the customer data could be guessed open.")}</span>
               <Link href="/settings/" className="font-medium underline">{t("Change it")}</Link>
+            </div>
+          )}
+          {newer && (
+            <div className="mb-4 flex flex-wrap items-center justify-between gap-2 rounded-md border border-accent/50 bg-accent/10 px-3 py-2 text-sm text-ink" role="status" data-testid="update-banner">
+              <span>{t("A newer version of the app is available. Reload to get the latest functions.")}</span>
+              {/* Reloading is only offered once every change is safely stored. */}
+              <button className="btn btn-primary" disabled={mode === "workspace" && saved !== "saved"} title={mode === "workspace" && saved !== "saved" ? t("Wait until all changes are saved.") : undefined} onClick={() => window.location.reload()}>{t("Reload now")}</button>
             </div>
           )}
           {mode === "workspace" && db.settings.seenBuild !== build && (
