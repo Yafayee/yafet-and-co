@@ -20,4 +20,5 @@ run german.js "$BASE" "$OUT/shots" nothing
 run daily-use.js "$BASE" "$OUT/data" "$OUT/shots"
 run hardening.js "$BASE" "$OUT/data" "$OUT/shots"
 run fill-in.js "$BASE" "$OUT/data" "$OUT/shots"
+run webmail.js "$BASE" "$OUT/data" "$OUT/shots"
 [ "$FAIL" = 0 ] && echo "ALL BROWSER TESTS PASSED" || { echo "SOME BROWSER TESTS FAILED, see $OUT"; exit 1; }
