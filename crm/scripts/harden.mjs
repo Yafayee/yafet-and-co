@@ -30,4 +30,6 @@ for (const page of pages) {
   writeFileSync(page, html);
   done++;
 }
+// A tiny file the running app asks for to notice that a newer version was published.
+writeFileSync(join(OUT, "version.json"), JSON.stringify({ build: (process.env.GITHUB_SHA ?? "").slice(0, 7) || "local" }));
 console.log(`Content-Security-Policy tightened in ${done} pages.`);
