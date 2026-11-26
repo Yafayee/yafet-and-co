@@ -5,7 +5,7 @@ import { age, daysToBirthday, daysUntil, parseIso } from "@/lib/dates";
 import { setLang, t } from "@/lib/i18n";
 import { strength } from "@/lib/passphrase";
 import { assess } from "@/lib/rules";
-import { sendLink } from "@/lib/send";
+import { DEFAULT_WEBMAIL, sendLink, webmailUrl } from "@/lib/send";
 import { customer, daysFromNow, db, policy } from "./helpers";
 
 describe("dates", () => {
@@ -128,3 +128,13 @@ describe("slowing down guesses at the unlock screen", () => {
     expect(waitMs(1, b)).toBe(0);
   });
 });
+
+describe("company webmail address", () => {
+  it("accepts only https addresses and falls back to the OVB webmail", () => {
+    expect(webmailUrl({})).toBe(DEFAULT_WEBMAIL);
+    expect(webmailUrl({ webmailUrl: "https://mail.example.at/" })).toBe("https://mail.example.at/");
+    expect(webmailUrl({ webmailUrl: "javascript:alert(1)" })).toBe(DEFAULT_WEBMAIL);
+    expect(webmailUrl({ webmailUrl: "http://mail.example.at/" })).toBe(DEFAULT_WEBMAIL);
+  });
+});
+

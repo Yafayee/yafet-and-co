@@ -8,7 +8,7 @@ import { fmtDate, fmtDateTime, todayIso } from "@/lib/dates";
 import { daysAgo } from "@/lib/dates";
 import { strength } from "@/lib/passphrase";
 import { CodeBox, SecurityPanel } from "@/components/security-panel";
-import { download, toCsv } from "@/lib/send";
+import { download, toCsv, DEFAULT_WEBMAIL } from "@/lib/send";
 import { useStore } from "@/lib/store";
 import { DEFAULT_TEMPLATES } from "@/lib/templates";
 import { CHANNEL_LABEL } from "@/lib/types";
@@ -62,11 +62,18 @@ export default function SettingsPage() {
               <input type="number" min={7} max={365} className="input mt-1 max-w-32" defaultValue={db.settings.capDays} onBlur={(e) => { const v = Math.min(365, Math.max(7, Math.round(Number(e.target.value)) || 30)); e.target.value = String(v); if (v !== db.settings.capDays) update((d) => { d.settings.capDays = v; }, `Frequency limit set to ${v} days`); }} />
             </label>
             <label className="block"><span className="label">{t("Send emails with")}</span>
-              <select className="input mt-1" value={db.settings.emailVia ?? "default"} onChange={(e) => { const v = e.target.value as "default" | "gmail"; update((d) => { d.settings.emailVia = v; }, `Emails are sent with ${v === "gmail" ? "Gmail in the browser" : "the computer's mail program"}`); }}>
+              <select className="input mt-1" value={db.settings.emailVia ?? "default"} onChange={(e) => { const v = e.target.value as "default" | "gmail" | "webmail"; update((d) => { d.settings.emailVia = v; }, `Emails are sent with ${v === "gmail" ? "Gmail in the browser" : v === "webmail" ? "the company webmail" : "the computer's mail program"}`); }}>
                 <option value="default">{t("The mail program of this computer")}</option>
                 <option value="gmail">{t("Gmail in the browser")}</option>
+                <option value="webmail">{t("Company webmail (e.g. OVB)")}</option>
               </select>
             </label>
+            {db.settings.emailVia === "webmail" && (
+              <label className="block"><span className="label">{t("Address of the company webmail")}</span>
+                <input type="url" className="input mt-1" placeholder={DEFAULT_WEBMAIL} defaultValue={db.settings.webmailUrl ?? DEFAULT_WEBMAIL} onBlur={(e) => { const v = e.target.value.trim(); if (v !== (db.settings.webmailUrl ?? DEFAULT_WEBMAIL)) update((d) => { d.settings.webmailUrl = v; }, "Company webmail address changed"); }} />
+                <span className="mt-1 block text-xs text-mute">{t("Emails go out from your company address. The CRM opens the webmail and copies the address, subject and text for you to paste into a new message.")}</span>
+              </label>
+            )}
             {db.settings.emailVia === "gmail" && (
               <label className="block"><span className="label">{t("Your Gmail address (the sender)")}</span>
                 <input type="email" className="input mt-1" placeholder="name@gmail.com" defaultValue={db.settings.gmailAddress ?? ""} onBlur={(e) => { const v = e.target.value.trim(); if (v !== (db.settings.gmailAddress ?? "")) update((d) => { d.settings.gmailAddress = v; }, "Gmail sender address changed"); }} />
