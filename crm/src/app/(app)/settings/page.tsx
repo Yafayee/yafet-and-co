@@ -61,13 +61,23 @@ export default function SettingsPage() {
             <label className="block"><span className="label">{t("Minimum days between product messages to one customer")}</span>
               <input type="number" min={7} max={365} className="input mt-1 max-w-32" defaultValue={db.settings.capDays} onBlur={(e) => { const v = Math.min(365, Math.max(7, Math.round(Number(e.target.value)) || 30)); e.target.value = String(v); if (v !== db.settings.capDays) update((d) => { d.settings.capDays = v; }, `Frequency limit set to ${v} days`); }} />
             </label>
-            <label className="block"><span className="label">{t("Send emails with")}</span>
-              <select className="input mt-1" value={db.settings.emailVia ?? "default"} onChange={(e) => { const v = e.target.value as "default" | "gmail" | "webmail"; update((d) => { d.settings.emailVia = v; }, `Emails are sent with ${v === "gmail" ? "Gmail in the browser" : v === "webmail" ? "the company webmail" : "the computer's mail program"}`); }}>
-                <option value="default">{t("The mail program of this computer")}</option>
-                <option value="gmail">{t("Gmail in the browser")}</option>
-                <option value="webmail">{t("Company webmail (e.g. OVB)")}</option>
-              </select>
-            </label>
+            {/* Three visible choices instead of a drop-down list, so the options cannot be overlooked. */}
+            <fieldset>
+              <legend className="label">{t("Send emails with")}</legend>
+              <div className="mt-1 grid gap-2" role="radiogroup" aria-label={t("Send emails with")}>
+                {([["default", "The mail program of this computer", "Outlook, Apple Mail or Thunderbird on this computer."], ["gmail", "Gmail in the browser", "Opens a filled-in Gmail message."], ["webmail", "Company webmail (e.g. OVB)", "Sends from your company address, e.g. yafet.teshome@ovb.at."]] as const).map(([v, l, d]) => {
+                  const on = (db.settings.emailVia ?? "default") === v;
+                  return (
+                    <button key={v} type="button" role="radio" aria-checked={on} data-testid={`email-via-${v}`}
+                      onClick={() => { if (!on) update((x) => { x.settings.emailVia = v; }, `Emails are sent with ${v === "gmail" ? "Gmail in the browser" : v === "webmail" ? "the company webmail" : "the computer's mail program"}`); }}
+                      className={`flex items-start gap-3 rounded-md border px-3 py-2.5 text-left transition-colors ${on ? "border-primary bg-primary/15" : "border-line hover:border-primary/60"}`}>
+                      <span className={`mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border ${on ? "border-primary" : "border-mute"}`}>{on && <span className="h-2 w-2 rounded-full bg-primary" />}</span>
+                      <span><span className="block text-sm font-medium text-white">{t(l)}</span><span className="block text-xs text-mute">{t(d)}</span></span>
+                    </button>
+                  );
+                })}
+              </div>
+            </fieldset>
             {db.settings.emailVia === "webmail" && (
               <label className="block"><span className="label">{t("Address of the company webmail")}</span>
                 <input type="url" className="input mt-1" placeholder={DEFAULT_WEBMAIL} defaultValue={db.settings.webmailUrl ?? DEFAULT_WEBMAIL} onBlur={(e) => { const v = e.target.value.trim(); if (v !== (db.settings.webmailUrl ?? DEFAULT_WEBMAIL)) update((d) => { d.settings.webmailUrl = v; }, "Company webmail address changed"); }} />
