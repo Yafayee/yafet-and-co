@@ -1,0 +1,5 @@
+:HL["/yafet-and-co/crm/_next/static/chunks/14bppvtibyc8o.css","style"]
+:HC["/",""]
+2:[["children",{"s":"__PAGE__","h":160}]]
+1:[["children",{"s":"(app)","h":96,"c":"$Q2"}]]
+0:{"b":"I-gltfYpB_CQrJqLFyybJ","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
