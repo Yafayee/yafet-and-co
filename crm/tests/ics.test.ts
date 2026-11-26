@@ -23,9 +23,13 @@ describe("calendar files", () => {
     expect(f).toContain("DTEND;VALUE=DATE:20270101");
     for (const line of f.split("\r\n")) expect(new TextEncoder().encode(line).length).toBeLessThanOrEqual(75);
   });
-  it("keeps a meeting late in the evening on the same day", () => {
+  it("lets a late meeting end after midnight, strictly after its start", () => {
     const f = calendarFile([{ task: { id: "t3", customerId: c.id, title: "Termin", due: "2026-12-03", done: false, kind: "meeting", time: "23:30", place: "Büro" } }], now);
-    expect(f).toContain("DTEND:20261203T235900");
+    expect(f).toContain("DTSTART:20261203T233000");
+    expect(f).toContain("DTEND:20261204T003000");
+    const g = calendarFile([{ task: { id: "t4", customerId: c.id, title: "Spät", due: "2026-12-31", done: false, kind: "call", time: "23:59" } }], now);
+    expect(g).toContain("DTSTART:20261231T235900");
+    expect(g).toContain("DTEND:20270101T001400");
     expect(f).toContain("LOCATION:Büro");
   });
 });

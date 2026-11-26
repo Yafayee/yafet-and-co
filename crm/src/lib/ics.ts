@@ -26,11 +26,14 @@ export function taskEvent(task: Task, c: Customer | undefined, now = new Date())
   const who = c ? `${c.firstName} ${c.lastName}`.trim() : "";
   const lines = ["BEGIN:VEVENT", `UID:${task.id}@cp-crm`, `DTSTAMP:${stamp(now)}`];
   if (task.time && /^\d{2}:\d{2}$/.test(task.time)) {
-    const start = `${day(task.due)}T${task.time.replace(":", "")}00`;
-    const mins = Math.max(5, Math.min(600, task.minutes ?? (task.kind === "call" ? 15 : 60)));
+    // Start and end as real local times, so an appointment that runs past midnight ends on the next day.
+    const [y, mo, d] = task.due.split("-").map(Number);
     const [h, m] = task.time.split(":").map(Number);
-    const endD = new Date(2000, 0, 1, h, m + mins);
-    const end = endD.getDate() === 1 ? `${day(task.due)}T${String(endD.getHours()).padStart(2, "0")}${String(endD.getMinutes()).padStart(2, "0")}00` : `${day(task.due)}T235900`;
+    const mins = Math.max(5, Math.min(600, task.minutes ?? (task.kind === "call" ? 15 : 60)));
+    const p2 = (n: number) => String(n).padStart(2, "0");
+    const local = (x: Date) => `${x.getFullYear()}${p2(x.getMonth() + 1)}${p2(x.getDate())}T${p2(x.getHours())}${p2(x.getMinutes())}00`;
+    const startD = new Date(y, mo - 1, d, h, m);
+    const start = local(startD), end = local(new Date(startD.getTime() + mins * 60_000));
     lines.push(`DTSTART:${start}`, `DTEND:${end}`);
   } else {
     lines.push(`DTSTART;VALUE=DATE:${day(task.due)}`, `DTEND;VALUE=DATE:${nextDay(task.due)}`);
