@@ -64,16 +64,18 @@ export default function SettingsPage() {
             {/* Three visible choices instead of a drop-down list, so the options cannot be overlooked. */}
             <fieldset>
               <legend className="label">{t("Send emails with")}</legend>
-              <div className="mt-1 grid gap-2" role="radiogroup" aria-label={t("Send emails with")}>
+              <div className="mt-1 grid gap-2">
                 {([["default", "The mail program of this computer", "Outlook, Apple Mail or Thunderbird on this computer."], ["gmail", "Gmail in the browser", "Opens a filled-in Gmail message."], ["webmail", "Company webmail (e.g. OVB)", "Sends from your company address, e.g. yafet.teshome@ovb.at."]] as const).map(([v, l, d]) => {
                   const on = (db.settings.emailVia ?? "default") === v;
                   return (
-                    <button key={v} type="button" role="radio" aria-checked={on} data-testid={`email-via-${v}`}
-                      onClick={() => { if (!on) update((x) => { x.settings.emailVia = v; }, `Emails are sent with ${v === "gmail" ? "Gmail in the browser" : v === "webmail" ? "the company webmail" : "the computer's mail program"}`); }}
-                      className={`flex items-start gap-3 rounded-md border px-3 py-2.5 text-left transition-colors ${on ? "border-primary bg-primary/15" : "border-line hover:border-primary/60"}`}>
-                      <span className={`mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border ${on ? "border-primary" : "border-mute"}`}>{on && <span className="h-2 w-2 rounded-full bg-primary" />}</span>
+                    // A real radio input inside each card keeps arrow-key and screen-reader behaviour.
+                    <label key={v} data-testid={`email-via-${v}`}
+                      className={`flex cursor-pointer items-start gap-3 rounded-md border px-3 py-2.5 text-left transition-colors focus-within:ring-2 focus-within:ring-white/60 ${on ? "border-primary bg-primary/15" : "border-line hover:border-primary/60"}`}>
+                      <input type="radio" name="email-via" value={v} className="sr-only" checked={on}
+                        onChange={() => update((x) => { x.settings.emailVia = v; }, `Emails are sent with ${v === "gmail" ? "Gmail in the browser" : v === "webmail" ? "the company webmail" : "the computer's mail program"}`)} />
+                      <span aria-hidden className={`mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border ${on ? "border-primary" : "border-mute"}`}>{on && <span className="h-2 w-2 rounded-full bg-primary" />}</span>
                       <span><span className="block text-sm font-medium text-white">{t(l)}</span><span className="block text-xs text-mute">{t(d)}</span></span>
-                    </button>
+                    </label>
                   );
                 })}
               </div>
