@@ -144,5 +144,10 @@ describe("company webmail address", () => {
     expect(decodeURIComponent(inner.pathname)).toBe("kunde@example.com");
     expect(inner.searchParams.get("subject")).toBe("Frage & Antwort");
     expect(inner.searchParams.get("body")).toBe("Hallo,\nwie geht's?");
+    // An address that already has a query and a fragment keeps both.
+    const f = new URL(webmailCompose({ webmailUrl: "https://mail.example.at/webmail/?lang=de#inbox" }, "kunde@example.com", { subject: "A", body: "B" }));
+    expect(f.searchParams.get("lang")).toBe("de");
+    expect(f.searchParams.get("mailto")).toContain("mailto:kunde%40example.com");
+    expect(f.hash).toBe("#inbox");
   });
 });

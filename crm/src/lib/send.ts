@@ -20,7 +20,10 @@ export const webmailUrl = (s?: { webmailUrl?: string }) => { const u = s?.webmai
 export function webmailCompose(s: { webmailUrl?: string } | undefined, to: string, t: TemplateText): string {
   const base = webmailUrl(s);
   const link = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(t.subject)}&body=${encodeURIComponent(t.body)}`;
-  return `${base}${base.includes("?") ? "&" : "?"}mailto=${encodeURIComponent(link)}`;
+  // Built with URL so that an existing query or "#…" part of the configured address stays intact.
+  const u = new URL(base);
+  u.searchParams.set("mailto", link);
+  return u.toString();
 }
 
 export function sendLink(c: Customer, channel: Channel, t: TemplateText, via?: { emailVia?: "default" | "gmail" | "webmail"; gmailAddress?: string }): string {
