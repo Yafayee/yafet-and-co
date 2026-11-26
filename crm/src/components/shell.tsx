@@ -147,7 +147,8 @@ export function Shell({ children }: { children: ReactNode }) {
           {newer && (
             <div className="mb-4 flex flex-wrap items-center justify-between gap-2 rounded-md border border-accent/50 bg-accent/10 px-3 py-2 text-sm text-ink" role="status" data-testid="update-banner">
               <span>{t("A newer version of the app is available. Reload to get the latest functions.")}</span>
-              <button className="btn btn-primary" onClick={() => window.location.reload()}>{t("Reload now")}</button>
+              {/* Reloading is only offered once every change is safely stored. */}
+              <button className="btn btn-primary" disabled={mode === "workspace" && saved !== "saved"} title={mode === "workspace" && saved !== "saved" ? t("Wait until all changes are saved.") : undefined} onClick={() => window.location.reload()}>{t("Reload now")}</button>
             </div>
           )}
           {mode === "workspace" && db.settings.seenBuild !== build && (

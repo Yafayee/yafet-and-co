@@ -177,6 +177,7 @@ export const DE: Record<string, string> = {
   "Open your company webmail. If the new message is not filled in by itself, click New message there and paste these three parts. The address is already copied.": "Öffnen Sie Ihr Firmen-Webmail. Falls die neue Nachricht nicht von selbst ausgefüllt ist, klicken Sie dort auf Neue Nachricht und fügen Sie diese drei Teile ein. Die Adresse ist bereits kopiert.",
   "A newer version of the app is available. Reload to get the latest functions.": "Eine neuere Version der App ist verfügbar. Laden Sie neu, um die neuesten Funktionen zu erhalten.",
   "Reload now": "Jetzt neu laden",
+  "Wait until all changes are saved.": "Warten Sie, bis alle Änderungen gespeichert sind.",
   // ---- general words
   Cancel: "Abbrechen", Add: "Hinzufügen", Edit: "Bearbeiten", Hide: "Ausblenden", Name: "Name", Message: "Nachricht", Product: "Produkt", Products: "Produkte",
   Yes: "Ja", No: "Nein", Any: "Beliebig", None: "Keine", "None.": "Keine.", "Not known": "Nicht bekannt", Status: "Status", Why: "Warum", "Why:": "Warum:",
