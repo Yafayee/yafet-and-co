@@ -12,7 +12,7 @@ const log = (...a) => console.log(...a);
   await p.goto(base + '/', { waitUntil: 'networkidle' });
   await p.click('button:has-text("Open the demo")'); await p.waitForSelector('h1:has-text("Dashboard")');
   await p.click('nav a:has-text("Settings")');
-  await p.selectOption('label:has-text("Send emails with") select', 'webmail');
+  await p.click('[data-testid=email-via-webmail]');
   log('default webmail address:', await p.locator('label:has-text("Address of the company webmail") input').inputValue());
   await p.click('nav a:has-text("Approvals")'); await p.waitForTimeout(600);
   const card = p.locator('button:has-text("Send via company webmail")').first();

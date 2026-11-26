@@ -178,6 +178,9 @@ export const DE: Record<string, string> = {
   "A newer version of the app is available. Reload to get the latest functions.": "Eine neuere Version der App ist verfügbar. Laden Sie neu, um die neuesten Funktionen zu erhalten.",
   "Reload now": "Jetzt neu laden",
   "Wait until all changes are saved.": "Warten Sie, bis alle Änderungen gespeichert sind.",
+  "Outlook, Apple Mail or Thunderbird on this computer.": "Outlook, Apple Mail oder Thunderbird auf diesem Computer.",
+  "Opens a filled-in Gmail message.": "Öffnet eine ausgefüllte Gmail-Nachricht.",
+  "Sends from your company address, e.g. yafet.teshome@ovb.at.": "Sendet von Ihrer Firmenadresse, z. B. yafet.teshome@ovb.at.",
   // ---- general words
   Cancel: "Abbrechen", Add: "Hinzufügen", Edit: "Bearbeiten", Hide: "Ausblenden", Name: "Name", Message: "Nachricht", Product: "Produkt", Products: "Produkte",
   Yes: "Ja", No: "Nein", Any: "Beliebig", None: "Keine", "None.": "Keine.", "Not known": "Nicht bekannt", Status: "Status", Why: "Warum", "Why:": "Warum:",
