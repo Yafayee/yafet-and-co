@@ -5,7 +5,7 @@ import type { Customer, Task } from "./types";
  * IceWarp calendar can import. Times are written as local "floating" times,
  * so 10:00 stays 10:00 wherever the file is opened.
  */
-const esc = (s: string) => s.replace(/\\/g, "\\\\").replace(/;/g, "\;").replace(/,/g, "\\,").replace(/\r?\n/g, "\\n");
+const esc = (s: string) => s.replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,").replace(/\r?\n/g, "\\n");
 /** Lines longer than 75 bytes are folded, as the format requires. */
 function fold(line: string): string {
   const out: string[] = [];
