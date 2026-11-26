@@ -1,6 +1,6 @@
 "use client";
 
-import { Search, Upload, UserPlus } from "lucide-react";
+import { ListChecks, Search, Upload, UserPlus } from "lucide-react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useMemo, useState } from "react";
@@ -75,6 +75,7 @@ export function CustomerList() {
     <>
       <PageHeader title={t("Customers")} subtitle={t(`${rows.length} of ${db.customers.length} profiles`)}>
         <button className="btn btn-primary" onClick={() => setAdding(true)}><UserPlus className="h-4 w-4" /> {t("Add customer")}</button>
+        <Link href="/customers/fill/" className="btn btn-outline"><ListChecks className="h-4 w-4" /> {t("Complete profiles")}</Link>
         <Link href="/import/" className="btn btn-outline"><Upload className="h-4 w-4" /> {t("Import")}</Link>
       </PageHeader>
 
