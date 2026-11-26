@@ -11,7 +11,7 @@ describe("calendar files", () => {
     expect(f.startsWith("BEGIN:VCALENDAR\r\nVERSION:2.0\r\n")).toBe(true);
     expect(f).toContain("DTSTART:20261203T103000");
     expect(f).toContain("DTEND:20261203T104500");
-    expect(f).toContain("SUMMARY:Unfall\\, besprechen\; heute – Anna Muster");
+    expect(f).toContain("SUMMARY:Unfall\\, besprechen\\; heute – Anna Muster");
     expect(f).toContain("DESCRIPTION:Tel: +436601234567\\nE-Mail: anna@example.com");
     expect(f).toContain("TRIGGER:-PT15M");
     expect(f).toContain("DTSTAMP:20261126T090000Z");
